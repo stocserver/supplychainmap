@@ -1,0 +1,68 @@
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
+
+const inter = Inter({ subsets: ["latin"] })
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "US Supply Chain & Value Chain Platform",
+    template: "%s | SupplyChainMap",
+  },
+  description:
+    "Explore US public companies through their industry value chains and supply chain relationships",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "US Supply Chain & Value Chain Platform",
+    description:
+      "Explore US public companies through their industry value chains and supply chain relationships",
+    url: "/",
+    siteName: "SupplyChainMap",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "US Supply Chain & Value Chain Platform",
+    description:
+      "Explore US public companies through their industry value chains and supply chain relationships",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      maxImagePreview: "large",
+      maxSnippet: -1,
+      maxVideoPreview: -1,
+    },
+  },
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <div className="flex min-h-screen flex-col">
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
+      </body>
+    </html>
+  )
+}
+
+
