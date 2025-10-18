@@ -18,11 +18,28 @@ if (!FMP_API_KEY || !SUPABASE_URL || !SUPABASE_KEY) {
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
-async function fetchFundamentals(ticker: string) {
+// Simple global rate limiter for all outbound FMP requests
+let lastFetchAt = 0
+let fetchQueue: Promise<void> = Promise.resolve()
+function wait(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+async function limitedFetch(url: string, minIntervalMs: number) {
+  await (fetchQueue = fetchQueue.then(async () => {
+    const now = Date.now()
+    const toWait = Math.max(0, minIntervalMs - (now - lastFetchAt))
+    if (toWait > 0) await wait(toWait)
+    lastFetchAt = Date.now()
+  }))
+  return fetch(url)
+}
+
+async function fetchFundamentals(ticker: string, minIntervalMs: number) {
   try {
     console.log(`  📊 Fetching quote...`)
     const quoteUrl = `https://financialmodelingprep.com/stable/quote?symbol=${ticker}&apikey=${FMP_API_KEY}`
-    const quoteResponse = await fetch(quoteUrl)
+    const quoteResponse = await limitedFetch(quoteUrl, minIntervalMs)
     
     if (!quoteResponse.ok) {
       throw new Error(`Quote API error: ${quoteResponse.status}`)
@@ -33,7 +50,7 @@ async function fetchFundamentals(ticker: string) {
 
     console.log(`  📄 Fetching profile...`)
     const profileUrl = `https://financialmodelingprep.com/stable/profile?symbol=${ticker}&apikey=${FMP_API_KEY}`
-    const profileResponse = await fetch(profileUrl)
+    const profileResponse = await limitedFetch(profileUrl, minIntervalMs)
     
     if (!profileResponse.ok) {
       throw new Error(`Profile API error: ${profileResponse.status}`)
@@ -45,31 +62,31 @@ async function fetchFundamentals(ticker: string) {
     // Fetch Income Statement (Annual)
     console.log(`  📈 Fetching income statement...`)
     const incomeUrl = `https://financialmodelingprep.com/stable/income-statement?symbol=${ticker}&period=annual&limit=5&apikey=${FMP_API_KEY}`
-    const incomeResponse = await fetch(incomeUrl)
+    const incomeResponse = await limitedFetch(incomeUrl, minIntervalMs)
     const incomeStatements = incomeResponse.ok ? await incomeResponse.json() : []
 
     // Fetch Balance Sheet (Annual)
     console.log(`  📊 Fetching balance sheet...`)
     const balanceUrl = `https://financialmodelingprep.com/stable/balance-sheet-statement?symbol=${ticker}&period=annual&limit=5&apikey=${FMP_API_KEY}`
-    const balanceResponse = await fetch(balanceUrl)
+    const balanceResponse = await limitedFetch(balanceUrl, minIntervalMs)
     const balanceSheets = balanceResponse.ok ? await balanceResponse.json() : []
 
     // Fetch Cash Flow (Annual)
     console.log(`  💰 Fetching cash flow statement...`)
     const cashFlowUrl = `https://financialmodelingprep.com/stable/cash-flow-statement?symbol=${ticker}&period=annual&limit=5&apikey=${FMP_API_KEY}`
-    const cashFlowResponse = await fetch(cashFlowUrl)
+    const cashFlowResponse = await limitedFetch(cashFlowUrl, minIntervalMs)
     const cashFlowStatements = cashFlowResponse.ok ? await cashFlowResponse.json() : []
 
     // Fetch Key Metrics
     console.log(`  📊 Fetching key metrics...`)
     const metricsUrl = `https://financialmodelingprep.com/stable/key-metrics-ttm?symbol=${ticker}&limit=1&apikey=${FMP_API_KEY}`
-    const metricsResponse = await fetch(metricsUrl)
+    const metricsResponse = await limitedFetch(metricsUrl, minIntervalMs)
     const keyMetrics = metricsResponse.ok ? await metricsResponse.json() : []
 
     // Fetch Financial Ratios
     console.log(`  📐 Fetching financial ratios...`)
     const ratiosUrl = `https://financialmodelingprep.com/stable/ratios-ttm?symbol=${ticker}&limit=1&apikey=${FMP_API_KEY}`
-    const ratiosResponse = await fetch(ratiosUrl)
+    const ratiosResponse = await limitedFetch(ratiosUrl, minIntervalMs)
     const ratios = ratiosResponse.ok ? await ratiosResponse.json() : []
 
     return {
@@ -93,12 +110,15 @@ async function importFundamentals() {
   
   // Optional CLI flags
   const limitFlag = process.argv.find(a => a.startsWith('--limit='))
-  const maxCompanies = limitFlag ? Math.max(1, parseInt(limitFlag.split('=')[1], 10)) : 30
+  let maxCompanies = limitFlag ? Math.max(0, parseInt(limitFlag.split('=')[1], 10)) : 0
   const delayFlag = process.argv.find(a => a.startsWith('--delay='))
   const delayMs = delayFlag ? Math.max(0, parseInt(delayFlag.split('=')[1], 10)) : 2000
   const offsetFlag = process.argv.find(a => a.startsWith('--offset='))
   const offset = offsetFlag ? Math.max(0, parseInt(offsetFlag.split('=')[1], 10)) : 0
   const usOnly = process.argv.includes('--usOnly')
+  const rpmFlag = process.argv.find(a => a.startsWith('--rpm='))
+  const rpm = rpmFlag ? Math.max(1, parseInt(rpmFlag.split('=')[1], 10)) : 300
+  const minIntervalMs = Math.ceil(60000 / rpm)
 
   // Get tickers
   let allTickers: string[] = []
@@ -127,8 +147,9 @@ async function importFundamentals() {
     ).sort()
   }
   
+  if (maxCompanies === 0) maxCompanies = allTickers.length
   console.log(`📈 Total companies: ${allTickers.length}`)
-  console.log(`🎯 Processing ${maxCompanies} companies starting at offset ${offset} (to stay under API limit)\n`)
+  console.log(`🎯 Processing ${maxCompanies} companies starting at offset ${offset} (rpm cap ${rpm})\n`)
   console.log('='.repeat(80) + '\n')
   
   // Process a limited subset to respect API limits
@@ -146,11 +167,11 @@ async function importFundamentals() {
     try {
       console.log(`${progress} Processing ${ticker}...`)
       
-      const data = await fetchFundamentals(ticker)
+      const data = await fetchFundamentals(ticker, minIntervalMs)
       apiCallsUsed += 7 // Approximate
       
       console.log(`  ✅ Data fetched: ${data.profile.companyName}`)
-      console.log(`     Price: $${data.quote.price} | Market Cap: $${(data.quote.marketCap / 1e9).toFixed(2)}B`)
+      console.log(`     Price: $${data.quote.price} | Market Cap: $${(Number(data.quote.marketCap || 0) / 1e9).toFixed(2)}B`)
       console.log(`     Income Statements: ${data.incomeStatements.length} years`)
       console.log(`     Balance Sheets: ${data.balanceSheets.length} years`)
       console.log(`     Cash Flows: ${data.cashFlowStatements.length} years`)
@@ -165,7 +186,7 @@ async function importFundamentals() {
         .from('companies')
         .upsert({
           ticker: ticker,
-          name: data.profile.companyName || ticker,
+          name: (data.profile && data.profile.companyName) ? data.profile.companyName : ticker,
           sector: data.profile.sector || null,
           industry: data.profile.industry || null,
           description: data.profile.description || null,
@@ -173,7 +194,7 @@ async function importFundamentals() {
           logo_url: data.profile.image || null,
           country: data.profile.country || 'US',
           exchange: data.profile.exchangeShortName || data.quote.exchange || null,
-          market_cap: data.quote.marketCap || 0,
+          market_cap: Math.trunc(Number(data.quote.marketCap || 0)),
           employees: data.profile.fullTimeEmployees || 0,
           data: {
             // Current Quote Data

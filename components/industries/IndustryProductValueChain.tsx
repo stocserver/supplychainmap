@@ -164,12 +164,12 @@ export function IndustryProductValueChain({ stages, industryName }: IndustryProd
 
   const totalProducts = useMemo(() => stages.reduce((acc, s) => acc + s.products.length, 0), [stages])
 
-  function findProductById(targetId: string): ProductCategory | null {
+  function findProductById(targetId: string): { product: ProductCategory; stage: ValueChainStageProducts } | null {
     for (const stage of stages) {
       const stack = [...stage.products]
       while (stack.length) {
         const p = stack.pop() as ProductCategory
-        if (p.id === targetId) return p
+        if (p.id === targetId) return { product: p, stage }
         const subs = (p as any).subProducts as ProductCategory[] | undefined
         if (subs && subs.length) stack.push(...subs)
       }
@@ -180,9 +180,9 @@ export function IndustryProductValueChain({ stages, industryName }: IndustryProd
   useEffect(() => {
     const id = searchParams.get('product')
     if (!id) return
-    const product = findProductById(id)
-    if (product) {
-      handleOpen(product)
+    const found = findProductById(id)
+    if (found) {
+      handleOpen(found.product, found.stage)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams, stages])
