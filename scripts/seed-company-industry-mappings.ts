@@ -47,7 +47,7 @@ async function main() {
     if (!slug) continue
     const industryId = slugToId.get(slug)
     if (!industryId) continue
-    rows.push({ company_id: (c as any).id, industry_id, is_primary: true })
+    rows.push({ company_id: (c as any).id, industry_id: industryId, is_primary: true })
   }
 
   // Upsert in batches
