@@ -311,7 +311,7 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
 
                       {/* Equity */}
                       <tr className="border-b-2 border-gray-300 hover:bg-gray-50 bg-green-50">
-                        <td className="py-2 px-4 font-bold sticky left-0 bg-green-50 z-10">Shareholders' Equity</td>
+                        <td className="py-2 px-4 font-bold sticky left-0 bg-green-50 z-10">Shareholders&apos; Equity</td>
                         {balanceSheets.map((stmt: any) => (
                           <td key={stmt.date} className="text-right py-2 px-4 font-bold text-green-700">
                             {formatMillion(stmt.totalStockholdersEquity)}

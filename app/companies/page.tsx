@@ -100,7 +100,7 @@ export default function CompaniesPage() {
     }
 
     return allCompanies.filter(t => matchesCategory(t) && matchesSearch(t))
-  }, [allCompanies, category, searchTerm, tickerToIndustry, companiesFromDb])
+  }, [allCompanies, category, searchTerm, tickerToIndustry, companiesFromDb, categoryOptions])
 
   return (
     <div className="container py-8">

@@ -122,7 +122,7 @@ export default function IndustriesPage() {
     return industriesList
       .filter(i => inSelected(i.slug, i.category))
       .sort((a, b) => a.name.localeCompare(b.name))
-  }, [category, industriesList])
+  }, [category, industriesList, categoryOptions, aliasBySlug])
 
   function getStagesForSlug(slug: string): ValueChainStageProducts[] | null {
     switch (slug) {
