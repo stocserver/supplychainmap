@@ -170,7 +170,7 @@ async function importFundamentals() {
       const data = await fetchFundamentals(ticker, minIntervalMs)
       apiCallsUsed += 7 // Approximate
       
-      console.log(`  ✅ Data fetched: ${data.profile.companyName}`)
+      console.log(`  ✅ Data fetched: ${(data.profile && data.profile.companyName) || ticker}`)
       console.log(`     Price: $${data.quote.price} | Market Cap: $${(Number(data.quote.marketCap || 0) / 1e9).toFixed(2)}B`)
       console.log(`     Income Statements: ${data.incomeStatements.length} years`)
       console.log(`     Balance Sheets: ${data.balanceSheets.length} years`)
