@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
@@ -11,7 +11,12 @@ import { supabase } from "@/lib/supabase/client"
 export default function CompaniesPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [category, setCategory] = useState("all")
-  const [companiesFromDb, setCompaniesFromDb] = useState<{ ticker: string, name: string, industry?: string, industry_category?: string }[]>([])
+  const [companiesFromDb, setCompaniesFromDb] = useState<{ ticker: string, name: string, market_cap: number, industry?: string }[]>([])
+  const [page, setPage] = useState(0)
+  const [hasMore, setHasMore] = useState(true)
+  const loadingRef = useRef(false)
+  const [searchResults, setSearchResults] = useState<{ ticker: string, name: string, market_cap: number, industry?: string }[] | null>(null)
+  const searchTimer = useRef<number | null>(null)
 
   // High-level category filters (same groupings as industries page)
   const categoryOptions = [
@@ -31,16 +36,18 @@ export default function CompaniesPage() {
   const [tickerToIndustry, setTickerToIndustry] = useState<Map<string, Industry>>(new Map())
   useEffect(() => {
     let mounted = true
-    async function load() {
+    async function loadInitial() {
       try {
-        // Load companies list
         const { data: companies } = await supabase
           .from('companies')
-          .select('ticker, name, industry, industry_category')
-          .order('market_cap', { ascending: false })
-          .limit(2000)
+          .select('ticker, name, market_cap, industry')
+          .gt('market_cap', 0)
+          .order('market_cap', { ascending: false, nullsFirst: false })
+          .range(0, 49)
         if (companies && mounted) {
           setCompaniesFromDb(companies as any[])
+          setPage(1)
+          setHasMore((companies as any[]).length === 50)
         }
 
         const { data: inds } = await supabase
@@ -72,35 +79,89 @@ export default function CompaniesPage() {
       }
       if (mounted) setTickerToIndustry(local)
     }
-    load()
+    loadInitial()
     return () => { mounted = false }
   }, [])
 
+  // Infinite scroll loader
+  useEffect(() => {
+    function onScroll() {
+      if (!hasMore || loadingRef.current) return
+      const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200
+      if (!nearBottom) return
+      loadingRef.current = true
+      const from = page * 50
+      const to = from + 49
+      supabase
+        .from('companies')
+        .select('ticker, name, market_cap, industry')
+        .gt('market_cap', 0)
+        .order('market_cap', { ascending: false, nullsFirst: false })
+        .range(from, to)
+        .then(({ data, error }) => {
+          if (!error && data && data.length > 0) {
+            setCompaniesFromDb(prev => [...prev, ...data as any[]])
+            setPage(prev => prev + 1)
+            setHasMore((data as any[]).length === 50)
+          } else {
+            setHasMore(false)
+          }
+        })
+        .finally(() => { loadingRef.current = false })
+    }
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [page, hasMore])
+
+  // Debounced server-side search across entire DB
+  useEffect(() => {
+    if (searchTimer.current) window.clearTimeout(searchTimer.current)
+    if (!searchTerm) {
+      setSearchResults(null)
+      return
+    }
+    // Only search when at least 2 chars
+    if (searchTerm.trim().length < 2) return
+    searchTimer.current = window.setTimeout(async () => {
+      const term = `%${searchTerm.trim()}%`
+      const { data } = await supabase
+        .from('companies')
+        .select('ticker, name, market_cap, industry')
+        .or(`ticker.ilike.${term},name.ilike.${term}`)
+        .order('market_cap', { ascending: false, nullsFirst: false })
+        .limit(200)
+      setSearchResults((data || []) as any)
+    }, 300)
+    return () => { if (searchTimer.current) window.clearTimeout(searchTimer.current) }
+  }, [searchTerm])
+
   // All available companies (prefer DB list; fallback to mapping keys)
   const allCompanies = useMemo(() => {
-    const fromDb = companiesFromDb.map(c => c.ticker)
+    const source = searchResults ?? companiesFromDb
+    const fromDb = source.map(c => c.ticker)
     if (fromDb.length > 0) return fromDb
     return Array.from(new Set(Array.from(tickerToIndustry.keys()))).sort()
-  }, [companiesFromDb, tickerToIndustry])
+  }, [companiesFromDb, searchResults, tickerToIndustry])
 
   const filteredCompanies = useMemo(() => {
     const selected = categoryOptions.find(c => c.value === category)
     const matchesCategory = (ticker: string) => {
       if (!selected || !selected.ids) return true
       // Prefer DB category on the company row
-      const comp = companiesFromDb.find(c => c.ticker === ticker)
+      const source = searchResults ?? companiesFromDb
+      const comp = source.find(c => c.ticker === ticker)
       if (comp?.industry_category) return selected.value === comp.industry_category
       const ind = tickerToIndustry.get(ticker)
       return ind ? selected.ids.includes(ind.id) : false
     }
     const matchesSearch = (ticker: string) => {
-      if (!searchTerm) return true
+      if (!searchTerm || searchResults) return true
       const name = companiesFromDb.find(c => c.ticker === ticker)?.name || ''
       return ticker.toLowerCase().includes(searchTerm.toLowerCase()) || name.toLowerCase().includes(searchTerm.toLowerCase())
     }
 
     return allCompanies.filter(t => matchesCategory(t) && matchesSearch(t))
-  }, [allCompanies, category, searchTerm, tickerToIndustry, companiesFromDb, categoryOptions])
+  }, [allCompanies, category, searchTerm, searchResults, tickerToIndustry, companiesFromDb, categoryOptions])
 
   return (
     <div className="container py-8">
@@ -158,11 +219,14 @@ export default function CompaniesPage() {
       {/* Companies Grid */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filteredCompanies.map((ticker) => {
-          const company = companiesFromDb.find(c => c.ticker === ticker)
+          const source = searchResults ?? companiesFromDb
+          const company = source.find(c => c.ticker === ticker)
           return (
             <CompanyCard
               key={ticker}
               ticker={ticker}
+              name={company?.name}
+              marketCap={company?.market_cap}
               industry={tickerToIndustry.get(ticker)}
               labelTextOverride={tickerToIndustry.get(ticker) ? undefined : (company?.industry || undefined)}
             />
@@ -174,6 +238,9 @@ export default function CompaniesPage() {
         <div className="flex h-48 items-center justify-center rounded-lg border-2 border-dashed">
           <p className="text-muted-foreground">No companies found matching &quot;{searchTerm}&quot;</p>
         </div>
+      )}
+      {(!searchResults && !hasMore && companiesFromDb.length > 0) && (
+        <div className="py-6 text-center text-xs text-muted-foreground">No more results</div>
       )}
     </div>
   )

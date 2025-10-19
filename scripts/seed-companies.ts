@@ -1,15 +1,10 @@
 import * as dotenv from 'dotenv'
 import * as path from 'path'
+import { pathToFileURL } from 'url'
+import { promises as fs } from 'fs'
 import { createClient } from '@supabase/supabase-js'
 import { industries } from '../lib/data/industries'
-import { semiconductorProductStages } from '../lib/industries/semiconductors.products'
-import { cloudProductStages } from '../lib/industries/cloud-computing.products'
-import { dataCenterProductStages } from '../lib/industries/data-centers.products'
-import { cyberProductStages } from '../lib/industries/cybersecurity.products'
-import { softwareSaaSProductStages } from '../lib/industries/software-saas.products'
-import { evProductStages } from '../lib/industries/electric-vehicles.products'
-import { solarProductStages } from '../lib/industries/solar-energy.products'
-import { energyStorageProductStages } from '../lib/industries/energy-storage.products'
+import type { ValueChainStageProducts, ProductCategory } from '../lib/data/industries'
 
 type CompanyRef = { name: string; ticker?: string }
 
@@ -25,6 +20,34 @@ function collectFromProducts(products: any[]): CompanyRef[] {
   return results
 }
 
+function isStageArray(value: any): value is ValueChainStageProducts[] {
+  return Array.isArray(value)
+    && value.length > 0
+    && typeof value[0] === 'object'
+    && value[0] !== null
+    && ['upstream', 'midstream', 'downstream'].includes((value[0] as any).stage)
+    && Array.isArray((value[0] as any).products)
+}
+
+async function loadAllProductStages(): Promise<ValueChainStageProducts[]> {
+  const dir = path.resolve(process.cwd(), 'lib', 'industries')
+  const entries = await fs.readdir(dir)
+  const files = entries.filter(f => f.endsWith('.products.ts'))
+  const all: ValueChainStageProducts[] = []
+  for (const file of files) {
+    const full = path.resolve(dir, file)
+    try {
+      const mod = await import(pathToFileURL(full).href)
+      for (const value of Object.values(mod)) {
+        if (isStageArray(value)) all.push(...value)
+      }
+    } catch (e: any) {
+      console.warn(`⚠️  Failed to import ${file}: ${e.message}`)
+    }
+  }
+  return all
+}
+
 async function main() {
   // Load env from .env.local (same convention as other scripts)
   dotenv.config({ path: path.resolve(process.cwd(), '.env.local') })
@@ -38,15 +61,13 @@ async function main() {
 
   const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY)
 
-  // 1) Aggregate from product-centric maps (has names)
-  const semiCompanies = collectFromProducts(semiconductorProductStages.flatMap((s) => s.products))
-  const cloudCompanies = collectFromProducts(cloudProductStages.flatMap((s) => s.products))
-  const dcCompanies = collectFromProducts(dataCenterProductStages.flatMap((s) => s.products))
-  const cyberCompanies = collectFromProducts(cyberProductStages.flatMap((s) => s.products))
-  const swCompanies = collectFromProducts(softwareSaaSProductStages.flatMap((s) => s.products))
-  const evCompanies = collectFromProducts(evProductStages.flatMap((s) => s.products))
-  const solarCompanies = collectFromProducts(solarProductStages.flatMap((s) => s.products))
-  const storageCompanies = collectFromProducts(energyStorageProductStages.flatMap((s) => s.products))
+  // 1) Aggregate from ALL product-centric maps dynamically
+  const stages = await loadAllProductStages()
+  const productCompanyRefs: CompanyRef[] = []
+  for (const stage of stages) {
+    const products = (stage as any).products as ProductCategory[]
+    productCompanyRefs.push(...collectFromProducts(products))
+  }
 
   // 2) Aggregate from classic industries lists (featured + valueChain companies)
   function collectIndustryTickers(): CompanyRef[] {
@@ -86,14 +107,7 @@ async function main() {
   const tickerToName = new Map<string, string>()
   for (const ref of [
     ...classicCompanies,
-    ...semiCompanies,
-    ...cloudCompanies,
-    ...dcCompanies,
-    ...cyberCompanies,
-    ...swCompanies,
-    ...evCompanies,
-    ...solarCompanies,
-    ...storageCompanies,
+    ...productCompanyRefs,
   ]) {
     if (!ref.ticker) continue
     const t = ref.ticker.toUpperCase()

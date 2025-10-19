@@ -16,11 +16,26 @@ interface CompanyData {
   marketCap: number
 }
 
-export function CompanyCard({ ticker }: { ticker: string, industry?: Industry, labelTextOverride?: string }) {
+type Props = { ticker: string; name?: string; marketCap?: number; industry?: Industry; labelTextOverride?: string }
+
+export function CompanyCard({ ticker, name, marketCap }: Props) {
   const [data, setData] = useState<CompanyData | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    // If props include name/marketCap, use them directly (no fetch per card)
+    if (name !== undefined || marketCap !== undefined) {
+      setData({
+        ticker,
+        name: name || ticker,
+        price: 0,
+        change: 0,
+        changePercent: 0,
+        marketCap: marketCap || 0,
+      })
+      setLoading(false)
+      return
+    }
     async function fetchData() {
       try {
         const response = await fetch(`/api/companies/${ticker}`)
@@ -34,9 +49,8 @@ export function CompanyCard({ ticker }: { ticker: string, industry?: Industry, l
         setLoading(false)
       }
     }
-
     fetchData()
-  }, [ticker])
+  }, [ticker, name, marketCap])
 
   if (loading) {
     return (

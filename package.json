@@ -20,9 +20,11 @@
     "import:companies": "tsx scripts/import-companies-to-supabase.ts",
     "import:batch": "tsx scripts/import-batch-fundamentals.ts --limit=10 --concurrency=10",
     "import:one": "tsx scripts/import-sequential.ts --limit=1 --delay=1500",
-    "import:fundamentals": "tsx scripts/import-fundamentals-to-supabase.ts",
+    "import:fundamentals": "tsx scripts/import-fundamentals-only.ts",
     "reimport:fix": "tsx scripts/reimport-with-fix.ts",
-    "seed:companies": "tsx scripts/seed-companies.ts"
+    "seed:companies": "tsx scripts/seed-companies.ts",
+    "validate:hardcoded": "tsx scripts/validate-hardcoded-vs-db.ts",
+    "validate:hardcoded:seed": "tsx scripts/validate-hardcoded-vs-db.ts --seed"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
