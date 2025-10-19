@@ -150,10 +150,6 @@ export default function CompaniesPage() {
     const selected = categoryOptions.find(c => c.value === category)
     const matchesCategory = (ticker: string) => {
       if (!selected || !selected.ids) return true
-      // Prefer DB category on the company row
-      const source = searchResults ?? companiesFromDb
-      const comp = source.find(c => c.ticker === ticker)
-      if (comp?.industry_category) return selected.value === comp.industry_category
       const ind = tickerToIndustry.get(ticker)
       return ind ? selected.ids.includes(ind.id) : false
     }
