@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -38,6 +39,20 @@ export default async function CompanyPage({ params }: { params: { ticker: string
 
   return (
     <div className="container py-8">
+      {/* JSON-LD: Company basic schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: profile.name,
+            tickerSymbol: ticker,
+            url: profile.website || undefined,
+            address: undefined,
+          }),
+        }}
+      />
       {/* Back button */}
       <Link href="/companies">
         <Button variant="ghost" className="mb-6">
@@ -195,5 +210,39 @@ export default async function CompanyPage({ params }: { params: { ticker: string
       </Tabs>
     </div>
   )
+}
+
+export async function generateMetadata({ params }: { params: { ticker: string } }): Promise<Metadata> {
+  const ticker = params.ticker.toUpperCase()
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  const title = `${ticker} | Company Overview`
+  const description = `Key fundamentals, financials, and value chain context for ${ticker}.`
+  const url = `${siteUrl}/companies/${ticker}`
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "website",
+      images: [
+        {
+          url: `${siteUrl}/og-default.png`,
+          width: 1200,
+          height: 630,
+          alt: "StockOtters Supply Chain Map",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${siteUrl}/og-default.png`],
+    },
+  }
 }
 

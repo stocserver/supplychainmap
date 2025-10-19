@@ -35,6 +35,23 @@ export default function Home() {
         </p>
       </div>
 
+      {/* Call to Action - moved up for prominence */}
+      <div className="mb-12 rounded-lg bg-primary/5 p-8 text-center">
+        <h2 className="mb-4 text-2xl font-bold">
+          Understand the Complete Supply Chain
+        </h2>
+        <p className="mx-auto mb-6 max-w-2xl text-muted-foreground">
+          See how companies connect from raw materials to end products. 
+          Identify investment opportunities across the value chain.
+        </p>
+        <Link 
+          href="/industries"
+          className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+        >
+          Explore All Industries
+        </Link>
+      </div>
+
       {/* Quick Stats */}
       <div className="mb-12 grid gap-4 md:grid-cols-3">
         <Card>
@@ -66,22 +83,7 @@ export default function Home() {
       
       
 
-      {/* Call to Action */}
-      <div className="mt-16 rounded-lg bg-primary/5 p-8 text-center">
-        <h2 className="mb-4 text-2xl font-bold">
-          Understand the Complete Supply Chain
-        </h2>
-        <p className="mx-auto mb-6 max-w-2xl text-muted-foreground">
-          See how companies connect from raw materials to end products. 
-          Identify investment opportunities across the value chain.
-        </p>
-        <Link 
-          href="/industries"
-          className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-        >
-          Explore All Industries
-        </Link>
-      </div>
+      
     </div>
   )
 }

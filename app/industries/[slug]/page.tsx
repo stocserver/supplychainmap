@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -189,5 +190,46 @@ export default async function IndustryPage({ params }: { params: { slug: string 
       )}
     </div>
   )
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  const industry = getIndustryBySlug(params.slug)
+  if (!industry) {
+    return {
+      title: "Industry | SupplyChainMap",
+      description: "Explore industry value chains and featured companies.",
+    }
+  }
+
+  const title = `${industry.name} Value Chain | SupplyChainMap`
+  const description = industry.description
+  const url = `${siteUrl}/industries/${industry.slug}`
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "website",
+      images: [
+        {
+          url: `${siteUrl}/og-default.png`,
+          width: 1200,
+          height: 630,
+          alt: `${industry.name} Value Chain`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${siteUrl}/og-default.png`],
+    },
+  }
 }
 

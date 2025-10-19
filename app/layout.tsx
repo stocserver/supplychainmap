@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: "/favicon-32x32.png",
+  },
   openGraph: {
     title: "US Supply Chain & Value Chain Platform",
     description:
