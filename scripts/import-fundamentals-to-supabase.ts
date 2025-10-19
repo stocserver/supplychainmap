@@ -116,13 +116,14 @@ async function importFundamentals() {
   const offsetFlag = process.argv.find(a => a.startsWith('--offset='))
   const offset = offsetFlag ? Math.max(0, parseInt(offsetFlag.split('=')[1], 10)) : 0
   const usOnly = process.argv.includes('--usOnly')
+  const fromDb = process.argv.includes('--fromDb')
   const rpmFlag = process.argv.find(a => a.startsWith('--rpm='))
   const rpm = rpmFlag ? Math.max(1, parseInt(rpmFlag.split('=')[1], 10)) : 300
   const minIntervalMs = Math.ceil(60000 / rpm)
 
   // Get tickers
   let allTickers: string[] = []
-  if (usOnly) {
+  if (usOnly || fromDb) {
     console.log('🌎 US-only mode: loading tickers from Supabase companies table')
     const { data, error } = await supabase
       .from('companies')
@@ -130,12 +131,16 @@ async function importFundamentals() {
       .order('market_cap', { ascending: false })
       .limit(2000)
     if (!error && data) {
-      const usExchanges = new Set(['NASDAQ', 'NYSE', 'NYSE MKT', 'AMEX', 'NYSEARCA', 'BATS', 'ARCA'])
-      allTickers = Array.from(new Set(
-        data
-          .filter((c: any) => (c.country === 'US') || (c.exchange && usExchanges.has(String(c.exchange).toUpperCase())))
-          .map((c: any) => c.ticker)
-      ))
+      if (usOnly) {
+        const usExchanges = new Set(['NASDAQ', 'NYSE', 'NYSE MKT', 'AMEX', 'NYSEARCA', 'BATS', 'ARCA'])
+        allTickers = Array.from(new Set(
+          data
+            .filter((c: any) => (c.country === 'US') || (c.exchange && usExchanges.has(String(c.exchange).toUpperCase())))
+            .map((c: any) => c.ticker)
+        ))
+      } else {
+        allTickers = Array.from(new Set(data.map((c: any) => c.ticker)))
+      }
     }
     if (allTickers.length === 0) {
       console.log('⚠️  No US tickers from DB; falling back to local list')
