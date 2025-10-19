@@ -92,13 +92,14 @@ export default function CompaniesPage() {
       loadingRef.current = true
       const from = page * 50
       const to = from + 49
-      supabase
-        .from('companies')
-        .select('ticker, name, market_cap, industry')
-        .gt('market_cap', 0)
-        .order('market_cap', { ascending: false, nullsFirst: false })
-        .range(from, to)
-        .then(({ data, error }) => {
+      ;(async () => {
+        try {
+          const { data, error } = await supabase
+            .from('companies')
+            .select('ticker, name, market_cap, industry')
+            .gt('market_cap', 0)
+            .order('market_cap', { ascending: false, nullsFirst: false })
+            .range(from, to)
           if (!error && data && data.length > 0) {
             setCompaniesFromDb(prev => [...prev, ...data as any[]])
             setPage(prev => prev + 1)
@@ -106,8 +107,10 @@ export default function CompaniesPage() {
           } else {
             setHasMore(false)
           }
-        })
-        .finally(() => { loadingRef.current = false })
+        } finally {
+          loadingRef.current = false
+        }
+      })()
     }
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
