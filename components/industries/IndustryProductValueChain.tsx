@@ -8,10 +8,12 @@ import { Building2 } from 'lucide-react'
 import type { ProductCategory, ProductCompanyRef, ValueChainStageProducts } from '@/lib/data/industries'
 import { CompanyCard } from '@/components/companies/company-card'
 import { useSearchParams } from 'next/navigation'
+import type { Industry } from '@/lib/data/industries'
 
 interface IndustryProductValueChainProps {
   stages: ValueChainStageProducts[]
   industryName: string
+  industry?: Industry
 }
 
 interface ActiveProduct {
@@ -116,7 +118,7 @@ function ProductStage({ stage, onClick }: { stage: ValueChainStageProducts; onCl
   )
 }
 
-export function IndustryProductValueChain({ stages, industryName }: IndustryProductValueChainProps) {
+export function IndustryProductValueChain({ stages, industryName, industry }: IndustryProductValueChainProps) {
   const [active, setActive] = useState<ActiveProduct | null>(null)
   const [open, setOpen] = useState(false)
   const [descExpanded, setDescExpanded] = useState(false)
@@ -222,7 +224,11 @@ export function IndustryProductValueChain({ stages, industryName }: IndustryProd
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                       {active.companiesDetailed!.map((c, idx) => (
                         c.ticker ? (
-                          <CompanyCard key={`${c.ticker}-${idx}`} ticker={c.ticker} />
+                          <CompanyCard 
+                            key={`${c.ticker}-${idx}`} 
+                            ticker={c.ticker} 
+                            industry={industry}
+                          />
                         ) : (
                           <Link key={`${c.name}-${idx}`} href={`/companies/${encodeURIComponent(c.name).toUpperCase()}`}>
                             <div className="rounded-lg border bg-card p-4 transition-all hover:shadow-md">

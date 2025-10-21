@@ -81,79 +81,79 @@ export default async function IndustryPage({ params }: { params: { slug: string 
 
       {/* Value Chain Visualization */}
       {industry.slug === 'semiconductors' ? (
-        <IndustryProductValueChain stages={semiconductorProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={semiconductorProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'cloud-computing' ? (
-        <IndustryProductValueChain stages={cloudProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={cloudProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'data-centers' ? (
-        <IndustryProductValueChain stages={dataCenterProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={dataCenterProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'cybersecurity' ? (
-        <IndustryProductValueChain stages={cyberProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={cyberProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'software-saas' ? (
-        <IndustryProductValueChain stages={softwareSaaSProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={softwareSaaSProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'electric-vehicles' ? (
-        <IndustryProductValueChain stages={evProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={evProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'solar-energy' ? (
-        <IndustryProductValueChain stages={solarProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={solarProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'energy-storage' ? (
-        <IndustryProductValueChain stages={energyStorageProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={energyStorageProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'pharmaceuticals' ? (
-        <IndustryProductValueChain stages={pharmaceuticalProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={pharmaceuticalProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'banking' ? (
-        <IndustryProductValueChain stages={bankingProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={bankingProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'oil-gas' ? (
-        <IndustryProductValueChain stages={oilGasProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={oilGasProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'automotive' ? (
-        <IndustryProductValueChain stages={automotiveProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={automotiveProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'retail' ? (
-        <IndustryProductValueChain stages={retailProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={retailProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'telecommunications' ? (
-        <IndustryProductValueChain stages={telecommunicationsProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={telecommunicationsProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'aerospace-defense' ? (
-        <IndustryProductValueChain stages={aerospaceProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={aerospaceProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'biotechnology' ? (
-        <IndustryProductValueChain stages={biotechnologyProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={biotechnologyProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'insurance' ? (
-        <IndustryProductValueChain stages={insuranceProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={insuranceProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'media-entertainment' ? (
-        <IndustryProductValueChain stages={mediaEntertainmentProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={mediaEntertainmentProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'utilities' ? (
-        <IndustryProductValueChain stages={utilitiesProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={utilitiesProductStages} industryName={industry.name} industry={industry} />
       )         : industry.slug === 'fintech' ? (
-        <IndustryProductValueChain stages={fintechProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={fintechProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'medical-devices' ? (
-        <IndustryProductValueChain stages={medicalDevicesProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={medicalDevicesProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'ecommerce' ? (
-        <IndustryProductValueChain stages={ecommerceProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={ecommerceProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'real-estate' ? (
-        <IndustryProductValueChain stages={realEstateProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={realEstateProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'asset-management' ? (
-        <IndustryProductValueChain stages={assetManagementProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={assetManagementProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'chemicals' ? (
-        <IndustryProductValueChain stages={chemicalsProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={chemicalsProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'food-beverage' ? (
-        <IndustryProductValueChain stages={foodBeverageProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={foodBeverageProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'artificial-intelligence' ? (
-        <IndustryProductValueChain stages={artificialIntelligenceProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={artificialIntelligenceProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'robotics-automation' ? (
-        <IndustryProductValueChain stages={roboticsAutomationProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={roboticsAutomationProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'transportation-logistics' ? (
-        <IndustryProductValueChain stages={transportationLogisticsProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={transportationLogisticsProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'space-technology' ? (
-        <IndustryProductValueChain stages={spaceTechnologyProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={spaceTechnologyProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'digital-health' ? (
-        <IndustryProductValueChain stages={digitalHealthProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={digitalHealthProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'mining-materials' ? (
-        <IndustryProductValueChain stages={miningMaterialsProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={miningMaterialsProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'consumer-products' ? (
-        <IndustryProductValueChain stages={consumerProductsProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={consumerProductsProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'hospitality' ? (
-        <IndustryProductValueChain stages={hospitalityProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={hospitalityProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'construction-engineering' ? (
-        <IndustryProductValueChain stages={constructionEngineeringProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={constructionEngineeringProductStages} industryName={industry.name} industry={industry} />
       ) : industry.slug === 'agtech' ? (
-        <IndustryProductValueChain stages={agtechProductStages} industryName={industry.name} />
+        <IndustryProductValueChain stages={agtechProductStages} industryName={industry.name} industry={industry} />
       ) : industry.valueChain ? (
-        <IndustryValueChain valueChain={industry.valueChain} industryName={industry.name} />
+        <IndustryValueChain valueChain={industry.valueChain} industryName={industry.name} industry={industry} />
       ) : industry.subcategories ? (
         <Card className="mb-8">
           <CardHeader>
