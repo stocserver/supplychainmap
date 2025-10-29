@@ -195,9 +195,10 @@ export const utilitiesProductStages: ValueChainStageProducts[] = [
           { name: 'NRG Energy', ticker: 'NRG', listing: 'US' },
           { name: 'Constellation Energy', ticker: 'CEG', listing: 'US' },
           { name: 'Calpine', ticker: 'CPN', listing: 'US' },
-          { name: 'Dynegy', ticker: 'DYNC', listing: 'US' },
           { name: 'Direct Energy', ticker: 'NRG', listing: 'US' },
-          { name: 'Green Mountain Energy', ticker: 'NRG', listing: 'US' }
+          { name: 'Green Mountain Energy', ticker: 'NRG', listing: 'US' },
+          { name: 'EDP Energias', ticker: 'EDPFY', listing: 'ADR' },
+          { name: 'Engie', ticker: 'ENGIY', listing: 'ADR' }
         ],
         subProducts: [
           {

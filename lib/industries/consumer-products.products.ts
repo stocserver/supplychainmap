@@ -10,11 +10,13 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
         id: 'raw-materials-consumer',
         name: 'Raw Materials & Ingredients',
         description: 'Fragrances, flavors and key inputs for consumer goods',
-        longDescription: 'Inputs that feed personal care and household product manufacturing, including fragrances, surfactants and packaging resins.',
+        longDescription:
+          'Inputs that feed personal care and household product manufacturing, including fragrances, surfactants and packaging resins.',
         companiesDetailed: [
           { name: 'International Flavors & Fragrances', ticker: 'IFF', listing: 'US' },
           { name: 'Ecolab', ticker: 'ECL', listing: 'US' },
-          { name: 'LyondellBasell', ticker: 'LYB', listing: 'US' }
+          { name: 'LyondellBasell', ticker: 'LYB', listing: 'US' },
+          { name: 'Packaging Corp of America', ticker: 'PKG', listing: 'US' }
         ],
         tags: ['Fragrances', 'Surfactants', 'Packaging Resins']
       },
@@ -22,39 +24,51 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
         id: 'personal-care',
         name: 'Personal Care',
         description: 'Personal and household care products',
-        longDescription: 'Manufacturing and marketing of products for personal hygiene and grooming, including skincare, haircare, oral care, and cosmetics. This segment focuses on brand innovation, consumer preferences, and broad distribution channels.',
+        longDescription:
+          'Manufacturing and marketing of products for personal hygiene and grooming, including skincare, haircare, oral care, and cosmetics. This segment focuses on brand innovation, consumer preferences, and broad distribution channels.',
         companiesDetailed: [
           { name: 'Procter & Gamble', ticker: 'PG', listing: 'US' },
           { name: 'Colgate-Palmolive', ticker: 'CL', listing: 'US' },
-          { name: 'Kimberly-Clark', ticker: 'KMB', listing: 'US' }
+          { name: 'Kimberly-Clark', ticker: 'KMB', listing: 'US' },
+          { name: 'Spectrum Brands', ticker: 'SPB', listing: 'US' },
+          { name: 'Central Garden & Pet', ticker: 'CENT', listing: 'US' }
         ],
         subProducts: [
           {
             id: 'skincare',
             name: 'Skincare & Beauty',
             description: 'Skincare, cosmetics and beauty products',
-            longDescription: 'Development and sale of products for skin health, appearance, and beauty enhancement, such as moisturizers, serums, cleansers, and makeup. This segment is driven by trends in dermatology, anti-aging, and natural ingredients.',
+            longDescription:
+              'Development and sale of products for skin health, appearance, and beauty enhancement, such as moisturizers, serums, cleansers, and makeup. This segment is driven by trends in dermatology, anti-aging, and natural ingredients.',
             companiesDetailed: [
-              { name: 'Estée Lauder', ticker: 'EL', listing: 'US' },
-              { name: 'Procter & Gamble', ticker: 'PG', listing: 'US' }
+              { name: 'Estee Lauder', ticker: 'EL', listing: 'US' },
+              { name: 'e.l.f. Beauty', ticker: 'ELF', listing: 'US' },
+              { name: 'Coty', ticker: 'COTY', listing: 'US' },
+              { name: 'Procter & Gamble', ticker: 'PG', listing: 'US' },
+              { name: 'The Beauty Health Company', ticker: 'SKIN', listing: 'US' },
+              { name: 'Olaplex', ticker: 'OLPX', listing: 'US' }
             ]
           },
           {
             id: 'hair-care',
             name: 'Hair Care',
             description: 'Shampoo, conditioner and hair styling',
-            longDescription: 'Production and marketing of products for hair cleansing, conditioning, styling, and treatment. This includes shampoos, conditioners, styling gels, and colorants, catering to diverse hair types and consumer needs.',
+            longDescription:
+              'Production and marketing of products for hair cleansing, conditioning, styling, and treatment. This includes shampoos, conditioners, styling gels, and colorants, catering to diverse hair types and consumer needs.',
             companiesDetailed: [
-              { name: 'Procter & Gamble', ticker: 'PG', listing: 'US' }
+              { name: 'Procter & Gamble', ticker: 'PG', listing: 'US' },
+              { name: 'Coty', ticker: 'COTY', listing: 'US' }
             ]
           },
           {
             id: 'oral-care',
             name: 'Oral Care',
             description: 'Toothpaste and oral hygiene',
-            longDescription: 'Manufacturing and distribution of oral hygiene products such as toothpastes, mouthwashes, and toothbrushes. This segment focuses on promoting dental health, cavity prevention, and fresh breath.',
+            longDescription:
+              'Manufacturing and distribution of oral hygiene products such as toothpastes, mouthwashes, and toothbrushes. This segment focuses on promoting dental health, cavity prevention, and fresh breath.',
             companiesDetailed: [
-              { name: 'Colgate-Palmolive', ticker: 'CL', listing: 'US' }
+              { name: 'Colgate-Palmolive', ticker: 'CL', listing: 'US' },
+              { name: 'Procter & Gamble', ticker: 'PG', listing: 'US' }
             ]
           }
         ],
@@ -71,29 +85,39 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
         id: 'household-products',
         name: 'Household Products',
         description: 'Household consumables and appliances',
-        longDescription: 'Production and marketing of cleaning supplies, paper goods, and small household appliances for home use. This segment emphasizes effectiveness, convenience, and value for everyday household tasks.',
+        longDescription:
+          'Production and marketing of cleaning supplies, paper goods, and small household appliances for home use. This segment emphasizes effectiveness, convenience, and value for everyday household tasks.',
         companiesDetailed: [
           { name: 'Whirlpool', ticker: 'WHR', listing: 'US' },
-          { name: 'Newell Brands', ticker: 'NWL', listing: 'US' }
+          { name: 'Newell Brands', ticker: 'NWL', listing: 'US' },
+          { name: 'Stanley Black & Decker', ticker: 'SWK', listing: 'US' },
+          { name: 'Middleby', ticker: 'MIDD', listing: 'US' },
+          { name: 'Snap-on', ticker: 'SNA', listing: 'US' }
         ],
         subProducts: [
           {
             id: 'home-cleaning',
             name: 'Home Cleaning',
             description: 'Surface cleaners, detergents and sanitizers',
-            longDescription: 'Manufacturing of products for cleaning and sanitizing homes, including surface cleaners, laundry detergents, dishwashing liquids, and disinfectants. Focus on effectiveness, safety, and scent preferences.',
+            longDescription:
+              'Manufacturing of products for cleaning and sanitizing homes, including surface cleaners, laundry detergents, dishwashing liquids, and disinfectants. Focus on effectiveness, safety, and scent preferences.',
             companiesDetailed: [
               { name: 'The Clorox Company', ticker: 'CLX', listing: 'US' },
-              { name: 'Church & Dwight', ticker: 'CHD', listing: 'US' }
+              { name: 'Church & Dwight', ticker: 'CHD', listing: 'US' },
+              { name: 'Procter & Gamble', ticker: 'PG', listing: 'US' },
+              { name: 'Reckitt Benckiser', ticker: 'RBGLY', listing: 'ADR' }
             ]
           },
           {
             id: 'paper-goods',
             name: 'Paper Goods',
             description: 'Tissue and paper-based products',
-            longDescription: 'Production of disposable paper products for household use, such as facial tissues, paper towels, toilet paper, and napkins. Emphasis on softness, absorbency, and sustainable sourcing.',
+            longDescription:
+              'Production of disposable paper products for household use, such as facial tissues, paper towels, toilet paper, and napkins. Emphasis on softness, absorbency, and sustainable sourcing.',
             companiesDetailed: [
-              { name: 'Kimberly-Clark', ticker: 'KMB', listing: 'US' }
+              { name: 'Kimberly-Clark', ticker: 'KMB', listing: 'US' },
+              { name: 'Clearwater Paper', ticker: 'CLW', listing: 'US' },
+              { name: 'Procter & Gamble', ticker: 'PG', listing: 'US' }
             ]
           }
         ],
@@ -103,7 +127,8 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
         id: 'tobacco',
         name: 'Tobacco',
         description: 'Tobacco and reduced-risk products',
-        longDescription: 'Manufacturing and marketing of tobacco products, including traditional cigarettes and cigars, as well as developing and distributing reduced-risk alternatives. This segment navigates evolving regulations and public health concerns.',
+        longDescription:
+          'Manufacturing and marketing of tobacco products, including traditional cigarettes and cigars, as well as developing and distributing reduced-risk alternatives. This segment navigates evolving regulations and public health concerns.',
         companiesDetailed: [
           { name: 'Altria', ticker: 'MO', listing: 'US' },
           { name: 'Philip Morris', ticker: 'PM', listing: 'US' }
@@ -113,7 +138,8 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
             id: 'combustibles',
             name: 'Combustibles',
             description: 'Traditional cigarette products',
-            longDescription: 'Production and sale of traditional combustible tobacco products, primarily cigarettes. This segment faces declining volumes in many markets due to health concerns and regulatory pressures.',
+            longDescription:
+              'Production and sale of traditional combustible tobacco products, primarily cigarettes. This segment faces declining volumes in many markets due to health concerns and regulatory pressures.',
             companiesDetailed: [
               { name: 'Altria', ticker: 'MO', listing: 'US' },
               { name: 'Philip Morris', ticker: 'PM', listing: 'US' }
@@ -123,7 +149,8 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
             id: 'rrp',
             name: 'Reduced-Risk Products',
             description: 'Heated tobacco and other reduced-risk formats',
-            longDescription: 'Development, manufacturing, and commercialization of tobacco and nicotine products with the potential to reduce harm compared to traditional cigarettes, such as heated tobacco products, e-cigarettes, and oral smokeless products.',
+            longDescription:
+              'Development, manufacturing, and commercialization of tobacco and nicotine products with the potential to reduce harm compared to traditional cigarettes, such as heated tobacco products, e-cigarettes, and oral smokeless products.',
             companiesDetailed: [
               { name: 'Philip Morris', ticker: 'PM', listing: 'US' }
             ]
@@ -142,38 +169,49 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
         id: 'retail',
         name: 'Retail Channels',
         description: 'Big box and specialty retail',
-        longDescription: 'Distribution channels through which consumer products reach end-users. This includes mass merchandisers, drugstores, and online platforms, each with distinct strategies for product display, pricing, and customer engagement.',
+        longDescription:
+          'Distribution channels through which consumer products reach end-users. This includes mass merchandisers, drugstores, and online platforms, each with distinct strategies for product display, pricing, and customer engagement.',
         companiesDetailed: [
           { name: 'Walmart', ticker: 'WMT', listing: 'US' },
-          { name: 'Target', ticker: 'TGT', listing: 'US' }
+          { name: 'Target', ticker: 'TGT', listing: 'US' },
+          { name: 'Dollar General', ticker: 'DG', listing: 'US' },
+          { name: 'Dollar Tree', ticker: 'DLTR', listing: 'US' },
+          { name: 'Ulta Beauty', ticker: 'ULTA', listing: 'US' }
         ],
         subProducts: [
           {
             id: 'mass-merch',
             name: 'Mass Merchandisers',
             description: 'Big-box retail chains',
-            longDescription: 'Large retail formats (superstores, hypermarkets) offering a wide variety of consumer goods at competitive prices, including groceries, electronics, apparel, and household items. Focus on high volume and broad appeal.',
+            longDescription:
+              'Large retail formats (superstores, hypermarkets) offering a wide variety of consumer goods at competitive prices, including groceries, electronics, apparel, and household items. Focus on high volume and broad appeal.',
             companiesDetailed: [
               { name: 'Walmart', ticker: 'WMT', listing: 'US' },
               { name: 'Target', ticker: 'TGT', listing: 'US' },
-              { name: 'Costco Wholesale', ticker: 'COST', listing: 'US' }
+              { name: 'Costco Wholesale', ticker: 'COST', listing: 'US' },
+              { name: "BJ's Wholesale Club", ticker: 'BJ', listing: 'US' },
+              { name: 'Dollar General', ticker: 'DG', listing: 'US' },
+              { name: 'Dollar Tree', ticker: 'DLTR', listing: 'US' }
             ]
           },
           {
             id: 'drugstores',
             name: 'Drugstores',
             description: 'Drugstore chains and health retail',
-            longDescription: 'Retailers primarily focused on health, beauty, and wellness products, alongside pharmaceuticals, over-the-counter medicines, and some convenience goods. They serve as accessible community health and shopping hubs.',
+            longDescription:
+              'Retailers primarily focused on health, beauty, and wellness products, alongside pharmaceuticals, over-the-counter medicines, and some convenience goods. They serve as accessible community health and shopping hubs.',
             companiesDetailed: [
               { name: 'CVS Health', ticker: 'CVS', listing: 'US' },
-              { name: 'Walgreens Boots Alliance', ticker: 'WBA', listing: 'US' }
+              { name: 'Walgreens Boots Alliance', ticker: 'WBA', listing: 'US' },
+              { name: 'Ulta Beauty', ticker: 'ULTA', listing: 'US' }
             ]
           },
           {
             id: 'online',
             name: 'Online Retail',
             description: 'E-commerce channels',
-            longDescription: 'Sales of consumer products through digital platforms and websites. This channel offers convenience, vast product selection, and competitive pricing, driven by rapid fulfillment and personalized shopping experiences.',
+            longDescription:
+              'Sales of consumer products through digital platforms and websites. This channel offers convenience, vast product selection, and competitive pricing, driven by rapid fulfillment and personalized shopping experiences.',
             companiesDetailed: [
               { name: 'Amazon', ticker: 'AMZN', listing: 'US' }
             ]
@@ -184,5 +222,4 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
     ]
   }
 ]
-
 

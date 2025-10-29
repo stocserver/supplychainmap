@@ -19,7 +19,10 @@ export const medicalDevicesProductStages: ValueChainStageProducts[] = [
           { name: 'Stryker', ticker: 'SYK', listing: 'US' },
           { name: 'Baxter International', ticker: 'BAX', listing: 'US' },
           { name: 'Becton Dickinson', ticker: 'BDX', listing: 'US' },
-          { name: 'Zimmer Biomet', ticker: 'ZBH', listing: 'US' }
+          { name: 'Zimmer Biomet', ticker: 'ZBH', listing: 'US' },
+          { name: 'Smith & Nephew', ticker: 'SNN', listing: 'US' },
+          { name: 'Teleflex', ticker: 'TFX', listing: 'US' },
+          { name: 'Integer Holdings', ticker: 'ITGR', listing: 'US' }
         ],
         subProducts: [
           {
@@ -30,7 +33,8 @@ export const medicalDevicesProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Johnson & Johnson', ticker: 'JNJ', listing: 'US' },
               { name: 'Abbott Laboratories', ticker: 'ABT', listing: 'US' },
-              { name: 'Baxter International', ticker: 'BAX', listing: 'US' }
+              { name: 'Baxter International', ticker: 'BAX', listing: 'US' },
+              { name: 'Teleflex', ticker: 'TFX', listing: 'US' }
             ]
           },
           {
@@ -41,7 +45,8 @@ export const medicalDevicesProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Medtronic', ticker: 'MDT', listing: 'US' },
               { name: 'Boston Scientific', ticker: 'BSX', listing: 'US' },
-              { name: 'Stryker', ticker: 'SYK', listing: 'US' }
+              { name: 'Stryker', ticker: 'SYK', listing: 'US' },
+              { name: 'Integer Holdings', ticker: 'ITGR', listing: 'US' }
             ]
           }
         ],
@@ -69,7 +74,13 @@ export const medicalDevicesProductStages: ValueChainStageProducts[] = [
           { name: 'Becton Dickinson', ticker: 'BDX', listing: 'US' },
           { name: 'Zimmer Biomet', ticker: 'ZBH', listing: 'US' },
           { name: 'Intuitive Surgical', ticker: 'ISRG', listing: 'US' },
-          { name: 'Edwards Lifesciences', ticker: 'EW', listing: 'US' }
+          { name: 'Edwards Lifesciences', ticker: 'EW', listing: 'US' },
+          { name: 'Alcon', ticker: 'ALC', listing: 'US' },
+          { name: 'Cooper Companies', ticker: 'COO', listing: 'US' },
+          { name: 'Masimo', ticker: 'MASI', listing: 'US' },
+          { name: 'NuVasive', ticker: 'NUVA', listing: 'US' },
+          { name: 'Globus Medical', ticker: 'GMED', listing: 'US' },
+          { name: 'Alphatec Holdings', ticker: 'ATEC', listing: 'US' }
         ],
         subProducts: [
           {
@@ -91,7 +102,10 @@ export const medicalDevicesProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Zimmer Biomet', ticker: 'ZBH', listing: 'US' },
               { name: 'Stryker', ticker: 'SYK', listing: 'US' },
-              { name: 'Edwards Lifesciences', ticker: 'EW', listing: 'US' }
+              { name: 'Edwards Lifesciences', ticker: 'EW', listing: 'US' },
+              { name: 'Medtronic', ticker: 'MDT', listing: 'US' },
+              { name: 'Boston Scientific', ticker: 'BSX', listing: 'US' },
+              { name: 'Abbott Laboratories', ticker: 'ABT', listing: 'US' }
             ]
           }
         ],
@@ -110,7 +124,12 @@ export const medicalDevicesProductStages: ValueChainStageProducts[] = [
           { name: 'Danaher', ticker: 'DHR', listing: 'US' },
           { name: 'Thermo Fisher Scientific', ticker: 'TMO', listing: 'US' },
           { name: 'Becton Dickinson', ticker: 'BDX', listing: 'US' },
-          { name: 'Hologic', ticker: 'HOLX', listing: 'US' }
+          { name: 'Hologic', ticker: 'HOLX', listing: 'US' },
+          { name: 'Agilent Technologies', ticker: 'A', listing: 'US' },
+          { name: 'Bio-Rad Laboratories', ticker: 'BIO', listing: 'US' },
+          { name: 'PerkinElmer', ticker: 'PKI', listing: 'US' },
+          { name: 'Illumina', ticker: 'ILMN', listing: 'US' },
+          { name: 'Bruker Corporation', ticker: 'BRKR', listing: 'US' }
         ],
         subProducts: [
           {
@@ -132,7 +151,9 @@ export const medicalDevicesProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Danaher', ticker: 'DHR', listing: 'US' },
               { name: 'Thermo Fisher Scientific', ticker: 'TMO', listing: 'US' },
-              { name: 'Abbott Laboratories', ticker: 'ABT', listing: 'US' }
+              { name: 'Abbott Laboratories', ticker: 'ABT', listing: 'US' },
+              { name: 'Roche', ticker: 'RHHBY', listing: 'ADR' },
+              { name: 'Siemens Healthineers', ticker: 'SEMHF', listing: 'ADR' }
             ]
           }
         ],
@@ -150,7 +171,10 @@ export const medicalDevicesProductStages: ValueChainStageProducts[] = [
           { name: 'Medtronic', ticker: 'MDT', listing: 'US' },
           { name: 'Abbott Laboratories', ticker: 'ABT', listing: 'US' },
           { name: 'Dexcom', ticker: 'DXCM', listing: 'US' },
-          { name: 'iRhythm Technologies', ticker: 'IRTC', listing: 'US' }
+          { name: 'iRhythm Technologies', ticker: 'IRTC', listing: 'US' },
+          { name: 'Insulet Corporation', ticker: 'PODD', listing: 'US' },
+          { name: 'Tandem Diabetes Care', ticker: 'TNDM', listing: 'US' },
+          { name: 'Senseonics Holdings', ticker: 'SENS', listing: 'US' }
         ],
         subProducts: [
           {
@@ -255,7 +279,9 @@ export const medicalDevicesProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Medtronic', ticker: 'MDT', listing: 'US' },
               { name: 'Stryker', ticker: 'SYK', listing: 'US' },
-              { name: 'Boston Scientific', ticker: 'BSX', listing: 'US' }
+              { name: 'Boston Scientific', ticker: 'BSX', listing: 'US' },
+              { name: 'Intuitive Surgical', ticker: 'ISRG', listing: 'US' },
+              { name: 'Zimmer Biomet', ticker: 'ZBH', listing: 'US' }
             ]
           }
         ],

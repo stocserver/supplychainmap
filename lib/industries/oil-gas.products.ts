@@ -19,7 +19,15 @@ export const oilGasProductStages: ValueChainStageProducts[] = [
           { name: 'Pioneer Natural Resources', ticker: 'PXD', listing: 'US' },
           { name: 'Diamondback Energy', ticker: 'FANG', listing: 'US' },
           { name: 'Devon Energy', ticker: 'DVN', listing: 'US' },
-          { name: 'Marathon Oil', ticker: 'MRO', listing: 'US' }
+          { name: 'Marathon Oil', ticker: 'MRO', listing: 'US' },
+          { name: 'Hess Corporation', ticker: 'HES', listing: 'US' },
+          { name: 'Occidental Petroleum', ticker: 'OXY', listing: 'US' },
+          { name: 'Coterra Energy', ticker: 'CTRA', listing: 'US' },
+          { name: 'APA Corporation', ticker: 'APA', listing: 'US' },
+          { name: 'Antero Resources', ticker: 'AR', listing: 'US' },
+          { name: 'Range Resources', ticker: 'RRC', listing: 'US' },
+          { name: 'Southwestern Energy', ticker: 'SWN', listing: 'US' },
+          { name: 'EQT Corporation', ticker: 'EQT', listing: 'US' }
         ],
         subProducts: [
           {
@@ -30,7 +38,9 @@ export const oilGasProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Transocean', ticker: 'RIG', listing: 'US' },
               { name: 'Noble Corporation', ticker: 'NE', listing: 'US' },
-              { name: 'Valaris', ticker: 'VAL', listing: 'US' }
+              { name: 'Valaris', ticker: 'VAL', listing: 'US' },
+              { name: 'Seadrill', ticker: 'SDRL', listing: 'US' },
+              { name: 'Borr Drilling', ticker: 'BORR', listing: 'US' }
             ]
           },
           {
@@ -41,7 +51,10 @@ export const oilGasProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'EOG Resources', ticker: 'EOG', listing: 'US' },
               { name: 'Pioneer Natural Resources', ticker: 'PXD', listing: 'US' },
-              { name: 'Diamondback Energy', ticker: 'FANG', listing: 'US' }
+              { name: 'Diamondback Energy', ticker: 'FANG', listing: 'US' },
+              { name: 'Coterra Energy', ticker: 'CTRA', listing: 'US' },
+              { name: 'Antero Resources', ticker: 'AR', listing: 'US' },
+              { name: 'Range Resources', ticker: 'RRC', listing: 'US' }
             ]
           }
         ],
@@ -58,7 +71,14 @@ export const oilGasProductStages: ValueChainStageProducts[] = [
           { name: 'Baker Hughes', ticker: 'BKR', listing: 'US' },
           { name: 'National Oilwell Varco', ticker: 'NOV', listing: 'US' },
           { name: 'TechnipFMC', ticker: 'FTI', listing: 'US' },
-          { name: 'Oceaneering International', ticker: 'OII', listing: 'US' }
+          { name: 'Oceaneering International', ticker: 'OII', listing: 'US' },
+          { name: 'Weatherford International', ticker: 'WFRD', listing: 'US' },
+          { name: 'ChampionX', ticker: 'CHX', listing: 'US' },
+          { name: 'Helmerich & Payne', ticker: 'HP', listing: 'US' },
+          { name: 'Patterson-UTI Energy', ticker: 'PTEN', listing: 'US' },
+          { name: 'Nabors Industries', ticker: 'NBR', listing: 'US' },
+          { name: 'Tetra Technologies', ticker: 'TTI', listing: 'US' },
+          { name: 'Core Laboratories', ticker: 'CLB', listing: 'US' }
         ],
         tags: ['Oilfield Services', 'Drilling Equipment', 'Well Services']
       }
@@ -82,7 +102,12 @@ export const oilGasProductStages: ValueChainStageProducts[] = [
           { name: 'Magellan Midstream Partners', ticker: 'MMP', listing: 'US' },
           { name: 'Williams Companies', ticker: 'WMB', listing: 'US' },
           { name: 'ONEOK', ticker: 'OKE', listing: 'US' },
-          { name: 'TC Energy', ticker: 'TRP', listing: 'US' }
+          { name: 'TC Energy', ticker: 'TRP', listing: 'US' },
+          { name: 'MPLX', ticker: 'MPLX', listing: 'US' },
+          { name: 'Enbridge', ticker: 'ENB', listing: 'US' },
+          { name: 'NuStar Energy', ticker: 'NS', listing: 'US' },
+          { name: 'USA Compression Partners', ticker: 'USAC', listing: 'US' },
+          { name: 'Archrock', ticker: 'AROC', listing: 'US' }
         ],
         subProducts: [
           {
@@ -92,7 +117,9 @@ export const oilGasProductStages: ValueChainStageProducts[] = [
             longDescription: 'Pipeline networks dedicated to transporting unrefined crude oil from production areas and gathering systems to refineries and export terminals, focusing on throughput, integrity management, and leak detection.',
             companiesDetailed: [
               { name: 'Kinder Morgan', ticker: 'KMI', listing: 'US' },
-              { name: 'Plains All American Pipeline', ticker: 'PAA', listing: 'US' }
+              { name: 'Plains All American Pipeline', ticker: 'PAA', listing: 'US' },
+              { name: 'NuStar Energy', ticker: 'NS', listing: 'US' },
+              { name: 'Magellan Midstream Partners', ticker: 'MMP', listing: 'US' }
             ]
           },
           {
@@ -120,7 +147,11 @@ export const oilGasProductStages: ValueChainStageProducts[] = [
           { name: 'Phillips 66', ticker: 'PSX', listing: 'US' },
           { name: 'PBF Energy', ticker: 'PBF', listing: 'US' },
           { name: 'HollyFrontier', ticker: 'HFC', listing: 'US' },
-          { name: 'Delek US Holdings', ticker: 'DK', listing: 'US' }
+          { name: 'Delek US Holdings', ticker: 'DK', listing: 'US' },
+          { name: 'CVR Energy', ticker: 'CVI', listing: 'US' },
+          { name: 'Par Pacific Holdings', ticker: 'PARR', listing: 'US' },
+          { name: 'Calumet Specialty Products', ticker: 'CLMT', listing: 'US' },
+          { name: 'World Fuel Services', ticker: 'INT', listing: 'US' }
         ],
         subProducts: [
           {
@@ -142,7 +173,11 @@ export const oilGasProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Dow Inc.', ticker: 'DOW', listing: 'US' },
               { name: 'LyondellBasell', ticker: 'LYB', listing: 'US' },
-              { name: 'Westlake Chemical', ticker: 'WLK', listing: 'US' }
+              { name: 'Westlake Chemical', ticker: 'WLK', listing: 'US' },
+              { name: 'Eastman Chemical', ticker: 'EMN', listing: 'US' },
+              { name: 'Huntsman Corporation', ticker: 'HUN', listing: 'US' },
+              { name: 'Celanese Corporation', ticker: 'CE', listing: 'US' },
+              { name: 'Trinseo', ticker: 'TSE', listing: 'US' }
             ]
           }
         ],
@@ -168,7 +203,10 @@ export const oilGasProductStages: ValueChainStageProducts[] = [
           { name: 'Marathon Petroleum', ticker: 'MPC', listing: 'US' },
           { name: 'Phillips 66', ticker: 'PSX', listing: 'US' },
           { name: 'Murphy USA', ticker: 'MUSA', listing: 'US' },
-          { name: "Casey's General Stores", ticker: 'CASY', listing: 'US' }
+          { name: "Casey's General Stores", ticker: 'CASY', listing: 'US' },
+          { name: 'TotalEnergies', ticker: 'TTE', listing: 'ADR' },
+          { name: 'Eni', ticker: 'E', listing: 'ADR' },
+          { name: 'Sunoco', ticker: 'SUN', listing: 'US' }
         ],
         subProducts: [
           {
@@ -190,7 +228,9 @@ export const oilGasProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Marathon Petroleum', ticker: 'MPC', listing: 'US' },
               { name: 'Phillips 66', ticker: 'PSX', listing: 'US' },
-              { name: 'Sunoco', ticker: 'SUN', listing: 'US' }
+              { name: 'Sunoco', ticker: 'SUN', listing: 'US' },
+              { name: 'Valero Energy', ticker: 'VLO', listing: 'US' },
+              { name: 'World Fuel Services', ticker: 'INT', listing: 'US' }
             ]
           }
         ],
@@ -206,7 +246,10 @@ export const oilGasProductStages: ValueChainStageProducts[] = [
           { name: 'Tellurian', ticker: 'TELL', listing: 'US' },
           { name: 'NextDecade', ticker: 'NEXT', listing: 'US' },
           { name: 'Sempra Energy', ticker: 'SRE', listing: 'US' },
-          { name: 'Kinder Morgan', ticker: 'KMI', listing: 'US' }
+          { name: 'Kinder Morgan', ticker: 'KMI', listing: 'US' },
+          { name: 'Energy Transfer', ticker: 'ET', listing: 'US' },
+          { name: 'Williams Companies', ticker: 'WMB', listing: 'US' },
+          { name: 'New Fortress Energy', ticker: 'NFE', listing: 'US' }
         ],
         tags: ['LNG', 'Export', 'Trading', 'International']
       }

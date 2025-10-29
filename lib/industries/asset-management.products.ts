@@ -15,7 +15,14 @@ export const assetManagementProductStages: ValueChainStageProducts[] = [
           { name: 'S&P Global', ticker: 'SPGI', listing: 'US' },
           { name: 'MSCI', ticker: 'MSCI', listing: 'US' },
           { name: 'NASDAQ', ticker: 'NDAQ', listing: 'US' },
-          { name: 'Intercontinental Exchange', ticker: 'ICE', listing: 'US' }
+          { name: 'Intercontinental Exchange', ticker: 'ICE', listing: 'US' },
+          { name: 'CME Group', ticker: 'CME', listing: 'US' },
+          { name: 'Cboe Global Markets', ticker: 'CBOE', listing: 'US' },
+          { name: 'MarketAxess', ticker: 'MKTX', listing: 'US' },
+          { name: 'Tradeweb Markets', ticker: 'TW', listing: 'US' },
+          { name: 'Morningstar', ticker: 'MORN', listing: 'US' },
+          { name: 'FactSet', ticker: 'FDS', listing: 'US' },
+          { name: 'Thomson Reuters', ticker: 'TRI', listing: 'US' }
         ],
         tags: ['Benchmarks', 'Data', 'Exchanges']
       },
@@ -27,7 +34,13 @@ export const assetManagementProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'Charles Schwab', ticker: 'SCHW', listing: 'US' },
           { name: 'Morgan Stanley', ticker: 'MS', listing: 'US' },
-          { name: 'Goldman Sachs', ticker: 'GS', listing: 'US' }
+          { name: 'Goldman Sachs', ticker: 'GS', listing: 'US' },
+          { name: 'Interactive Brokers', ticker: 'IBKR', listing: 'US' },
+          { name: 'Robinhood', ticker: 'HOOD', listing: 'US' },
+          { name: 'LPL Financial', ticker: 'LPLA', listing: 'US' },
+          { name: 'Raymond James', ticker: 'RJF', listing: 'US' },
+          { name: 'Stifel Financial', ticker: 'SF', listing: 'US' },
+          { name: 'Ameriprise Financial', ticker: 'AMP', listing: 'US' }
         ],
         tags: ['Wealth Platforms', 'RIAs']
       }
@@ -48,7 +61,17 @@ export const assetManagementProductStages: ValueChainStageProducts[] = [
           { name: 'T. Rowe Price', ticker: 'TROW', listing: 'US' },
           { name: 'Franklin Resources', ticker: 'BEN', listing: 'US' },
           { name: 'Invesco', ticker: 'IVZ', listing: 'US' },
-          { name: 'State Street', ticker: 'STT', listing: 'US' }
+          { name: 'State Street', ticker: 'STT', listing: 'US' },
+          { name: 'AllianceBernstein', ticker: 'AB', listing: 'US' },
+          { name: 'Janus Henderson', ticker: 'JHG', listing: 'US' },
+          { name: 'Artisan Partners', ticker: 'APAM', listing: 'US' },
+          { name: 'Federated Hermes', ticker: 'FHI', listing: 'US' },
+          { name: 'Affiliated Managers Group', ticker: 'AMG', listing: 'US' },
+          { name: 'SEI Investments', ticker: 'SEIC', listing: 'US' },
+          { name: 'Cohen & Steers', ticker: 'CNS', listing: 'US' },
+          { name: 'Virtus Investment Partners', ticker: 'VRTS', listing: 'US' },
+          { name: 'Lazard Asset Management', ticker: 'LAZ', listing: 'US' },
+          { name: 'Ameriprise Financial', ticker: 'AMP', listing: 'US' }
         ],
         tags: ['Active', 'Institutional']
       },
@@ -62,7 +85,12 @@ export const assetManagementProductStages: ValueChainStageProducts[] = [
           { name: 'KKR', ticker: 'KKR', listing: 'US' },
           { name: 'Apollo Global', ticker: 'APO', listing: 'US' },
           { name: 'Carlyle Group', ticker: 'CG', listing: 'US' },
-          { name: 'Ares Management', ticker: 'ARES', listing: 'US' }
+          { name: 'Ares Management', ticker: 'ARES', listing: 'US' },
+          { name: 'TPG', ticker: 'TPG', listing: 'US' },
+          { name: 'Blue Owl Capital', ticker: 'OWL', listing: 'US' },
+          { name: 'Brookfield Asset Management', ticker: 'BAM', listing: 'US' },
+          { name: 'Hamilton Lane', ticker: 'HLNE', listing: 'US' },
+          { name: 'StepStone Group', ticker: 'STEP', listing: 'US' }
         ],
         tags: ['Private Markets', 'Credit', 'Real Assets']
       }
@@ -92,7 +120,9 @@ export const assetManagementProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'BNY Mellon', ticker: 'BK', listing: 'US' },
           { name: 'State Street', ticker: 'STT', listing: 'US' },
-          { name: 'Northern Trust', ticker: 'NTRS', listing: 'US' }
+          { name: 'Northern Trust', ticker: 'NTRS', listing: 'US' },
+          { name: 'JPMorgan', ticker: 'JPM', listing: 'US' },
+          { name: 'Citigroup', ticker: 'C', listing: 'US' }
         ],
         tags: ['Custody', 'Asset Servicing']
       }

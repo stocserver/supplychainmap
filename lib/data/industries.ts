@@ -178,20 +178,20 @@ export const industries: Industry[] = [
     color: 'bg-purple-500',
     icon: '🤖',
     subcategories: ['AI Platforms', 'ML Infrastructure', 'AI Chips', 'Applications'],
-    featured_companies: ['NVDA', 'GOOGL', 'MSFT', 'META', 'ORCL', 'CRM', 'PLTR', 'AI', 'SNOW', 'DDOG'],
+    featured_companies: ['NVDA', 'GOOGL', 'MSFT', 'META', 'ORCL', 'CRM', 'PLTR', 'AI', 'SNOW', 'DDOG', 'SMCI', 'PATH', 'MDB', 'CFLT', 'PSTG', 'NET'],
     valueChain: {
       upstream: [
         {
           id: 'ai-chips',
           name: 'AI Chips & Hardware',
           description: 'Specialized processors designed for AI workloads including GPUs, TPUs, and custom AI accelerators.',
-          companies: ['NVDA', 'AMD', 'INTC', 'GOOGL'],
+          companies: ['NVDA', 'AMD', 'INTC', 'AVGO', 'QCOM', 'ARM', 'SMCI', 'HPE', 'DELL'],
         },
         {
           id: 'data-infrastructure',
           name: 'Data Infrastructure & Storage',
           description: 'Data centers, storage solutions, and infrastructure required to train and deploy AI models.',
-          companies: ['MSFT', 'GOOGL', 'AMZN', 'SNOW'],
+          companies: ['MSFT', 'GOOGL', 'AMZN', 'SNOW', 'MDB', 'CFLT', 'PSTG', 'NTAP'],
         },
       ],
       midstream: [
@@ -199,13 +199,13 @@ export const industries: Industry[] = [
           id: 'ml-platforms',
           name: 'ML Platforms & Frameworks',
           description: 'Machine learning platforms, frameworks, and tools for building and training AI models.',
-          companies: ['GOOGL', 'MSFT', 'META', 'AMZN'],
+          companies: ['GOOGL', 'MSFT', 'META', 'AMZN', 'NVDA', 'ORCL', 'IBM', 'PLTR', 'AI'],
         },
         {
           id: 'ai-software',
           name: 'AI Software & APIs',
           description: 'AI software platforms, APIs, and services for natural language processing, computer vision, and more.',
-          companies: ['GOOGL', 'MSFT', 'ORCL', 'AI', 'PLTR'],
+          companies: ['GOOGL', 'MSFT', 'ORCL', 'AI', 'PLTR', 'CRM', 'ADBE', 'NOW'],
         },
       ],
       downstream: [
@@ -213,13 +213,13 @@ export const industries: Industry[] = [
           id: 'ai-applications',
           name: 'AI Applications & Solutions',
           description: 'End-user AI applications across various industries including business intelligence, automation, and decision support.',
-          companies: ['CRM', 'MSFT', 'PLTR', 'AI', 'NOW'],
+          companies: ['CRM', 'MSFT', 'PLTR', 'AI', 'NOW', 'PATH', 'CRWD', 'ADBE', 'WDAY'],
         },
         {
           id: 'ai-services',
           name: 'AI Consulting & Services',
           description: 'Professional services helping businesses implement and optimize AI solutions.',
-          companies: ['IBM', 'ORCL', 'PLTR'],
+          companies: ['IBM', 'ORCL', 'PLTR', 'ACN', 'CTSH', 'INFY', 'WIT', 'EPAM'],
         },
       ],
     },
@@ -400,20 +400,20 @@ export const industries: Industry[] = [
     color: 'bg-green-500',
     icon: '🚗',
     subcategories: ['Manufacturers', 'Batteries', 'Charging', 'Components'],
-    featured_companies: ['TSLA', 'RIVN', 'LCID', 'F', 'GM', 'NIO', 'XPEV', 'LI', 'CHPT', 'BLNK', 'EVGO', 'ALB', 'SQM', 'LAC', 'APTV', 'LEA'],
+    featured_companies: ['TSLA', 'RIVN', 'LCID', 'F', 'GM', 'NIO', 'XPEV', 'LI', 'BYDDY', 'CHPT', 'BLNK', 'EVGO', 'ALB', 'SQM', 'LAC', 'WBX'],
     valueChain: {
       upstream: [
         {
           id: 'raw-materials',
           name: 'Raw Materials & Mining',
           description: 'Mining and processing of critical materials for EV batteries including lithium, cobalt, nickel, and rare earth elements. These materials are essential for battery production and electric motors.',
-          companies: ['ALB', 'SQM', 'LAC', 'LTHM', 'MP'],
+          companies: ['ALB', 'SQM', 'LAC', 'LTHM', 'MP', 'PLL', 'SGML'],
         },
         {
           id: 'battery-materials',
           name: 'Battery Materials & Components',
           description: 'Production of refined battery materials such as cathode materials, anode materials, electrolytes, and separators. These are the building blocks for lithium-ion batteries.',
-          companies: ['ALB', 'SQM'],
+          companies: ['ALB', 'SQM', 'LTHM', 'PLL', 'SGML'],
         },
       ],
       midstream: [
@@ -426,7 +426,7 @@ export const industries: Industry[] = [
               id: 'battery-cells',
               name: 'Battery Cells',
               description: 'Production of individual lithium-ion battery cells in various formats (cylindrical, prismatic, pouch).',
-              companies: ['TSLA', 'PANW'],
+              companies: ['TSLA', 'PCRFY', 'QS', 'ENVX', 'FREY'],
             },
             {
               id: 'battery-packs',
@@ -435,7 +435,7 @@ export const industries: Industry[] = [
               companies: ['TSLA'],
             },
           ],
-          companies: ['TSLA', 'PANW', 'QS'],
+          companies: ['TSLA', 'PCRFY', 'QS', 'ENVX', 'FREY'],
         },
         {
           id: 'ev-components',
@@ -452,10 +452,10 @@ export const industries: Industry[] = [
               id: 'power-electronics',
               name: 'Power Electronics & Inverters',
               description: 'Manufacturing of power electronics, inverters, and DC-DC converters for EV power management.',
-              companies: ['ON', 'NXPI'],
+              companies: ['ON', 'WOLF', 'IFNNY', 'STM', 'NXPI'],
             },
           ],
-          companies: ['APTV', 'LEA', 'BWA'],
+          companies: ['APTV', 'LEA', 'BWA', 'MBLY'],
         },
       ],
       downstream: [
@@ -474,7 +474,7 @@ export const industries: Industry[] = [
               id: 'traditional-oems',
               name: 'Traditional OEMs',
               description: 'Legacy automakers transitioning to electric vehicle production.',
-              companies: ['F', 'GM', 'TM', 'STLA'],
+              companies: ['F', 'GM', 'STLA'],
             },
           ],
           companies: ['TSLA', 'RIVN', 'LCID', 'F', 'GM', 'NIO', 'XPEV', 'LI'],
@@ -483,7 +483,7 @@ export const industries: Industry[] = [
           id: 'charging-infrastructure',
           name: 'Charging Infrastructure',
           description: 'Development and operation of EV charging networks, including home chargers, public charging stations, and fast-charging networks.',
-          companies: ['CHPT', 'BLNK', 'EVGO', 'TSLA'],
+          companies: ['CHPT', 'BLNK', 'EVGO', 'TSLA', 'WBX', 'ABBNY'],
         },
         {
           id: 'sales-service',
@@ -820,20 +820,20 @@ export const industries: Industry[] = [
     color: 'bg-slate-600',
     icon: '✈️',
     subcategories: ['Commercial Aviation', 'Defense', 'Space', 'Components'],
-    featured_companies: ['BA', 'LMT', 'RTX', 'NOC', 'GD', 'HWM', 'LHX', 'TDG', 'HEI', 'TXT', 'SPR'],
+    featured_companies: ['BA', 'GE', 'RTX', 'HON', 'LMT', 'NOC', 'GD', 'EADSY', 'ERJ', 'HWM', 'LHX', 'TDG', 'HEI', 'TXT', 'SPR'],
     valueChain: {
       upstream: [
         {
           id: 'raw-materials-aero',
           name: 'Raw Materials & Alloys',
           description: 'Specialized metals, composites, and materials for aerospace applications.',
-          companies: ['ATI', 'HWM'],
+          companies: ['AA', 'ARNC', 'CRS', 'ATI', 'HXL', 'TRYIY', 'TINLY', 'HWM'],
         },
         {
           id: 'components-parts',
           name: 'Components & Parts',
           description: 'Engines, avionics, landing gear, and aircraft components.',
-          companies: ['TDG', 'HEI', 'SPR', 'CW'],
+          companies: ['GE', 'RTX', 'HON', 'SAFRY', 'RYCEY', 'SPR', 'TDG', 'HEI', 'CW'],
         },
       ],
       midstream: [
@@ -841,7 +841,7 @@ export const industries: Industry[] = [
           id: 'aircraft-manufacturing',
           name: 'Aircraft Manufacturing',
           description: 'Commercial and military aircraft production.',
-          companies: ['BA', 'LMT', 'NOC', 'TXT'],
+          companies: ['BA', 'EADSY', 'ERJ', 'BDRBF', 'TXT', 'FINMY', 'LMT', 'NOC'],
         },
         {
           id: 'defense-systems',
@@ -852,16 +852,10 @@ export const industries: Industry[] = [
       ],
       downstream: [
         {
-          id: 'airlines',
-          name: 'Airlines & Operators',
-          description: 'Commercial airlines and aircraft operators.',
-          companies: ['DAL', 'UAL', 'AAL', 'LUV'],
-        },
-        {
           id: 'mro',
           name: 'Maintenance, Repair & Overhaul',
           description: 'Aircraft maintenance and support services.',
-          companies: ['HEI', 'TDG', 'SPR'],
+          companies: ['AIR', 'DLAKY', 'SGGKY', 'HEI', 'TDG', 'SPR'],
         },
       ],
     },
@@ -1197,21 +1191,49 @@ export const industries: Industry[] = [
     description: 'Precision agriculture, biotech, and equipment',
     color: 'bg-lime-600',
     icon: '🌾',
-    subcategories: ['Precision Ag', 'Biotech', 'Equipment', 'Vertical Farming'],
-    featured_companies: ['DE', 'AGCO', 'CTVA', 'FMC', 'NTR', 'MOS', 'CF', 'IPI', 'SMG'],
+    subcategories: ['Precision Ag', 'Biotech', 'Equipment', 'Vertical Farming', 'Irrigation', 'Animal Health'],
+    featured_companies: ['DE', 'AGCO', 'CTVA', 'FMC', 'NTR', 'MOS', 'CF', 'IPI', 'SMG', 'TRMB', 'LNN', 'ICL', 'KUBTY', 'BAYRY', 'BASFY', 'VMI', 'TTC', 'ZTS', 'ELAN', 'YARIY', 'SQM'],
     valueChain: {
       upstream: [
         {
           id: 'seeds-biotech',
           name: 'Seeds & Agricultural Biotech',
           description: 'Genetically modified seeds, crop protection, and agricultural biotechnology.',
-          companies: ['CTVA', 'FMC', 'SMG'],
+          companies: ['CTVA', 'FMC', 'SMG', 'BAYRY', 'BASFY'],
+          subcategories: [
+            {
+              id: 'seed-genetics',
+              name: 'Seed Genetics & Breeding',
+              description: 'Crop seed development and genetic improvement.',
+              companies: ['CTVA', 'SMG'],
+            },
+            {
+              id: 'crop-protection',
+              name: 'Crop Protection Chemicals',
+              description: 'Herbicides, fungicides, and insecticides.',
+              companies: ['FMC', 'BAYRY', 'BASFY', 'CTVA'],
+            },
+          ],
         },
         {
           id: 'fertilizers',
           name: 'Fertilizers & Nutrients',
-          description: 'Nitrogen, phosphate, and potash fertilizers.',
-          companies: ['NTR', 'MOS', 'CF', 'IPI'],
+          description: 'Nitrogen, phosphate, and potash fertilizers, and specialty nutrients.',
+          companies: ['NTR', 'MOS', 'CF', 'IPI', 'ICL', 'YARIY', 'SQM'],
+          subcategories: [
+            {
+              id: 'commodity-fertilizers',
+              name: 'Commodity Fertilizers',
+              description: 'Nitrogen, phosphate, and potash fertilizers.',
+              companies: ['NTR', 'MOS', 'CF', 'IPI', 'YARIY', 'SQM'],
+            },
+            {
+              id: 'specialty-nutrients',
+              name: 'Specialty Nutrients & Micronutrients',
+              description: 'Specialized fertilizers and soil amendments.',
+              companies: ['ICL', 'FMC'],
+            },
+          ],
         },
       ],
       midstream: [
@@ -1219,27 +1241,109 @@ export const industries: Industry[] = [
           id: 'ag-equipment',
           name: 'Agricultural Equipment',
           description: 'Tractors, combines, and farming machinery.',
-          companies: ['DE', 'AGCO', 'CNHI'],
+          companies: ['DE', 'AGCO', 'CNHI', 'KUBTY'],
+          subcategories: [
+            {
+              id: 'heavy-equipment',
+              name: 'Heavy Farm Machinery',
+              description: 'Large tractors, combines, and harvesters.',
+              companies: ['DE', 'AGCO', 'CNHI', 'KUBTY'],
+            },
+            {
+              id: 'implements',
+              name: 'Implements & Attachments',
+              description: 'Planters, tillage equipment, and harvesting attachments.',
+              companies: ['DE', 'AGCO', 'CNHI'],
+            },
+          ],
         },
         {
           id: 'precision-ag',
           name: 'Precision Agriculture',
-          description: 'GPS guidance, sensors, drones, and farm management software.',
-          companies: ['DE', 'AGCO', 'TTC'],
+          description: 'GPS guidance, sensors, drones, farm management software, and automation systems.',
+          companies: ['DE', 'AGCO', 'TRMB', 'LNN'],
+          subcategories: [
+            {
+              id: 'guidance-systems',
+              name: 'GPS Guidance & Auto-Steer',
+              description: 'Precision guidance and autonomous steering systems.',
+              companies: ['DE', 'AGCO', 'TRMB'],
+            },
+            {
+              id: 'irrigation-systems',
+              name: 'Smart Irrigation Systems',
+              description: 'Automated and precision irrigation systems.',
+              companies: ['LNN', 'TRMB', 'VMI', 'TTC'],
+            },
+            {
+              id: 'farm-software',
+              name: 'Farm Management Software',
+              description: 'Data analytics, field mapping, and farm management platforms.',
+              companies: ['TRMB', 'DE', 'AGCO'],
+            },
+          ],
         },
       ],
       downstream: [
         {
           id: 'farming-services',
           name: 'Farming Services',
-          description: 'Contract farming, crop management, and agricultural services.',
-          companies: ['ADM', 'BG'],
+          description: 'Agricultural cooperatives, contract farming, crop consulting, and managed farm operations.',
+          companies: ['ADM', 'BG', 'INGR'],
+          subcategories: [
+            {
+              id: 'ag-cooperatives',
+              name: 'Agricultural Cooperatives',
+              description: 'Farmer-owned cooperatives providing services and marketing.',
+              companies: [],
+            },
+            {
+              id: 'crop-services',
+              name: 'Crop Services & Consulting',
+              description: 'Crop consulting, custom application, and farm management services.',
+              companies: ['ADM', 'BG'],
+            },
+          ],
+        },
+        {
+          id: 'animal-health',
+          name: 'Animal Health & Livestock Technology',
+          description: 'Animal pharmaceuticals, vaccines, diagnostics, and livestock management solutions.',
+          companies: ['ZTS', 'ELAN'],
+          subcategories: [
+            {
+              id: 'animal-pharma',
+              name: 'Animal Pharmaceuticals & Vaccines',
+              description: 'Veterinary drugs, vaccines, and therapeutic solutions for livestock.',
+              companies: ['ZTS', 'ELAN'],
+            },
+            {
+              id: 'livestock-management',
+              name: 'Livestock Management & Diagnostics',
+              description: 'Animal health diagnostics, monitoring systems, and herd management.',
+              companies: ['ZTS', 'ELAN'],
+            },
+          ],
         },
         {
           id: 'food-processing',
           name: 'Food Processing & Distribution',
-          description: 'Agricultural product processing and distribution.',
-          companies: ['ADM', 'BG', 'TSN', 'HRL'],
+          description: 'Agricultural commodity processing, grain handling, and ingredient manufacturing.',
+          companies: ['ADM', 'BG', 'TSN', 'HRL', 'INGR'],
+          subcategories: [
+            {
+              id: 'grain-processing',
+              name: 'Grain & Oilseed Processing',
+              description: 'Milling, crushing, and refining of agricultural commodities.',
+              companies: ['ADM', 'BG', 'INGR'],
+            },
+            {
+              id: 'protein-processing',
+              name: 'Protein Processing',
+              description: 'Meat and poultry processing.',
+              companies: ['TSN', 'HRL'],
+            },
+          ],
         },
       ],
     },
@@ -1252,20 +1356,20 @@ export const industries: Industry[] = [
     color: 'bg-emerald-600',
     icon: '🏦',
     subcategories: ['Commercial Banking', 'Investment Banking', 'Wealth Management', 'Payment Services'],
-    featured_companies: ['JPM', 'BAC', 'WFC', 'C', 'GS', 'MS', 'USB', 'PNC', 'TFC', 'SCHW', 'BK', 'STT', 'NTRS', 'CFG'],
+    featured_companies: ['JPM', 'BAC', 'WFC', 'C', 'GS', 'MS', 'USB', 'PNC', 'TFC', 'SCHW', 'BK', 'STT', 'NTRS', 'CFG', 'FITB', 'RF', 'HBAN', 'KEY', 'MTB', 'COF', 'DFS', 'SYF', 'AXP', 'ALLY', 'JEF', 'EVR', 'HLI', 'MC'],
     valueChain: {
       upstream: [
         {
           id: 'core-banking-tech',
           name: 'Core Banking Technology',
           description: 'Banking software platforms, core processing systems, and financial infrastructure.',
-          companies: ['FIS', 'FISV', 'JACK', 'INTU'],
+          companies: ['FIS', 'FI', 'JKHY', 'INTU', 'QTWO', 'NCNO'],
         },
         {
           id: 'financial-data',
           name: 'Financial Data & Analytics',
           description: 'Market data, credit ratings, and financial analytics providers.',
-          companies: ['SPGI', 'MCO', 'MSCI', 'FACT'],
+          companies: ['SPGI', 'MCO', 'MSCI', 'FDS', 'MORN'],
         },
       ],
       midstream: [
@@ -1273,19 +1377,19 @@ export const industries: Industry[] = [
           id: 'commercial-banking',
           name: 'Commercial Banking',
           description: 'Deposit accounts, business lending, and commercial banking services.',
-          companies: ['JPM', 'BAC', 'WFC', 'C', 'USB', 'PNC', 'TFC', 'CFG'],
+          companies: ['JPM', 'BAC', 'WFC', 'C', 'USB', 'PNC', 'TFC', 'CFG', 'FITB', 'RF', 'HBAN', 'KEY', 'MTB'],
         },
         {
           id: 'investment-banking',
           name: 'Investment Banking & Capital Markets',
           description: 'Underwriting, M&A advisory, and capital markets services.',
-          companies: ['JPM', 'GS', 'MS', 'C', 'BAC'],
+          companies: ['JPM', 'GS', 'MS', 'C', 'BAC', 'JEF', 'EVR', 'HLI', 'MC', 'PIPR', 'RJF', 'SF'],
         },
         {
           id: 'wealth-management',
           name: 'Wealth Management & Asset Custody',
           description: 'Private banking, wealth advisory, and asset custody services.',
-          companies: ['MS', 'SCHW', 'BK', 'STT', 'NTRS', 'JPM'],
+          companies: ['MS', 'SCHW', 'BK', 'STT', 'NTRS', 'JPM', 'AMP', 'LPLA', 'SF'],
         },
       ],
       downstream: [
@@ -1293,13 +1397,13 @@ export const industries: Industry[] = [
           id: 'retail-banking',
           name: 'Retail Banking',
           description: 'Consumer checking, savings, mortgages, and personal loans.',
-          companies: ['JPM', 'BAC', 'WFC', 'USB', 'PNC', 'TFC'],
+          companies: ['JPM', 'BAC', 'WFC', 'USB', 'PNC', 'TFC', 'FITB', 'RF', 'HBAN', 'KEY', 'MTB', 'ALLY'],
         },
         {
           id: 'credit-cards',
           name: 'Credit Card Services',
           description: 'Credit card issuance and consumer credit.',
-          companies: ['JPM', 'BAC', 'C', 'AXP', 'DFS', 'COF'],
+          companies: ['JPM', 'BAC', 'C', 'AXP', 'DFS', 'COF', 'SYF'],
         },
       ],
     },
@@ -1372,20 +1476,20 @@ export const industries: Industry[] = [
     color: 'bg-purple-700',
     icon: '📈',
     subcategories: ['Asset Managers', 'Exchanges', 'Index Providers', 'Alternative Investments'],
-    featured_companies: ['BLK', 'TROW', 'BEN', 'IVZ', 'NDAQ', 'ICE', 'CME', 'CBOE', 'KKR', 'BX', 'APO', 'CG', 'ARES'],
+    featured_companies: ['BLK', 'TROW', 'BEN', 'IVZ', 'NDAQ', 'ICE', 'CME', 'CBOE', 'KKR', 'BX', 'APO', 'CG', 'ARES', 'MSCI', 'SPGI', 'STT', 'BK', 'NTRS', 'AB', 'JHG', 'APAM', 'AMG', 'FHI', 'BAM', 'TPG'],
     valueChain: {
       upstream: [
         {
           id: 'market-infrastructure',
           name: 'Market Infrastructure & Exchanges',
           description: 'Stock exchanges, futures exchanges, and trading platforms.',
-          companies: ['NDAQ', 'ICE', 'CME', 'CBOE'],
+          companies: ['NDAQ', 'ICE', 'CME', 'CBOE', 'MKTX', 'TW'],
         },
         {
           id: 'index-data',
           name: 'Index Providers & Market Data',
           description: 'Financial indices, benchmarks, and market data services.',
-          companies: ['SPGI', 'MSCI', 'NDAQ', 'ICE'],
+          companies: ['SPGI', 'MSCI', 'NDAQ', 'ICE', 'MORN', 'FDS', 'TRI', 'RELX'],
         },
       ],
       midstream: [
@@ -1393,13 +1497,13 @@ export const industries: Industry[] = [
           id: 'traditional-asset-mgmt',
           name: 'Traditional Asset Management',
           description: 'Institutional and traditional asset management (no ETFs).',
-          companies: ['BLK', 'TROW', 'BEN', 'IVZ', 'SCHW'],
+          companies: ['BLK', 'TROW', 'BEN', 'IVZ', 'SCHW', 'AB', 'JHG', 'APAM', 'FHI', 'AMG', 'SEIC', 'CNS', 'VRTS', 'AMP', 'LAZ'],
         },
         {
           id: 'alternative-investments',
           name: 'Alternative Asset Management',
           description: 'Private equity, hedge funds, and alternative investments.',
-          companies: ['KKR', 'BX', 'APO', 'CG', 'ARES', 'BLK'],
+          companies: ['KKR', 'BX', 'APO', 'CG', 'ARES', 'BLK', 'TPG', 'OWL', 'BAM', 'HLNE', 'STEP', 'BN'],
         },
       ],
       downstream: [
@@ -1407,13 +1511,13 @@ export const industries: Industry[] = [
           id: 'distribution',
           name: 'Fund Distribution',
           description: 'Distribution platforms and financial advisors.',
-          companies: ['SCHW', 'MS', 'TROW'],
+          companies: ['SCHW', 'MS', 'GS', 'TROW', 'IBKR', 'RJF', 'SF', 'LPLA', 'AMP'],
         },
         {
           id: 'investor-services',
           name: 'Investor Services',
           description: 'Custody, fund administration, and investor services.',
-          companies: ['BK', 'STT', 'NTRS'],
+          companies: ['BK', 'STT', 'NTRS', 'SSNC', 'BR', 'JPM', 'C', 'FIS'],
         },
       ],
     },
@@ -1756,20 +1860,20 @@ export const industries: Industry[] = [
     color: 'bg-red-600',
     icon: '🚙',
     subcategories: ['Auto Manufacturers', 'Auto Parts', 'Tires', 'Dealers'],
-    featured_companies: ['TM', 'F', 'GM', 'STLA', 'HMC', 'APTV', 'LEA', 'BWA', 'DLPH', 'ALV', 'GT', 'AN', 'PAG', 'LAD'],
+    featured_companies: ['F', 'GM', 'STLA', 'TM', 'HMC', 'VWAGY', 'BMWYY', 'MBGYY', 'NSANY', 'TTM', 'HYMTF', 'KIMTF', 'FUJHY', 'MZDAY', 'RNLSY', 'ISUZY', 'HINOY', 'APTV', 'LEA', 'BWA', 'MGA', 'GT', 'AN', 'PAG', 'LAD', 'GPI', 'SAH', 'ABG', 'KMX', 'CVNA'],
     valueChain: {
       upstream: [
         {
           id: 'auto-parts-suppliers',
           name: 'Auto Parts & Components',
           description: 'Tier 1 and tier 2 automotive suppliers.',
-          companies: ['APTV', 'LEA', 'BWA', 'DLPH', 'ALV'],
+          companies: ['APTV', 'LEA', 'BWA', 'MGA', 'ALV', 'VC', 'GNTX', 'AXL', 'DAN'],
         },
         {
           id: 'tires',
           name: 'Tires',
           description: 'Tire manufacturing for passenger and commercial vehicles.',
-          companies: ['GT', 'BRBR'],
+          companies: ['GT', 'BRDCY', 'MGDDY', 'CTTAF'],
         },
       ],
       midstream: [
@@ -1777,7 +1881,7 @@ export const industries: Industry[] = [
           id: 'auto-manufacturing',
           name: 'Vehicle Manufacturing',
           description: 'Traditional internal combustion and hybrid vehicle manufacturing.',
-          companies: ['TM', 'F', 'GM', 'STLA', 'HMC'],
+          companies: ['GM', 'F', 'STLA', 'TM', 'HMC', 'VWAGY', 'BMWYY', 'MBGYY', 'NSANY', 'TTM', 'HYMTF', 'KIMTF', 'FUJHY', 'MZDAY', 'RNLSY', 'ISUZY', 'HINOY'],
         },
       ],
       downstream: [
@@ -1785,13 +1889,13 @@ export const industries: Industry[] = [
           id: 'dealers',
           name: 'Auto Dealers & Retail',
           description: 'New and used car dealerships.',
-          companies: ['AN', 'PAG', 'LAD', 'SAH'],
+          companies: ['AN', 'PAG', 'LAD', 'SAH', 'GPI', 'ABG', 'KMX', 'CVNA', 'CRMT'],
         },
         {
           id: 'aftermarket',
           name: 'Aftermarket & Parts',
           description: 'Auto parts retail, repair, and aftermarket services.',
-          companies: ['AAP', 'AZO', 'ORLY'],
+          companies: ['AAP', 'AZO', 'ORLY', 'GPC', 'LKQ', 'MNRO'],
         },
       ],
     },

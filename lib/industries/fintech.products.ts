@@ -18,7 +18,8 @@ export const fintechProductStages: ValueChainStageProducts[] = [
           { name: 'Discover Financial', ticker: 'DFS', listing: 'US' },
           { name: 'PayPal', ticker: 'PYPL', listing: 'US' },
           { name: 'Square', ticker: 'SQ', listing: 'US' },
-          { name: 'Adyen', ticker: 'ADYEY', listing: 'ADR' }
+          { name: 'Adyen', ticker: 'ADYEY', listing: 'ADR' },
+          { name: 'Marqeta', ticker: 'MQ', listing: 'US' }
         ],
         subProducts: [
           {
@@ -52,7 +53,8 @@ export const fintechProductStages: ValueChainStageProducts[] = [
         description: 'Cryptocurrency and blockchain technology platforms',
         longDescription: 'Development and maintenance of the underlying technology that powers decentralized digital currencies and distributed ledgers. This includes blockchain protocols, cryptocurrency exchanges, and platforms for decentralized finance (DeFi), enabling secure and transparent digital asset transactions.',
         companiesDetailed: [
-          { name: 'Coinbase', ticker: 'COIN', listing: 'US' }
+          { name: 'Coinbase', ticker: 'COIN', listing: 'US' },
+          { name: 'MicroStrategy', ticker: 'MSTR', listing: 'US' }
         ],
         subProducts: [
           {
@@ -61,7 +63,8 @@ export const fintechProductStages: ValueChainStageProducts[] = [
             description: 'Digital asset trading platforms',
             longDescription: 'Online platforms where users can buy, sell, and trade various cryptocurrencies. These exchanges provide market access, liquidity, and often offer custody services for digital assets, facilitating participation in the broader blockchain ecosystem.',
             companiesDetailed: [
-              { name: 'Coinbase', ticker: 'COIN', listing: 'US' }
+              { name: 'Coinbase', ticker: 'COIN', listing: 'US' },
+              { name: 'MicroStrategy', ticker: 'MSTR', listing: 'US' }
             ]
           },
           
@@ -86,8 +89,10 @@ export const fintechProductStages: ValueChainStageProducts[] = [
           { name: 'Adyen', ticker: 'ADYEY', listing: 'ADR' },
           { name: 'Fiserv', ticker: 'FISV', listing: 'US' },
           { name: 'Global Payments', ticker: 'GPN', listing: 'US' },
-          { name: 'First Data', ticker: 'FDC', listing: 'US' },
-          { name: 'Worldpay', ticker: 'WP', listing: 'US' }
+          { name: 'Worldpay', ticker: 'WP', listing: 'US' },
+          { name: 'Marqeta', ticker: 'MQ', listing: 'US' },
+          { name: 'Shift4 Payments', ticker: 'FOUR', listing: 'US' },
+          { name: 'Toast', ticker: 'TOST', listing: 'US' }
         ],
         subProducts: [
           {
@@ -107,9 +112,10 @@ export const fintechProductStages: ValueChainStageProducts[] = [
             description: 'E-commerce payment processing',
             longDescription: 'Specialized payment processing solutions for e-commerce transactions, enabling businesses to securely accept payments through their websites and online platforms. This involves integrating payment gateways, managing fraud detection, and ensuring compliance with online security standards.',
             companiesDetailed: [
-              { name: 'Stripe', ticker: 'STRIPE', listing: 'Private' },
               { name: 'PayPal', ticker: 'PYPL', listing: 'US' },
-              { name: 'Adyen', ticker: 'ADYEY', listing: 'ADR' }
+              { name: 'Adyen', ticker: 'ADYEY', listing: 'ADR' },
+              { name: 'Shift4 Payments', ticker: 'FOUR', listing: 'US' },
+              { name: 'Toast', ticker: 'TOST', listing: 'US' }
             ]
           }
         ],
@@ -159,7 +165,9 @@ export const fintechProductStages: ValueChainStageProducts[] = [
           { name: 'SoFi', ticker: 'SOFI', listing: 'US' },
           { name: 'LendingClub', ticker: 'LC', listing: 'US' },
           { name: 'Upstart', ticker: 'UPST', listing: 'US' },
-          { name: 'Affirm', ticker: 'AFRM', listing: 'US' }
+          { name: 'Affirm', ticker: 'AFRM', listing: 'US' },
+          { name: 'Bill.com', ticker: 'BILL', listing: 'US' },
+          { name: 'Dave', ticker: 'DAVE', listing: 'US' }
         ],
         subProducts: [
           {
@@ -169,7 +177,8 @@ export const fintechProductStages: ValueChainStageProducts[] = [
             longDescription: 'Digital platforms that enable individuals to buy, sell, and manage various investment assets, including stocks, ETFs, and cryptocurrencies. These apps often feature user-friendly interfaces, educational content, and sometimes commission-free trading.',
             companiesDetailed: [
               { name: 'Robinhood', ticker: 'HOOD', listing: 'US' },
-              { name: 'SoFi', ticker: 'SOFI', listing: 'US' }
+              { name: 'SoFi', ticker: 'SOFI', listing: 'US' },
+              { name: 'Intuit', ticker: 'INTU', listing: 'US' }
             ]
           },
           {
@@ -180,7 +189,8 @@ export const fintechProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'LendingClub', ticker: 'LC', listing: 'US' },
               { name: 'Upstart', ticker: 'UPST', listing: 'US' },
-              { name: 'Affirm', ticker: 'AFRM', listing: 'US' }
+              { name: 'Affirm', ticker: 'AFRM', listing: 'US' },
+              { name: 'SoFi', ticker: 'SOFI', listing: 'US' }
             ]
           }
         ],
@@ -202,8 +212,8 @@ export const fintechProductStages: ValueChainStageProducts[] = [
           { name: 'Fiserv', ticker: 'FISV', listing: 'US' },
           { name: 'Fidelity National Information Services', ticker: 'FIS', listing: 'US' },
           { name: 'Jack Henry & Associates', ticker: 'JKHY', listing: 'US' },
-          { name: 'Temenos', ticker: 'TEMN', listing: 'Foreign' },
           { name: 'Guidewire Software', ticker: 'GWRE', listing: 'US' },
+          { name: 'NCR Corporation', ticker: 'NCR', listing: 'US' },
           { name: 'Duck Creek Technologies', ticker: 'DCT', listing: 'US' },
           { name: 'Yodlee', ticker: 'ENV', listing: 'US' }
         ],

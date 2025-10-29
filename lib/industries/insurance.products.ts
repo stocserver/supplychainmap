@@ -19,7 +19,10 @@ export const insuranceProductStages: ValueChainStageProducts[] = [
           { name: 'Everest Re', ticker: 'RE', listing: 'US' },
           { name: 'Arch Capital Group', ticker: 'ACGL', listing: 'US' },
           { name: 'RenaissanceRe', ticker: 'RNR', listing: 'US' },
-          { name: 'Validus Holdings', ticker: 'VR', listing: 'US' }
+          { name: 'Scor SE', ticker: 'SCRYY', listing: 'ADR' },
+          { name: 'PartnerRe', ticker: 'PRE', listing: 'US' },
+          { name: 'Axis Capital Holdings', ticker: 'AXS', listing: 'US' },
+          { name: 'Alleghany Corporation', ticker: 'Y', listing: 'US' }
         ],
         subProducts: [
           {
@@ -56,8 +59,11 @@ export const insuranceProductStages: ValueChainStageProducts[] = [
           { name: 'CoreLogic', ticker: 'CLGX', listing: 'US' },
           { name: 'Guidewire Software', ticker: 'GWRE', listing: 'US' },
           { name: 'Duck Creek Technologies', ticker: 'DCT', listing: 'US' },
-          { name: 'EIS Group', ticker: 'EIS', listing: 'Private' },
-          { name: 'Insurity', ticker: 'INS', listing: 'Private' }
+          { name: 'Domo', ticker: 'DOMO', listing: 'US' },
+          { name: 'Palantir Technologies', ticker: 'PLTR', listing: 'US' },
+          { name: 'Salesforce', ticker: 'CRM', listing: 'US' },
+          { name: 'Oracle', ticker: 'ORCL', listing: 'US' },
+          { name: 'Microsoft', ticker: 'MSFT', listing: 'US' }
         ],
         subProducts: [
           {
@@ -103,7 +109,11 @@ export const insuranceProductStages: ValueChainStageProducts[] = [
           { name: 'Principal Financial', ticker: 'PFG', listing: 'US' },
           { name: 'Unum Group', ticker: 'UNM', listing: 'US' },
           { name: 'Brighthouse Financial', ticker: 'BHF', listing: 'US' },
-          { name: 'Voya Financial', ticker: 'VOYA', listing: 'US' }
+          { name: 'Voya Financial', ticker: 'VOYA', listing: 'US' },
+          { name: 'Equitable Holdings', ticker: 'EQH', listing: 'US' },
+          { name: 'American Equity Investment', ticker: 'AEL', listing: 'US' },
+          { name: 'Fidelity National Financial', ticker: 'FNF', listing: 'US' },
+          { name: 'Globe Life', ticker: 'GL', listing: 'US' }
         ],
         subProducts: [
           {
@@ -144,7 +154,12 @@ export const insuranceProductStages: ValueChainStageProducts[] = [
           { name: 'Chubb', ticker: 'CB', listing: 'US' },
           { name: 'Hartford Financial', ticker: 'HIG', listing: 'US' },
           { name: 'Cincinnati Financial', ticker: 'CINF', listing: 'US' },
-          { name: 'W.R. Berkley', ticker: 'WRB', listing: 'US' }
+          { name: 'W.R. Berkley', ticker: 'WRB', listing: 'US' },
+          { name: 'American International Group', ticker: 'AIG', listing: 'US' },
+          { name: 'Markel Corporation', ticker: 'MKL', listing: 'US' },
+          { name: 'Selective Insurance', ticker: 'SIGI', listing: 'US' },
+          { name: 'Mercury General', ticker: 'MCY', listing: 'US' },
+          { name: 'First American Financial', ticker: 'FAF', listing: 'US' }
         ],
         subProducts: [
           {
@@ -183,7 +198,9 @@ export const insuranceProductStages: ValueChainStageProducts[] = [
           { name: 'Humana', ticker: 'HUM', listing: 'US' },
           { name: 'Cigna', ticker: 'CI', listing: 'US' },
           { name: 'Molina Healthcare', ticker: 'MOH', listing: 'US' },
-          { name: 'Centene', ticker: 'CNC', listing: 'US' }
+          { name: 'Centene', ticker: 'CNC', listing: 'US' },
+          { name: 'Oscar Health', ticker: 'OSCR', listing: 'US' },
+          { name: 'Alignment Healthcare', ticker: 'ALHC', listing: 'US' }
         ],
         subProducts: [
           {
@@ -229,7 +246,8 @@ export const insuranceProductStages: ValueChainStageProducts[] = [
           { name: 'Willis Towers Watson', ticker: 'WTW', listing: 'US' },
           { name: 'Arthur J. Gallagher', ticker: 'AJG', listing: 'US' },
           { name: 'Brown & Brown', ticker: 'BRO', listing: 'US' },
-          { name: 'HUB International', ticker: 'HUB', listing: 'Private' }
+          { name: 'Ryan Specialty', ticker: 'RYAN', listing: 'US' },
+          { name: 'BRP Group', ticker: 'BRP', listing: 'US' }
         ],
         subProducts: [
           {
@@ -263,10 +281,9 @@ export const insuranceProductStages: ValueChainStageProducts[] = [
         longDescription: 'Companies that provide claims processing, management, and related services to insurance companies.',
         companiesDetailed: [
           { name: 'Crawford & Company', ticker: 'CRD.B', listing: 'US' },
-          { name: 'Sedgwick', ticker: 'SEDG', listing: 'Private' },
           { name: 'Gallagher Bassett', ticker: 'AJG', listing: 'US' },
-          { name: 'York Risk Services', ticker: 'YORK', listing: 'Private' },
-          { name: 'Genex Services', ticker: 'GENEX', listing: 'Private' }
+          { name: 'CorVel Corporation', ticker: 'CRVL', listing: 'US' },
+          { name: 'Echelon Claims Services', ticker: 'ECSV', listing: 'US' }
         ],
         tags: ['Claims', 'Processing', 'Management', 'Services']
       }

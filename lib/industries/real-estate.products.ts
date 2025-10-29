@@ -19,7 +19,13 @@ export const realEstateProductStages: ValueChainStageProducts[] = [
           { name: 'KB Home', ticker: 'KBH', listing: 'US' },
           { name: 'Toll Brothers', ticker: 'TOL', listing: 'US' },
           { name: 'Brookfield Properties', ticker: 'BPY', listing: 'US' },
-          { name: 'Simon Property Group', ticker: 'SPG', listing: 'US' }
+          { name: 'Simon Property Group', ticker: 'SPG', listing: 'US' },
+          { name: 'Hovnanian Enterprises', ticker: 'HOV', listing: 'US' },
+          { name: 'Beazer Homes', ticker: 'BZH', listing: 'US' },
+          { name: 'M.D.C. Holdings', ticker: 'MDC', listing: 'US' },
+          { name: 'Taylor Morrison Home', ticker: 'TMHC', listing: 'US' },
+          { name: 'Meritage Homes', ticker: 'MTH', listing: 'US' },
+          { name: 'Century Communities', ticker: 'CCS', listing: 'US' }
         ],
         subProducts: [
           {
@@ -60,14 +66,16 @@ export const realEstateProductStages: ValueChainStageProducts[] = [
         description: 'Real Estate Investment Trusts focused on residential properties',
         longDescription: 'Real Estate Investment Trusts (REITs) that specialize in owning, operating, and managing income-producing residential properties, such as apartment communities, single-family rental homes, and manufactured housing. These REITs provide investors with exposure to the residential housing market and generate revenue through rental income.',
         companiesDetailed: [
-          { name: 'American Tower', ticker: 'AMT', listing: 'US' },
           { name: 'AvalonBay Communities', ticker: 'AVB', listing: 'US' },
           { name: 'Equity Residential', ticker: 'EQR', listing: 'US' },
           { name: 'UDR', ticker: 'UDR', listing: 'US' },
           { name: 'Camden Property Trust', ticker: 'CPT', listing: 'US' },
           { name: 'Essex Property Trust', ticker: 'ESS', listing: 'US' },
           { name: 'Mid-America Apartment Communities', ticker: 'MAA', listing: 'US' },
-          { name: 'Invitation Homes', ticker: 'INVH', listing: 'US' }
+          { name: 'Invitation Homes', ticker: 'INVH', listing: 'US' },
+          { name: 'Apartment Income REIT', ticker: 'AIRC', listing: 'US' },
+          { name: 'Equity Commonwealth', ticker: 'EQC', listing: 'US' },
+          { name: 'Blackstone Mortgage Trust', ticker: 'BXMT', listing: 'US' }
         ],
         subProducts: [
           {
@@ -88,7 +96,8 @@ export const realEstateProductStages: ValueChainStageProducts[] = [
             longDescription: 'REITs that acquire, renovate, and manage portfolios of single-family homes for rental purposes. This segment provides housing options to a diverse tenant base and offers investors exposure to the growing single-family rental market.',
             companiesDetailed: [
               { name: 'Invitation Homes', ticker: 'INVH', listing: 'US' },
-              { name: 'American Homes 4 Rent', ticker: 'AMH', listing: 'US' }
+              { name: 'American Homes 4 Rent', ticker: 'AMH', listing: 'US' },
+              { name: 'Tricon Residential', ticker: 'TCN', listing: 'US' }
             ]
           }
         ],
@@ -107,7 +116,13 @@ export const realEstateProductStages: ValueChainStageProducts[] = [
           { name: 'Crown Castle', ticker: 'CCI', listing: 'US' },
           { name: 'American Tower', ticker: 'AMT', listing: 'US' },
           { name: 'SBA Communications', ticker: 'SBAC', listing: 'US' },
-          { name: 'Digital Realty Trust', ticker: 'DLR', listing: 'US' }
+          { name: 'Digital Realty Trust', ticker: 'DLR', listing: 'US' },
+          { name: 'VICI Properties', ticker: 'VICI', listing: 'US' },
+          { name: 'Public Storage', ticker: 'PSA', listing: 'US' },
+          { name: 'Extra Space Storage', ticker: 'EXR', listing: 'US' },
+          { name: 'CubeSmart', ticker: 'CUBE', listing: 'US' },
+          { name: 'Prologis', ticker: 'PLD', listing: 'US' },
+          { name: 'Duke Realty', ticker: 'DRE', listing: 'US' }
         ],
         subProducts: [
           {
@@ -118,7 +133,10 @@ export const realEstateProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Boston Properties', ticker: 'BXP', listing: 'US' },
               { name: 'SL Green Realty', ticker: 'SLG', listing: 'US' },
-              { name: 'Kilroy Realty', ticker: 'KRC', listing: 'US' }
+              { name: 'Kilroy Realty', ticker: 'KRC', listing: 'US' },
+              { name: 'Vornado Realty Trust', ticker: 'VNO', listing: 'US' },
+              { name: 'Hudson Pacific Properties', ticker: 'HPP', listing: 'US' },
+              { name: 'Brandywine Realty Trust', ticker: 'BDN', listing: 'US' }
             ]
           },
           {
@@ -129,7 +147,9 @@ export const realEstateProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Simon Property Group', ticker: 'SPG', listing: 'US' },
               { name: 'Realty Income', ticker: 'O', listing: 'US' },
-              { name: 'Kimco Realty', ticker: 'KIM', listing: 'US' }
+              { name: 'Kimco Realty', ticker: 'KIM', listing: 'US' },
+              { name: 'Federal Realty Investment Trust', ticker: 'FRT', listing: 'US' },
+              { name: 'Macerich', ticker: 'MAC', listing: 'US' }
             ]
           }
         ],
@@ -148,7 +168,10 @@ export const realEstateProductStages: ValueChainStageProducts[] = [
           { name: 'SBA Communications', ticker: 'SBAC', listing: 'US' },
           { name: 'Welltower', ticker: 'WELL', listing: 'US' },
           { name: 'Ventas', ticker: 'VTR', listing: 'US' },
-          { name: 'Healthpeak Properties', ticker: 'PEAK', listing: 'US' }
+          { name: 'Healthpeak Properties', ticker: 'PEAK', listing: 'US' },
+          { name: 'Iron Mountain', ticker: 'IRM', listing: 'US' },
+          { name: 'Lamar Advertising', ticker: 'LAMR', listing: 'US' },
+          { name: 'Outfront Media', ticker: 'OUT', listing: 'US' }
         ],
         subProducts: [
           {
@@ -196,7 +219,9 @@ export const realEstateProductStages: ValueChainStageProducts[] = [
           { name: 'Marcus & Millichap', ticker: 'MMI', listing: 'US' },
           { name: 'Newmark Group', ticker: 'NMRK', listing: 'US' },
           { name: 'AvalonBay Communities', ticker: 'AVB', listing: 'US' },
-          { name: 'Equity Residential', ticker: 'EQR', listing: 'US' }
+          { name: 'Equity Residential', ticker: 'EQR', listing: 'US' },
+          { name: 'FirstService Corporation', ticker: 'FSV', listing: 'US' },
+          { name: 'Assurant', ticker: 'AIZ', listing: 'US' }
         ],
         subProducts: [
           {
@@ -237,7 +262,10 @@ export const realEstateProductStages: ValueChainStageProducts[] = [
           { name: 'Marcus & Millichap', ticker: 'MMI', listing: 'US' },
           { name: 'Newmark Group', ticker: 'NMRK', listing: 'US' },
           { name: 'Compass', ticker: 'COMP', listing: 'US' },
-          { name: 'Redfin', ticker: 'RDFN', listing: 'US' }
+          { name: 'Redfin', ticker: 'RDFN', listing: 'US' },
+          { name: 'Anywhere Real Estate', ticker: 'HOUS', listing: 'US' },
+          { name: 'Douglas Elliman', ticker: 'DOUG', listing: 'US' },
+          { name: 'Opendoor Technologies', ticker: 'OPEN', listing: 'US' }
         ],
         subProducts: [
           {
@@ -259,7 +287,9 @@ export const realEstateProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Compass', ticker: 'COMP', listing: 'US' },
               { name: 'Redfin', ticker: 'RDFN', listing: 'US' },
-              { name: 'Zillow', ticker: 'Z', listing: 'US' }
+              { name: 'Zillow', ticker: 'Z', listing: 'US' },
+              { name: 'Anywhere Real Estate', ticker: 'HOUS', listing: 'US' },
+              { name: 'Opendoor Technologies', ticker: 'OPEN', listing: 'US' }
             ]
           }
         ],

@@ -74,7 +74,7 @@ function ProductBox({ product, onClick, stage }: { product: ProductCategory; onC
         <div className="mt-3">
           <div className="grid gap-2 grid-cols-1">
             {product.subProducts.map((sp) => (
-              <button
+              <div
                 key={sp.id}
                 onClick={(e) => {
                   e.stopPropagation()
@@ -82,6 +82,15 @@ function ProductBox({ product, onClick, stage }: { product: ProductCategory; onC
                 }}
                 className="w-full cursor-pointer rounded-lg border bg-white p-3 text-left shadow-sm transition-all hover:border-primary/30 hover:bg-muted/40"
                 title={sp.description}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    onClick(sp, stage)
+                  }
+                }}
               >
                 <div className="flex items-start justify-between">
                   <p className="text-sm font-medium break-words">{sp.name}</p>
@@ -89,7 +98,7 @@ function ProductBox({ product, onClick, stage }: { product: ProductCategory; onC
                     {collectCompanies(sp).length}
                   </div>
                 </div>
-              </button>
+              </div>
             ))}
           </div>
         </div>

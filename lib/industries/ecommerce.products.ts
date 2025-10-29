@@ -39,9 +39,10 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
             description: 'Software-as-a-service e-commerce solutions',
             longDescription: 'Cloud-based software solutions that allow businesses to create and manage their online stores without needing to host or maintain the underlying infrastructure. These platforms typically offer features like store design, product management, payment integration, and analytics on a subscription model.',
             companiesDetailed: [
-              { name: 'Shopify', ticker: 'SHOP', listing: 'US' },
-              { name: 'BigCommerce', ticker: 'BIGC', listing: 'US' },
-              { name: 'Squarespace', ticker: 'SQSP', listing: 'US' }
+          { name: 'Shopify', ticker: 'SHOP', listing: 'US' },
+          { name: 'BigCommerce', ticker: 'BIGC', listing: 'US' },
+          { name: 'Squarespace', ticker: 'SQSP', listing: 'US' },
+          { name: 'Wix', ticker: 'WIX', listing: 'US' }
             ]
           }
         ],
@@ -60,7 +61,9 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
           { name: 'Fiserv', ticker: 'FISV', listing: 'US' },
           { name: 'Global Payments', ticker: 'GPN', listing: 'US' },
           { name: 'Worldpay', ticker: 'WP', listing: 'US' },
-          { name: 'Authorize.Net', ticker: 'V', listing: 'US' }
+          { name: 'Marqeta', ticker: 'MQ', listing: 'US' },
+          { name: 'Toast', ticker: 'TOST', listing: 'US' },
+          { name: 'Shift4 Payments', ticker: 'FOUR', listing: 'US' }
         ],
         subProducts: [
           {
@@ -71,7 +74,8 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               
               { name: 'PayPal', ticker: 'PYPL', listing: 'US' },
-              { name: 'Adyen', ticker: 'ADYEY', listing: 'ADR' }
+              { name: 'Adyen', ticker: 'ADYEY', listing: 'ADR' },
+              { name: 'Shift4 Payments', ticker: 'FOUR', listing: 'US' }
             ]
           },
           {
@@ -107,6 +111,7 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
           { name: 'Alibaba', ticker: 'BABA', listing: 'ADR' },
           { name: 'JD.com', ticker: 'JD', listing: 'ADR' },
           { name: 'Walmart', ticker: 'WMT', listing: 'US' },
+          { name: 'MercadoLibre', ticker: 'MELI', listing: 'US' },
           { name: 'Target', ticker: 'TGT', listing: 'US' },
           { name: 'Wayfair', ticker: 'W', listing: 'US' }
         ],
@@ -128,9 +133,11 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
             description: 'Niche and specialty product marketplaces',
             longDescription: 'Online platforms focusing on specific product categories or niches, connecting specialized sellers with targeted buyers. These marketplaces often offer curated selections, unique products, and cater to particular consumer interests or hobbies.',
             companiesDetailed: [
-              { name: 'Etsy', ticker: 'ETSY', listing: 'US' },
-              { name: 'Wayfair', ticker: 'W', listing: 'US' },
-              { name: 'Chewy', ticker: 'CHWY', listing: 'US' }
+          { name: 'Etsy', ticker: 'ETSY', listing: 'US' },
+          { name: 'Wayfair', ticker: 'W', listing: 'US' },
+          { name: 'Chewy', ticker: 'CHWY', listing: 'US' },
+          { name: 'The RealReal', ticker: 'REAL', listing: 'US' },
+          { name: 'Revolve Group', ticker: 'RVLV', listing: 'US' }
             ]
           }
         ],
@@ -148,8 +155,9 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
           { name: 'Under Armour', ticker: 'UAA', listing: 'US' },
           { name: 'Warby Parker', ticker: 'WRBY', listing: 'US' },
           { name: 'Allbirds', ticker: 'BIRD', listing: 'US' },
-          { name: 'Casper', ticker: 'CSPR', listing: 'US' },
-          
+          { name: 'Revolve Group', ticker: 'RVLV', listing: 'US' },
+          { name: 'Stitch Fix', ticker: 'SFIX', listing: 'US' },
+          { name: 'Rent the Runway', ticker: 'RENT', listing: 'US' }
         ],
         subProducts: [
           {
@@ -160,7 +168,8 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Nike', ticker: 'NKE', listing: 'US' },
               { name: 'Lululemon', ticker: 'LULU', listing: 'US' },
-              { name: 'Warby Parker', ticker: 'WRBY', listing: 'US' }
+              { name: 'Warby Parker', ticker: 'WRBY', listing: 'US' },
+              { name: 'Revolve Group', ticker: 'RVLV', listing: 'US' }
             ]
           },
           {
@@ -170,7 +179,7 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
             longDescription: 'Direct-to-consumer brands offering products related to lifestyle, home goods, wellness, and personal care. These brands often focus on aesthetic, ethical sourcing, and building a community around their products.',
             companiesDetailed: [
               { name: 'Allbirds', ticker: 'BIRD', listing: 'US' },
-              { name: 'Casper', ticker: 'CSPR', listing: 'US' }
+              { name: 'Stitch Fix', ticker: 'SFIX', listing: 'US' }
             ]
           }
         ],
@@ -187,6 +196,7 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
           { name: 'UPS', ticker: 'UPS', listing: 'US' },
           { name: 'DHL', ticker: 'DPSGY', listing: 'ADR' },
           { name: 'Shopify', ticker: 'SHOP', listing: 'US' },
+          { name: 'XPO Logistics', ticker: 'XPO', listing: 'US' },
           { name: 'Walmart', ticker: 'WMT', listing: 'US' }
         ],
         subProducts: [
@@ -234,7 +244,7 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
           { name: 'Sabre', ticker: 'SABR', listing: 'US' },
           { name: 'Amadeus', ticker: 'AMADF', listing: 'ADR' },
           { name: 'Despegar', ticker: 'DESP', listing: 'US' },
-          { name: 'MakeMyTrip', ticker: 'MMYT', listing: 'US' }
+          { name: 'Redfin', ticker: 'RDFN', listing: 'US' }
         ],
         subProducts: [
           {
@@ -270,11 +280,10 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'Shopify', ticker: 'SHOP', listing: 'US' },
           { name: 'BigCommerce', ticker: 'BIGC', listing: 'US' },
-          { name: 'Mailchimp', ticker: 'INTC', listing: 'US' },
           { name: 'Klaviyo', ticker: 'KVYO', listing: 'US' },
           { name: 'Zendesk', ticker: 'ZEN', listing: 'US' },
-          
-          { name: 'HubSpot', ticker: 'HUBS', listing: 'US' }
+          { name: 'HubSpot', ticker: 'HUBS', listing: 'US' },
+          { name: 'LivePerson', ticker: 'LPSN', listing: 'US' }
         ],
         subProducts: [
           {
@@ -283,9 +292,9 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
             description: 'E-commerce marketing and analytics',
             longDescription: 'Software and services designed to help e-commerce businesses attract, engage, and retain customers. This includes email marketing, social media advertising, search engine optimization (SEO) tools, and data analytics to track campaign performance and customer behavior.',
             companiesDetailed: [
-              { name: 'Mailchimp', ticker: 'INTC', listing: 'US' },
               { name: 'Klaviyo', ticker: 'KVYO', listing: 'US' },
-              { name: 'HubSpot', ticker: 'HUBS', listing: 'US' }
+              { name: 'HubSpot', ticker: 'HUBS', listing: 'US' },
+              { name: 'BigCommerce', ticker: 'BIGC', listing: 'US' }
             ]
           },
           {

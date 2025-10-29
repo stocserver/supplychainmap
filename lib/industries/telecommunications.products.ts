@@ -17,8 +17,10 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
           { name: 'Arista Networks', ticker: 'ANET', listing: 'US' },
           { name: 'Nokia', ticker: 'NOK', listing: 'US' },
           { name: 'Ericsson', ticker: 'ERIC', listing: 'US' },
-          
+          { name: 'Samsung Electronics', ticker: 'SSNLF', listing: 'ADR' },
           { name: 'CommScope', ticker: 'COMM', listing: 'US' },
+          { name: 'Fujitsu', ticker: 'FJTSY', listing: 'ADR' },
+          { name: 'Motorola Solutions', ticker: 'MSI', listing: 'US' },
           { name: 'Ciena Corporation', ticker: 'CIEN', listing: 'US' }
         ],
         subProducts: [
@@ -57,7 +59,8 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
           { name: 'Crown Castle', ticker: 'CCI', listing: 'US' },
           { name: 'SBA Communications', ticker: 'SBAC', listing: 'US' },
           { name: 'Uniti Group', ticker: 'UNIT', listing: 'US' },
-          { name: 'Digital Realty Trust', ticker: 'DLR', listing: 'US' }
+          { name: 'Digital Realty Trust', ticker: 'DLR', listing: 'US' },
+          { name: 'Equinix', ticker: 'EQIX', listing: 'US' }
         ],
         tags: ['Cell Towers', 'Infrastructure', 'REITs', 'Wireless']
       }
@@ -200,7 +203,8 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
           { name: 'Verizon Communications', ticker: 'VZ', listing: 'US' },
           { name: 'Lumen Technologies', ticker: 'LUMN', listing: 'US' },
           { name: 'Cogent Communications', ticker: 'CCOI', listing: 'US' },
-          
+          { name: 'GTT Communications', ticker: 'GTT', listing: 'US' },
+          { name: 'Zayo Group', ticker: 'ZAYO', listing: 'US' },
         ],
         subProducts: [
           {
@@ -211,7 +215,7 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Lumen Technologies', ticker: 'LUMN', listing: 'US' },
               { name: 'Cogent Communications', ticker: 'CCOI', listing: 'US' },
-              
+              { name: 'Zayo Group', ticker: 'ZAYO', listing: 'US' },
             ]
           },
           {
@@ -222,7 +226,8 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'AT&T', ticker: 'T', listing: 'US' },
               { name: 'Verizon Communications', ticker: 'VZ', listing: 'US' },
-              { name: 'Windstream', ticker: 'WINMQ', listing: 'US' }
+              { name: 'Windstream', ticker: 'WINMQ', listing: 'US' },
+              { name: 'Vonage', ticker: 'VG', listing: 'US' }
             ]
           }
         ],

@@ -17,7 +17,7 @@ export const aerospaceProductStages: ValueChainStageProducts[] = [
           { name: 'Carpenter Technology', ticker: 'CRS', listing: 'US' },
           { name: 'ATI', ticker: 'ATI', listing: 'US' },
           { name: 'Hexcel', ticker: 'HXL', listing: 'US' },
-          { name: 'Toray Industries', ticker: 'TRIL', listing: 'ADR' },
+          { name: 'Toray Industries', ticker: 'TRYIY', listing: 'ADR' },
           { name: 'Teijin', ticker: 'TINLY', listing: 'ADR' }
         ],
         subProducts: [
@@ -36,7 +36,7 @@ export const aerospaceProductStages: ValueChainStageProducts[] = [
             description: 'Advanced composite materials',
             companiesDetailed: [
               { name: 'Hexcel', ticker: 'HXL', listing: 'US' },
-              { name: 'Toray Industries', ticker: 'TRIL', listing: 'ADR' }
+              { name: 'Toray Industries', ticker: 'TRYIY', listing: 'ADR' }
             ]
           }
         ],
@@ -99,7 +99,7 @@ export const aerospaceProductStages: ValueChainStageProducts[] = [
           { name: 'Embraer', ticker: 'ERJ', listing: 'US' },
           { name: 'Bombardier', ticker: 'BDRBF', listing: 'ADR' },
           { name: 'Textron', ticker: 'TXT', listing: 'US' },
-          { name: 'Leonardo', ticker: 'LDO', listing: 'ADR' },
+          { name: 'Leonardo', ticker: 'FINMY', listing: 'ADR' },
           
         ],
         subProducts: [
@@ -180,7 +180,7 @@ export const aerospaceProductStages: ValueChainStageProducts[] = [
           { name: 'Southwest Airlines', ticker: 'LUV', listing: 'US' },
           { name: 'JetBlue Airways', ticker: 'JBLU', listing: 'US' },
           { name: 'Alaska Air Group', ticker: 'ALK', listing: 'US' },
-          { name: 'Spirit Airlines', ticker: 'SAVE', listing: 'US' },
+          { name: 'Spirit Airlines', ticker: 'FLYY', listing: 'US' },
           { name: 'Frontier Airlines', ticker: 'ULCC', listing: 'US' }
         ],
         subProducts: [
@@ -201,7 +201,7 @@ export const aerospaceProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Southwest Airlines', ticker: 'LUV', listing: 'US' },
               { name: 'JetBlue Airways', ticker: 'JBLU', listing: 'US' },
-              { name: 'Spirit Airlines', ticker: 'SAVE', listing: 'US' }
+              { name: 'Spirit Airlines', ticker: 'FLYY', listing: 'US' }
             ]
           }
         ],
@@ -215,7 +215,7 @@ export const aerospaceProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'AAR Corp', ticker: 'AIR', listing: 'US' },
           { name: 'StandardAero', ticker: 'SA', listing: 'Private' },
-          { name: 'Lufthansa Technik', ticker: 'LHA', listing: 'ADR' },
+          { name: 'Lufthansa Technik', ticker: 'DLAKY', listing: 'ADR' },
           { name: 'ST Engineering', ticker: 'SGGKY', listing: 'ADR' },
           
         ],
@@ -226,7 +226,7 @@ export const aerospaceProductStages: ValueChainStageProducts[] = [
             description: 'Aircraft engine maintenance',
             companiesDetailed: [
               
-              { name: 'Lufthansa Technik', ticker: 'LHA', listing: 'ADR' }
+              { name: 'Lufthansa Technik', ticker: 'DLAKY', listing: 'ADR' }
             ]
           },
           {

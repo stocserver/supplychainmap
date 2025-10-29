@@ -16,10 +16,14 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
           { name: 'Danaher', ticker: 'DHR', listing: 'US' },
           { name: 'Agilent Technologies', ticker: 'A', listing: 'US' },
           { name: 'Waters Corporation', ticker: 'WAT', listing: 'US' },
-          { name: 'PerkinElmer', ticker: 'PKI', listing: 'US' },
+          { name: 'Revvity (formerly PerkinElmer)', ticker: 'RVTY', listing: 'US' },
           { name: 'Bio-Rad Laboratories', ticker: 'BIO', listing: 'US' },
+          { name: '10x Genomics', ticker: 'TXG', listing: 'US' },
           { name: 'Illumina', ticker: 'ILMN', listing: 'US' },
-          { name: 'Pacific Biosciences', ticker: 'PACB', listing: 'US' }
+          { name: 'Pacific Biosciences', ticker: 'PACB', listing: 'US' },
+          { name: 'Bionano Genomics', ticker: 'BNGO', listing: 'US' },
+          { name: 'Element Biosciences', ticker: 'ELBM', listing: 'US' },
+          { name: 'Nanostring Technologies', ticker: 'NSTG', listing: 'US' }
         ],
         subProducts: [
           {
@@ -29,8 +33,7 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
             longDescription: 'High-throughput technologies and instruments that determine the order of nucleotides in DNA and RNA. These platforms enable genomics research, clinical diagnostics, and precision medicine by providing rapid, cost-effective sequencing.',
             companiesDetailed: [
               { name: 'Illumina', ticker: 'ILMN', listing: 'US' },
-              { name: 'Pacific Biosciences', ticker: 'PACB', listing: 'US' },
-              { name: 'Oxford Nanopore', ticker: 'ONT', listing: 'Private' }
+              { name: 'Pacific Biosciences', ticker: 'PACB', listing: 'US' }
             ]
           },
           {
@@ -58,7 +61,9 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
           { name: 'Intellia Therapeutics', ticker: 'NTLA', listing: 'US' },
           { name: 'Bluebird Bio', ticker: 'BLUE', listing: 'US' },
           { name: 'Sangamo Therapeutics', ticker: 'SGMO', listing: 'US' },
-          { name: 'Precision BioSciences', ticker: 'DTIL', listing: 'US' }
+          { name: 'Precision BioSciences', ticker: 'DTIL', listing: 'US' },
+          { name: 'Beam Therapeutics', ticker: 'BEAM', listing: 'US' },
+          { name: 'Fate Therapeutics', ticker: 'FATE', listing: 'US' }
         ],
         subProducts: [
           {
@@ -105,7 +110,7 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
           { name: 'Regeneron', ticker: 'REGN', listing: 'US' },
           { name: 'Vertex Pharmaceuticals', ticker: 'VRTX', listing: 'US' },
           { name: 'Moderna', ticker: 'MRNA', listing: 'US' },
-          { name: 'BioNTech', ticker: 'BNTX', listing: 'US' },
+          { name: 'Arcturus Therapeutics', ticker: 'ARCT', listing: 'US' },
           { name: 'Incyte', ticker: 'INCY', listing: 'US' }
         ],
         subProducts: [
@@ -125,7 +130,8 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
             description: 'Messenger RNA therapeutics',
             companiesDetailed: [
               { name: 'Moderna', ticker: 'MRNA', listing: 'US' },
-              { name: 'BioNTech', ticker: 'BNTX', listing: 'US' }
+              { name: 'BioNTech', ticker: 'BNTX', listing: 'US' },
+              { name: 'Arcturus Therapeutics', ticker: 'ARCT', listing: 'US' }
             ]
           }
         ],
@@ -141,10 +147,14 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
           { name: 'Roche', ticker: 'RHHBY', listing: 'ADR' },
           { name: 'Danaher', ticker: 'DHR', listing: 'US' },
           { name: 'Becton Dickinson', ticker: 'BDX', listing: 'US' },
-          { name: 'Quidel', ticker: 'QDEL', listing: 'US' },
+          { name: 'Hologic', ticker: 'HOLX', listing: 'US' },
+          { name: 'QuidelOrtho', ticker: 'QDEL', listing: 'US' },
           { name: 'Exact Sciences', ticker: 'EXAS', listing: 'US' },
           { name: 'Guardant Health', ticker: 'GH', listing: 'US' },
-          { name: 'Foundation Medicine', ticker: 'FMI', listing: 'US' }
+          { name: 'Natera', ticker: 'NTRA', listing: 'US' },
+          { name: 'Invitae', ticker: 'NVTA', listing: 'US' },
+          { name: 'NeoGenomics', ticker: 'NEO', listing: 'US' },
+          { name: 'Adaptive Biotechnologies', ticker: 'ADPT', listing: 'US' }
         ],
         subProducts: [
           {
@@ -154,7 +164,8 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Roche', ticker: 'RHHBY', listing: 'ADR' },
               { name: 'Abbott Laboratories', ticker: 'ABT', listing: 'US' },
-              { name: 'Exact Sciences', ticker: 'EXAS', listing: 'US' }
+              { name: 'Exact Sciences', ticker: 'EXAS', listing: 'US' },
+              { name: 'Hologic', ticker: 'HOLX', listing: 'US' }
             ]
           },
           {
@@ -163,7 +174,7 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
             description: 'Blood-based cancer detection',
             companiesDetailed: [
               { name: 'Guardant Health', ticker: 'GH', listing: 'US' },
-              { name: 'Foundation Medicine', ticker: 'FMI', listing: 'US' }
+              { name: 'Natera', ticker: 'NTRA', listing: 'US' }
             ]
           }
         ],
@@ -187,9 +198,11 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
           { name: 'Biogen', ticker: 'BIIB', listing: 'US' },
           { name: 'Regeneron', ticker: 'REGN', listing: 'US' },
           { name: 'Vertex Pharmaceuticals', ticker: 'VRTX', listing: 'US' },
-          { name: 'Alexion Pharmaceuticals', ticker: 'ALXN', listing: 'US' },
           { name: 'BioMarin Pharmaceutical', ticker: 'BMRN', listing: 'US' },
-          { name: 'Ultragenyx Pharmaceutical', ticker: 'RARE', listing: 'US' }
+          { name: 'Ultragenyx Pharmaceutical', ticker: 'RARE', listing: 'US' },
+          { name: 'Alnylam Pharmaceuticals', ticker: 'ALNY', listing: 'US' },
+          { name: 'Incyte', ticker: 'INCY', listing: 'US' },
+          { name: 'Exelixis', ticker: 'EXEL', listing: 'US' }
         ],
         subProducts: [
           {
@@ -197,9 +210,9 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
             name: 'Rare Disease Therapeutics',
             description: 'Orphan drugs for rare diseases',
             companiesDetailed: [
-              { name: 'Alexion Pharmaceuticals', ticker: 'ALXN', listing: 'US' },
               { name: 'BioMarin Pharmaceutical', ticker: 'BMRN', listing: 'US' },
-              { name: 'Ultragenyx Pharmaceutical', ticker: 'RARE', listing: 'US' }
+              { name: 'Ultragenyx Pharmaceutical', ticker: 'RARE', listing: 'US' },
+              { name: 'Sarepta Therapeutics', ticker: 'SRPT', listing: 'US' }
             ]
           },
           {
@@ -209,7 +222,8 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Amgen', ticker: 'AMGN', listing: 'US' },
               { name: 'Regeneron', ticker: 'REGN', listing: 'US' },
-              { name: 'Gilead Sciences', ticker: 'GILD', listing: 'US' }
+              { name: 'Gilead Sciences', ticker: 'GILD', listing: 'US' },
+              { name: 'Exelixis', ticker: 'EXEL', listing: 'US' }
             ]
           }
         ],
@@ -221,12 +235,13 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
         description: 'Biotechnology contract services',
         longDescription: 'Companies that provide contract development and manufacturing services for biotechnology companies.',
         companiesDetailed: [
-          { name: 'Lonza Group', ticker: 'LZAGY', listing: 'ADR' },
           { name: 'Catalent', ticker: 'CTLT', listing: 'US' },
-          { name: 'Patheon', ticker: 'PTHN', listing: 'US' },
-          { name: 'Cambrex', ticker: 'CBM', listing: 'US' },
-          { name: 'Piramal Pharma', ticker: 'PIRAMAL', listing: 'Foreign' },
-          { name: 'WuXi Biologics', ticker: 'WUXI', listing: 'ADR' }
+          { name: 'Charles River Laboratories', ticker: 'CRL', listing: 'US' },
+          { name: 'Avid Bioservices', ticker: 'CDMO', listing: 'US' },
+          { name: 'Emergent BioSolutions', ticker: 'EBS', listing: 'US' },
+          { name: 'Thermo Fisher Scientific', ticker: 'TMO', listing: 'US' },
+          { name: 'Lonza Group', ticker: 'LZAGY', listing: 'ADR' },
+          { name: 'WuXi Biologics', ticker: 'WXXWY', listing: 'ADR' }
         ],
         subProducts: [
           {
@@ -234,9 +249,9 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
             name: 'Biologics Manufacturing',
             description: 'Large-scale biologics production',
             companiesDetailed: [
-              { name: 'Lonza Group', ticker: 'LZAGY', listing: 'ADR' },
               { name: 'Catalent', ticker: 'CTLT', listing: 'US' },
-              { name: 'WuXi Biologics', ticker: 'WUXI', listing: 'ADR' }
+              { name: 'Charles River Laboratories', ticker: 'CRL', listing: 'US' },
+              { name: 'Avid Bioservices', ticker: 'CDMO', listing: 'US' }
             ]
           },
           {
@@ -244,8 +259,9 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
             name: 'Cell & Gene Therapy Manufacturing',
             description: 'Specialized manufacturing for advanced therapies',
             companiesDetailed: [
-              { name: 'Lonza Group', ticker: 'LZAGY', listing: 'ADR' },
-              { name: 'Catalent', ticker: 'CTLT', listing: 'US' }
+              { name: 'Catalent', ticker: 'CTLT', listing: 'US' },
+              { name: 'Charles River Laboratories', ticker: 'CRL', listing: 'US' },
+              { name: 'Emergent BioSolutions', ticker: 'EBS', listing: 'US' }
             ]
           }
         ],

@@ -15,7 +15,13 @@ export const artificialIntelligenceProductStages: ValueChainStageProducts[] = [
           { name: 'NVIDIA', ticker: 'NVDA', listing: 'US' },
           { name: 'AMD', ticker: 'AMD', listing: 'US' },
           { name: 'Intel', ticker: 'INTC', listing: 'US' },
-          { name: 'Marvell', ticker: 'MRVL', listing: 'US' }
+          { name: 'Marvell', ticker: 'MRVL', listing: 'US' },
+          { name: 'Super Micro Computer', ticker: 'SMCI', listing: 'US' },
+          { name: 'Broadcom', ticker: 'AVGO', listing: 'US' },
+          { name: 'Qualcomm', ticker: 'QCOM', listing: 'US' },
+          { name: 'Arm', ticker: 'ARM', listing: 'US' },
+          { name: 'Hewlett Packard Enterprise', ticker: 'HPE', listing: 'US' },
+          { name: 'Dell Technologies', ticker: 'DELL', listing: 'US' }
         ]
       },
       {
@@ -26,7 +32,11 @@ export const artificialIntelligenceProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'Snowflake', ticker: 'SNOW', listing: 'US' },
           { name: 'Datadog', ticker: 'DDOG', listing: 'US' },
-          { name: 'Elastic', ticker: 'ESTC', listing: 'US' }
+          { name: 'Elastic', ticker: 'ESTC', listing: 'US' },
+          { name: 'MongoDB', ticker: 'MDB', listing: 'US' },
+          { name: 'Confluent', ticker: 'CFLT', listing: 'US' },
+          { name: 'Pure Storage', ticker: 'PSTG', listing: 'US' },
+          { name: 'NetApp', ticker: 'NTAP', listing: 'US' }
         ]
       }
     ]
@@ -44,7 +54,12 @@ export const artificialIntelligenceProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'Microsoft (Azure AI)', ticker: 'MSFT', listing: 'US' },
           { name: 'Alphabet (Google Cloud AI)', ticker: 'GOOGL', listing: 'US' },
-          { name: 'Amazon (AWS AI)', ticker: 'AMZN', listing: 'US' }
+          { name: 'Amazon (AWS AI)', ticker: 'AMZN', listing: 'US' },
+          { name: 'NVIDIA (AI Enterprise)', ticker: 'NVDA', listing: 'US' },
+          { name: 'Oracle (OCI AI)', ticker: 'ORCL', listing: 'US' },
+          { name: 'IBM (watsonx)', ticker: 'IBM', listing: 'US' },
+          { name: 'Palantir', ticker: 'PLTR', listing: 'US' },
+          { name: 'C3.ai', ticker: 'AI', listing: 'US' }
         ]
       },
       {
@@ -54,7 +69,9 @@ export const artificialIntelligenceProductStages: ValueChainStageProducts[] = [
         longDescription: 'Practices and tools for operationalizing machine learning models in production environments. MLOps focuses on automating and standardizing the deployment, monitoring, and management of ML models to ensure reliability, scalability, and compliance, bridging the gap between data science and operations.',
         companiesDetailed: [
           { name: 'Datadog', ticker: 'DDOG', listing: 'US' },
-          { name: 'Snowflake', ticker: 'SNOW', listing: 'US' }
+          { name: 'Snowflake', ticker: 'SNOW', listing: 'US' },
+          { name: 'Dynatrace', ticker: 'DT', listing: 'US' },
+          { name: 'Elastic', ticker: 'ESTC', listing: 'US' }
         ]
       }
     ]
@@ -72,7 +89,11 @@ export const artificialIntelligenceProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'ServiceNow', ticker: 'NOW', listing: 'US' },
           { name: 'CrowdStrike', ticker: 'CRWD', listing: 'US' },
-          { name: 'Adobe', ticker: 'ADBE', listing: 'US' }
+          { name: 'Adobe', ticker: 'ADBE', listing: 'US' },
+          { name: 'Salesforce', ticker: 'CRM', listing: 'US' },
+          { name: 'Palantir', ticker: 'PLTR', listing: 'US' },
+          { name: 'UiPath', ticker: 'PATH', listing: 'US' },
+          { name: 'Intuit', ticker: 'INTU', listing: 'US' }
         ]
       }
     ]

@@ -14,7 +14,11 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'Ingredion', ticker: 'INGR', listing: 'US' },
           { name: 'International Flavors & Fragrances', ticker: 'IFF', listing: 'US' },
-          { name: 'Archer Daniels Midland', ticker: 'ADM', listing: 'US' }
+          { name: 'Archer Daniels Midland', ticker: 'ADM', listing: 'US' },
+          { name: 'Bunge', ticker: 'BG', listing: 'US' },
+          { name: 'Tate & Lyle', ticker: 'TATYY', listing: 'ADR' },
+          { name: 'McCormick', ticker: 'MKC', listing: 'US' },
+          { name: 'Ajinomoto', ticker: 'AJINY', listing: 'ADR' }
         ],
         subProducts: [
           {
@@ -24,7 +28,9 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
             longDescription: 'Production and supply of sweeteners (e.g., high-fructose corn syrup, glucose), starches, and plant-based texturizers. These ingredients are crucial for food texture, flavor, and shelf-life across a wide range of processed foods and beverages.',
             companiesDetailed: [
               { name: 'Ingredion', ticker: 'INGR', listing: 'US' },
-              { name: 'Archer Daniels Midland', ticker: 'ADM', listing: 'US' }
+              { name: 'Archer Daniels Midland', ticker: 'ADM', listing: 'US' },
+              { name: 'Bunge', ticker: 'BG', listing: 'US' },
+              { name: 'Tate & Lyle', ticker: 'TATYY', listing: 'ADR' }
             ]
           },
           {
@@ -34,7 +40,8 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
             longDescription: 'Development and production of natural and artificial flavors, extracts, spices, and seasoning blends. These ingredients are essential for enhancing the taste, aroma, and overall sensory experience of food and beverage products.',
             companiesDetailed: [
               { name: 'International Flavors & Fragrances', ticker: 'IFF', listing: 'US' },
-              { name: 'McCormick', ticker: 'MKC', listing: 'US' }
+              { name: 'McCormick', ticker: 'MKC', listing: 'US' },
+              { name: 'Ajinomoto', ticker: 'AJINY', listing: 'ADR' }
             ]
           },
           {
@@ -57,7 +64,10 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'General Mills', ticker: 'GIS', listing: 'US' },
           { name: 'Kraft Heinz', ticker: 'KHC', listing: 'US' },
-          { name: 'Kellanova (Kellogg Snacks)', ticker: 'K', listing: 'US' }
+          { name: 'Kellanova (Kellogg Snacks)', ticker: 'K', listing: 'US' },
+          { name: 'J.M. Smucker', ticker: 'SJM', listing: 'US' },
+          { name: 'B&G Foods', ticker: 'BGS', listing: 'US' },
+          { name: 'TreeHouse Foods', ticker: 'THS', listing: 'US' }
         ],
         subProducts: [
           {
@@ -67,7 +77,9 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
             longDescription: 'Production of snack foods such as chips, crackers, and popcorn, as well as confectionery items like chocolates, candies, and gum. This segment focuses on convenient, ready-to-eat products for indulgence and everyday consumption.',
             companiesDetailed: [
               { name: 'Mondelez', ticker: 'MDLZ', listing: 'US' },
-              { name: 'Hershey', ticker: 'HSY', listing: 'US' }
+              { name: 'Hershey', ticker: 'HSY', listing: 'US' },
+              { name: 'Utz Brands', ticker: 'UTZ', listing: 'US' },
+              { name: 'Lamb Weston', ticker: 'LW', listing: 'US' }
             ]
           },
           {
@@ -77,7 +89,9 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
             longDescription: 'Manufacturing of convenient, pre-prepared meals and meal components, including canned goods, frozen entrees, and shelf-stable kits. These products offer ease of preparation and extended shelf-life for busy consumers.',
             companiesDetailed: [
               { name: 'Conagra Brands', ticker: 'CAG', listing: 'US' },
-              { name: 'Campbell Soup', ticker: 'CPB', listing: 'US' }
+              { name: 'Campbell Soup', ticker: 'CPB', listing: 'US' },
+              { name: 'B&G Foods', ticker: 'BGS', listing: 'US' },
+              { name: 'TreeHouse Foods', ticker: 'THS', listing: 'US' }
             ]
           },
           {
@@ -87,7 +101,9 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
             longDescription: 'Processing of livestock and poultry into various meat products, including fresh cuts, processed meats, and value-added protein products. This segment involves slaughtering, butchering, packaging, and distribution to retail and foodservice.',
             companiesDetailed: [
               { name: 'Tyson Foods', ticker: 'TSN', listing: 'US' },
-              { name: 'Hormel Foods', ticker: 'HRL', listing: 'US' }
+              { name: 'Hormel Foods', ticker: 'HRL', listing: 'US' },
+              { name: 'JBS', ticker: 'JBSAY', listing: 'ADR' },
+              { name: 'Pilgrim\'s Pride', ticker: 'PPC', listing: 'US' }
             ]
           }
         ]
@@ -108,7 +124,10 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
           { name: 'Coca-Cola', ticker: 'KO', listing: 'US' },
           { name: 'PepsiCo', ticker: 'PEP', listing: 'US' },
           { name: 'Keurig Dr Pepper', ticker: 'KDP', listing: 'US' },
-          { name: 'Constellation Brands', ticker: 'STZ', listing: 'US' }
+          { name: 'Constellation Brands', ticker: 'STZ', listing: 'US' },
+          { name: 'Diageo', ticker: 'DEO', listing: 'ADR' },
+          { name: 'Heineken', ticker: 'HEINY', listing: 'ADR' },
+          { name: 'Brown-Forman', ticker: 'BF.B', listing: 'US' }
         ],
         subProducts: [
           {
@@ -129,7 +148,9 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
             longDescription: 'Brewing, marketing, and distribution of various beer types (lagers, ales, craft beers) and increasingly, hard seltzers. This segment is influenced by consumer tastes, regional preferences, and promotional activities.',
             companiesDetailed: [
               { name: 'Constellation Brands', ticker: 'STZ', listing: 'US' },
-              { name: 'Molson Coors', ticker: 'TAP', listing: 'US' }
+              { name: 'Molson Coors', ticker: 'TAP', listing: 'US' },
+              { name: 'Heineken', ticker: 'HEINY', listing: 'ADR' },
+              { name: 'Boston Beer', ticker: 'SAM', listing: 'US' }
             ]
           },
           {
@@ -152,7 +173,9 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'Walmart', ticker: 'WMT', listing: 'US' },
           { name: 'Costco', ticker: 'COST', listing: 'US' },
-          { name: 'Sysco', ticker: 'SYY', listing: 'US' }
+          { name: 'Sysco', ticker: 'SYY', listing: 'US' },
+          { name: 'Albertsons', ticker: 'ACI', listing: 'US' },
+          { name: 'Performance Food Group', ticker: 'PFGC', listing: 'US' }
         ],
         subProducts: [
           {
@@ -163,7 +186,9 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Walmart', ticker: 'WMT', listing: 'US' },
               { name: 'Kroger', ticker: 'KR', listing: 'US' },
-              { name: 'Costco', ticker: 'COST', listing: 'US' }
+              { name: 'Costco', ticker: 'COST', listing: 'US' },
+              { name: 'Albertsons', ticker: 'ACI', listing: 'US' },
+              { name: 'Target', ticker: 'TGT', listing: 'US' }
             ]
           },
           {
@@ -173,7 +198,8 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
             longDescription: 'Distribution of food, beverages, and supplies to restaurants, hotels, schools, hospitals, and other foodservice establishments. This segment focuses on high-volume, efficient delivery and specialized product requirements.',
             companiesDetailed: [
               { name: 'Sysco', ticker: 'SYY', listing: 'US' },
-              { name: 'US Foods', ticker: 'USFD', listing: 'US' }
+              { name: 'US Foods', ticker: 'USFD', listing: 'US' },
+              { name: 'Performance Food Group', ticker: 'PFGC', listing: 'US' }
             ]
           }
         ]
@@ -193,7 +219,11 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'McDonald\'s', ticker: 'MCD', listing: 'US' },
           { name: 'Yum! Brands', ticker: 'YUM', listing: 'US' },
-          { name: 'Darden Restaurants', ticker: 'DRI', listing: 'US' }
+          { name: 'Darden Restaurants', ticker: 'DRI', listing: 'US' },
+          { name: 'Restaurant Brands International', ticker: 'QSR', listing: 'US' },
+          { name: 'Wendy\'s', ticker: 'WEN', listing: 'US' },
+          { name: 'Domino\'s Pizza', ticker: 'DPZ', listing: 'US' },
+          { name: 'Brinker International', ticker: 'EAT', listing: 'US' }
         ],
         subProducts: [
           {
@@ -204,7 +234,9 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'McDonald\'s', ticker: 'MCD', listing: 'US' },
               { name: 'Yum! Brands', ticker: 'YUM', listing: 'US' },
-              { name: 'Restaurant Brands International', ticker: 'QSR', listing: 'US' }
+              { name: 'Restaurant Brands International', ticker: 'QSR', listing: 'US' },
+              { name: 'Wendy\'s', ticker: 'WEN', listing: 'US' },
+              { name: 'Domino\'s Pizza', ticker: 'DPZ', listing: 'US' }
             ]
           },
           {
@@ -214,7 +246,8 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
             longDescription: 'Restaurants offering higher-quality ingredients and a more upscale dining experience than QSR, but with counter service and faster preparation times than traditional casual dining. Focus on customization and fresh ingredients.',
             companiesDetailed: [
               { name: 'Chipotle Mexican Grill', ticker: 'CMG', listing: 'US' },
-              { name: 'Shake Shack', ticker: 'SHAK', listing: 'US' }
+              { name: 'Shake Shack', ticker: 'SHAK', listing: 'US' },
+              { name: 'Wingstop', ticker: 'WING', listing: 'US' }
             ]
           },
           {
@@ -223,7 +256,9 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
             description: 'Coffee chains and cafes',
             longDescription: 'Operation of coffee shops, cafes, and bakeries, offering a range of coffee, tea, pastries, and light meals. These establishments often serve as social hubs and provide grab-and-go options for commuters.',
             companiesDetailed: [
-              { name: 'Starbucks', ticker: 'SBUX', listing: 'US' }
+              { name: 'Starbucks', ticker: 'SBUX', listing: 'US' },
+              { name: 'Dutch Bros', ticker: 'BROS', listing: 'US' },
+              { name: 'JDE Peet\'s', ticker: 'JDEPY', listing: 'ADR' }
             ]
           }
         ]

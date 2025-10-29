@@ -13,6 +13,10 @@ const upstream: ValueChainStageProducts = {
         { name: 'Albemarle', ticker: 'ALB', listing: 'US' },
         { name: 'Livent', ticker: 'LTHM', listing: 'US' },
         { name: 'Piedmont Lithium', ticker: 'PLL', listing: 'US' },
+        { name: 'Sociedad Química y Minera', ticker: 'SQM', listing: 'US' },
+        { name: 'Standard Lithium', ticker: 'SLI', listing: 'US' },
+        { name: 'Lithium Americas', ticker: 'LAC', listing: 'US' },
+        { name: 'Freeport-McMoRan', ticker: 'FCX', listing: 'US' }
       ],
       tags: ['Lithium', 'Cathode', 'Anode'],
     },
@@ -32,6 +36,8 @@ const midstream: ValueChainStageProducts = {
         { name: 'Tesla', ticker: 'TSLA', listing: 'US' },
         { name: 'Fluence', ticker: 'FLNC', listing: 'US' },
         { name: 'Stem', ticker: 'STEM', listing: 'US' },
+        { name: 'ESS Tech', ticker: 'GWH', listing: 'US' },
+        { name: 'Energy Vault', ticker: 'NRGV', listing: 'US' }
       ],
       tags: ['BESS'],
     },
@@ -42,6 +48,7 @@ const midstream: ValueChainStageProducts = {
       companiesDetailed: [
         { name: 'Enphase', ticker: 'ENPH', listing: 'US' },
         { name: 'SolarEdge', ticker: 'SEDG', listing: 'US' },
+        { name: 'Generac', ticker: 'GNRC', listing: 'US' }
       ],
     },
   ],
@@ -59,6 +66,9 @@ const downstream: ValueChainStageProducts = {
       companiesDetailed: [
         { name: 'Tesla Powerwall', ticker: 'TSLA', listing: 'US' },
         { name: 'Enphase', ticker: 'ENPH', listing: 'US' },
+        { name: 'Generac', ticker: 'GNRC', listing: 'US' },
+        { name: 'Sunrun', ticker: 'RUN', listing: 'US' },
+        { name: 'SunPower', ticker: 'SPWR', listing: 'US' }
       ],
     },
     {
@@ -68,6 +78,10 @@ const downstream: ValueChainStageProducts = {
       companiesDetailed: [
         { name: 'Fluence', ticker: 'FLNC', listing: 'US' },
         { name: 'NextEra Energy', ticker: 'NEE', listing: 'US' },
+        { name: 'Stem', ticker: 'STEM', listing: 'US' },
+        { name: 'ESS Tech', ticker: 'GWH', listing: 'US' },
+        { name: 'AES Corporation', ticker: 'AES', listing: 'US' },
+        { name: 'Duke Energy', ticker: 'DUK', listing: 'US' }
       ],
     },
   ],

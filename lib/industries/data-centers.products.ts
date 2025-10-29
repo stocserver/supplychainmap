@@ -13,9 +13,10 @@ const upstream: ValueChainStageProducts = {
       companiesDetailed: [
         { name: 'Vertiv', ticker: 'VRT', listing: 'US' },
         { name: 'Eaton', ticker: 'ETN', listing: 'US' },
-        { name: 'Schneider Electric', listing: 'Foreign' },
         { name: 'Trane Technologies', ticker: 'TT', listing: 'US' },
         { name: 'Carrier', ticker: 'CARR', listing: 'US' },
+        { name: 'Johnson Controls', ticker: 'JCI', listing: 'US' },
+        { name: 'Honeywell', ticker: 'HON', listing: 'US' },
       ],
       tags: ['UPS', 'CRAC/CRAH', 'Switchgear'],
     },
@@ -39,6 +40,7 @@ const upstream: ValueChainStageProducts = {
         { name: 'Corning', ticker: 'GLW', listing: 'US' },
         { name: 'Ciena', ticker: 'CIEN', listing: 'US' },
         { name: 'CommScope', ticker: 'COMM', listing: 'US' },
+        { name: 'Amphenol', ticker: 'APH', listing: 'US' },
       ],
       tags: ['Fiber', 'DWDM'],
     },
@@ -72,7 +74,8 @@ const midstream: ValueChainStageProducts = {
       companiesDetailed: [
         { name: 'Equinix', ticker: 'EQIX', listing: 'US' },
         { name: 'Digital Realty', ticker: 'DLR', listing: 'US' },
-        
+        { name: 'Iron Mountain', ticker: 'IRM', listing: 'US' },
+        { name: 'Switch', ticker: 'SWCH', listing: 'US' },
       ],
       tags: ['Interconnection', 'Neutral Meet-Me'],
     },
@@ -84,7 +87,8 @@ const midstream: ValueChainStageProducts = {
       companiesDetailed: [
         { name: 'American Tower', ticker: 'AMT', listing: 'US' },
         { name: 'Crown Castle', ticker: 'CCI', listing: 'US' },
-        
+        { name: 'SBA Communications', ticker: 'SBAC', listing: 'US' },
+        { name: 'Uniti Group', ticker: 'UNIT', listing: 'US' },
       ],
       tags: ['Backbone', 'Edge'],
     },

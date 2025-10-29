@@ -12,8 +12,6 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
         description: 'Tier 1 and Tier 2 automotive component suppliers',
         longDescription: 'Companies that manufacture automotive components and systems for vehicle assembly, including engines, transmissions, electronics, and interior/exterior parts.',
         companiesDetailed: [
-          { name: 'Bosch', ticker: 'BOSCH', listing: 'Private' },
-          { name: 'Continental', ticker: 'CTTAF', listing: 'ADR' },
           { name: 'Magna International', ticker: 'MGA', listing: 'US' },
           { name: 'Aptiv', ticker: 'APTV', listing: 'US' },
           { name: 'Lear Corporation', ticker: 'LEA', listing: 'US' },
@@ -21,7 +19,13 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
           { name: 'Gentex', ticker: 'GNTX', listing: 'US' },
           { name: 'BorgWarner', ticker: 'BWA', listing: 'US' },
           { name: 'Dana Incorporated', ticker: 'DAN', listing: 'US' },
-          { name: 'American Axle & Manufacturing', ticker: 'AXL', listing: 'US' }
+          { name: 'American Axle & Manufacturing', ticker: 'AXL', listing: 'US' },
+          { name: 'Autoliv', ticker: 'ALV', listing: 'US' },
+          { name: 'DENSO', ticker: 'DNZOY', listing: 'ADR' },
+          { name: 'Valeo', ticker: 'VLEEY', listing: 'ADR' },
+          { name: 'Aisin', ticker: 'ASEKY', listing: 'ADR' },
+          { name: 'Forvia (Faurecia)', ticker: 'FURCF', listing: 'ADR' },
+          { name: 'JTEKT', ticker: 'JTEKY', listing: 'ADR' }
         ],
         subProducts: [
           {
@@ -43,7 +47,8 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Aptiv', ticker: 'APTV', listing: 'US' },
               { name: 'Visteon', ticker: 'VC', listing: 'US' },
-              { name: 'Gentex', ticker: 'GNTX', listing: 'US' }
+              { name: 'Gentex', ticker: 'GNTX', listing: 'US' },
+              { name: 'Mobileye', ticker: 'MBLY', listing: 'US' }
             ]
           }
         ],
@@ -56,7 +61,6 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
         longDescription: 'Companies that manufacture tires, rubber products, and related automotive components.',
         companiesDetailed: [
           { name: 'Goodyear Tire & Rubber', ticker: 'GT', listing: 'US' },
-          { name: 'Cooper Tire & Rubber', ticker: 'CTB', listing: 'US' },
           { name: 'Michelin', ticker: 'MGDDY', listing: 'ADR' },
           { name: 'Bridgestone', ticker: 'BRDCY', listing: 'ADR' },
           { name: 'Continental', ticker: 'CTTAF', listing: 'ADR' }
@@ -78,14 +82,21 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
         companiesDetailed: [
           { name: 'General Motors', ticker: 'GM', listing: 'US' },
           { name: 'Ford Motor Company', ticker: 'F', listing: 'US' },
-          { name: 'Tesla', ticker: 'TSLA', listing: 'US' },
+          { name: 'Stellantis', ticker: 'STLA', listing: 'US' },
           { name: 'Toyota Motor', ticker: 'TM', listing: 'ADR' },
           { name: 'Honda Motor', ticker: 'HMC', listing: 'ADR' },
           { name: 'Nissan Motor', ticker: 'NSANY', listing: 'ADR' },
           { name: 'Volkswagen', ticker: 'VWAGY', listing: 'ADR' },
           { name: 'BMW', ticker: 'BMWYY', listing: 'ADR' },
           { name: 'Mercedes-Benz Group', ticker: 'MBGYY', listing: 'ADR' },
-          { name: 'Stellantis', ticker: 'STLA', listing: 'US' }
+          { name: 'Tata Motors', ticker: 'TTM', listing: 'US' },
+          { name: 'Hyundai Motor', ticker: 'HYMTF', listing: 'ADR' },
+          { name: 'Kia', ticker: 'KIMTF', listing: 'ADR' },
+          { name: 'Subaru', ticker: 'FUJHY', listing: 'ADR' },
+          { name: 'Mazda', ticker: 'MZDAY', listing: 'ADR' },
+          { name: 'Renault', ticker: 'RNLSY', listing: 'ADR' },
+          { name: 'Isuzu Motors', ticker: 'ISUZY', listing: 'ADR' },
+          { name: 'Hino Motors', ticker: 'HINOY', listing: 'ADR' }
         ],
         subProducts: [
           {
@@ -95,7 +106,7 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'BMW', ticker: 'BMWYY', listing: 'ADR' },
               { name: 'Mercedes-Benz Group', ticker: 'MBGYY', listing: 'ADR' },
-              { name: 'Tesla', ticker: 'TSLA', listing: 'US' }
+              { name: 'Ferrari', ticker: 'RACE', listing: 'US' }
             ]
           },
           {
@@ -106,7 +117,21 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
               { name: 'General Motors', ticker: 'GM', listing: 'US' },
               { name: 'Ford Motor Company', ticker: 'F', listing: 'US' },
               { name: 'Toyota Motor', ticker: 'TM', listing: 'ADR' },
-              { name: 'Honda Motor', ticker: 'HMC', listing: 'ADR' }
+              { name: 'Honda Motor', ticker: 'HMC', listing: 'ADR' },
+              { name: 'Hyundai Motor', ticker: 'HYMTF', listing: 'ADR' },
+              { name: 'Kia', ticker: 'KIMTF', listing: 'ADR' }
+            ]
+          },
+          {
+            id: 'commercial-vehicles',
+            name: 'Commercial & Heavy Vehicles',
+            description: 'Trucks, buses, and heavy-duty vehicles',
+            companiesDetailed: [
+              { name: 'PACCAR', ticker: 'PCAR', listing: 'US' },
+              { name: 'Volvo AB', ticker: 'VLVLY', listing: 'ADR' },
+              { name: 'Isuzu Motors', ticker: 'ISUZY', listing: 'ADR' },
+              { name: 'Hino Motors', ticker: 'HINOY', listing: 'ADR' },
+              { name: 'Tata Motors', ticker: 'TTM', listing: 'US' }
             ]
           }
         ],
@@ -132,7 +157,8 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
           { name: 'Sonic Automotive', ticker: 'SAH', listing: 'US' },
           { name: 'Asbury Automotive Group', ticker: 'ABG', listing: 'US' },
           { name: 'CarMax', ticker: 'KMX', listing: 'US' },
-          { name: 'Carvana', ticker: 'CVNA', listing: 'US' }
+          { name: 'Carvana', ticker: 'CVNA', listing: 'US' },
+          { name: 'America\'s Car-Mart', ticker: 'CRMT', listing: 'US' }
         ],
         subProducts: [
           {
@@ -152,7 +178,17 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'CarMax', ticker: 'KMX', listing: 'US' },
               { name: 'Carvana', ticker: 'CVNA', listing: 'US' },
-              { name: 'Vroom', ticker: 'VRM', listing: 'US' }
+              { name: 'Vroom', ticker: 'VRM', listing: 'US' },
+              { name: 'America\'s Car-Mart', ticker: 'CRMT', listing: 'US' }
+            ]
+          },
+          {
+            id: 'auctions-remarketing',
+            name: 'Auctions & Remarketing',
+            description: 'Salvage and wholesale auctions, digital remarketing',
+            companiesDetailed: [
+              { name: 'Copart', ticker: 'CPRT', listing: 'US' },
+              { name: 'KAR Global', ticker: 'KAR', listing: 'US' }
             ]
           }
         ],
@@ -169,7 +205,9 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
           { name: 'Advance Auto Parts', ticker: 'AAP', listing: 'US' },
           { name: 'Genuine Parts Company', ticker: 'GPC', listing: 'US' },
           { name: 'LKQ Corporation', ticker: 'LKQ', listing: 'US' },
-          { name: 'Monro', ticker: 'MNRO', listing: 'US' }
+          { name: 'Monro', ticker: 'MNRO', listing: 'US' },
+          { name: 'Driven Brands', ticker: 'DRVN', listing: 'US' },
+          { name: 'Mister Car Wash', ticker: 'MCW', listing: 'US' }
         ],
         subProducts: [
           {
@@ -188,7 +226,7 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
             description: 'Automotive repair and maintenance',
             companiesDetailed: [
               { name: 'Monro', ticker: 'MNRO', listing: 'US' },
-              { name: 'Pep Boys', ticker: 'PBYI', listing: 'US' }
+              { name: 'Driven Brands', ticker: 'DRVN', listing: 'US' }
             ]
           }
         ],

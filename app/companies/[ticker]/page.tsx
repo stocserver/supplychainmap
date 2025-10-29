@@ -9,6 +9,10 @@ import { formatCurrency, formatNumber } from "@/lib/utils"
 import { supabaseServer } from "@/lib/supabase/server"
 import { FinancialStatements } from "@/components/company/FinancialStatements"
 
+// Force dynamic rendering to always fetch fresh data
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default async function CompanyPage({ params }: { params: { ticker: string } }) {
   const ticker = params.ticker.toUpperCase()
 

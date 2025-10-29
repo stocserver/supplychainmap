@@ -12,12 +12,13 @@ export const bankingProductStages: ValueChainStageProducts[] = [
         description: 'Core banking systems and infrastructure platforms',
         longDescription: 'Technology platforms that provide the foundational systems for banking operations including account management, transaction processing, and customer data management.',
         companiesDetailed: [
-          { name: 'Fiserv', ticker: 'FISV', listing: 'US' },
+          { name: 'Fiserv', ticker: 'FI', listing: 'US' },
           { name: 'Fidelity National Information Services', ticker: 'FIS', listing: 'US' },
           { name: 'Jack Henry & Associates', ticker: 'JKHY', listing: 'US' },
-          { name: 'Temenos', ticker: 'TEMN', listing: 'Foreign' },
-          { name: 'Infosys', ticker: 'INFY', listing: 'ADR' },
-          { name: 'TCS', ticker: 'TCS', listing: 'ADR' }
+          { name: 'Q2 Holdings', ticker: 'QTWO', listing: 'US' },
+          { name: 'nCino', ticker: 'NCNO', listing: 'US' },
+          { name: 'Alkami Technology', ticker: 'ALKT', listing: 'US' },
+          { name: 'NCR Voyix', ticker: 'VYX', listing: 'US' }
         ],
         tags: ['Core Banking', 'Transaction Processing', 'Account Management']
       },
@@ -27,12 +28,12 @@ export const bankingProductStages: ValueChainStageProducts[] = [
         description: 'Financial data providers and analytics platforms',
         longDescription: 'Companies that provide financial data, market intelligence, and analytics tools used by banks for risk management, compliance, and decision-making.',
         companiesDetailed: [
-          { name: 'Bloomberg', ticker: 'BB', listing: 'US' },
-          { name: 'Refinitiv', ticker: 'TRI', listing: 'US' },
-          { name: 'FactSet', ticker: 'FDS', listing: 'US' },
           { name: 'S&P Global', ticker: 'SPGI', listing: 'US' },
+          { name: 'Moody\'s', ticker: 'MCO', listing: 'US' },
           { name: 'MSCI', ticker: 'MSCI', listing: 'US' },
-          { name: 'Morningstar', ticker: 'MORN', listing: 'US' }
+          { name: 'FactSet', ticker: 'FDS', listing: 'US' },
+          { name: 'Morningstar', ticker: 'MORN', listing: 'US' },
+          { name: 'Thomson Reuters', ticker: 'TRI', listing: 'US' }
         ],
         tags: ['Market Data', 'Analytics', 'Risk Management']
       }
@@ -53,10 +54,19 @@ export const bankingProductStages: ValueChainStageProducts[] = [
           { name: 'Bank of America', ticker: 'BAC', listing: 'US' },
           { name: 'Wells Fargo', ticker: 'WFC', listing: 'US' },
           { name: 'Citigroup', ticker: 'C', listing: 'US' },
-          { name: 'Goldman Sachs', ticker: 'GS', listing: 'US' },
-          { name: 'Morgan Stanley', ticker: 'MS', listing: 'US' },
           { name: 'U.S. Bancorp', ticker: 'USB', listing: 'US' },
-          { name: 'PNC Financial', ticker: 'PNC', listing: 'US' }
+          { name: 'PNC Financial', ticker: 'PNC', listing: 'US' },
+          { name: 'Truist Financial', ticker: 'TFC', listing: 'US' },
+          { name: 'Fifth Third Bancorp', ticker: 'FITB', listing: 'US' },
+          { name: 'Regions Financial', ticker: 'RF', listing: 'US' },
+          { name: 'Huntington Bancshares', ticker: 'HBAN', listing: 'US' },
+          { name: 'KeyCorp', ticker: 'KEY', listing: 'US' },
+          { name: 'M&T Bank', ticker: 'MTB', listing: 'US' },
+          { name: 'Zions Bancorporation', ticker: 'ZION', listing: 'US' },
+          { name: 'Comerica', ticker: 'CMA', listing: 'US' },
+          { name: 'Western Alliance Bancorporation', ticker: 'WAL', listing: 'US' },
+          { name: 'First Horizon', ticker: 'FHN', listing: 'US' },
+          { name: 'First Citizens BancShares', ticker: 'FCNCA', listing: 'US' }
         ],
         subProducts: [
           {
@@ -95,8 +105,16 @@ export const bankingProductStages: ValueChainStageProducts[] = [
           { name: 'JPMorgan Chase', ticker: 'JPM', listing: 'US' },
           { name: 'Bank of America', ticker: 'BAC', listing: 'US' },
           { name: 'Citigroup', ticker: 'C', listing: 'US' },
-          { name: 'Credit Suisse', ticker: 'CS', listing: 'ADR' },
-          { name: 'Deutsche Bank', ticker: 'DB', listing: 'ADR' }
+          { name: 'Jefferies', ticker: 'JEF', listing: 'US' },
+          { name: 'Evercore', ticker: 'EVR', listing: 'US' },
+          { name: 'Houlihan Lokey', ticker: 'HLI', listing: 'US' },
+          { name: 'Moelis & Company', ticker: 'MC', listing: 'US' },
+          { name: 'Piper Sandler', ticker: 'PIPR', listing: 'US' },
+          { name: 'Stifel Financial', ticker: 'SF', listing: 'US' },
+          { name: 'Raymond James', ticker: 'RJF', listing: 'US' },
+          { name: 'Lazard', ticker: 'LAZ', listing: 'US' },
+          { name: 'Cowen', ticker: 'COWN', listing: 'US' },
+          { name: 'KBW', ticker: 'KBWR', listing: 'US' }
         ],
         tags: ['M&A', 'Capital Markets', 'Trading', 'Advisory']
       },
@@ -135,7 +153,12 @@ export const bankingProductStages: ValueChainStageProducts[] = [
           { name: 'U.S. Bancorp', ticker: 'USB', listing: 'US' },
           { name: 'PNC Financial', ticker: 'PNC', listing: 'US' },
           { name: 'Truist Financial', ticker: 'TFC', listing: 'US' },
-          { name: 'Capital One', ticker: 'COF', listing: 'US' }
+          { name: 'Capital One', ticker: 'COF', listing: 'US' },
+          { name: 'Fifth Third Bancorp', ticker: 'FITB', listing: 'US' },
+          { name: 'Regions Financial', ticker: 'RF', listing: 'US' },
+          { name: 'Huntington Bancshares', ticker: 'HBAN', listing: 'US' },
+          { name: 'KeyCorp', ticker: 'KEY', listing: 'US' },
+          { name: 'M&T Bank', ticker: 'MTB', listing: 'US' }
         ],
         subProducts: [
           {
@@ -177,7 +200,10 @@ export const bankingProductStages: ValueChainStageProducts[] = [
           { name: 'Visa', ticker: 'V', listing: 'US' },
           { name: 'Mastercard', ticker: 'MA', listing: 'US' },
           { name: 'PayPal', ticker: 'PYPL', listing: 'US' },
-          { name: 'Square', ticker: 'SQ', listing: 'US' }
+          { name: 'Square', ticker: 'SQ', listing: 'US' },
+          { name: 'Global Payments', ticker: 'GPN', listing: 'US' },
+          { name: 'Fidelity National Financial', ticker: 'FNF', listing: 'US' },
+          { name: 'Adyen', ticker: 'ADYEN', listing: 'Foreign' }
         ],
         tags: ['Credit Cards', 'Payment Processing', 'Digital Payments']
       }

@@ -12,9 +12,16 @@ export const roboticsAutomationProductStages: ValueChainStageProducts[] = [
         description: 'Industrial sensors, vision, and motion components',
         longDescription: 'Manufacturing and supply of critical components for robotic and automation systems, including industrial sensors (e.g., proximity, vision, force), specialized cameras, and actuators (e.g., servo motors, grippers). These components enable robots to perceive their environment, interact with objects, and execute precise movements.',
         companiesDetailed: [
-          { name: 'Keyence', listing: 'ADR' },
+          { name: 'Keyence', ticker: 'KYCCY', listing: 'ADR' },
           { name: 'Cognex', ticker: 'CGNX', listing: 'US' },
-          { name: 'Rockwell Automation', ticker: 'ROK', listing: 'US' }
+          { name: 'Rockwell Automation', ticker: 'ROK', listing: 'US' },
+          { name: 'Emerson Electric', ticker: 'EMR', listing: 'US' },
+          { name: 'Honeywell', ticker: 'HON', listing: 'US' },
+          { name: 'SICK AG', ticker: 'SICK', listing: 'ADR' },
+          { name: 'Teledyne Technologies', ticker: 'TDY', listing: 'US' },
+          { name: 'AMETEK', ticker: 'AME', listing: 'US' },
+          { name: 'Parker Hannifin', ticker: 'PH', listing: 'US' },
+          { name: 'Moog', ticker: 'MOG.A', listing: 'US' }
         ]
       }
     ]
@@ -30,9 +37,17 @@ export const roboticsAutomationProductStages: ValueChainStageProducts[] = [
         description: 'Robotic arms, cobots, and automation cells',
         longDescription: 'Design, manufacturing, and deployment of robotic systems for industrial applications, such as assembly, welding, painting, and material handling. This includes traditional industrial robotic arms, collaborative robots (cobots) that work alongside humans, and fully automated production cells.',
         companiesDetailed: [
-          { name: 'ABB', listing: 'ADR' },
-          { name: 'Fanuc', listing: 'ADR' },
-          { name: 'Rockwell Automation', ticker: 'ROK', listing: 'US' }
+          { name: 'ABB', ticker: 'ABBNY', listing: 'ADR' },
+          { name: 'Fanuc', ticker: 'FANUY', listing: 'ADR' },
+          { name: 'Rockwell Automation', ticker: 'ROK', listing: 'US' },
+          { name: 'Kuka AG', ticker: 'KUAY', listing: 'ADR' },
+          { name: 'Yaskawa Electric', ticker: 'YASKY', listing: 'ADR' },
+          { name: 'Teradyne', ticker: 'TER', listing: 'US' },
+          { name: 'Omron', ticker: 'OMRNY', listing: 'ADR' },
+          { name: 'Brooks Automation', ticker: 'BRKS', listing: 'US' },
+          { name: 'Intuitive Surgical', ticker: 'ISRG', listing: 'US' },
+          { name: 'Zebra Technologies', ticker: 'ZBRA', listing: 'US' },
+          { name: 'Adept Technology', ticker: 'ADNT', listing: 'US' }
         ]
       },
       {
@@ -42,7 +57,12 @@ export const roboticsAutomationProductStages: ValueChainStageProducts[] = [
         longDescription: 'Development and implementation of automated solutions for warehousing and logistics, including automated storage and retrieval systems (AS/RS), robotic picking solutions, and autonomous mobile robots (AMRs). These systems optimize inventory management, order fulfillment, and material flow within distribution centers.',
         companiesDetailed: [
           { name: 'Honeywell', ticker: 'HON', listing: 'US' },
-          { name: 'Zebra Technologies', ticker: 'ZBRA', listing: 'US' }
+          { name: 'Zebra Technologies', ticker: 'ZBRA', listing: 'US' },
+          { name: 'Dematic Group', ticker: 'KION', listing: 'ADR' },
+          { name: 'AutoStore', ticker: 'AUTO', listing: 'US' },
+          { name: 'Symbotic', ticker: 'SYM', listing: 'US' },
+          { name: 'Locus Robotics', ticker: 'LOCU', listing: 'US' },
+          { name: 'Berkshire Grey', ticker: 'BGRY', listing: 'US' }
         ]
       }
     ]
@@ -59,7 +79,8 @@ export const roboticsAutomationProductStages: ValueChainStageProducts[] = [
         longDescription: 'Development and deployment of robots designed to assist humans in non-industrial settings, such as cleaning robots for commercial spaces, delivery robots for last-mile logistics, and retail robots for inventory management and customer assistance. These robots enhance efficiency and convenience in various service sectors.',
         companiesDetailed: [
           { name: 'iRobot', ticker: 'IRBT', listing: 'US' },
-          { name: 'Zebra Technologies', ticker: 'ZBRA', listing: 'US' }
+          { name: 'Zebra Technologies', ticker: 'ZBRA', listing: 'US' },
+          { name: 'SoftBank Robotics', ticker: 'SFTBY', listing: 'ADR' }
         ]
       }
     ]

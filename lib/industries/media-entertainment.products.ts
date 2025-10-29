@@ -57,7 +57,12 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
           { name: 'Ubisoft', ticker: 'UBSFY', listing: 'ADR' },
           { name: 'CD Projekt', ticker: 'OTGLY', listing: 'ADR' },
           { name: 'Roblox', ticker: 'RBLX', listing: 'US' },
-          { name: 'Unity Software', ticker: 'U', listing: 'US' }
+          { name: 'Unity Software', ticker: 'U', listing: 'US' },
+          { name: 'Zynga', ticker: 'ZNGA', listing: 'US' },
+          { name: 'Sea Limited', ticker: 'SE', listing: 'US' },
+          { name: 'AppLovin', ticker: 'APP', listing: 'US' },
+          { name: 'Nintendo', ticker: 'NTDOY', listing: 'ADR' },
+          { name: 'Bandai Namco', ticker: 'NCBDF', listing: 'ADR' }
         ],
         subProducts: [
           {
@@ -67,7 +72,9 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
             companiesDetailed: [
               { name: 'Electronic Arts', ticker: 'EA', listing: 'US' },
               { name: 'Activision Blizzard', ticker: 'ATVI', listing: 'US' },
-              { name: 'Take-Two Interactive', ticker: 'TTWO', listing: 'US' }
+              { name: 'Take-Two Interactive', ticker: 'TTWO', listing: 'US' },
+              { name: 'Nintendo', ticker: 'NTDOY', listing: 'ADR' },
+              { name: 'Bandai Namco', ticker: 'NCBDF', listing: 'ADR' }
             ]
           },
           {
@@ -76,7 +83,10 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
             description: 'Games for smartphones and tablets',
             companiesDetailed: [
               { name: 'Roblox', ticker: 'RBLX', listing: 'US' },
-              { name: 'Unity Software', ticker: 'U', listing: 'US' }
+              { name: 'Unity Software', ticker: 'U', listing: 'US' },
+              { name: 'Sea Limited', ticker: 'SE', listing: 'US' },
+              { name: 'AppLovin', ticker: 'APP', listing: 'US' },
+              { name: 'Zynga', ticker: 'ZNGA', listing: 'US' }
             ]
           }
         ],
@@ -102,7 +112,8 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
           { name: 'Paramount Global', ticker: 'PARA', listing: 'US' },
           { name: 'Apple', ticker: 'AAPL', listing: 'US' },
           { name: 'Amazon', ticker: 'AMZN', listing: 'US' },
-          { name: 'Roku', ticker: 'ROKU', listing: 'US' }
+          { name: 'Roku', ticker: 'ROKU', listing: 'US' },
+          { name: 'FuboTV', ticker: 'FUBO', listing: 'US' }
         ],
         subProducts: [
           {
@@ -138,7 +149,9 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
           { name: 'Snap', ticker: 'SNAP', listing: 'US' },
           { name: 'Pinterest', ticker: 'PINS', listing: 'US' },
           { name: 'LinkedIn', ticker: 'MSFT', listing: 'US' },
-          { name: 'Reddit', ticker: 'RDDT', listing: 'US' }
+          { name: 'Reddit', ticker: 'RDDT', listing: 'US' },
+          { name: 'Match Group', ticker: 'MTCH', listing: 'US' },
+          { name: 'Bumble', ticker: 'BMBL', listing: 'US' }
         ],
         subProducts: [
           {
@@ -220,7 +233,10 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
           { name: 'The Trade Desk', ticker: 'TTD', listing: 'US' },
           { name: 'Roku', ticker: 'ROKU', listing: 'US' },
           { name: 'Snap', ticker: 'SNAP', listing: 'US' },
-          { name: 'Pinterest', ticker: 'PINS', listing: 'US' }
+          { name: 'Pinterest', ticker: 'PINS', listing: 'US' },
+          { name: 'Magnite', ticker: 'MGNI', listing: 'US' },
+          { name: 'PubMatic', ticker: 'PUBM', listing: 'US' },
+          { name: 'Criteo', ticker: 'CRTO', listing: 'US' }
         ],
         subProducts: [
           {
@@ -255,7 +271,8 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
           { name: 'Madison Square Garden', ticker: 'MSGS', listing: 'US' },
           { name: 'Dolphin Entertainment', ticker: 'DLPN', listing: 'US' },
           { name: 'Eventbrite', ticker: 'EB', listing: 'US' },
-          { name: 'Ticketmaster', ticker: 'LYV', listing: 'US' }
+          { name: 'Ticketmaster', ticker: 'LYV', listing: 'US' },
+          { name: 'Sphere Entertainment', ticker: 'SPHR', listing: 'US' }
         ],
         subProducts: [
           {
