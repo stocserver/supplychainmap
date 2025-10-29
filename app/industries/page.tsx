@@ -117,7 +117,7 @@ export default function IndustriesPage() {
       if (!selected?.ids) return true
       // Prefer DB category when present
       if (category) return selected.value === 'all' || selected.value === category
-      return selected.ids.includes(slug) || selected.ids.includes(aliasBySlug[slug])
+      return selected.ids.includes(slug) || (slug in aliasBySlug && selected.ids.includes(aliasBySlug[slug as keyof typeof aliasBySlug]))
     }
     return industriesList
       .filter(i => inSelected(i.slug, i.category))
