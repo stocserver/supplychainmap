@@ -52,7 +52,7 @@ type DbIndustry = {
 
 export default function IndustriesPage() {
   // Category filters mapped to the previous groupings
-  const categoryOptions = [
+  const categoryOptions = useMemo(() => [
     { label: "All", value: "all", ids: null as string[] | null },
     { label: "Technology & Innovation", value: "tech", ids: ['semiconductors', 'ai-ml', 'cloud-computing', 'cybersecurity', 'software-saas', 'data-centers', 'telecommunications', 'robotics'] },
     { label: "Financials", value: "financials", ids: ['banking', 'insurance', 'asset-management', 'fintech'] },
@@ -63,7 +63,7 @@ export default function IndustriesPage() {
     { label: "Real Estate & Construction", value: "real-estate", ids: ['real-estate', 'construction-engineering'] },
     { label: "Hospitality & Entertainment", value: "hospitality", ids: ['hospitality', 'media-entertainment'] },
     { label: "Agriculture & Industrial", value: "agriculture", ids: ['agtech'] },
-  ]
+  ], [])
 
   const [category, setCategory] = useState("all")
   type HoverState = {
@@ -104,12 +104,12 @@ export default function IndustriesPage() {
     return () => { mounted = false }
   }, [])
 
-  const aliasBySlug: Record<string, string> = {
+  const aliasBySlug = useMemo(() => ({
     'aerospace-defense': 'aerospace',
     'space-technology': 'space',
     'artificial-intelligence': 'ai-ml',
     'robotics-automation': 'robotics',
-  }
+  }), [])
 
   const filtered = useMemo(() => {
     const selected = categoryOptions.find(c => c.value === category)

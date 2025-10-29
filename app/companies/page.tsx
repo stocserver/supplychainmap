@@ -19,7 +19,7 @@ export default function CompaniesPage() {
   const searchTimer = useRef<number | null>(null)
 
   // High-level category filters (same groupings as industries page)
-  const categoryOptions = [
+  const categoryOptions = useMemo(() => [
     { label: "All", value: "all", ids: null as string[] | null },
     { label: "Technology & Innovation", value: "tech", ids: ['semiconductors', 'ai-ml', 'cloud-computing', 'cybersecurity', 'software-saas', 'data-centers', 'telecommunications', 'robotics'] },
     { label: "Financials", value: "financials", ids: ['banking', 'insurance', 'asset-management', 'fintech'] },
@@ -30,7 +30,7 @@ export default function CompaniesPage() {
     { label: "Real Estate & Construction", value: "real-estate", ids: ['real-estate', 'construction-engineering'] },
     { label: "Hospitality & Entertainment", value: "hospitality", ids: ['hospitality', 'media-entertainment'] },
     { label: "Agriculture & Industrial", value: "agriculture", ids: ['agtech'] },
-  ]
+  ], [])
 
   // Map each ticker to its first associated industry (DB first, fallback to local)
   const [tickerToIndustry, setTickerToIndustry] = useState<Map<string, Industry>>(new Map())

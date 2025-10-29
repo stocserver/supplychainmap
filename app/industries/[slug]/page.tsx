@@ -153,7 +153,7 @@ export default async function IndustryPage({ params }: { params: { slug: string 
       ) : industry.slug === 'agtech' ? (
         <IndustryProductValueChain stages={agtechProductStages} industryName={industry.name} industry={industry} />
       ) : industry.valueChain ? (
-        <IndustryValueChain valueChain={industry.valueChain} industryName={industry.name} industry={industry} />
+        <IndustryValueChain valueChain={industry.valueChain} industryName={industry.name} />
       ) : industry.subcategories ? (
         <Card className="mb-8">
           <CardHeader>
