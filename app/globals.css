@@ -58,4 +58,19 @@
   }
 }
 
+/* Responsive defaults */
+@layer base {
+  img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  /* Allow paragraphs to wrap long URLs/strings, but keep headings natural */
+  p { overflow-wrap: anywhere; }
+  h1, h2, h3, h4, h5, h6 { overflow-wrap: normal; word-break: normal; hyphens: manual; }
+}
+
 

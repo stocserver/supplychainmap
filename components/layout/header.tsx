@@ -11,20 +11,21 @@ import {
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container grid h-16 grid-cols-3 items-center">
+      <div className="container relative grid h-16 items-center grid-cols-[1fr_auto] md:grid-cols-3">
         {/* Left: Brand */}
         <div className="flex items-center">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
+          <Link href="/" className="mr-6 flex items-center space-x-2 min-w-0">
             <Image 
               src="/otters.png" 
               alt="StockOtters" 
               width={40} 
               height={40}
-              className="h-8 w-auto sm:h-10 md:h-12"
+              className="h-8 w-auto sm:h-10 md:h-12 shrink-0"
             />
-            <div className="flex flex-col">
-              <span className="text-xs font-medium text-muted-foreground sm:text-sm">StockOtters</span>
-              <span className="text-base font-bold sm:text-lg">Supply Chain Map</span>
+            {/* Brand text shrinks and truncates on narrow screens */}
+            <div className="flex flex-col leading-tight min-w-0">
+              <span className="text-[10px] sm:text-xs font-medium text-muted-foreground truncate">StockOtters</span>
+              <span className="text-sm sm:text-base font-bold truncate">Supply Chain Map</span>
             </div>
           </Link>
         </div>
@@ -89,5 +90,3 @@ export function Header() {
     </header>
   )
 }
-
-

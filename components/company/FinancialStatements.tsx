@@ -12,6 +12,7 @@ interface FinancialStatementsProps {
 
 export function FinancialStatements({ data }: FinancialStatementsProps) {
   const [period, setPeriod] = useState<'annual' | 'quarterly'>('annual')
+  const [activeTab, setActiveTab] = useState<'income' | 'balance' | 'cashflow' | 'metrics' | 'ratios'>('income')
 
   if (!data?.data) {
     return (
@@ -66,41 +67,111 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
 
   return (
     <div className="space-y-4">
-      {/* Period Toggle */}
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Financial Statements</h2>
-        <div className="flex gap-2 bg-gray-100 p-1 rounded-lg">
+      {/* Period Toggle as labels (chips) */}
+      <div className="flex justify-end items-center mb-2 sm:mb-3 md:mb-4">
+        <div className="flex gap-2">
           <Button
-            variant={period === 'annual' ? 'default' : 'ghost'}
+            variant="ghost"
             size="sm"
             onClick={() => setPeriod('annual')}
-            className="px-6"
+            className={
+              `rounded-full border px-3 py-1.5 text-sm ${
+                period === 'annual'
+                  ? 'bg-primary text-primary-foreground border-primary'
+                  : 'bg-transparent text-foreground/70'
+              }`
+            }
           >
             Annual
           </Button>
           <Button
-            variant={period === 'quarterly' ? 'default' : 'ghost'}
+            variant="ghost"
             size="sm"
             onClick={() => setPeriod('quarterly')}
-            className="px-6"
+            className={
+              `rounded-full border px-3 py-1.5 text-sm ${
+                period === 'quarterly'
+                  ? 'bg-primary text-primary-foreground border-primary'
+                  : 'bg-transparent text-foreground/70'
+              }`
+            }
           >
             Quarterly
           </Button>
         </div>
       </div>
 
-      <Tabs defaultValue="income" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="income">Income Statement</TabsTrigger>
-          <TabsTrigger value="balance">Balance Sheet</TabsTrigger>
-          <TabsTrigger value="cashflow">Cash Flow</TabsTrigger>
-          <TabsTrigger value="metrics">Key Metrics</TabsTrigger>
-          <TabsTrigger value="ratios">Ratios</TabsTrigger>
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)} className="w-full">
+        {/* Chip tabs that wrap into next row on small screens; ensure container grows (no overlap) */}
+        <TabsList className="w-full h-auto flex flex-wrap md:flex-nowrap gap-2 px-1 bg-transparent p-0 mb-2 sm:mb-3">
+          <TabsTrigger value="income" className="rounded-full border px-2.5 py-1.5 text-xs sm:text-sm md:px-3 md:py-2 md:text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary">Income</TabsTrigger>
+          <TabsTrigger value="balance" className="rounded-full border px-2.5 py-1.5 text-xs sm:text-sm md:px-3 md:py-2 md:text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary">Balance</TabsTrigger>
+          <TabsTrigger value="cashflow" className="rounded-full border px-2.5 py-1.5 text-xs sm:text-sm md:px-3 md:py-2 md:text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary">Cash Flow</TabsTrigger>
+          <TabsTrigger value="metrics" className="rounded-full border px-2.5 py-1.5 text-xs sm:text-sm md:px-3 md:py-2 md:text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary">Metrics</TabsTrigger>
+          <TabsTrigger value="ratios" className="rounded-full border px-2.5 py-1.5 text-xs sm:text-sm md:px-3 md:py-2 md:text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary">Ratios</TabsTrigger>
         </TabsList>
 
         {/* Income Statement - Spreadsheet View */}
         <TabsContent value="income">
-          <Card>
+          <Card className="md:hidden">
+            <CardHeader>
+              <CardTitle>Income Statement ({period === 'annual' ? 'Annual' : 'Quarterly'})</CardTitle>
+              <CardDescription>Amounts in millions</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {incomeStatements.length > 0 ? (
+                <div className="space-y-4">
+                  {incomeStatements.map((stmt: any) => {
+                    const grossMargin = stmt.grossProfitRatio || (stmt.revenue ? stmt.grossProfit / stmt.revenue : null)
+                    const opMargin = stmt.operatingIncomeRatio || (stmt.revenue ? stmt.operatingIncome / stmt.revenue : null)
+                    const netMargin = stmt.netIncomeRatio || (stmt.revenue ? stmt.netIncome / stmt.revenue : null)
+                    const ebitdaMargin = stmt.ebitdaratio || stmt.ebitdaRatio || (stmt.revenue && stmt.ebitda ? stmt.ebitda / stmt.revenue : null)
+                    return (
+                      <Card key={stmt.date}>
+                        <CardHeader>
+                          <CardTitle className="text-lg">{formatPeriodHeader(stmt)}</CardTitle>
+                          <CardDescription>{new Date(stmt.date).toLocaleDateString()}</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                            <div className="text-muted-foreground">Revenue</div>
+                            <div className="text-right font-medium">{formatMillion(stmt.revenue)}</div>
+                            <div className="text-muted-foreground">Cost of Revenue</div>
+                            <div className="text-right">{formatMillion(stmt.costOfRevenue)}</div>
+                            <div className="font-semibold">Gross Profit</div>
+                            <div className="text-right font-semibold">{formatMillion(stmt.grossProfit)}</div>
+                            <div className="text-muted-foreground italic">Gross Margin</div>
+                            <div className="text-right text-muted-foreground italic">{formatPercent(grossMargin)}</div>
+                            <div className="font-semibold">Operating Income</div>
+                            <div className="text-right font-semibold">{formatMillion(stmt.operatingIncome)}</div>
+                            <div className="text-muted-foreground italic">Operating Margin</div>
+                            <div className="text-right text-muted-foreground italic">{formatPercent(opMargin)}</div>
+                            <div className="font-semibold text-green-700">Net Income</div>
+                            <div className="text-right font-semibold text-green-700">{formatMillion(stmt.netIncome)}</div>
+                            <div className="text-muted-foreground italic">Net Margin</div>
+                            <div className="text-right text-muted-foreground italic">{formatPercent(netMargin)}</div>
+                            <div>EPS (Basic)</div>
+                            <div className="text-right">${stmt.eps?.toFixed(2) || 'N/A'}</div>
+                            <div>EPS (Diluted)</div>
+                            <div className="text-right">${stmt.epsdiluted?.toFixed(2) || stmt.epsDiluted?.toFixed(2) || 'N/A'}</div>
+                            <div>EBITDA</div>
+                            <div className="text-right">{formatMillion(stmt.ebitda)}</div>
+                            <div className="text-muted-foreground italic">EBITDA Margin</div>
+                            <div className="text-right text-muted-foreground italic">{formatPercent(ebitdaMargin)}</div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )
+                  })}
+                </div>
+              ) : (
+                <p className="text-muted-foreground">No {period} income statement data available</p>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Desktop table */}
+          <Card className="hidden md:block">
             <CardHeader>
               <CardTitle>Income Statement ({period === 'annual' ? 'Annual' : 'Quarterly'})</CardTitle>
               <CardDescription>Financial performance (amounts in millions)</CardDescription>
@@ -251,7 +322,47 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
 
         {/* Balance Sheet - Spreadsheet View */}
         <TabsContent value="balance">
-          <Card>
+          <Card className="md:hidden">
+            <CardHeader>
+              <CardTitle>Balance Sheet ({period === 'annual' ? 'Annual' : 'Quarterly'})</CardTitle>
+              <CardDescription>Amounts in millions</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {balanceSheets.length > 0 ? (
+                <div className="space-y-4">
+                  {balanceSheets.map((stmt: any) => (
+                    <Card key={stmt.date}>
+                      <CardHeader>
+                        <CardTitle className="text-lg">{formatPeriodHeader(stmt)}</CardTitle>
+                        <CardDescription>{new Date(stmt.date).toLocaleDateString()}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                          <div className="text-muted-foreground">Cash &amp; Equivalents</div>
+                          <div className="text-right">{formatMillion(stmt.cashAndCashEquivalents)}</div>
+                          <div className="font-semibold">Total Assets</div>
+                          <div className="text-right font-semibold">{formatMillion(stmt.totalAssets)}</div>
+                          <div>Total Debt</div>
+                          <div className="text-right">{formatMillion(stmt.totalDebt)}</div>
+                          <div className="font-semibold">Total Liabilities</div>
+                          <div className="text-right font-semibold">{formatMillion(stmt.totalLiabilities)}</div>
+                          <div className="font-semibold">Shareholders' Equity</div>
+                          <div className="text-right font-semibold">{formatMillion(stmt.shareholdersEquity)}</div>
+                          <div>Net Debt</div>
+                          <div className="text-right">{formatMillion(stmt.netDebt)}</div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-muted-foreground">No {period} balance sheet data available</p>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Desktop table */}
+          <Card className="hidden md:block">
             <CardHeader>
               <CardTitle>Balance Sheet ({period === 'annual' ? 'Annual' : 'Quarterly'})</CardTitle>
               <CardDescription>Financial position (amounts in millions)</CardDescription>
@@ -340,7 +451,43 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
 
         {/* Cash Flow - Spreadsheet View */}
         <TabsContent value="cashflow">
-          <Card>
+          <Card className="md:hidden">
+            <CardHeader>
+              <CardTitle>Cash Flow Statement ({period === 'annual' ? 'Annual' : 'Quarterly'})</CardTitle>
+              <CardDescription>Amounts in millions</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {cashFlowStatements.length > 0 ? (
+                <div className="space-y-4">
+                  {cashFlowStatements.map((stmt: any) => (
+                    <Card key={stmt.date}>
+                      <CardHeader>
+                        <CardTitle className="text-lg">{formatPeriodHeader(stmt)}</CardTitle>
+                        <CardDescription>{new Date(stmt.date).toLocaleDateString()}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                          <div className="font-semibold text-green-700">Operating Cash Flow</div>
+                          <div className="text-right font-semibold text-green-700">{formatMillion(stmt.operatingCashFlow)}</div>
+                          <div>Capital Expenditure</div>
+                          <div className="text-right text-red-600">{formatMillion(stmt.capitalExpenditure)}</div>
+                          <div className="font-semibold text-blue-700">Free Cash Flow</div>
+                          <div className="text-right font-semibold text-blue-700">{formatMillion(stmt.freeCashFlow)}</div>
+                          <div>Dividends Paid</div>
+                          <div className="text-right">{stmt.dividendsPaid ? formatMillion(Math.abs(stmt.dividendsPaid)) : 'N/A'}</div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-muted-foreground">No {period} cash flow data available</p>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Desktop table */}
+          <Card className="hidden md:block">
             <CardHeader>
               <CardTitle>Cash Flow Statement ({period === 'annual' ? 'Annual' : 'Quarterly'})</CardTitle>
               <CardDescription>Cash movements (amounts in millions)</CardDescription>
