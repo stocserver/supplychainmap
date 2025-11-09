@@ -274,7 +274,7 @@ export function IndustryValueChain({
                   <button
                     key={segment.id}
                     onClick={() => handleSegmentClick(segment)}
-                    className="group w-56 rounded-lg border-2 border-blue-300 bg-gradient-to-br from-blue-50 to-blue-100 p-4 shadow-sm transition-all hover:scale-105 hover:border-blue-500 hover:shadow-md"
+                    className="group w-full md:w-56 rounded-lg border-2 border-blue-300 bg-gradient-to-br from-blue-50 to-blue-100 p-4 shadow-sm transition-all hover:scale-105 hover:border-blue-500 hover:shadow-md"
                   >
                     <div className="text-left">
                       <p className="text-sm font-semibold text-blue-900 mb-2">{segment.name}</p>
@@ -313,7 +313,7 @@ export function IndustryValueChain({
                 <div key={segment.id} className="flex flex-col gap-3">
                   <button
                     onClick={() => handleSegmentClick(segment)}
-                    className="group w-72 rounded-lg border-2 border-purple-300 bg-gradient-to-br from-purple-50 to-purple-100 p-4 shadow-sm transition-all hover:scale-105 hover:border-purple-500 hover:shadow-md"
+                    className="group w-full md:w-72 rounded-lg border-2 border-purple-300 bg-gradient-to-br from-purple-50 to-purple-100 p-4 shadow-sm transition-all hover:scale-105 hover:border-purple-500 hover:shadow-md"
                   >
                     <div className="text-left">
                       <p className="text-sm font-semibold text-purple-900 mb-2">{segment.name}</p>
@@ -344,7 +344,7 @@ export function IndustryValueChain({
                         <button
                           key={subcategory.id}
                           onClick={() => handleSegmentClick(segment, subcategory.id)}
-                          className="group w-72 rounded border-2 border-purple-200 bg-white p-3 text-left shadow-sm transition-all hover:scale-105 hover:border-purple-400 hover:shadow-md"
+                          className="group w-full md:w-72 rounded border-2 border-purple-200 bg-white p-3 text-left shadow-sm transition-all hover:scale-105 hover:border-purple-400 hover:shadow-md"
                         >
                           <p className="text-xs font-medium text-purple-800 mb-1">
                             {subcategory.name}
@@ -387,7 +387,7 @@ export function IndustryValueChain({
                   <div key={segment.id} className="flex flex-col gap-2">
                     <button
                       onClick={() => handleSegmentClick(segment)}
-                      className="group w-72 rounded-lg border-2 border-green-300 bg-gradient-to-br from-green-50 to-green-100 p-4 shadow-sm transition-all hover:scale-105 hover:border-green-500 hover:shadow-md"
+                      className="group w-full md:w-72 rounded-lg border-2 border-green-300 bg-gradient-to-br from-green-50 to-green-100 p-4 shadow-sm transition-all hover:scale-105 hover:border-green-500 hover:shadow-md"
                     >
                       <div className="text-left">
                         <p className="text-sm font-semibold text-green-900 mb-2">{segment.name}</p>
@@ -418,7 +418,7 @@ export function IndustryValueChain({
                           <button
                             key={subcategory.id}
                             onClick={() => handleSegmentClick(segment, subcategory.id)}
-                            className="group w-72 rounded border-2 border-green-200 bg-white p-3 text-left shadow-sm transition-all hover:scale-105 hover:border-green-400 hover:shadow-md"
+                            className="group w-full md:w-72 rounded border-2 border-green-200 bg-white p-3 text-left shadow-sm transition-all hover:scale-105 hover:border-green-400 hover:shadow-md"
                           >
                             <p className="text-xs font-medium text-green-800 mb-1">
                               {subcategory.name}
@@ -543,4 +543,3 @@ export function IndustryValueChain({
     </div>
   )
 }
-

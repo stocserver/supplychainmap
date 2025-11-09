@@ -116,7 +116,7 @@ function ProductStage({ stage, onClick }: { stage: ValueChainStageProducts; onCl
       : { header: 'text-green-700', border: 'border-green-200', bg: 'from-green-50 to-green-100' }
 
   return (
-    <div className={`flex min-w-[320px] flex-col gap-3 rounded-xl border ${color.border} bg-gradient-to-b ${color.bg} p-4`}> 
+    <div className={`flex w-full md:min-w-[320px] flex-col gap-3 rounded-xl border ${color.border} bg-gradient-to-b ${color.bg} p-4`}> 
       <h3 className={`text-center text-sm font-semibold ${color.header}`}>{stage.stageLabel}</h3>
       <div className="grid gap-3" style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))' }}>
         {stage.products.map((p) => (
@@ -204,8 +204,8 @@ export function IndustryProductValueChain({ stages, industryName, industry }: In
         <CardHeader>
           <CardTitle>Product Value Chain</CardTitle>
         </CardHeader>
-        <CardContent className="overflow-x-auto">
-          <div className="flex items-start justify-center gap-6">
+        <CardContent className="md:overflow-x-auto">
+          <div className="flex flex-col md:flex-row items-stretch md:items-start justify-center gap-4 md:gap-6">
             {stages.map((s) => (
               <ProductStage key={s.stage} stage={s} onClick={handleOpen} />
             ))}
@@ -290,5 +290,4 @@ export function IndustryProductValueChain({ stages, industryName, industry }: In
     </div>
   )
 }
-
 

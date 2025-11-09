@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { useEffect, useMemo, useRef, useState } from "react"
 import type { ProductCategory, ValueChainStageProducts } from "@/lib/data/industries"
 import { supabase } from "@/lib/supabase/client"
@@ -259,6 +260,18 @@ export default function IndustriesPage() {
     }
   }
 
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobilePreview, setMobilePreview] = useState<{ slug: string; name: string; stages: ValueChainStageProducts[] } | null>(null)
+
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
+  function openMobilePreview(slug: string, name: string) {
+    const stages = getStagesForSlug(slug)
+    if (!stages) return
+    setMobilePreview({ slug, name, stages })
+    setMobileOpen(true)
+  }
+
   return (
     <div className="container py-6">
       <div className="mb-4">
@@ -297,8 +310,9 @@ export default function IndustriesPage() {
           <div
             key={industry.slug}
             className="group relative"
-            onMouseEnter={(e) => openPreviewAtTile(e as unknown as React.MouseEvent<HTMLDivElement>, industry.slug, industry.name)}
-            onMouseLeave={scheduleHide}
+            onMouseEnter={(e) => !isMobile && openPreviewAtTile(e as unknown as React.MouseEvent<HTMLDivElement>, industry.slug, industry.name)}
+            onMouseLeave={() => !isMobile && scheduleHide()}
+            onClick={() => isMobile && openMobilePreview(industry.slug, industry.name)}
           >
             <div tabIndex={0} className="flex h-28 flex-col items-center justify-center rounded-md border bg-card transition-all duration-200 ease-out hover:bg-accent group-hover:bg-accent focus:outline-none hover:shadow-md group-hover:shadow-md hover:scale-[1.02] group-hover:scale-[1.02]">
               <div className={`mb-2 flex h-9 w-9 items-center justify-center rounded-md ${industry.color} text-lg text-white`}>
@@ -308,12 +322,12 @@ export default function IndustriesPage() {
                 {industry.name}
               </div>
             </div>
-            <Link href={`/industries/${industry.slug}`} aria-label={`Open ${industry.name}`} className="absolute inset-0" />
+            <Link href={`/industries/${industry.slug}`} aria-label={`Open ${industry.name}`} className="absolute inset-0 hidden md:block" />
           </div>
         ))}
                       </div>
 
-      {hovered && (
+      {hovered && !isMobile && (
         <div
           className="fixed z-[60] overflow-y-auto rounded-lg border bg-popover p-4 text-popover-foreground shadow-xl"
           style={{ left: hovered.left, top: hovered.top, bottom: hovered.bottom, width: hovered.width, maxHeight: hovered.maxHeight }}
@@ -363,6 +377,41 @@ export default function IndustriesPage() {
           </div>
         </div>
       )}
+
+      {/* Mobile vertical preview dialog */}
+      <Dialog open={mobileOpen} onOpenChange={setMobileOpen}>
+        <DialogContent className="max-h-[85vh] overflow-y-auto">
+          {mobilePreview && (
+            <>
+              <DialogHeader>
+                <DialogTitle>{mobilePreview.name} Product Value Chain</DialogTitle>
+              </DialogHeader>
+              <div className="mt-2 space-y-3">
+                {mobilePreview.stages.map((stage) => {
+                  const color = stage.stage === 'upstream'
+                    ? { header: 'text-blue-700', border: 'border-blue-200', bg: 'from-blue-50 to-blue-100' }
+                    : stage.stage === 'midstream'
+                    ? { header: 'text-purple-700', border: 'border-purple-200', bg: 'from-purple-50 to-purple-100' }
+                    : { header: 'text-green-700', border: 'border-green-200', bg: 'from-green-50 to-green-100' }
+                  return (
+                    <div key={stage.stage} className={`flex w-full flex-col gap-3 rounded-xl border ${color.border} bg-gradient-to-b ${color.bg} p-3`}>
+                      <h3 className={`text-center text-sm font-semibold ${color.header}`}>{stage.stageLabel}</h3>
+                      <div className="grid gap-2" style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))' }}>
+                        {stage.products.map((p: ProductCategory) => (
+                          <Link key={p.id} href={`/industries/${mobilePreview.slug}?product=${encodeURIComponent(p.id)}`} className="flex items-start justify-between rounded-xl border bg-white p-3 shadow-sm">
+                            <p className="text-sm font-medium break-words">{p.name}</p>
+                            <span className="rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">{collectCompanies(p).count}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Helper: show count for reassurance, tiny and unobtrusive */}
       <div className="mt-2 text-xs text-muted-foreground">{filtered.length} industries</div>
