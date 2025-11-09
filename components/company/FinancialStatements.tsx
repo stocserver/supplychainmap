@@ -66,35 +66,24 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
   }
 
   return (
-    <div className="space-y-4">
-      {/* Period Toggle as labels (chips) */}
-      <div className="flex justify-end items-center mb-2 sm:mb-3 md:mb-4">
-        <div className="flex gap-2">
+    <div className="space-y-3 sm:space-y-4">
+      {/* Heading + Period segmented toggle (web style), wraps on small */}
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 className="text-2xl font-bold">Financial Statements</h2>
+        <div className="flex gap-2 bg-gray-100 p-1 rounded-lg">
           <Button
-            variant="ghost"
+            variant={period === 'annual' ? 'default' : 'ghost'}
             size="sm"
             onClick={() => setPeriod('annual')}
-            className={
-              `rounded-full border px-3 py-1.5 text-sm ${
-                period === 'annual'
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'bg-transparent text-foreground/70'
-              }`
-            }
+            className="px-4 sm:px-6"
           >
             Annual
           </Button>
           <Button
-            variant="ghost"
+            variant={period === 'quarterly' ? 'default' : 'ghost'}
             size="sm"
             onClick={() => setPeriod('quarterly')}
-            className={
-              `rounded-full border px-3 py-1.5 text-sm ${
-                period === 'quarterly'
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'bg-transparent text-foreground/70'
-              }`
-            }
+            className="px-4 sm:px-6"
           >
             Quarterly
           </Button>
@@ -102,13 +91,13 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
       </div>
 
       <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)} className="w-full">
-        {/* Chip tabs that wrap into next row on small screens; ensure container grows (no overlap) */}
-        <TabsList className="w-full h-auto flex flex-wrap md:flex-nowrap gap-2 px-1 bg-transparent p-0 mb-2 sm:mb-3">
-          <TabsTrigger value="income" className="rounded-full border px-2.5 py-1.5 text-xs sm:text-sm md:px-3 md:py-2 md:text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary">Income</TabsTrigger>
-          <TabsTrigger value="balance" className="rounded-full border px-2.5 py-1.5 text-xs sm:text-sm md:px-3 md:py-2 md:text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary">Balance</TabsTrigger>
-          <TabsTrigger value="cashflow" className="rounded-full border px-2.5 py-1.5 text-xs sm:text-sm md:px-3 md:py-2 md:text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary">Cash Flow</TabsTrigger>
-          <TabsTrigger value="metrics" className="rounded-full border px-2.5 py-1.5 text-xs sm:text-sm md:px-3 md:py-2 md:text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary">Metrics</TabsTrigger>
-          <TabsTrigger value="ratios" className="rounded-full border px-2.5 py-1.5 text-xs sm:text-sm md:px-3 md:py-2 md:text-base data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary">Ratios</TabsTrigger>
+        {/* Section labels bar (web style) in light background; wraps when needed */}
+        <TabsList className="w-full h-auto flex flex-wrap gap-2 bg-blue-50 p-1 rounded-md">
+          <TabsTrigger value="income" className="rounded-md px-3 py-2 text-sm text-blue-700 data-[state=active]:bg-white data-[state=active]:text-foreground data-[state=active]:shadow-sm">Income Statement</TabsTrigger>
+          <TabsTrigger value="balance" className="rounded-md px-3 py-2 text-sm text-blue-700 data-[state=active]:bg-white data-[state=active]:text-foreground data-[state=active]:shadow-sm">Balance Sheet</TabsTrigger>
+          <TabsTrigger value="cashflow" className="rounded-md px-3 py-2 text-sm text-blue-700 data-[state=active]:bg-white data-[state=active]:text-foreground data-[state=active]:shadow-sm">Cash Flow</TabsTrigger>
+          <TabsTrigger value="metrics" className="rounded-md px-3 py-2 text-sm text-blue-700 data-[state=active]:bg-white data-[state=active]:text-foreground data-[state=active]:shadow-sm">Key Metrics</TabsTrigger>
+          <TabsTrigger value="ratios" className="rounded-md px-3 py-2 text-sm text-blue-700 data-[state=active]:bg-white data-[state=active]:text-foreground data-[state=active]:shadow-sm">Ratios</TabsTrigger>
         </TabsList>
 
         {/* Income Statement - Spreadsheet View */}
@@ -346,7 +335,7 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
                           <div className="text-right">{formatMillion(stmt.totalDebt)}</div>
                           <div className="font-semibold">Total Liabilities</div>
                           <div className="text-right font-semibold">{formatMillion(stmt.totalLiabilities)}</div>
-                          <div className="font-semibold">Shareholders' Equity</div>
+                          <div className="font-semibold">Shareholders&apos; Equity</div>
                           <div className="text-right font-semibold">{formatMillion(stmt.shareholdersEquity)}</div>
                           <div>Net Debt</div>
                           <div className="text-right">{formatMillion(stmt.netDebt)}</div>
