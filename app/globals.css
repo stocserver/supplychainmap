@@ -46,6 +46,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
+    --radius: 0.5rem;
   }
 }
 
@@ -73,4 +74,49 @@
   h1, h2, h3, h4, h5, h6 { overflow-wrap: normal; word-break: normal; hyphens: manual; }
 }
 
+/* Manual Typography Styles for Article Content */
+@layer components {
+  .blog-content {
+    @apply text-foreground/90 leading-relaxed font-sans;
+  }
 
+  .blog-content h2 {
+    @apply scroll-m-20 text-3xl font-bold tracking-tight first:mt-0 mt-10 mb-6;
+  }
+
+  .blog-content h3 {
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight mt-8 mb-4;
+  }
+
+  .blog-content h4 {
+    @apply scroll-m-20 text-xl font-semibold tracking-tight mt-6 mb-4;
+  }
+
+  .blog-content p {
+    @apply leading-7 [&:not(:first-child)]:mt-6 mb-6 text-lg text-muted-foreground/90;
+  }
+
+  .blog-content ul {
+    @apply my-6 ml-6 list-disc [&>li]:mt-2;
+  }
+
+  .blog-content ol {
+    @apply my-6 ml-6 list-decimal [&>li]:mt-2;
+  }
+
+  .blog-content li {
+    @apply leading-7 text-muted-foreground/90 text-lg;
+  }
+
+  .blog-content a {
+    @apply font-medium text-primary underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition-colors;
+  }
+  
+  .blog-content blockquote {
+    @apply mt-6 border-l-4 border-primary pl-6 italic text-muted-foreground;
+  }
+
+  .blog-content strong {
+    @apply font-semibold text-foreground;
+  }
+}

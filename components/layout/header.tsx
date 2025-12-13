@@ -1,5 +1,8 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu } from "lucide-react"
 import {
@@ -9,16 +12,18 @@ import {
 } from "@/components/ui/dialog"
 
 export function Header() {
+  const [open, setOpen] = useState(false)
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container relative grid h-16 items-center grid-cols-[1fr_auto] md:grid-cols-3">
         {/* Left: Brand */}
         <div className="flex items-center">
           <Link href="/" className="mr-6 flex items-center space-x-2 min-w-0">
-            <Image 
-              src="/otters.png" 
-              alt="StockOtters" 
-              width={40} 
+            <Image
+              src="/otters.png"
+              alt="StockOtters"
+              width={40}
               height={40}
               className="h-8 w-auto sm:h-10 md:h-12 shrink-0"
             />
@@ -46,6 +51,12 @@ export function Header() {
               Companies
             </Link>
             <Link
+              href="/blog"
+              className="transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
+            >
+              Blog
+            </Link>
+            <Link
               href="/about"
               className="transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
             >
@@ -56,7 +67,7 @@ export function Header() {
 
         {/* Right: Kebab (mobile) */}
         <div className="flex justify-end md:hidden">
-          <Dialog>
+          <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-5 w-5" />
@@ -67,18 +78,28 @@ export function Header() {
                 <Link
                   href="/industries"
                   className="text-lg font-semibold px-2 py-2"
+                  onClick={() => setOpen(false)}
                 >
                   Industries
                 </Link>
                 <Link
                   href="/companies"
                   className="transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium px-2 py-2"
+                  onClick={() => setOpen(false)}
                 >
                   Companies
                 </Link>
                 <Link
+                  href="/blog"
+                  className="transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium px-2 py-2"
+                  onClick={() => setOpen(false)}
+                >
+                  Blog
+                </Link>
+                <Link
                   href="/about"
                   className="transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium px-2 py-2"
+                  onClick={() => setOpen(false)}
                 >
                   About
                 </Link>

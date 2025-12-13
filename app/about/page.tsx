@@ -1,6 +1,37 @@
+import type { Metadata } from "next"
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+
+export const metadata: Metadata = {
+  title: "About | SupplyChainMap",
+  description:
+    "Learn about SupplyChainMap - a platform to explore US public companies through their industry value chains and supply chain relationships.",
+  alternates: { canonical: `${siteUrl}/about` },
+}
+
 export default function AboutPage() {
   return (
     <div className="container py-8">
+      {/* Organization JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "SupplyChainMap",
+            url: siteUrl,
+            description:
+              "A platform to explore US public companies through their industry value chains and supply chain relationships.",
+            contactPoint: {
+              "@type": "ContactPoint",
+              email: "stocserver@gmail.com",
+              contactType: "customer service",
+            },
+          }),
+        }}
+      />
+
       <div className="mx-auto max-w-3xl text-center">
         <h1 className="mb-4 text-4xl font-bold">About Supply Chain Map</h1>
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
@@ -24,5 +55,3 @@ export default function AboutPage() {
     </div>
   )
 }
-
-

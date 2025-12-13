@@ -10,6 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/industries",
     "/companies",
     "/about",
+    "/blog",
   ].map((route) => ({
     url: `${siteUrl}${route || "/"}`,
     changeFrequency: "weekly",
@@ -51,6 +52,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           url: `${siteUrl}/companies/${company.ticker}`,
           changeFrequency: "daily",
           priority: 0.5,
+        })
+      })
+    }
+
+    // Fetch published blog posts
+    const { data: blogPosts } = await supabaseServer
+      .from('blog_posts')
+      .select('slug, updated_at')
+      .eq('published', true)
+      .order('published_at', { ascending: false })
+
+    if (blogPosts) {
+      blogPosts.forEach((post) => {
+        dynamicRoutes.push({
+          url: `${siteUrl}/blog/${post.slug}`,
+          lastModified: post.updated_at ? new Date(post.updated_at) : undefined,
+          changeFrequency: "weekly",
+          priority: 0.6,
         })
       })
     }
