@@ -10,7 +10,7 @@ export default function NotFound() {
             </div>
             <h2 className="mb-2 text-3xl font-bold tracking-tight">Page Not Found</h2>
             <p className="mb-8 text-muted-foreground max-w-md">
-                Sorry, we couldn't find the page you're looking for. It might have been moved, deleted, or never existed.
+                Sorry, we couldn&apos;t find the page you&apos;re looking for. It might have been moved, deleted, or never existed.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/">
