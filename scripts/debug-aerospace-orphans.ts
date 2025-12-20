@@ -36,7 +36,7 @@ async function main() {
     let orphans = 0
     for (const co of companies) {
         const tags = co.value_chain_tags || []
-        const hasMatch = tags.some(t => VALID_TAGS.has(t))
+        const hasMatch = tags.some((t: string) => VALID_TAGS.has(t))
 
         if (!hasMatch) {
             console.log(`❌ ORPHAN: ${co.ticker} (${co.name}) - Tags: [${tags.join(', ')}]`)
