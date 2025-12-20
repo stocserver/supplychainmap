@@ -223,7 +223,7 @@ export function IndustryValueChain({
 
   const handleSegmentClick = (segment: ValueChainSegment, subcategoryId?: string) => {
     if (subcategoryId && segment.subcategories) {
-      const subcategory = segment.subcategories.find((s) => s.id === subcategoryId)
+      const subcategory = segment.subcategories.find((s) => s.id === subcategoryId) as any
       if (subcategory) {
         setSelectedSegment({
           id: subcategory.id,
@@ -239,7 +239,7 @@ export function IndustryValueChain({
         id: segment.id,
         name: segment.name,
         description: segment.description,
-        companies: segment.companies || [],
+        companies: (segment as any).companies || [],
         products: segment.products || [],
       } as any)
       setIsDialogOpen(true)
@@ -293,7 +293,7 @@ export function IndustryValueChain({
                         </div>
                       )}
                       <p className="text-xs text-blue-600 font-medium">
-                        {segment.companies?.length || 0} companies
+                        {(segment as any).companies?.length || 0} companies
                       </p>
                     </div>
                   </button>
@@ -332,7 +332,7 @@ export function IndustryValueChain({
                         </div>
                       )}
                       <p className="text-xs text-purple-600 font-medium">
-                        {segment.companies?.length || 0} companies
+                        {(segment as any).companies?.length || 0} companies
                       </p>
                     </div>
                   </button>
@@ -364,7 +364,7 @@ export function IndustryValueChain({
                             </div>
                           )}
                           <p className="text-xs text-purple-500 font-medium">
-                            {subcategory.companies?.length || 0} companies
+                            {(subcategory as any).companies?.length || 0} companies
                           </p>
                         </button>
                       ))}
@@ -406,7 +406,7 @@ export function IndustryValueChain({
                           </div>
                         )}
                         <p className="text-xs text-green-600 font-medium">
-                          {segment.companies?.length || 0} companies
+                          {(segment as any).companies?.length || 0} companies
                         </p>
                       </div>
                     </button>
@@ -438,7 +438,7 @@ export function IndustryValueChain({
                               </div>
                             )}
                             <p className="text-xs text-green-500 font-medium">
-                              {subcategory.companies?.length || 0} companies
+                              {(subcategory as any).companies?.length || 0} companies
                             </p>
                           </button>
                         ))}
