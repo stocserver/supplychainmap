@@ -1,7 +1,9 @@
 "use client"
 
 import Link from "next/link"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { CompanyCard } from "@/components/companies/company-card"
+import { BarChart3, Layers } from "lucide-react"
 import { useMemo, useRef, useState } from "react"
 import type { ProductCategory, ValueChainStageProducts } from "@/lib/data/industries"
 import { getRegionallyContextualizedStages } from "@/lib/data/industries"
@@ -212,7 +214,9 @@ export function IndustriesClient({ initialIndustries, country = 'US', companyCou
             name: c.name,
             tags: c.value_chain_tags || [],
             country: c.country,
-            industry: c.industry // Pass industry for filtering orphans
+            industry: c.industry, // Pass industry for filtering orphans
+            marketCap: c.market_cap,
+            logoUrl: c.logo_url
         }))
 
         const contextualized = getRegionallyContextualizedStages(raw, slug, country, formattedCompanies)
@@ -330,6 +334,15 @@ export function IndustriesClient({ initialIndustries, country = 'US', companyCou
     const [mobileOpen, setMobileOpen] = useState(false)
     const [mobilePreview, setMobilePreview] = useState<{ slug: string; name: string; stages: ValueChainStageProducts[] } | null>(null)
 
+    // Product popup state - shows company cards when clicking on a product
+    const [productOpen, setProductOpen] = useState(false)
+    const [selectedProduct, setSelectedProduct] = useState<{
+        name: string
+        description?: string
+        companies: any[]
+        industrySlug: string
+    } | null>(null)
+
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
     function openMobilePreview(slug: string, name: string) {
@@ -337,6 +350,20 @@ export function IndustriesClient({ initialIndustries, country = 'US', companyCou
         if (!stages) return
         setMobilePreview({ slug, name, stages })
         setMobileOpen(true)
+    }
+
+    // Open product popup with company cards
+    function openProductPopup(product: ProductCategory, industrySlug: string) {
+        const companiesList = (collectCompanies(product) as any).all || []
+        setSelectedProduct({
+            name: product.name,
+            description: (product as any).description,
+            companies: companiesList,
+            industrySlug
+        })
+        setProductOpen(true)
+        // Close hover popup when product popup opens
+        setHovered(null)
     }
 
     return (
@@ -413,7 +440,22 @@ export function IndustriesClient({ initialIndustries, country = 'US', companyCou
                                 </span>
                             ) : null}
                         </div>
-                        <Link href={`/industries/${hovered.slug}${country !== 'US' ? `?country=${country}` : ''}`} className="text-xs font-medium text-primary hover:underline">Open full page</Link>
+                        <div className="flex items-center gap-3">
+                            <Link
+                                href={`/industries/${hovered.slug}?view=visual${country !== 'US' ? `&country=${country}` : ''}`}
+                                className="flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200 hover:text-slate-900 transition-colors"
+                            >
+                                <BarChart3 className="h-3 w-3" />
+                                Leaderboard
+                            </Link>
+                            <Link
+                                href={`/industries/${hovered.slug}?view=value-chain${country !== 'US' ? `&country=${country}` : ''}`}
+                                className="flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200 hover:text-slate-900 transition-colors"
+                            >
+                                <Layers className="h-3 w-3" />
+                                Value Chain
+                            </Link>
+                        </div>
                     </div>
                     <div className="grid gap-4 md:grid-cols-3">
                         {hovered.stages.map((stage) => {
@@ -453,35 +495,41 @@ export function IndustriesClient({ initialIndustries, country = 'US', companyCou
 
                                             return (
                                                 <div key={p.id} className="rounded-xl border bg-white p-3 shadow-sm">
-                                                    <Link href={`/industries/${hovered.slug}?product=${encodeURIComponent(p.id)}${country !== 'US' ? `&country=${country}` : ''}`} className="flex items-start justify-between gap-2">
+                                                    <div
+                                                        onClick={() => openProductPopup(p, hovered.slug)}
+                                                        className="flex items-start justify-between gap-2 cursor-pointer hover:opacity-80"
+                                                    >
                                                         <div className="flex-1 min-w-0">
                                                             <p className="text-sm font-medium break-words">{p.name}</p>
                                                         </div>
                                                         <span className="shrink-0 rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">{collectCompanies(p).count}</span>
-                                                    </Link>
+                                                    </div>
 
                                                     {((p as any).subProducts && (p as any).subProducts.length > 0) || unmappedCount > 0 ? (
                                                         <div className="mt-2 grid gap-1">
                                                             {(p as any).subProducts?.slice(0, 3).map((sp: ProductCategory) => {
                                                                 if (collectCompanies(sp).count === 0) return null
                                                                 return (
-                                                                    <Link key={sp.id} href={`/industries/${hovered.slug}?product=${encodeURIComponent(sp.id)}${country !== 'US' ? `&country=${country}` : ''}`} className="flex items-start justify-between gap-2 rounded-lg border bg-white px-2 py-1 text-[12px] hover:bg-muted/40" title={(sp as any).description}>
+                                                                    <div key={sp.id} onClick={() => openProductPopup(sp, hovered.slug)} className="flex items-start justify-between gap-2 rounded-lg border bg-white px-2 py-1 text-[12px] cursor-pointer hover:bg-muted/40" title={(sp as any).description}>
                                                                         <span className="break-words min-w-0 flex-1 whitespace-normal">{sp.name}</span>
                                                                         <span className="shrink-0 rounded-md bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">{collectCompanies(sp).count}</span>
-                                                                    </Link>
+                                                                    </div>
                                                                 )
                                                             })}
 
-                                                            {/* Dynamic "Other" Link */}
+                                                            {/* Dynamic "Other" button */}
                                                             {unmappedCount > 0 && (
-                                                                <Link href={`/industries/${hovered.slug}?product=${encodeURIComponent(p.id + '-other')}${country !== 'US' ? `&country=${country}` : ''}`} className="flex items-start justify-between gap-2 rounded-lg border bg-white px-2 py-1 text-[12px] hover:bg-muted/40 italic text-muted-foreground">
+                                                                <div onClick={() => {
+                                                                    const unmappedProduct = { id: p.id + '-other', name: `Other ${p.name}`, description: `Uncategorized companies in ${p.name}`, companiesDetailed: direct.filter((c: any) => !c.ticker || !(new Set(subProducts.flatMap((sp: any) => (collectCompanies(sp) as any).all?.map((x: any) => x.ticker) || []))).has(c.ticker)) } as any
+                                                                    openProductPopup(unmappedProduct, hovered.slug)
+                                                                }} className="flex items-start justify-between gap-2 rounded-lg border bg-white px-2 py-1 text-[12px] cursor-pointer hover:bg-muted/40 italic text-muted-foreground">
                                                                     <span className="break-words min-w-0 flex-1 whitespace-normal">Other {p.name}</span>
                                                                     <span className="shrink-0 rounded-md bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">{unmappedCount}</span>
-                                                                </Link>
+                                                                </div>
                                                             )}
 
                                                             {(p as any).subProducts?.length > 3 && (
-                                                                <Link href={`/industries/${hovered.slug}?product=${encodeURIComponent(p.id)}${country !== 'US' ? `&country=${country}` : ''}`} className="rounded-lg border bg-background px-2 py-1 text-[12px] text-muted-foreground hover:bg-accent">+{(p as any).subProducts.length - 3} more</Link>
+                                                                <div onClick={() => openProductPopup(p, hovered.slug)} className="rounded-lg border bg-background px-2 py-1 text-[12px] text-muted-foreground cursor-pointer hover:bg-accent">+{(p as any).subProducts.length - 3} more</div>
                                                             )}
                                                         </div>
                                                     ) : null}
@@ -501,7 +549,27 @@ export function IndustriesClient({ initialIndustries, country = 'US', companyCou
                     {mobilePreview && (
                         <>
                             <DialogHeader>
-                                <DialogTitle>{mobilePreview.name} Product Value Chain</DialogTitle>
+                                <div className="flex flex-col gap-4">
+                                    <DialogTitle>{mobilePreview.name} Product Value Chain</DialogTitle>
+                                    <div className="flex gap-2">
+                                        <Link
+                                            href={`/industries/${mobilePreview.slug}?view=visual${country !== 'US' ? `&country=${country}` : ''}`}
+                                            className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-slate-100 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200 active:bg-slate-300 transition-colors"
+                                            onClick={() => setMobileOpen(false)}
+                                        >
+                                            <BarChart3 className="h-4 w-4" />
+                                            Leaderboard
+                                        </Link>
+                                        <Link
+                                            href={`/industries/${mobilePreview.slug}?view=value-chain${country !== 'US' ? `&country=${country}` : ''}`}
+                                            className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-slate-100 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200 active:bg-slate-300 transition-colors"
+                                            onClick={() => setMobileOpen(false)}
+                                        >
+                                            <Layers className="h-4 w-4" />
+                                            Value Chain
+                                        </Link>
+                                    </div>
+                                </div>
                             </DialogHeader>
                             <div className="mt-2 space-y-3">
                                 {mobilePreview.stages.map((stage) => {
@@ -519,17 +587,66 @@ export function IndustriesClient({ initialIndustries, country = 'US', companyCou
                                             <h3 className={`text-center text-sm font-semibold ${color.header}`}>{stage.stageLabel}</h3>
                                             <div className="grid gap-2" style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))' }}>
                                                 {visibleProducts.map((p: ProductCategory) => (
-                                                    <Link key={p.id} href={`/industries/${mobilePreview.slug}?product=${encodeURIComponent(p.id)}${country !== 'US' ? `&country=${country}` : ''}`} className="flex items-start justify-between gap-2 rounded-xl border bg-white p-3 shadow-sm">
+                                                    <div key={p.id} onClick={() => { setMobileOpen(false); openProductPopup(p, mobilePreview.slug); }} className="flex items-start justify-between gap-2 rounded-xl border bg-white p-3 shadow-sm cursor-pointer hover:bg-muted/40">
                                                         <div className="flex-1 min-w-0">
                                                             <p className="text-sm font-medium break-words">{p.name}</p>
                                                         </div>
                                                         <span className="shrink-0 rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">{collectCompanies(p).count}</span>
-                                                    </Link>
+                                                    </div>
                                                 ))}
                                             </div>
                                         </div>
                                     )
                                 })}
+                            </div>
+                        </>
+                    )}
+                </DialogContent>
+            </Dialog>
+
+            {/* Product Popup - Shows company cards */}
+            <Dialog open={productOpen} onOpenChange={setProductOpen}>
+                <DialogContent className="max-h-[85vh] max-w-5xl overflow-y-auto">
+                    {selectedProduct && (
+                        <>
+                            <DialogHeader>
+                                <DialogTitle className="text-2xl">{selectedProduct.name}</DialogTitle>
+                                {selectedProduct.description && (
+                                    <DialogDescription className="pt-2 text-base leading-relaxed">
+                                        {selectedProduct.description}
+                                    </DialogDescription>
+                                )}
+                            </DialogHeader>
+                            <div className="mt-4">
+                                {selectedProduct.companies.length > 0 ? (
+                                    <div>
+                                        <h4 className="mb-3 text-lg font-semibold">Companies ({selectedProduct.companies.length})</h4>
+                                        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                                            {selectedProduct.companies.map((c: any, idx: number) => (
+                                                c.ticker ? (
+                                                    <CompanyCard
+                                                        key={`${c.ticker}-${idx}`}
+                                                        ticker={c.ticker}
+                                                        name={c.name}
+                                                        country={c.country}
+                                                        marketCap={c.marketCap}
+                                                    />
+                                                ) : (
+                                                    <Link key={`${c.name}-${idx}`} href={`/companies/${encodeURIComponent(c.name).toUpperCase()}`}>
+                                                        <div className="rounded-lg border bg-card p-4 transition-all hover:shadow-md">
+                                                            <p className="font-medium">{c.name}</p>
+                                                            <p className="text-xs text-muted-foreground">{c.listing}</p>
+                                                        </div>
+                                                    </Link>
+                                                )
+                                            ))}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="flex h-24 items-center justify-center rounded-lg border-2 border-dashed">
+                                        <p className="text-muted-foreground">No companies listed yet</p>
+                                    </div>
+                                )}
                             </div>
                         </>
                     )}

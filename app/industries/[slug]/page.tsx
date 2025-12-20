@@ -55,10 +55,11 @@ export default async function IndustryPage({
   searchParams,
 }: {
   params: { slug: string }
-  searchParams: { country?: string }
+  searchParams: { country?: string; view?: string }
 }) {
   const country = searchParams.country || 'US'
   const industry = getIndustryBySlug(params.slug, country)
+  const view = searchParams.view === 'value-chain' ? 'value-chain' : 'visual'
 
   if (!industry) {
     notFound()
@@ -104,7 +105,9 @@ export default async function IndustryPage({
     name: c.name,
     country: c.country,
     tags: c.value_chain_tags || [],
-    industry: c.industry
+    industry: c.industry,
+    marketCap: c.market_cap,
+    logoUrl: c.logo_url
   })) || []
 
   // Check if this industry uses database-driven value chain
@@ -149,6 +152,7 @@ export default async function IndustryPage({
 
       {/* View Toggle (Visual Map vs Value Chain) */}
       <IndustryViewToggle
+        defaultTab={view}
         visualMap={
           <div className="mb-12">
             <VisualMap companies={featuredCandidates} />

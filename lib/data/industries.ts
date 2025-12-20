@@ -71,7 +71,7 @@ export function getRegionallyContextualizedStages(
   stages: ValueChainStageProducts[],
   slug: string,
   region: string = 'US',
-  dynamicCompanies?: { ticker: string; name: string; tags: string[]; country: string }[]
+  dynamicCompanies?: { ticker: string; name: string; tags: string[]; country: string; marketCap?: number; logoUrl?: string }[]
 ): ValueChainStageProducts[] {
   // If no dynamic data and region is US, return static (legacy)
   if (!dynamicCompanies && region === 'US') {
@@ -83,7 +83,7 @@ export function getRegionallyContextualizedStages(
 
   // Build lookup maps
   const nodeToTickers = new Map<string, string[]>()
-  const tickerDetails = new Map<string, { name: string; country: string; tags: string[] }>()
+  const tickerDetails = new Map<string, { name: string; country: string; tags: string[]; marketCap?: number; logoUrl?: string }>()
 
   // 1. Load Static Data (Base)
   const regionData = REGION_DATA[region]
@@ -106,7 +106,7 @@ export function getRegionallyContextualizedStages(
   if (dynamicCompanies && dynamicCompanies.length > 0) {
     dynamicCompanies.forEach(c => {
       // Update details
-      tickerDetails.set(c.ticker, { name: c.name, country: c.country, tags: c.tags || [] })
+      tickerDetails.set(c.ticker, { name: c.name, country: c.country, tags: c.tags || [], marketCap: c.marketCap, logoUrl: c.logoUrl })
 
       if (c.tags) {
         c.tags.forEach(tag => {
@@ -134,7 +134,9 @@ export function getRegionallyContextualizedStages(
           ticker: t,
           listing: region === 'US' ? 'US' : 'Foreign',
           country: tickerDetails.get(t)?.country || region,
-          tags: tickerDetails.get(t)?.tags || []
+          tags: tickerDetails.get(t)?.tags || [],
+          marketCap: tickerDetails.get(t)?.marketCap,
+          logoUrl: tickerDetails.get(t)?.logoUrl
         }))
         // Legacy support
         product.companies = tickers

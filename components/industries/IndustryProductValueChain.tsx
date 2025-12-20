@@ -409,9 +409,14 @@ export function IndustryProductValueChain({ stages, industryName, industry }: In
   }
 
   useEffect(() => {
-    const id = searchParams.get('product')
-    if (!id) return
+    const rawId = searchParams.get('product')
+    if (!rawId) return
+    const id = decodeURIComponent(rawId)
+    console.log('[IndustryProductValueChain] Looking for product:', id)
+    console.log('[IndustryProductValueChain] Available stages:', stages.length)
+    console.log('[IndustryProductValueChain] All product IDs:', stages.flatMap(s => s.products.map(p => p.id)))
     const found = findProductById(id)
+    console.log('[IndustryProductValueChain] Found:', found ? found.product.name : 'NOT FOUND')
     if (found) {
       handleOpen(found.product, found.stage)
     }

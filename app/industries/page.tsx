@@ -55,7 +55,7 @@ export default async function IndustriesPage({
   while (true) {
     const { data, error } = await supabaseServer
       .from('companies')
-      .select('ticker, name, industry, value_chain_tags')
+      .select('ticker, name, industry, value_chain_tags, market_cap, logo_url')
       .eq('country', country)
       .range(from, from + batchSize - 1)
 

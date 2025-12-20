@@ -46,6 +46,7 @@ export default async function CompanyPage({
     country: companyData?.country || 'N/A',
     description: companyData?.description,
     website: companyData?.website,
+    logoUrl: companyData?.logo_url,
   }
 
   const quote = companyData?.data?.quote
@@ -78,6 +79,7 @@ export default async function CompanyPage({
             name: profile.name,
             tickerSymbol: ticker,
             url: profile.website || undefined,
+            logo: profile.logoUrl || undefined,
             address: undefined,
           }),
         }}
@@ -92,9 +94,19 @@ export default async function CompanyPage({
 
       {/* Compact Header */}
       <div className="mb-6 flex items-start gap-4">
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-3xl text-white shrink-0">
-          <Building2 className="h-8 w-8" />
-        </div>
+        {profile.logoUrl ? (
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white border shrink-0 overflow-hidden p-2">
+            <img
+              src={profile.logoUrl}
+              alt={`${profile.name} logo`}
+              className="h-full w-full object-contain"
+            />
+          </div>
+        ) : (
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-3xl text-white shrink-0">
+            <Building2 className="h-8 w-8" />
+          </div>
+        )}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 flex-wrap">
             <h1 className="text-2xl sm:text-3xl font-bold leading-tight break-normal">

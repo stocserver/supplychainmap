@@ -7,11 +7,12 @@ import { Layers, BarChart3 } from 'lucide-react'
 interface IndustryViewToggleProps {
     valueChain: ReactNode
     visualMap: ReactNode
+    defaultTab?: string
 }
 
-export function IndustryViewToggle({ valueChain, visualMap }: IndustryViewToggleProps) {
+export function IndustryViewToggle({ valueChain, visualMap, defaultTab = "visual" }: IndustryViewToggleProps) {
     return (
-        <Tabs defaultValue="visual" className="w-full">
+        <Tabs defaultValue={defaultTab} className="w-full">
             <div className="flex justify-center mb-6 sm:mb-8">
                 <TabsList className="grid w-full max-w-[300px] sm:max-w-[400px] grid-cols-2 p-1 bg-slate-100 rounded-xl">
                     <TabsTrigger

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Card, CardContent } from "@/components/ui/card"
 import { Building2 } from "lucide-react"
 import { formatCurrency } from "@/lib/utils"
@@ -19,6 +20,7 @@ interface CompanyData {
 type Props = { ticker: string; name?: string; marketCap?: number; industry?: Industry; labelTextOverride?: string; country?: string }
 
 export function CompanyCard({ ticker, name, marketCap, industry, labelTextOverride, country = 'US' }: Props) {
+  const router = useRouter()
   // Helper to build country-aware URLs
   const getHref = (path: string) => country !== 'US' ? `${path}?country=${country}` : path
   const [data, setData] = useState<CompanyData | null>(null)
@@ -66,17 +68,22 @@ export function CompanyCard({ ticker, name, marketCap, industry, labelTextOverri
 
   if (!data) {
     return (
-      <Link href={getHref(`/companies/${ticker}`)}>
-        <Card className="transition-all hover:shadow-lg hover:scale-[1.02]">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2">
-              <Building2 className="h-4 w-4 text-muted-foreground" />
-              <p className="text-sm font-medium">{ticker}</p>
-            </div>
-            <p className="mt-2 text-xs text-muted-foreground">Data unavailable</p>
-          </CardContent>
-        </Card>
-      </Link>
+      <Card
+        className="transition-all hover:shadow-lg hover:scale-[1.02] relative cursor-pointer"
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          router.push(getHref(`/companies/${ticker}`))
+        }}
+      >
+        <CardContent className="p-4">
+          <div className="flex items-center gap-2">
+            <Building2 className="h-4 w-4 text-muted-foreground" />
+            <p className="text-sm font-medium">{ticker}</p>
+          </div>
+          <p className="mt-2 text-xs text-muted-foreground">Data unavailable</p>
+        </CardContent>
+      </Card>
     )
   }
 
@@ -147,36 +154,39 @@ export function CompanyCard({ ticker, name, marketCap, industry, labelTextOverri
   const categoryColor = industry?.id ? getCategoryColor(industry.id) : { bg: '#f3f4f620', text: '#6b7280' }
 
   return (
-    <Link href={getHref(`/companies/${ticker}`)}>
-      <Card className="transition-all hover:shadow-lg hover:scale-[1.02] relative">
-        <CardContent className="p-4">
-          {/* Industry Label - Top Right */}
-          {displayLabel && (
-            <div className="absolute top-3 right-3">
-              <span
-                className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
-                style={{
-                  backgroundColor: categoryColor.bg,
-                  color: categoryColor.text
-                }}
-              >
-                {displayLabel}
-              </span>
-            </div>
-          )}
-
-          <div className="mb-3">
-            <p className="text-2xl font-bold">{ticker}</p>
-            <p className="text-base text-muted-foreground line-clamp-1">{data.name}</p>
+    <Card
+      className="transition-all hover:shadow-lg hover:scale-[1.02] relative cursor-pointer"
+      onClick={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        router.push(getHref(`/companies/${ticker}`))
+      }}
+    >
+      <CardContent className="p-4">
+        {/* Industry Label - Top Right */}
+        {displayLabel && (
+          <div className="absolute top-3 right-3">
+            <span
+              className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
+              style={{
+                backgroundColor: categoryColor.bg,
+                color: categoryColor.text
+              }}
+            >
+              {displayLabel}
+            </span>
           </div>
+        )}
 
-          <div className="text-lg font-semibold">
-            Market Cap: <span className="text-primary">{formatCurrency(data.marketCap)}</span>
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
+        <div className="mb-3">
+          <p className="text-2xl font-bold">{ticker}</p>
+          <p className="text-base text-muted-foreground line-clamp-1">{data.name}</p>
+        </div>
+
+        <div className="text-lg font-semibold">
+          Market Cap: <span className="text-primary">{formatCurrency(data.marketCap)}</span>
+        </div>
+      </CardContent>
+    </Card>
   )
 }
-
-
