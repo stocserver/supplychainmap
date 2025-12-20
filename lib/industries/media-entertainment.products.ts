@@ -8,7 +8,7 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'content-production',
-        name: 'Content Production',
+        name: 'Content Production Services',
         description: 'Film, TV, and digital content production',
         longDescription: 'Companies that produce original content including movies, television shows, documentaries, and digital content for various platforms.',
         companiesDetailed: [
@@ -101,7 +101,7 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'streaming-platforms',
-        name: 'Streaming Platforms',
+        name: 'Content Streaming Platforms',
         description: 'Video streaming and on-demand services',
         longDescription: 'Companies that operate streaming platforms and video-on-demand services for distributing content to consumers.',
         companiesDetailed: [
@@ -141,7 +141,7 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'social-media',
-        name: 'Social Media Platforms',
+        name: 'Social & Community Platforms',
         description: 'Social networking and user-generated content',
         longDescription: 'Companies that operate social media platforms, enabling users to create, share, and interact with content.',
         companiesDetailed: [
@@ -177,7 +177,7 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'traditional-media',
-        name: 'Traditional Media',
+        name: 'Broadcast & Cable Networks',
         description: 'Broadcast television and radio',
         longDescription: 'Companies that operate traditional broadcast media including television networks, radio stations, and cable channels.',
         companiesDetailed: [
@@ -223,7 +223,7 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'advertising',
-        name: 'Digital Advertising',
+        name: 'Digital Advertising & AdTech',
         description: 'Online advertising and marketing services',
         longDescription: 'Companies that provide digital advertising platforms, ad technology, and marketing services for brands and advertisers.',
         companiesDetailed: [
@@ -263,7 +263,7 @@ export const mediaEntertainmentProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'live-entertainment',
-        name: 'Live Entertainment',
+        name: 'Live Events & Experiences',
         description: 'Live events, concerts, and entertainment venues',
         longDescription: 'Companies that produce and operate live entertainment events including concerts, sports, theater, and entertainment venues.',
         companiesDetailed: [

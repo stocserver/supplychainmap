@@ -3,12 +3,12 @@ import { ValueChainStageProducts } from "@/lib/data/industries"
 export const foodBeverageProductStages: ValueChainStageProducts[] = [
   {
     stage: 'upstream',
-    stageLabel: 'Ingredients & Processing',
+    stageLabel: 'Farming & Ingredient Production',
     layout: 'grid',
     products: [
       {
         id: 'ingredients',
-        name: 'Ingredients & Flavors',
+        name: 'Raw Ingredients & Flavorings',
         description: 'Ingredients, flavors, and nutrition inputs',
         longDescription: 'Supply of raw materials, flavors, and nutritional ingredients used in the production of food and beverage products. This includes natural and synthetic ingredients, as well as functional additives for fortification and enhancement.',
         companiesDetailed: [
@@ -58,7 +58,7 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'food-processing',
-        name: 'Food Processing',
+        name: 'Food & Beverage Manufacturing',
         description: 'Packaged food manufacturing',
         longDescription: 'Manufacturing of various packaged food products, encompassing categories like snacks, confectionery, prepared meals, and meat products. This involves raw material sourcing, production, packaging, and quality control to deliver consumer-ready goods.',
         companiesDetailed: [
@@ -112,12 +112,12 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
   },
   {
     stage: 'midstream',
-    stageLabel: 'Beverages & Distribution',
+    stageLabel: 'Food & Beverage Manufacturing & Distribution',
     layout: 'hybrid',
     products: [
       {
         id: 'beverages',
-        name: 'Beverages',
+        name: 'Beverage Production',
         description: 'Soft drinks, beer, wine, spirits',
         longDescription: 'Production and marketing of non-alcoholic and alcoholic beverages, including carbonated soft drinks, juices, bottled water, beer, wine, and spirits. This segment caters to diverse consumer preferences for refreshment, hydration, and social consumption.',
         companiesDetailed: [
@@ -167,7 +167,7 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'retail-distribution',
-        name: 'Retail Distribution',
+        name: 'Supply Chain & Distribution',
         description: 'Grocery and wholesale distribution',
         longDescription: 'Logistics and sales channels for moving food and beverage products from manufacturers to consumers. This includes grocery retailers, supermarkets, wholesale clubs, and foodservice distributors supplying restaurants and institutions.',
         companiesDetailed: [
@@ -208,12 +208,12 @@ export const foodBeverageProductStages: ValueChainStageProducts[] = [
   },
   {
     stage: 'downstream',
-    stageLabel: 'Restaurants & QSR',
+    stageLabel: 'Foodservice & Retail',
     layout: 'grid',
     products: [
       {
         id: 'restaurants',
-        name: 'Restaurants & QSR',
+        name: 'Foodservice & Retail',
         description: 'Restaurant operators and quick service chains',
         longDescription: 'Operation of various restaurant formats, from full-service dining to quick-service restaurants (QSR) and fast-casual concepts. This segment focuses on food preparation, customer service, brand experience, and efficient operations.',
         companiesDetailed: [

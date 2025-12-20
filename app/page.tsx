@@ -4,27 +4,45 @@ import { Card, CardContent } from "@/components/ui/card"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
 
+// Country names for display
+const COUNTRY_NAMES: Record<string, string> = {
+  'US': 'US',
+  'JP': 'Japan',
+  'CN': 'China',
+  'EU': 'Europe',
+}
+
 export const metadata: Metadata = {
-  title: "US Supply Chain & Value Chain Platform | SupplyChainMap",
+  title: "Supply Chain & Value Chain Platform | SupplyChainMap",
   description:
-    "Explore US public companies through their industry value chains. Understand supply chain relationships, find investment opportunities, and analyze company fundamentals.",
+    "Explore public companies through their industry value chains. Understand supply chain relationships, find investment opportunities, and analyze company fundamentals.",
   alternates: { canonical: siteUrl },
   openGraph: {
-    title: "US Supply Chain & Value Chain Platform",
+    title: "Supply Chain & Value Chain Platform",
     description:
-      "Explore US public companies through their industry value chains and supply chain relationships",
+      "Explore public companies through their industry value chains and supply chain relationships",
     url: siteUrl,
     type: "website",
   },
 }
 
-export default function Home() {
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { country?: string }
+}) {
+  const country = searchParams.country || 'US'
+  const countryName = COUNTRY_NAMES[country] || 'US'
+
+  // Helper to build country-aware URLs
+  const getHref = (path: string) => country !== 'US' ? `${path}?country=${country}` : path
+
   // FAQ data for both display and JSON-LD
   const faqs = [
     {
-      question: "What is SupplyChainMap?",
+      question: `What is SupplyChainMap?`,
       answer:
-        "SupplyChainMap is a platform to explore US public companies through their industry value chains. It helps investors understand supply chain relationships and identify investment opportunities across different sectors.",
+        `SupplyChainMap is a platform to explore ${countryName} public companies through their industry value chains. It helps investors understand supply chain relationships and identify investment opportunities across different sectors.`,
     },
     {
       question: "How many industries are covered?",
@@ -50,7 +68,7 @@ export default function Home() {
             name: "SupplyChainMap",
             url: siteUrl,
             description:
-              "Explore US public companies through their industry value chains and supply chain relationships",
+              "Explore public companies through their industry value chains and supply chain relationships",
             potentialAction: {
               "@type": "SearchAction",
               target: `${siteUrl}/industries?query={search_term_string}`,
@@ -80,7 +98,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="mb-12 text-center">
         <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-          US Supply Chain & Value Chain Platform
+          {countryName} Supply Chain & Value Chain Platform
         </h1>
         <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
           Explore public companies through their industry value chains.
@@ -98,7 +116,7 @@ export default function Home() {
           Identify investment opportunities across the value chain.
         </p>
         <Link
-          href="/industries"
+          href={getHref("/industries")}
           className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground hover:bg-primary/90"
         >
           Explore All Industries
@@ -118,7 +136,7 @@ export default function Home() {
         <Card>
           <CardContent className="pt-6">
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary">150+</div>
+              <div className="text-3xl font-bold text-primary">{country === 'JP' ? '35+' : '150+'}</div>
               <p className="text-sm text-muted-foreground">Featured Companies</p>
             </div>
           </CardContent>

@@ -2,7 +2,7 @@ import type { ValueChainStageProducts } from '@/lib/data/industries'
 
 const upstream: ValueChainStageProducts = {
   stage: 'upstream',
-  stageLabel: 'Upstream',
+  stageLabel: 'Core Development & Infrastructure',
   layout: 'grid',
   products: [
     {
@@ -22,7 +22,7 @@ const upstream: ValueChainStageProducts = {
 
 const midstream: ValueChainStageProducts = {
   stage: 'midstream',
-  stageLabel: 'Midstream',
+  stageLabel: 'Business & Productivity Applications',
   layout: 'hybrid',
   products: [
     {
@@ -79,7 +79,7 @@ const midstream: ValueChainStageProducts = {
 
 const downstream: ValueChainStageProducts = {
   stage: 'downstream',
-  stageLabel: 'Downstream',
+  stageLabel: 'Specialized & Integration Solutions',
   layout: 'grid',
   products: [
     {

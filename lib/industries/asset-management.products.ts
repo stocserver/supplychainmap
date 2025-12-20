@@ -8,7 +8,7 @@ export const assetManagementProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'market-infrastructure',
-        name: 'Market Infrastructure',
+        name: 'Market Data & Trading Venues',
         description: 'Index providers, market data, and trading venues',
         longDescription: 'Providers of essential services and platforms that enable financial markets to function, including the creation and maintenance of market indices, dissemination of financial data, and operation of trading venues for various asset classes. These services are crucial for investment analysis, portfolio benchmarking, and efficient capital allocation.',
         companiesDetailed: [
@@ -28,7 +28,7 @@ export const assetManagementProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'distribution',
-        name: 'Distribution Platforms',
+        name: 'Broker-Dealers & Investment Platforms',
         description: 'Broker-dealers and investment platforms',
         longDescription: 'Platforms and intermediaries that connect asset managers with investors. This includes broker-dealers, registered investment advisors (RIAs), and digital investment platforms that facilitate the sale and distribution of investment products to individual and institutional clients.',
         companiesDetailed: [
@@ -53,7 +53,7 @@ export const assetManagementProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'traditional-asset-mgmt',
-        name: 'Traditional Asset Management',
+        name: 'Public Markets Asset Management',
         description: 'Active and passive public markets managers',
         longDescription: 'Firms that manage investment portfolios primarily in publicly traded securities such as stocks, bonds, and money market instruments. This includes both active strategies (seeking to outperform benchmarks) and passive strategies (replicating index performance) for institutional and retail clients.',
         companiesDetailed: [
@@ -77,7 +77,7 @@ export const assetManagementProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'alternative-investments',
-        name: 'Alternative Investments',
+        name: 'Alternative Asset Management',
         description: 'Private equity, credit, and real assets managers',
         longDescription: 'Managers specializing in non-traditional asset classes like private equity, private credit, hedge funds, real estate, and infrastructure. These investments often offer diversification, higher potential returns, and less liquidity than public market securities.',
         companiesDetailed: [
@@ -103,7 +103,7 @@ export const assetManagementProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'investor-services',
-        name: 'Investor Services',
+        name: 'Fund Administration & Transfer Agency',
         description: 'Fund administration and transfer agency',
         longDescription: 'Specialized service providers that support asset managers with back-office operations, including fund accounting, net asset value (NAV) calculation, regulatory compliance, shareholder record-keeping, and reporting. These services are critical for operational efficiency and regulatory adherence.',
         companiesDetailed: [
@@ -114,7 +114,7 @@ export const assetManagementProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'custody',
-        name: 'Custody & Asset Servicing',
+        name: 'Global Custody & Fund Servicing',
         description: 'Global custody, accounting, and fund servicing',
         longDescription: 'Services that involve the safekeeping of financial assets, trade settlement, and related administrative functions for institutional investors. Custodians also provide accounting, performance reporting, and regulatory compliance support to ensure asset safety and operational integrity.',
         companiesDetailed: [

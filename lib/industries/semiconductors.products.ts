@@ -2,7 +2,7 @@ import type { ProductCategory, ValueChainStageProducts } from '@/lib/data/indust
 
 const upstream: ValueChainStageProducts = {
   stage: 'upstream',
-  stageLabel: 'Upstream',
+  stageLabel: 'Chip Design & IP Licensing',
   layout: 'grid',
   products: [
     {
@@ -53,7 +53,7 @@ const upstream: ValueChainStageProducts = {
 
 const midstream: ValueChainStageProducts = {
   stage: 'midstream',
-  stageLabel: 'Midstream',
+  stageLabel: 'Wafer Manufacturing & Materials',
   layout: 'hybrid',
   products: [
     {
@@ -105,7 +105,7 @@ const midstream: ValueChainStageProducts = {
 
 const downstream: ValueChainStageProducts = {
   stage: 'downstream',
-  stageLabel: 'Downstream',
+  stageLabel: 'Assembly, Test & Distribution',
   layout: 'grid',
   products: [
     {

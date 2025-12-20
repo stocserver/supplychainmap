@@ -15,32 +15,75 @@ export async function GET(request: NextRequest) {
         const userTopic = searchParams.get('topic')
         const template = searchParams.get('template') || 'general' // general, listicle, comparison, trends
 
-        // If no topic is provided and we aren't in 'general' mode (which can fallback to random), error out.
-        // Actually, let's allow random sub-niche selection even for specific templates if user didn't specify a topic.
-
         let mainTopic = userTopic
 
-        // If no topic provided, pick a RANDOM industry from database to ensure variety
+        // If no topic provided, we enter "News Discovery Mode"
         if (!mainTopic) {
-            const { data: industries } = await supabaseServer
-                .from('industries')
-                .select('name')
-                .limit(50)
+            console.log("[Agent] No topic provided. Entering News Discovery Mode...")
 
-            // Safety check
-            if (industries && industries.length > 0) {
-                const randomIndustry = industries[Math.floor(Math.random() * industries.length)].name
+            // 1. Fetch potential subjects (Industries or Top Companies)
+            // We'll flip a coin to decide whether to cover an Industry or a specific Company
+            const isIndustryMode = Math.random() > 0.4 // 60% chance of industry news (broader), 40% company specific
 
-                // Tailor the default random topic based on template
-                if (template === 'trends') {
-                    mainTopic = `Key Supply Chain Trends in ${randomIndustry} for 2026`
-                } else if (template === 'listicle') {
-                    mainTopic = `Essential Resources for ${randomIndustry} Supply Chain Management`
-                } else {
-                    mainTopic = `The State of ${randomIndustry} Supply Chains in 2026`
+            let searchSubject = ""
+            let searchQuery = ""
+
+            if (isIndustryMode) {
+                const { data: industries } = await supabaseServer.from('industries').select('name').limit(50)
+                if (industries && industries.length > 0) {
+                    const randomInd = industries[Math.floor(Math.random() * industries.length)].name
+                    searchSubject = randomInd
+                    searchQuery = `latest major supply chain news trends challenges ${randomInd} industry last 2 weeks`
                 }
             } else {
-                mainTopic = "Global Supply Chain Outlook 2026"
+                const { data: companies } = await supabaseServer
+                    .from('companies')
+                    .select('name')
+                    .gt('market_cap', 50000000000) // Only news about huge companies (>50B)
+                    .order('market_cap', { ascending: false })
+                    .limit(30)
+
+                if (companies && companies.length > 0) {
+                    const randomCo = companies[Math.floor(Math.random() * companies.length)].name
+                    searchSubject = randomCo
+                    searchQuery = `latest supply chain logistics business news ${randomCo} this month`
+                }
+            }
+
+            if (!searchSubject) {
+                searchSubject = "Global Logistics"
+                searchQuery = "latest global supply chain news disruption this week"
+            }
+
+            console.log(`[Agent] Hunting for news about: ${searchSubject}...`)
+
+            // 2. Perform Pre-Research Search
+            const newsResults = await searchTopics([searchQuery])
+
+            // 3. Generate a Headline based on real news
+            if (newsResults.results.length > 0) {
+                const topicPrompt = `
+                You are a news editor. Review these search results for ${searchSubject}.
+                Identify the single most significant, specific, and interesting news story or trend.
+                
+                Write a compelling, click-worthy blog post TITLE about this specific story.
+                
+                Rules:
+                - Do NOT use generic titles like "Trends in X" or "Future of Y".
+                - BE SPECIFIC. Example: "How the Red Sea Crisis is Impacting Tesla" or "NVIDIA's New Chip Plant Faces Water Shortage".
+                - If the news is negative, that's fine. Be objective but gripping.
+                - Return ONLY the title text. No quotes.
+            `
+                const headlineGen = await generateContent(topicPrompt, newsResults.results)
+
+                if (headlineGen.content && !headlineGen.error) {
+                    mainTopic = headlineGen.content.trim().replace(/^"|"$/g, '')
+                    console.log(`[Agent] 💡 Generated News-Based Topic: "${mainTopic}"`)
+                } else {
+                    mainTopic = `Emerging Trends in ${searchSubject} Supply Chain`
+                }
+            } else {
+                mainTopic = `The State of ${searchSubject} Supply Chain 2026`
             }
         }
 

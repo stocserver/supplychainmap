@@ -293,7 +293,7 @@ export const realEstateProductStages: ValueChainStageProducts[] = [
             ]
           }
         ],
-        tags: ['Brokerage', 'Advisory', 'Transactions', 'Services']
+        tags: ['Brokerage', 'Advisory', 'Transactions', 'Specialized Services']
       }
     ]
   }

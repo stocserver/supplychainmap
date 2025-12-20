@@ -24,7 +24,7 @@ export const bankingProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'financial-data',
-        name: 'Financial Data & Analytics',
+        name: 'Financial Data Providers & Analytics',
         description: 'Financial data providers and analytics platforms',
         longDescription: 'Companies that provide financial data, market intelligence, and analytics tools used by banks for risk management, compliance, and decision-making.',
         companiesDetailed: [
@@ -46,7 +46,7 @@ export const bankingProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'commercial-banking',
-        name: 'Commercial Banking',
+        name: 'Business Banking & Corporate Lending',
         description: 'Business banking services and corporate lending',
         longDescription: 'Banking services for businesses including commercial loans, treasury management, trade finance, and corporate banking solutions.',
         companiesDetailed: [
@@ -96,7 +96,7 @@ export const bankingProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'investment-banking',
-        name: 'Investment Banking',
+        name: 'Capital Markets & Advisory',
         description: 'Capital markets, M&A, and advisory services',
         longDescription: 'Investment banking services including mergers & acquisitions, capital raising, trading, and financial advisory services.',
         companiesDetailed: [
@@ -120,7 +120,7 @@ export const bankingProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'wealth-management',
-        name: 'Wealth Management',
+        name: 'Private Banking & Investment Advisory',
         description: 'Private banking and investment advisory services',
         longDescription: 'High-net-worth individual and family wealth management services including investment advisory, estate planning, and private banking.',
         companiesDetailed: [
@@ -142,7 +142,7 @@ export const bankingProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'retail-banking',
-        name: 'Retail Banking',
+        name: 'Consumer Banking & Digital Platforms',
         description: 'Consumer banking services and digital platforms',
         longDescription: 'Consumer-focused banking services including checking accounts, savings accounts, personal loans, mortgages, and digital banking platforms.',
         companiesDetailed: [
@@ -189,7 +189,7 @@ export const bankingProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'credit-cards',
-        name: 'Credit Cards & Payments',
+        name: 'Card Issuing & Payment Processing',
         description: 'Credit card issuing and payment processing',
         longDescription: 'Credit card issuing, payment processing, and related financial services for consumers and businesses.',
         companiesDetailed: [

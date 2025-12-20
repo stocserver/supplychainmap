@@ -2,12 +2,12 @@ import type { ProductCategory, ValueChainStageProducts } from '@/lib/data/indust
 
 const upstream: ValueChainStageProducts = {
   stage: 'upstream',
-  stageLabel: 'Upstream',
+  stageLabel: 'Infrastructure & Hardware',
   layout: 'grid',
   products: [
     {
       id: 'dc-infra',
-      name: 'Data Center Infrastructure',
+      name: 'Colocation & Interconnection',
       description:
         'Facilities, power, cooling, and interconnection platforms that underpin cloud availability and performance.',
       longDescription:
@@ -22,7 +22,7 @@ const upstream: ValueChainStageProducts = {
     },
     {
       id: 'network-hw',
-      name: 'Networking Hardware',
+      name: 'Cloud Networking Equipment',
       description:
         'Switches, routers, and data center networking fabrics enabling east–west/edge connectivity at scale.',
       longDescription:
@@ -41,12 +41,12 @@ const upstream: ValueChainStageProducts = {
 
 const midstream: ValueChainStageProducts = {
   stage: 'midstream',
-  stageLabel: 'Midstream',
+  stageLabel: 'Cloud Platforms & Services',
   layout: 'hybrid',
   products: [
     {
       id: 'iaas-paas',
-      name: 'Cloud Platforms (IaaS/PaaS)',
+      name: 'Core Cloud Services (IaaS/PaaS)',
       description:
         'Compute, storage, and networking primitives plus managed platform services for building applications.',
       longDescription:
@@ -62,7 +62,7 @@ const midstream: ValueChainStageProducts = {
     },
     {
       id: 'databases-storage',
-      name: 'Cloud Databases & Storage',
+      name: 'Managed Databases & Data Storage',
       description:
         'Managed databases, data warehouses, streaming, and scalable object/block/file storage.',
       longDescription:
@@ -83,7 +83,7 @@ const midstream: ValueChainStageProducts = {
     },
     {
       id: 'cdn-edge',
-      name: 'CDN & Edge Compute',
+      name: 'Content Delivery & Edge Computing',
       description:
         'Global content delivery, security at the edge, and serverless compute near users.',
       longDescription:
@@ -101,12 +101,12 @@ const midstream: ValueChainStageProducts = {
 
 const downstream: ValueChainStageProducts = {
   stage: 'downstream',
-  stageLabel: 'Downstream',
+  stageLabel: 'Applications & Solutions',
   layout: 'grid',
   products: [
     {
       id: 'saas',
-      name: 'SaaS Applications',
+      name: 'Software-as-a-Service (SaaS)',
       description: 'Enterprise applications delivered as a service on cloud platforms.',
       longDescription:
         'Multi-tenant applications built on cloud platforms that deliver business capabilities via subscription. Emphasize time-to-value, integrations, security/compliance, and continuous delivery of features.',
@@ -129,7 +129,7 @@ const downstream: ValueChainStageProducts = {
     },
     {
       id: 'observability',
-      name: 'Observability & Security',
+      name: 'Cloud Observability & Security Tools',
       description: 'Monitoring, logging, APM, and cloud security posture management.',
       longDescription:
         'Cloud-native monitoring, logging, and application performance platforms that provide full-stack visibility and security posture management to meet reliability, performance, and compliance objectives.',

@@ -7,7 +7,7 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
     layout: 'flow',
     products: [
       {
-        id: 'network-equipment',
+        id: 'Network Hardware Manufacturing',
         name: 'Network Equipment',
         description: 'Telecommunications infrastructure and networking equipment',
         longDescription: 'Companies that manufacture networking equipment, routers, switches, and telecommunications infrastructure components.',
@@ -50,7 +50,7 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
         tags: ['Network Equipment', 'Infrastructure', '5G', 'Wireless']
       },
       {
-        id: 'tower-infrastructure',
+        id: 'Tower Ownership & Leasing',
         name: 'Tower Infrastructure',
         description: 'Cell tower and wireless infrastructure',
         longDescription: 'Companies that own, operate, and lease cell towers and wireless infrastructure to telecommunications carriers.',
@@ -72,7 +72,7 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
     layout: 'hybrid',
     products: [
       {
-        id: 'carriers',
+        id: 'Mobile Network Operators',
         name: 'Wireless Carriers',
         description: 'Mobile network operators and wireless service providers',
         longDescription: 'Companies that operate wireless networks and provide mobile voice, data, and messaging services to consumers and businesses.',
@@ -110,7 +110,7 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
         tags: ['Wireless', 'Mobile', 'Carriers', '5G']
       },
       {
-        id: 'fiber-networks',
+        id: 'Fiber Optic Network Operators',
         name: 'Fiber Networks',
         description: 'Fiber optic internet and broadband services',
         longDescription: 'Companies that provide high-speed internet services over fiber optic networks to residential and business customers.',
@@ -156,7 +156,7 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
     layout: 'grid',
     products: [
       {
-        id: 'consumer-services',
+        id: 'Bundled Consumer Services',
         name: 'Consumer Services',
         description: 'Consumer telecommunications and entertainment services',
         longDescription: 'Companies providing bundled telecommunications services including internet, TV, phone, and streaming services to consumers.',
@@ -194,7 +194,7 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
         tags: ['Consumer', 'Bundled Services', 'Entertainment', 'Streaming']
       },
       {
-        id: 'enterprise-solutions',
+        id: 'Enterprise Connectivity & IT Services',
         name: 'Enterprise Solutions',
         description: 'Business telecommunications and cloud services',
         longDescription: 'Companies providing telecommunications, cloud, and connectivity solutions to businesses and enterprises.',
@@ -208,7 +208,7 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
         ],
         subProducts: [
           {
-            id: 'cloud-connectivity',
+            id: 'Cloud Interconnection Services',
             name: 'Cloud Connectivity',
             description: 'Cloud and data center connectivity',
             longDescription: 'Direct connect and IP transit solutions linking enterprise networks to cloud providers and data centers, optimizing latency, throughput, and security for hybrid architectures.',
@@ -219,7 +219,7 @@ export const telecommunicationsProductStages: ValueChainStageProducts[] = [
             ]
           },
           {
-            id: 'managed-services',
+            id: 'Managed Network Services',
             name: 'Managed Services',
             description: 'Managed telecommunications services',
             longDescription: 'Outsourced operation and monitoring of enterprise networks including SD‑WAN, security, voice, and collaboration, delivered with SLAs and 24/7 NOCs.',

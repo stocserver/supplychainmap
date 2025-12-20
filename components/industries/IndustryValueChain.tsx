@@ -266,7 +266,7 @@ export function IndustryValueChain({
         <CardContent className="overflow-x-auto">
           {/* Horizontal Layout - Centered */}
           <div className="flex items-start justify-center gap-4 pb-4">
-              {/* Upstream Section */}
+            {/* Upstream Section */}
             <div className="flex flex-col gap-4">
               <h3 className="text-center text-sm font-semibold text-blue-600">Upstream</h3>
               <div className="flex flex-col gap-3">
@@ -281,7 +281,7 @@ export function IndustryValueChain({
                       {segment.products && segment.products.length > 0 && (
                         <div className="space-y-1 mb-2">
                           {segment.products.slice(0, 4).map((product, idx) => (
-                            <p key={idx} className="text-xs text-blue-700 leading-relaxed">
+                            <p key={idx} className="text-xs text-blue-700 leading-relaxed break-words whitespace-normal">
                               • {product}
                             </p>
                           ))}
@@ -320,7 +320,7 @@ export function IndustryValueChain({
                       {segment.products && segment.products.length > 0 && (
                         <div className="space-y-1 mb-2">
                           {segment.products.slice(0, 4).map((product, idx) => (
-                            <p key={idx} className="text-xs text-purple-700 leading-relaxed">
+                            <p key={idx} className="text-xs text-purple-700 leading-relaxed break-words whitespace-normal">
                               • {product}
                             </p>
                           ))}
@@ -352,7 +352,7 @@ export function IndustryValueChain({
                           {subcategory.products && subcategory.products.length > 0 && (
                             <div className="space-y-0.5 mb-1">
                               {subcategory.products.slice(0, 3).map((product, idx) => (
-                                <p key={idx} className="text-xs text-purple-600 leading-relaxed">
+                                <p key={idx} className="text-xs text-purple-600 leading-relaxed break-words whitespace-normal">
                                   • {product}
                                 </p>
                               ))}
@@ -394,7 +394,7 @@ export function IndustryValueChain({
                         {segment.products && segment.products.length > 0 && (
                           <div className="space-y-1 mb-2">
                             {segment.products.slice(0, 4).map((product, idx) => (
-                              <p key={idx} className="text-xs text-green-700 leading-relaxed">
+                              <p key={idx} className="text-xs text-green-700 leading-relaxed break-words whitespace-normal">
                                 • {product}
                               </p>
                             ))}
@@ -426,7 +426,7 @@ export function IndustryValueChain({
                             {subcategory.products && subcategory.products.length > 0 && (
                               <div className="space-y-0.5 mb-1">
                                 {subcategory.products.slice(0, 3).map((product, idx) => (
-                                  <p key={idx} className="text-xs text-green-600 leading-relaxed">
+                                  <p key={idx} className="text-xs text-green-600 leading-relaxed break-words whitespace-normal">
                                     • {product}
                                   </p>
                                 ))}
@@ -466,7 +466,7 @@ export function IndustryValueChain({
                   {selectedSegment.description}
                 </DialogDescription>
               </DialogHeader>
-              
+
               {/* Products Section */}
               {(selectedSegment as any).products && (selectedSegment as any).products.length > 0 && (
                 <div className="mt-4 rounded-lg border bg-muted/30 p-4">

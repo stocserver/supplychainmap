@@ -2,12 +2,12 @@ import type { ValueChainStageProducts } from '@/lib/data/industries'
 
 const upstream: ValueChainStageProducts = {
   stage: 'upstream',
-  stageLabel: 'Upstream',
+  stageLabel: 'Raw Material Extraction',
   layout: 'grid',
   products: [
     {
       id: 'battery-materials',
-      name: 'Battery Materials & Components',
+      name: 'Lithium Mining & Refining',
       description: 'Lithium, cathode/anode materials, electrolytes, and separators for EV batteries.',
       companiesDetailed: [
         { name: 'Albemarle', ticker: 'ALB', listing: 'US' },
@@ -22,7 +22,7 @@ const upstream: ValueChainStageProducts = {
     },
     {
       id: 'power-semis',
-      name: 'Power Semiconductors (SiC/GaN)',
+      name: 'Semiconductor Manufacturing (SiC/GaN)',
       description: 'High-voltage devices enabling efficient traction inverters, OBCs, and DC-DC converters.',
       companiesDetailed: [
         { name: 'onsemi', ticker: 'ON', listing: 'US' },
@@ -38,12 +38,12 @@ const upstream: ValueChainStageProducts = {
 
 const midstream: ValueChainStageProducts = {
   stage: 'midstream',
-  stageLabel: 'Midstream',
+  stageLabel: 'Component Manufacturing & Integration',
   layout: 'hybrid',
   products: [
     {
       id: 'cells-packs',
-      name: 'Battery Cells & Packs',
+      name: 'Battery Cell & Pack Manufacturing',
       description: 'Cell manufacturing, module assembly, and pack integration with BMS.',
       companiesDetailed: [
         { name: 'Tesla', ticker: 'TSLA', listing: 'US' },
@@ -57,7 +57,7 @@ const midstream: ValueChainStageProducts = {
     },
     {
       id: 'drivetrain',
-      name: 'Drivetrain & Power Electronics',
+      name: 'Electric Drivetrain & Power Electronics Manufacturing',
       description: 'Traction inverters, e-axles, motors, onboard chargers, DC-DC converters.',
       companiesDetailed: [
         { name: 'BorgWarner', ticker: 'BWA', listing: 'US' },
@@ -70,7 +70,7 @@ const midstream: ValueChainStageProducts = {
     },
     {
       id: 'charging-hw',
-      name: 'Charging Hardware',
+      name: 'EV Charging Station Manufacturing',
       description: 'Fast DC chargers, AC charging stations, connectors, and power modules.',
       companiesDetailed: [
         { name: 'ChargePoint', ticker: 'CHPT', listing: 'US' },
@@ -88,12 +88,12 @@ const midstream: ValueChainStageProducts = {
 
 const downstream: ValueChainStageProducts = {
   stage: 'downstream',
-  stageLabel: 'Downstream',
+  stageLabel: 'Vehicle Assembly & Services',
   layout: 'grid',
   products: [
     {
       id: 'ev-oems',
-      name: 'EV OEMs',
+      name: 'Electric Vehicle Manufacturing',
       description: 'Pure-play and legacy automakers producing battery electric vehicles.',
       companiesDetailed: [
         { name: 'Tesla', ticker: 'TSLA', listing: 'US' },
@@ -110,7 +110,7 @@ const downstream: ValueChainStageProducts = {
     },
     {
       id: 'charging-networks',
-      name: 'Charging Networks & Services',
+      name: 'EV Charging Network Operation & Software',
       description: 'Public charging networks, software, and payments.',
       companiesDetailed: [
         { name: 'ChargePoint', ticker: 'CHPT', listing: 'US' },

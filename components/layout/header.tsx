@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu } from "lucide-react"
 import {
@@ -11,15 +12,27 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+import { CountrySwitcher } from "@/components/layout/country-switcher"
+
 export function Header() {
   const [open, setOpen] = useState(false)
+  const searchParams = useSearchParams()
+  const country = searchParams.get("country")
+
+  // Helper to build country-aware URLs
+  const getHref = (path: string) => {
+    if (country && country !== 'US') {
+      return `${path}?country=${country}`
+    }
+    return path
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container relative grid h-16 items-center grid-cols-[1fr_auto] md:grid-cols-3">
         {/* Left: Brand */}
         <div className="flex items-center">
-          <Link href="/" className="mr-6 flex items-center space-x-2 min-w-0">
+          <Link href={getHref("/")} className="mr-6 flex items-center space-x-2 min-w-0">
             <Image
               src="/otters.png"
               alt="StockOtters"
@@ -39,13 +52,13 @@ export function Header() {
         <div className="hidden md:flex items-center justify-center">
           <nav className="flex items-center space-x-8">
             <Link
-              href="/industries"
+              href={getHref("/industries")}
               className="text-base font-semibold transition-colors hover:text-foreground"
             >
               Industries
             </Link>
             <Link
-              href="/companies"
+              href={getHref("/companies")}
               className="transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
             >
               Companies
@@ -65,6 +78,11 @@ export function Header() {
           </nav>
         </div>
 
+        {/* Right: Actions (Desktop) - Country Switcher */}
+        <div className="hidden md:flex justify-end">
+          <CountrySwitcher />
+        </div>
+
         {/* Right: Kebab (mobile) */}
         <div className="flex justify-end md:hidden">
           <Dialog open={open} onOpenChange={setOpen}>
@@ -76,14 +94,14 @@ export function Header() {
             <DialogContent className="w-[90%] max-w-sm">
               <nav className="flex flex-col space-y-4 pt-4">
                 <Link
-                  href="/industries"
+                  href={getHref("/industries")}
                   className="text-lg font-semibold px-2 py-2"
                   onClick={() => setOpen(false)}
                 >
                   Industries
                 </Link>
                 <Link
-                  href="/companies"
+                  href={getHref("/companies")}
                   className="transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium px-2 py-2"
                   onClick={() => setOpen(false)}
                 >
@@ -103,6 +121,9 @@ export function Header() {
                 >
                   About
                 </Link>
+                <div className="px-2 pt-4 border-t">
+                  <CountrySwitcher />
+                </div>
               </nav>
             </DialogContent>
           </Dialog>

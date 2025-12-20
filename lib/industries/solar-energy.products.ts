@@ -2,7 +2,7 @@ import type { ValueChainStageProducts } from '@/lib/data/industries'
 
 const upstream: ValueChainStageProducts = {
   stage: 'upstream',
-  stageLabel: 'Upstream',
+  stageLabel: 'Raw Material Extraction & Processing',
   layout: 'grid',
   products: [
     {
@@ -18,7 +18,7 @@ const upstream: ValueChainStageProducts = {
     },
     {
       id: 'glass-encapsulants',
-      name: 'Glass & Encapsulants',
+      name: 'Module Components',
       description: 'Front glass, backsheets, and encapsulants for module durability.',
       companiesDetailed: [
         { name: 'First Solar', ticker: 'FSLR', listing: 'US' },
@@ -32,12 +32,12 @@ const upstream: ValueChainStageProducts = {
 
 const midstream: ValueChainStageProducts = {
   stage: 'midstream',
-  stageLabel: 'Midstream',
+  stageLabel: 'Component Manufacturing & Assembly',
   layout: 'hybrid',
   products: [
     {
       id: 'cells-modules',
-      name: 'Cells & Modules',
+      name: 'Solar Panel Manufacturing',
       description: 'Solar cell processing and module assembly.',
       companiesDetailed: [
         { name: 'First Solar', ticker: 'FSLR', listing: 'US' },
@@ -52,7 +52,7 @@ const midstream: ValueChainStageProducts = {
     },
     {
       id: 'inverters',
-      name: 'Inverters & Power Electronics',
+      name: 'Balance of System (BOS) Components',
       description: 'String and microinverters, optimizers, and BOS electronics.',
       companiesDetailed: [
         { name: 'Enphase', ticker: 'ENPH', listing: 'US' },
@@ -67,12 +67,12 @@ const midstream: ValueChainStageProducts = {
 
 const downstream: ValueChainStageProducts = {
   stage: 'downstream',
-  stageLabel: 'Downstream',
+  stageLabel: 'Project Development & Installation',
   layout: 'grid',
   products: [
     {
       id: 'residential',
-      name: 'Residential Installers',
+      name: 'Residential Solar Installation',
       description: 'Design, install, and service rooftop solar systems for homes.',
       companiesDetailed: [
         { name: 'Sunrun', ticker: 'RUN', listing: 'US' },
@@ -83,7 +83,7 @@ const downstream: ValueChainStageProducts = {
     },
     {
       id: 'utility-scale',
-      name: 'Utility-scale Developers',
+      name: 'Utility-Scale Project Development',
       description: 'Develop, finance, and operate utility-scale solar farms.',
       companiesDetailed: [
         { name: 'NextEra Energy', ticker: 'NEE', listing: 'US' },

@@ -3,7 +3,7 @@ import { Metadata } from "next"
 import { supabaseServer } from "@/lib/supabase/server"
 import { IndustriesClient, DbIndustry } from "@/components/industries/industries-client"
 
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 0 // Disable cache for debugging
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
 
@@ -19,37 +19,67 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function IndustriesPage() {
+export default async function IndustriesPage({
+  searchParams,
+}: {
+  searchParams: { country?: string }
+}) {
+  const country = searchParams.country || 'US'
+
   // Fetch industries data on the server
   let industriesList: DbIndustry[] = []
 
+  // Skip DB for now and use local file logic directly to test the switch
+  // (Since we haven't updated the DB schema to support regions yet)
   try {
-    const { data } = await supabaseServer
-      .from('industries')
-      .select('name, slug, description, color, icon, category')
+    const { getIndustries } = await import('@/lib/data/industries')
+    const industriesData = getIndustries(country)
 
-    if (data) {
-      industriesList = data as DbIndustry[]
-    }
+    industriesList = industriesData.map((i: any) => ({
+      name: i.name,
+      slug: i.slug,
+      description: i.description,
+      color: i.color,
+      icon: i.icon,
+      category: (i as any).category || null
+    }))
   } catch (e) {
-    console.error("Failed to fetch industries:", e)
+    console.error("Failed to load local industries:", e)
   }
 
-  // Fallback if DB is empty
-  if (industriesList.length === 0) {
-    try {
-      const { industries } = await import('@/lib/data/industries')
-      industriesList = industries.map((i: any) => ({
-        name: i.name,
-        slug: i.slug,
-        description: i.description,
-        color: i.color,
-        icon: i.icon,
-        category: (i as any).category || null
-      }))
-    } catch (e) {
-      console.error("Failed to load local industries:", e)
+  // Fetch companies for dynamic popup contextualization
+  // Pagination required to bypass 1000 row limit
+  let dbRows: any[] = []
+  let from = 0
+  const batchSize = 1000
+  while (true) {
+    const { data, error } = await supabaseServer
+      .from('companies')
+      .select('ticker, name, industry, value_chain_tags')
+      .eq('country', country)
+      .range(from, from + batchSize - 1)
+
+    if (error) {
+      console.error("Fetch error:", error)
+      break
     }
+    if (data && data.length > 0) {
+      dbRows = [...dbRows, ...data]
+      if (data.length < batchSize) break
+    } else {
+      break
+    }
+    from += batchSize
+  }
+
+  // Calculate counts for tile badges
+  const counts: Record<string, number> = {}
+  if (dbRows) {
+    dbRows.forEach((r: any) => {
+      if (r.industry) {
+        counts[r.industry] = (counts[r.industry] || 0) + 1
+      }
+    })
   }
 
   // Structured Data for SEO
@@ -75,7 +105,7 @@ export default async function IndustriesPage() {
       />
 
       <Suspense fallback={<div className="container py-8 text-center text-muted-foreground">Loading industries...</div>}>
-        <IndustriesClient initialIndustries={industriesList} />
+        <IndustriesClient initialIndustries={industriesList} country={country} companyCounts={counts} companies={dbRows || []} />
       </Suspense>
     </>
   )

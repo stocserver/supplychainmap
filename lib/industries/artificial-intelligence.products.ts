@@ -8,7 +8,7 @@ export const artificialIntelligenceProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'ai-chips',
-        name: 'AI Chips & Systems',
+        name: 'AI Chips & Hardware',
         description: 'GPUs, accelerators, and systems for AI training and inference',
         longDescription: 'Specialized hardware components, including Graphics Processing Units (GPUs), Application-Specific Integrated Circuits (ASICs), and Field-Programmable Gate Arrays (FPGAs), designed to accelerate AI and machine learning workloads. These systems provide the computational power required for training complex neural networks and performing high-speed inference.',
         companiesDetailed: [
@@ -26,7 +26,7 @@ export const artificialIntelligenceProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'data-infrastructure',
-        name: 'Data Infrastructure',
+        name: 'Data Management for AI',
         description: 'Data platforms, pipelines, observability for AI workloads',
         longDescription: 'Foundational systems and tools for managing, processing, and analyzing the vast amounts of data required for AI development. This includes data lakes, data warehouses, ETL pipelines, and observability tools that ensure data quality and availability for training and deploying AI models.',
         companiesDetailed: [
@@ -48,7 +48,7 @@ export const artificialIntelligenceProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'ml-platforms',
-        name: 'ML Platforms',
+        name: 'AI Development & Hosting Platforms',
         description: 'Model development, training, hosting, and API platforms',
         longDescription: 'Integrated platforms that provide tools and services for the entire machine learning lifecycle, from data preparation and model development to training, deployment, and management. These platforms often offer features like automated machine learning (AutoML), experiment tracking, and model serving via APIs.',
         companiesDetailed: [
@@ -64,7 +64,7 @@ export const artificialIntelligenceProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'mlops',
-        name: 'MLOps & ModelOps',
+        name: 'AI Operations & Deployment',
         description: 'Experiment tracking, deployment, monitoring, and governance',
         longDescription: 'Practices and tools for operationalizing machine learning models in production environments. MLOps focuses on automating and standardizing the deployment, monitoring, and management of ML models to ensure reliability, scalability, and compliance, bridging the gap between data science and operations.',
         companiesDetailed: [
@@ -83,7 +83,7 @@ export const artificialIntelligenceProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'ai-software',
-        name: 'AI Software',
+        name: 'Applied AI Solutions',
         description: 'Applied AI in productivity, security, and analytics',
         longDescription: 'Software solutions that embed AI capabilities to enhance various business functions, including productivity tools (e.g., AI assistants), cybersecurity platforms (e.g., threat detection), and advanced analytics applications. These solutions leverage AI models to automate tasks, provide insights, and improve decision-making.',
         companiesDetailed: [

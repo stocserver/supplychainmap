@@ -3,7 +3,7 @@ import { ValueChainStageProducts } from "@/lib/data/industries"
 export const automotiveProductStages: ValueChainStageProducts[] = [
   {
     stage: 'upstream',
-    stageLabel: 'Components & Suppliers',
+    stageLabel: 'Component Manufacturing & Supply',
     layout: 'flow',
     products: [
       {
@@ -71,12 +71,12 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
   },
   {
     stage: 'midstream',
-    stageLabel: 'Vehicle Manufacturing',
+    stageLabel: 'Vehicle Assembly & Production',
     layout: 'hybrid',
     products: [
       {
         id: 'auto-manufacturing',
-        name: 'Vehicle Manufacturing',
+        name: 'Vehicle Assembly & Production',
         description: 'Automotive assembly and manufacturing',
         longDescription: 'Companies that design, engineer, and manufacture complete vehicles including cars, trucks, SUVs, and commercial vehicles.',
         companiesDetailed: [
@@ -141,7 +141,7 @@ export const automotiveProductStages: ValueChainStageProducts[] = [
   },
   {
     stage: 'downstream',
-    stageLabel: 'Sales & Services',
+    stageLabel: 'Sales, Aftermarket & Services',
     layout: 'grid',
     products: [
       {

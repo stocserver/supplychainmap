@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { useMemo, useRef, useState } from "react"
 import type { ProductCategory, ValueChainStageProducts } from "@/lib/data/industries"
+import { getRegionallyContextualizedStages } from "@/lib/data/industries"
 import { semiconductorProductStages } from "@/lib/industries/semiconductors.products"
 import { cloudProductStages } from "@/lib/industries/cloud-computing.products"
 import { dataCenterProductStages } from "@/lib/industries/data-centers.products"
@@ -18,7 +19,7 @@ import { oilGasProductStages } from "@/lib/industries/oil-gas.products"
 import { automotiveProductStages } from "@/lib/industries/automotive.products"
 import { retailProductStages } from "@/lib/industries/retail.products"
 import { telecommunicationsProductStages } from "@/lib/industries/telecommunications.products"
-import { aerospaceProductStages } from "@/lib/industries/aerospace.products"
+import { aerospaceProductStages } from "@/lib/industries/aerospace-defense.products"
 import { biotechnologyProductStages } from "@/lib/industries/biotechnology.products"
 import { insuranceProductStages } from "@/lib/industries/insurance.products"
 import { mediaEntertainmentProductStages } from "@/lib/industries/media-entertainment.products"
@@ -40,6 +41,9 @@ import { consumerProductsProductStages } from "@/lib/industries/consumer-product
 import { hospitalityProductStages } from "@/lib/industries/hospitality.products"
 import { constructionEngineeringProductStages } from "@/lib/industries/construction-engineering.products"
 import { agtechProductStages } from "@/lib/industries/agtech.products"
+import { heavyIndustryProducts } from "@/lib/industries/heavy-industry.products"
+import { consumerElectronicsProducts } from "@/lib/industries/consumer-electronics.products"
+import { wholesaleTradingProducts } from "@/lib/industries/wholesale-trading.products"
 
 export interface DbIndustry {
     name: string
@@ -52,9 +56,13 @@ export interface DbIndustry {
 
 interface IndustriesClientProps {
     initialIndustries: DbIndustry[]
+    country?: string
+    companyCounts?: Record<string, number>
+    companies?: any[] // Loaded from server
 }
 
-export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
+export function IndustriesClient({ initialIndustries, country = 'US', companyCounts, companies = [] }: IndustriesClientProps) {
+    console.log(`[IndustriesClient] Received ${companies?.length} companies for country ${country}`)
     // Category filters mapped to the previous groupings
     const categoryOptions = useMemo(() => [
         { label: "All", value: "all", ids: null as string[] | null },
@@ -93,6 +101,34 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
         'robotics-automation': 'robotics',
     }), [])
 
+    // Calculate rich counts (including cross-industry tags) for all industries
+    // This allows the card badge to match the popup "Total Companies" count
+    const richCounts = useMemo(() => {
+        const counts: Record<string, number> = {}
+        if (!companies) return counts
+
+        industriesList.forEach(ind => {
+            const stages = getContextualizedStagesForSlug(ind.slug)
+            if (stages) {
+                // Collect all unique companies across all stages
+                const unique = new Set<string>()
+                stages.forEach(s => {
+                    s.products.forEach(p => {
+                        const { all } = collectCompanies(p) as any
+                        if (all) {
+                            all.forEach((c: any) => {
+                                if (c.ticker) unique.add(c.ticker)
+                                else if (c.name) unique.add(c.name)
+                            })
+                        }
+                    })
+                })
+                counts[ind.slug] = unique.size
+            }
+        })
+        return counts
+    }, [industriesList, companies, category])
+
     const filtered = useMemo(() => {
         const selected = categoryOptions.find(c => c.value === category)
         const inSelected = (slug: string, category?: string | null) => {
@@ -102,9 +138,9 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
             return selected.ids.includes(slug) || (slug in aliasBySlug && selected.ids.includes(aliasBySlug[slug as keyof typeof aliasBySlug]))
         }
         return industriesList
-            .filter(i => inSelected(i.slug, i.category))
+            .filter(i => inSelected(i.slug, i.category) && richCounts[i.slug] > 0)
             .sort((a, b) => a.name.localeCompare(b.name))
-    }, [category, industriesList, categoryOptions, aliasBySlug])
+    }, [category, industriesList, categoryOptions, aliasBySlug, richCounts])
 
     function getStagesForSlug(slug: string): ValueChainStageProducts[] | null {
         switch (slug) {
@@ -148,8 +184,93 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
             case 'hospitality': return hospitalityProductStages
             case 'construction-engineering': return constructionEngineeringProductStages
             case 'agtech': return agtechProductStages
+            case 'heavy-industry': return heavyIndustryProducts
+            case 'consumer-electronics': return consumerElectronicsProducts
+            case 'wholesale-trading': return wholesaleTradingProducts
             default: return null
         }
+    }
+
+    // Wrapper that applies region contextualization
+    function getContextualizedStagesForSlug(slug: string): ValueChainStageProducts[] | null {
+        const raw = getStagesForSlug(slug)
+        if (!raw) return null
+
+        // Find relevant companies for this industry
+        // Handle aliases if needed (e.g. 'semiconductors' in DB might map to 'semiconductors' slug)
+        // Ideally DB industry column matches the manual slug taxonomy exactly.
+        // Pass ALL companies so that companies from other industries (e.g. "Software") 
+        // can appear here if they have matching tags (e.g. "ai-software").
+        // The filtering happens inside getRegionallyContextualizedStages via tag matching.
+        const dynamicCompanies = companies
+
+        // console.log(`[IndustriesClient] Slug: ${slug}, Matches: ${dynamicCompanies?.length}`)
+
+        // Transform to expected format: { ticker, name, tags, country }
+        const formattedCompanies = dynamicCompanies?.map(c => ({
+            ticker: c.ticker,
+            name: c.name,
+            tags: c.value_chain_tags || [],
+            country: c.country,
+            industry: c.industry // Pass industry for filtering orphans
+        }))
+
+        const contextualized = getRegionallyContextualizedStages(raw, slug, country, formattedCompanies)
+
+        // Find orphans (companies that didn't get mapped to any product)
+        if (formattedCompanies && formattedCompanies.length > 0) {
+            const mappedTickers = new Set<string>()
+
+            // Helper to collect mapped tickers
+            const collectMapped = (products: ProductCategory[]) => {
+                products.forEach(p => {
+                    const companies = (p as any).companiesDetailed || []
+                    companies.forEach((c: any) => {
+                        if (c.ticker) mappedTickers.add(c.ticker)
+                    })
+                    if (p.subProducts) collectMapped(p.subProducts)
+                })
+            }
+
+            contextualized.forEach(stage => collectMapped(stage.products))
+
+            // Only consider orphans if they PRIMARILY belong to this industry
+            // (Exclude companies from other industries that simply didn't match a tag here)
+            const orphans = formattedCompanies.filter(c => !mappedTickers.has(c.ticker) && c.industry === slug)
+
+            if (orphans.length > 0) {
+                // Determine where to put them. 
+                // Option A: Specific "General" category in the first stage?
+                // Option B: A new stage "Uncategorized"?
+
+                // Let's go with Option A: Add to first stage as "General / Uncategorized"
+                if (contextualized.length > 0) {
+                    const firstStage = contextualized[0]
+
+                    // Check if a General bucket already exists to avoid duplication if run multiple times (though likely fresh copy)
+                    const generalId = `${slug}-general`
+                    const existing = firstStage.products.find(p => p.id === generalId)
+
+                    if (!existing) {
+                        firstStage.products.push({
+                            id: generalId,
+                            name: "General / Uncategorized",
+                            description: "Companies not yet categorized into specific segments",
+                            companiesDetailed: orphans.map(c => ({
+                                name: c.name,
+                                ticker: c.ticker,
+                                listing: c.country === 'US' ? 'US' : 'Foreign',
+                                country: c.country
+                            })),
+                            companies: orphans.map(c => c.ticker), // Legacy
+                            subProducts: []
+                        } as any)
+                    }
+                }
+            }
+        }
+
+        return contextualized
     }
 
     function collectCompanies(product?: ProductCategory): { count: number } {
@@ -165,9 +286,12 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
         return { count: seen.size, ...({ all } as any) }
     }
 
+
+
+
     function openPreviewAtTile(e: React.MouseEvent<HTMLDivElement>, slug: string, name: string) {
         cancelHide()
-        const stages = getStagesForSlug(slug)
+        const stages = getContextualizedStagesForSlug(slug)
         if (!stages) return
         const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect()
         const viewportWidth = window.innerWidth
@@ -209,7 +333,7 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
     function openMobilePreview(slug: string, name: string) {
-        const stages = getStagesForSlug(slug)
+        const stages = getContextualizedStagesForSlug(slug)
         if (!stages) return
         setMobilePreview({ slug, name, stages })
         setMobileOpen(true)
@@ -220,7 +344,7 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
             <div className="mb-4">
                 <h1 className="mb-2 text-3xl font-bold">Industry Value Chains</h1>
                 <p className="text-sm text-muted-foreground">
-                    Use category filters to narrow results. Compact tiles keep everything visible.
+                    Tracking <span className="font-medium text-foreground">{companies?.length || 0}</span> companies across major sectors. Use category filters to narrow results.
                 </p>
             </div>
 
@@ -235,8 +359,8 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
                                 aria-pressed={selected}
                                 onClick={() => setCategory(opt.value)}
                                 className={`rounded-full border px-3 py-1.5 transition-colors ${selected
-                                        ? 'border-primary bg-primary text-primary-foreground'
-                                        : 'border-input bg-background text-foreground hover:bg-accent'
+                                    ? 'border-primary bg-primary text-primary-foreground'
+                                    : 'border-input bg-background text-foreground hover:bg-accent'
                                     }`}
                             >
                                 {opt.label}
@@ -262,8 +386,13 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
                             <div className="line-clamp-1 px-2 text-center text-xs font-medium">
                                 {industry.name}
                             </div>
+                            {richCounts && richCounts[industry.slug] ? (
+                                <div className="mt-1 text-[10px] text-muted-foreground">
+                                    {richCounts[industry.slug]} Companies
+                                </div>
+                            ) : null}
                         </div>
-                        <Link href={`/industries/${industry.slug}`} aria-label={`Open ${industry.name}`} className="absolute inset-0 hidden md:block" />
+                        <Link href={`/industries/${industry.slug}${country !== 'US' ? `?country=${country}` : ''}`} aria-label={`Open ${industry.name}`} className="absolute inset-0 hidden md:block" />
                     </div>
                 ))}
             </div>
@@ -276,11 +405,22 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
                     onMouseLeave={scheduleHide}
                 >
                     <div className="mb-3 flex items-center justify-between">
-                        <p className="text-sm font-semibold">{hovered.name} Product Value Chain</p>
-                        <Link href={`/industries/${hovered.slug}`} className="text-xs font-medium text-primary hover:underline">Open full page</Link>
+                        <div className="flex items-center gap-2">
+                            <p className="text-sm font-semibold">{hovered.name} Product Value Chain</p>
+                            {richCounts && richCounts[hovered.slug] ? (
+                                <span className="rounded-md bg-muted px-1.5 py-0.5 text-[10px] font-normal text-muted-foreground">
+                                    {richCounts[hovered.slug]} Co.
+                                </span>
+                            ) : null}
+                        </div>
+                        <Link href={`/industries/${hovered.slug}${country !== 'US' ? `?country=${country}` : ''}`} className="text-xs font-medium text-primary hover:underline">Open full page</Link>
                     </div>
                     <div className="grid gap-4 md:grid-cols-3">
                         {hovered.stages.map((stage) => {
+                            // Filter products that have companies
+                            const visibleProducts = stage.products.filter(p => collectCompanies(p).count > 0)
+                            if (visibleProducts.length === 0) return null
+
                             const color = stage.stage === 'upstream'
                                 ? { header: 'text-blue-700', border: 'border-blue-200', bg: 'from-blue-50 to-blue-100' }
                                 : stage.stage === 'midstream'
@@ -290,27 +430,64 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
                                 <div key={stage.stage} className={`flex min-w-[300px] flex-col gap-3 rounded-xl border ${color.border} bg-gradient-to-b ${color.bg} p-3`}>
                                     <h3 className={`text-center text-xs font-semibold ${color.header}`}>{stage.stageLabel}</h3>
                                     <div className="grid gap-2" style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))' }}>
-                                        {stage.products.map((p: ProductCategory) => (
-                                            <div key={p.id} className="rounded-xl border bg-white p-3 shadow-sm">
-                                                <Link href={`/industries/${hovered.slug}?product=${encodeURIComponent(p.id)}`} className="flex items-start justify-between">
-                                                    <p className="text-sm font-medium break-words">{p.name}</p>
-                                                    <span className="rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">{collectCompanies(p).count}</span>
-                                                </Link>
-                                                {(p as any).subProducts && (p as any).subProducts.length > 0 && (
-                                                    <div className="mt-2 grid gap-1">
-                                                        {(p as any).subProducts.slice(0, 3).map((sp: ProductCategory) => (
-                                                            <Link key={sp.id} href={`/industries/${hovered.slug}?product=${encodeURIComponent(sp.id)}`} className="flex items-center justify-between rounded-lg border bg-white px-2 py-1 text-[12px] hover:bg-muted/40" title={(sp as any).description}>
-                                                                <span className="truncate pr-2">{sp.name}</span>
-                                                                <span className="rounded-md bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">{collectCompanies(sp).count}</span>
-                                                            </Link>
-                                                        ))}
-                                                        {(p as any).subProducts.length > 3 && (
-                                                            <Link href={`/industries/${hovered.slug}?product=${encodeURIComponent(p.id)}`} className="rounded-lg border bg-background px-2 py-1 text-[12px] text-muted-foreground hover:bg-accent">+{(p as any).subProducts.length - 3} more</Link>
-                                                        )}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        ))}
+                                        {visibleProducts.map((p: ProductCategory) => {
+                                            // Logic to find "Other" companies (in Parent but NOT in any displayed Child)
+                                            // Start unmapped calculation
+                                            const direct = (p as any).companiesDetailed || []
+                                            const subProducts = (p as any).subProducts || []
+
+                                            let unmappedCount = 0
+                                            if (direct.length > 0 && subProducts.length > 0) {
+                                                const childTickers = new Set<string>()
+                                                subProducts.forEach((sp: ProductCategory) => {
+                                                    const spAll = (collectCompanies(sp) as any).all || []
+                                                    spAll.forEach((c: any) => {
+                                                        if (c.ticker) childTickers.add(c.ticker)
+                                                    })
+                                                })
+                                                // items in direct that are NOT in childTickers
+                                                const unmapped = direct.filter((c: any) => !c.ticker || !childTickers.has(c.ticker))
+                                                unmappedCount = unmapped.length
+                                            }
+                                            // End unmapped calculation
+
+                                            return (
+                                                <div key={p.id} className="rounded-xl border bg-white p-3 shadow-sm">
+                                                    <Link href={`/industries/${hovered.slug}?product=${encodeURIComponent(p.id)}${country !== 'US' ? `&country=${country}` : ''}`} className="flex items-start justify-between gap-2">
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="text-sm font-medium break-words">{p.name}</p>
+                                                        </div>
+                                                        <span className="shrink-0 rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">{collectCompanies(p).count}</span>
+                                                    </Link>
+
+                                                    {((p as any).subProducts && (p as any).subProducts.length > 0) || unmappedCount > 0 ? (
+                                                        <div className="mt-2 grid gap-1">
+                                                            {(p as any).subProducts?.slice(0, 3).map((sp: ProductCategory) => {
+                                                                if (collectCompanies(sp).count === 0) return null
+                                                                return (
+                                                                    <Link key={sp.id} href={`/industries/${hovered.slug}?product=${encodeURIComponent(sp.id)}${country !== 'US' ? `&country=${country}` : ''}`} className="flex items-start justify-between gap-2 rounded-lg border bg-white px-2 py-1 text-[12px] hover:bg-muted/40" title={(sp as any).description}>
+                                                                        <span className="break-words min-w-0 flex-1 whitespace-normal">{sp.name}</span>
+                                                                        <span className="shrink-0 rounded-md bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">{collectCompanies(sp).count}</span>
+                                                                    </Link>
+                                                                )
+                                                            })}
+
+                                                            {/* Dynamic "Other" Link */}
+                                                            {unmappedCount > 0 && (
+                                                                <Link href={`/industries/${hovered.slug}?product=${encodeURIComponent(p.id + '-other')}${country !== 'US' ? `&country=${country}` : ''}`} className="flex items-start justify-between gap-2 rounded-lg border bg-white px-2 py-1 text-[12px] hover:bg-muted/40 italic text-muted-foreground">
+                                                                    <span className="break-words min-w-0 flex-1 whitespace-normal">Other {p.name}</span>
+                                                                    <span className="shrink-0 rounded-md bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">{unmappedCount}</span>
+                                                                </Link>
+                                                            )}
+
+                                                            {(p as any).subProducts?.length > 3 && (
+                                                                <Link href={`/industries/${hovered.slug}?product=${encodeURIComponent(p.id)}${country !== 'US' ? `&country=${country}` : ''}`} className="rounded-lg border bg-background px-2 py-1 text-[12px] text-muted-foreground hover:bg-accent">+{(p as any).subProducts.length - 3} more</Link>
+                                                            )}
+                                                        </div>
+                                                    ) : null}
+                                                </div>
+                                            )
+                                        })}
                                     </div>
                                 </div>
                             )
@@ -328,6 +505,10 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
                             </DialogHeader>
                             <div className="mt-2 space-y-3">
                                 {mobilePreview.stages.map((stage) => {
+                                    // Filter products
+                                    const visibleProducts = stage.products.filter(p => collectCompanies(p).count > 0)
+                                    if (visibleProducts.length === 0) return null
+
                                     const color = stage.stage === 'upstream'
                                         ? { header: 'text-blue-700', border: 'border-blue-200', bg: 'from-blue-50 to-blue-100' }
                                         : stage.stage === 'midstream'
@@ -337,10 +518,12 @@ export function IndustriesClient({ initialIndustries }: IndustriesClientProps) {
                                         <div key={stage.stage} className={`flex w-full flex-col gap-3 rounded-xl border ${color.border} bg-gradient-to-b ${color.bg} p-3`}>
                                             <h3 className={`text-center text-sm font-semibold ${color.header}`}>{stage.stageLabel}</h3>
                                             <div className="grid gap-2" style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))' }}>
-                                                {stage.products.map((p: ProductCategory) => (
-                                                    <Link key={p.id} href={`/industries/${mobilePreview.slug}?product=${encodeURIComponent(p.id)}`} className="flex items-start justify-between rounded-xl border bg-white p-3 shadow-sm">
-                                                        <p className="text-sm font-medium break-words">{p.name}</p>
-                                                        <span className="rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">{collectCompanies(p).count}</span>
+                                                {visibleProducts.map((p: ProductCategory) => (
+                                                    <Link key={p.id} href={`/industries/${mobilePreview.slug}?product=${encodeURIComponent(p.id)}${country !== 'US' ? `&country=${country}` : ''}`} className="flex items-start justify-between gap-2 rounded-xl border bg-white p-3 shadow-sm">
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="text-sm font-medium break-words">{p.name}</p>
+                                                        </div>
+                                                        <span className="shrink-0 rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">{collectCompanies(p).count}</span>
                                                     </Link>
                                                 ))}
                                             </div>

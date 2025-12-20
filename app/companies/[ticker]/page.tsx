@@ -14,8 +14,16 @@ import { FinancialStatements } from "@/components/company/FinancialStatements"
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export default async function CompanyPage({ params }: { params: { ticker: string } }) {
+export default async function CompanyPage({
+  params,
+  searchParams
+}: {
+  params: { ticker: string }
+  searchParams: { country?: string }
+}) {
   const ticker = params.ticker.toUpperCase()
+  const country = searchParams.country || 'US'
+  const backHref = country !== 'US' ? `/companies?country=${country}` : '/companies'
 
   // Try to fetch from Supabase; if missing, render page with placeholders
   const { data: fetched, error } = await supabaseServer
@@ -25,7 +33,7 @@ export default async function CompanyPage({ params }: { params: { ticker: string
     .maybeSingle()
 
   const companyData = fetched || null
-  
+
 
   // Extract data
   const profile = {
@@ -59,7 +67,7 @@ export default async function CompanyPage({ params }: { params: { ticker: string
   const eps = quote?.eps || incomeStatement?.eps
 
   return (
-    <div className="container py-8">
+    <div className="w-full max-w-[1400px] mx-auto px-3 sm:px-6 md:px-8 py-4 md:py-8">
       {/* JSON-LD: Company basic schema */}
       <script
         type="application/ld+json"
@@ -75,7 +83,7 @@ export default async function CompanyPage({ params }: { params: { ticker: string
         }}
       />
       {/* Back button */}
-      <Link href="/companies">
+      <Link href={backHref}>
         <Button variant="ghost" className="mb-6">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Companies
@@ -214,11 +222,11 @@ export default async function CompanyPage({ params }: { params: { ticker: string
               const hasEvToEbitda = keyMetrics?.evToEBITDATTM
               const hasRoe = keyMetrics?.returnOnEquityTTM
               const hasRoa = keyMetrics?.returnOnAssetsTTM
-              
+
               const hasAnyMetrics = peRatio || hasEvToSales || hasEvToEbitda || hasRoe || hasRoa || eps
-              
+
               if (!hasAnyMetrics) return null
-              
+
               return (
                 <Card>
                   <CardHeader>

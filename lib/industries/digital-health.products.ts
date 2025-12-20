@@ -58,7 +58,7 @@ export const digitalHealthProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'consumer-health',
-        name: 'Consumer Health',
+        name: 'Consumer Health Applications',
         description: 'Wellness, mental health, and chronic disease apps',
         longDescription: 'Digital applications and platforms directly engaging consumers for wellness, mental health support, and chronic disease management. These tools often provide personalized insights, coaching, and educational content to empower individuals in managing their health.',
         companiesDetailed: [

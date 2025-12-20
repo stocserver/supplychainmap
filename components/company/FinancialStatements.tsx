@@ -26,16 +26,16 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
   }
 
   const historicalFinancials = data.data.historicalFinancials || {}
-  
+
   // Get data based on selected period
-  const incomeStatements = period === 'annual' 
+  const incomeStatements = period === 'annual'
     ? (historicalFinancials.incomeStatements || [])
     : (historicalFinancials.incomeStatementsQuarterly || [])
-  
+
   const balanceSheets = period === 'annual'
     ? (historicalFinancials.balanceSheets || [])
     : (historicalFinancials.balanceSheetsQuarterly || [])
-  
+
   const cashFlowStatements = period === 'annual'
     ? (historicalFinancials.cashFlowStatements || [])
     : (historicalFinancials.cashFlowStatementsQuarterly || [])
@@ -58,7 +58,7 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
   const formatPeriodHeader = (stmt: any) => {
     const date = new Date(stmt.date)
     const year = date.getFullYear()
-    
+
     if (period === 'quarterly' && stmt.period) {
       return `${stmt.period} ${year}`
     }
@@ -121,7 +121,7 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
                           <CardTitle className="text-lg">{formatPeriodHeader(stmt)}</CardTitle>
                           <CardDescription>{new Date(stmt.date).toLocaleDateString()}</CardDescription>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="p-3">
                           <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
                             <div className="text-muted-foreground">Revenue</div>
                             <div className="text-right font-medium">{formatMillion(stmt.revenue)}</div>
@@ -325,7 +325,7 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
                         <CardTitle className="text-lg">{formatPeriodHeader(stmt)}</CardTitle>
                         <CardDescription>{new Date(stmt.date).toLocaleDateString()}</CardDescription>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="p-3">
                         <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
                           <div className="text-muted-foreground">Cash &amp; Equivalents</div>
                           <div className="text-right">{formatMillion(stmt.cashAndCashEquivalents)}</div>
@@ -454,7 +454,7 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
                         <CardTitle className="text-lg">{formatPeriodHeader(stmt)}</CardTitle>
                         <CardDescription>{new Date(stmt.date).toLocaleDateString()}</CardDescription>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="p-3">
                         <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
                           <div className="font-semibold text-green-700">Operating Cash Flow</div>
                           <div className="text-right font-semibold text-green-700">{formatMillion(stmt.operatingCashFlow)}</div>

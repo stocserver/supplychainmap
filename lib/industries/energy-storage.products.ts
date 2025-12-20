@@ -2,7 +2,7 @@ import type { ValueChainStageProducts } from '@/lib/data/industries'
 
 const upstream: ValueChainStageProducts = {
   stage: 'upstream',
-  stageLabel: 'Upstream',
+  stageLabel: 'Raw Material Extraction',
   layout: 'grid',
   products: [
     {
@@ -25,12 +25,12 @@ const upstream: ValueChainStageProducts = {
 
 const midstream: ValueChainStageProducts = {
   stage: 'midstream',
-  stageLabel: 'Midstream',
+  stageLabel: 'Component Manufacturing & Integration',
   layout: 'hybrid',
   products: [
     {
       id: 'cells-bess',
-      name: 'Cells & BESS Systems',
+      name: 'Battery Cell & BESS Manufacturing',
       description: 'Battery cell manufacturing and integrated battery energy storage systems (BESS).',
       companiesDetailed: [
         { name: 'Tesla', ticker: 'TSLA', listing: 'US' },
@@ -43,7 +43,7 @@ const midstream: ValueChainStageProducts = {
     },
     {
       id: 'inverters-ems',
-      name: 'Inverters & EMS',
+      name: 'Power Conversion & Management Systems',
       description: 'Bidirectional inverters, power conversion, and energy management systems.',
       companiesDetailed: [
         { name: 'Enphase', ticker: 'ENPH', listing: 'US' },
@@ -56,12 +56,12 @@ const midstream: ValueChainStageProducts = {
 
 const downstream: ValueChainStageProducts = {
   stage: 'downstream',
-  stageLabel: 'Downstream',
+  stageLabel: 'Deployment & Services',
   layout: 'grid',
   products: [
     {
       id: 'residential-storage',
-      name: 'Residential Storage',
+      name: 'Residential Energy Storage Solutions',
       description: 'Home batteries integrated with rooftop solar and backup power.',
       companiesDetailed: [
         { name: 'Tesla Powerwall', ticker: 'TSLA', listing: 'US' },
@@ -73,7 +73,7 @@ const downstream: ValueChainStageProducts = {
     },
     {
       id: 'grid-scale',
-      name: 'Grid-scale Storage',
+      name: 'Utility-Scale Energy Storage Solutions',
       description: 'Utility-scale BESS deployments for peak shaving, frequency regulation, and renewables integration.',
       companiesDetailed: [
         { name: 'Fluence', ticker: 'FLNC', listing: 'US' },

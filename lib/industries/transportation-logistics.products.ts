@@ -3,7 +3,7 @@ import { ValueChainStageProducts } from "@/lib/data/industries"
 export const transportationLogisticsProductStages: ValueChainStageProducts[] = [
   {
     stage: 'upstream',
-    stageLabel: 'Equipment & Infrastructure',
+    stageLabel: 'Vehicle and Machinery Manufacturing',
     layout: 'grid',
     products: [
       {
@@ -26,7 +26,7 @@ export const transportationLogisticsProductStages: ValueChainStageProducts[] = [
   },
   {
     stage: 'midstream',
-    stageLabel: 'Carriers & Networks',
+    stageLabel: 'Transportation Service Providers',
     layout: 'hybrid',
     products: [
       {
@@ -65,7 +65,7 @@ export const transportationLogisticsProductStages: ValueChainStageProducts[] = [
   },
   {
     stage: 'downstream',
-    stageLabel: 'Last Mile & 3PL',
+    stageLabel: 'Delivery and Fulfillment Services',
     layout: 'grid',
     products: [
       {

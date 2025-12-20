@@ -69,7 +69,7 @@ export const roboticsAutomationProductStages: ValueChainStageProducts[] = [
   },
   {
     stage: 'downstream',
-    stageLabel: 'Applications',
+    stageLabel: 'Robotic Applications',
     layout: 'grid',
     products: [
       {

@@ -1,6 +1,15 @@
+"use client"
+
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 
 export function Footer() {
+  const searchParams = useSearchParams()
+  const country = searchParams.get("country") || "US"
+
+  // Helper to build country-aware URLs
+  const getHref = (path: string) => country !== "US" ? `${path}?country=${country}` : path
+
   return (
     <footer className="border-t">
       <div className="container py-8 md:py-12">
@@ -8,36 +17,36 @@ export function Footer() {
           <div className="space-y-3">
             <h3 className="text-lg font-semibold">Supply Chain Map</h3>
             <p className="text-sm text-muted-foreground">
-              Explore US public companies through their industry value chains
+              Explore public companies through their industry value chains
             </p>
           </div>
-          
+
           <div className="space-y-3">
             <h4 className="text-sm font-semibold">Industries</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/industries/semiconductors" className="text-muted-foreground hover:text-foreground">
+                <Link href={getHref("/industries/semiconductors")} className="text-muted-foreground hover:text-foreground">
                   Semiconductors
                 </Link>
               </li>
               <li>
-                <Link href="/industries/artificial-intelligence" className="text-muted-foreground hover:text-foreground">
+                <Link href={getHref("/industries/artificial-intelligence")} className="text-muted-foreground hover:text-foreground">
                   Artificial Intelligence
                 </Link>
               </li>
               <li>
-                <Link href="/industries/electric-vehicles" className="text-muted-foreground hover:text-foreground">
+                <Link href={getHref("/industries/electric-vehicles")} className="text-muted-foreground hover:text-foreground">
                   Electric Vehicles
                 </Link>
               </li>
               <li>
-                <Link href="/industries" className="text-muted-foreground hover:text-foreground">
+                <Link href={getHref("/industries")} className="text-muted-foreground hover:text-foreground">
                   View All
                 </Link>
               </li>
             </ul>
           </div>
-          
+
           <div className="space-y-3">
             <h4 className="text-sm font-semibold">Resources</h4>
             <ul className="space-y-2 text-sm">
@@ -46,11 +55,7 @@ export function Footer() {
                   About
                 </Link>
               </li>
-              <li>
-                <Link href="/api-docs" className="text-muted-foreground hover:text-foreground">
-                  API Documentation
-                </Link>
-              </li>
+
               <li>
                 <Link href="/contact" className="text-muted-foreground hover:text-foreground">
                   Contact
@@ -58,7 +63,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          
+
           <div className="space-y-3">
             <h4 className="text-sm font-semibold">Legal</h4>
             <ul className="space-y-2 text-sm">
@@ -75,16 +80,14 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        
+
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} Supply Chain Map. All rights reserved.</p>
           <p className="mt-2">
-            Data provided by Yahoo Finance. Built for educational and research purposes.
+            Data provided for educational and research purposes.
           </p>
         </div>
       </div>
     </footer>
   )
 }
-
-

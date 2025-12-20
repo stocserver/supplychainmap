@@ -34,7 +34,7 @@ export const pharmaceuticalProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'research-tools',
-        name: 'Research Tools & Services',
+        name: 'Research Tools & Outsourced Services',
         description: 'Laboratory equipment, reagents, and research services',
         longDescription: 'Companies providing essential tools, equipment, and services that enable pharmaceutical research and development.',
         companiesDetailed: [
@@ -96,7 +96,7 @@ export const pharmaceuticalProductStages: ValueChainStageProducts[] = [
         subProducts: [
           {
             id: 'api-production',
-            name: 'API Production',
+            name: 'Active Pharmaceutical Ingredient (API) Manufacturing',
             description: 'Active Pharmaceutical Ingredient manufacturing',
             longDescription: 'Synthesis and purification of active pharmaceutical ingredients (APIs) at scale under cGMP conditions. Activities include process development, scale-up, impurity control, and technology transfer to ensure consistent quality and regulatory compliance.',
             companiesDetailed: [
@@ -109,7 +109,7 @@ export const pharmaceuticalProductStages: ValueChainStageProducts[] = [
           },
           {
             id: 'formulation',
-            name: 'Formulation & Packaging',
+            name: 'Drug Formulation & Finished Product Packaging',
             description: 'Converting APIs into finished dosage forms',
             longDescription: 'Development and production of finished dosage forms (tablets, capsules, injectables) by combining APIs with excipients, optimizing bioavailability, and ensuring stability. Includes primary and secondary packaging with serialization for supply chain security.',
             companiesDetailed: [
@@ -160,7 +160,7 @@ export const pharmaceuticalProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'specialty-pharma',
-        name: 'Specialty Pharmaceuticals',
+        name: 'Specialty & Orphan Drugs',
         description: 'High-cost, complex medications for rare diseases',
         longDescription: 'Specialized pharmaceutical companies focused on developing and commercializing treatments for rare diseases and complex conditions.',
         companiesDetailed: [

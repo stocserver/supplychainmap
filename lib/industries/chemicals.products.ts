@@ -3,12 +3,12 @@ import { ValueChainStageProducts } from "@/lib/data/industries"
 export const chemicalsProductStages: ValueChainStageProducts[] = [
   {
     stage: 'upstream',
-    stageLabel: 'Raw Materials & Basic Chemicals',
+    stageLabel: 'Upstream: Raw Material Extraction & Basic Chemical Synthesis',
     layout: 'grid',
     products: [
       {
         id: 'raw-materials-chem',
-        name: 'Raw Materials',
+        name: 'Feedstocks & Intermediates',
         description: 'Feedstocks and commodities',
         companiesDetailed: [
           { name: 'Dow', ticker: 'DOW', listing: 'US' },
@@ -44,7 +44,7 @@ export const chemicalsProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'basic-chemicals',
-        name: 'Basic Chemicals',
+        name: 'Commodity Chemicals & Polymers',
         description: 'Commodity chemicals and polymers',
         companiesDetailed: [
           { name: 'ExxonMobil (Chemicals)', ticker: 'XOM', listing: 'US' },
@@ -69,7 +69,7 @@ export const chemicalsProductStages: ValueChainStageProducts[] = [
           },
           {
             id: 'industrial-chemicals',
-            name: 'Industrial Chemicals',
+            name: 'Bulk Industrial Chemicals',
             description: 'Solvents, acids and bulk industrial chemicals',
             longDescription: 'Manufacturing of high-volume industrial chemicals such as sulfuric acid, nitric acid, methanol, and various solvents. These chemicals are critical for numerous industrial processes, including manufacturing, mining, and pulp & paper.',
             companiesDetailed: [
@@ -86,12 +86,12 @@ export const chemicalsProductStages: ValueChainStageProducts[] = [
   },
   {
     stage: 'midstream',
-    stageLabel: 'Specialty & Performance',
+    stageLabel: 'Midstream: Specialty Chemical Formulation & Production',
     layout: 'hybrid',
     products: [
       {
         id: 'specialty-chemicals',
-        name: 'Specialty Chemicals',
+        name: 'Performance Chemicals & Additives',
         description: 'Additives, coatings, and performance materials',
         companiesDetailed: [
           { name: 'PPG Industries', ticker: 'PPG', listing: 'US' },
@@ -133,7 +133,7 @@ export const chemicalsProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'agricultural-chemicals',
-        name: 'Agricultural Chemicals',
+        name: 'Agrochemicals',
         description: 'Fertilizers and crop protection',
         companiesDetailed: [
           { name: 'Nutrien', ticker: 'NTR', listing: 'US' },
@@ -170,12 +170,12 @@ export const chemicalsProductStages: ValueChainStageProducts[] = [
   },
   {
     stage: 'downstream',
-    stageLabel: 'Applications & Distribution',
+    stageLabel: 'Downstream: Chemical Applications & Distribution',
     layout: 'grid',
     products: [
       {
         id: 'applications',
-        name: 'Applications',
+        name: 'End-Use Chemical Products',
         description: 'End-use coatings, plastics, and materials',
         companiesDetailed: [
           { name: 'DuPont', ticker: 'DD', listing: 'US' },
@@ -186,7 +186,7 @@ export const chemicalsProductStages: ValueChainStageProducts[] = [
         subProducts: [
           {
             id: 'automotive-materials',
-            name: 'Automotive Materials',
+            name: 'Automotive Chemical Solutions',
             description: 'Materials used in automotive manufacturing',
             longDescription: 'Specialty chemicals and advanced materials used in automotive manufacturing for lightweighting, improved performance, and durability. Includes engineering plastics, composites, coatings, and adhesives for various vehicle components.',
             companiesDetailed: [
@@ -197,7 +197,7 @@ export const chemicalsProductStages: ValueChainStageProducts[] = [
           },
           {
             id: 'construction-materials',
-            name: 'Construction Materials',
+            name: 'Construction Chemical Solutions',
             description: 'Sealants, insulation and building materials',
             longDescription: 'Chemical products and materials for the construction industry, including high-performance sealants, insulation foams, roofing materials, and concrete additives. These enhance structural integrity, energy efficiency, and longevity of buildings.',
             companiesDetailed: [
@@ -210,7 +210,7 @@ export const chemicalsProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'industrial-distribution',
-        name: 'Industrial Distribution',
+        name: 'Chemical Distribution & Logistics',
         description: 'Chemical distribution and logistics',
         companiesDetailed: [
           { name: 'Hawkins', ticker: 'HWKN', listing: 'US' },

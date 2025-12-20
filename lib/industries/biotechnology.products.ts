@@ -8,7 +8,7 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'research-tools',
-        name: 'Research Tools & Platforms',
+        name: 'Research Tools & Reagents',
         description: 'Biotechnology research tools and platforms',
         longDescription: 'Companies that develop and provide research tools, laboratory equipment, and platforms that enable biotechnology research and drug discovery.',
         companiesDetailed: [
@@ -52,7 +52,7 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'gene-editing',
-        name: 'Gene Editing & Cell Therapy',
+        name: 'Gene Editing & Advanced Therapies',
         description: 'Advanced gene editing and cell therapy technologies',
         longDescription: 'Companies developing gene editing technologies like CRISPR and cell therapy platforms for treating genetic diseases and cancer.',
         companiesDetailed: [
@@ -100,7 +100,7 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'therapeutics-dev',
-        name: 'Therapeutic Development',
+        name: 'Drug Development & Clinical Trials',
         description: 'Biotechnology drug development and clinical trials',
         longDescription: 'Companies that develop biotechnological therapeutics including monoclonal antibodies, recombinant proteins, and other biologics.',
         companiesDetailed: [
@@ -139,7 +139,7 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'diagnostics-dev',
-        name: 'Diagnostics Development',
+        name: 'Diagnostic Development & Testing',
         description: 'Biotechnology diagnostic tools and tests',
         longDescription: 'Companies that develop diagnostic tests, biomarkers, and diagnostic tools using biotechnology approaches.',
         companiesDetailed: [
@@ -189,7 +189,7 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'commercialization',
-        name: 'Commercialization',
+        name: 'Product Commercialization & Sales',
         description: 'Biotechnology product commercialization and marketing',
         longDescription: 'Companies that commercialize biotechnology products, manage regulatory approvals, and market biotech therapeutics and diagnostics.',
         companiesDetailed: [
@@ -227,11 +227,11 @@ export const biotechnologyProductStages: ValueChainStageProducts[] = [
             ]
           }
         ],
-        tags: ['Commercialization', 'Marketing', 'Regulatory', 'Sales']
+        tags: ['Product Commercialization & Sales', 'Marketing', 'Regulatory', 'Sales']
       },
       {
         id: 'cdmo',
-        name: 'Contract Development & Manufacturing',
+        name: 'Contract Development & Manufacturing Services',
         description: 'Biotechnology contract services',
         longDescription: 'Companies that provide contract development and manufacturing services for biotechnology companies.',
         companiesDetailed: [

@@ -8,7 +8,7 @@ export const constructionEngineeringProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'engineering-design',
-        name: 'Engineering & Design',
+        name: 'Engineering & Design Services',
         description: 'Engineering, design, and architecture services',
         longDescription: 'Provision of specialized engineering, architectural, and design services for infrastructure, industrial, and commercial projects. This includes feasibility studies, detailed design, project management, and consulting across various disciplines like civil, structural, mechanical, and electrical engineering.',
         companiesDetailed: [
@@ -28,7 +28,7 @@ export const constructionEngineeringProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'construction-services',
-        name: 'Construction Services',
+        name: 'General and Specialty Construction',
         description: 'General contractors and specialty services',
         longDescription: 'Execution of construction projects, including general contracting, project management, and specialized services such as electrical, pipeline, and utility infrastructure installation. This segment involves site preparation, building, and infrastructure development from conception to completion.',
         companiesDetailed: [
@@ -45,7 +45,7 @@ export const constructionEngineeringProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'construction-equipment',
-        name: 'Construction Equipment',
+        name: 'Heavy Construction Machinery',
         description: 'Heavy machinery and equipment',
         longDescription: 'Manufacturing and distribution of heavy construction machinery, including excavators, loaders, bulldozers, cranes, and concrete mixers. This equipment is essential for earthmoving, material handling, and building infrastructure projects.',
         companiesDetailed: [
@@ -65,7 +65,7 @@ export const constructionEngineeringProductStages: ValueChainStageProducts[] = [
     products: [
       {
         id: 'building-products',
-        name: 'Building Products',
+        name: 'Building Materials & Systems',
         description: 'Materials and finished building products',
         longDescription: 'Manufacturing and supply of a wide range of building materials and finished products, including insulation, roofing, HVAC systems, windows, doors, and plumbing fixtures. These products are used in residential, commercial, and industrial construction.',
         companiesDetailed: [

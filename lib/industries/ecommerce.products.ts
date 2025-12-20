@@ -118,7 +118,7 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
         subProducts: [
           {
             id: 'general-marketplaces',
-            name: 'General Marketplaces',
+            name: 'Broad Category Marketplaces',
             description: 'Broad product category marketplaces',
             longDescription: 'Online platforms that offer a vast array of products across numerous categories from various sellers. These marketplaces cater to a broad consumer base, providing convenience and one-stop shopping for diverse needs.',
             companiesDetailed: [
@@ -129,7 +129,7 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
           },
           {
             id: 'specialty-marketplaces',
-            name: 'Specialty Marketplaces',
+            name: 'Niche & Category-Specific Marketplaces',
             description: 'Niche and specialty product marketplaces',
             longDescription: 'Online platforms focusing on specific product categories or niches, connecting specialized sellers with targeted buyers. These marketplaces often offer curated selections, unique products, and cater to particular consumer interests or hobbies.',
             companiesDetailed: [
@@ -274,7 +274,7 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'ecommerce-services',
-        name: 'E-commerce Services',
+        name: 'E-commerce Operations Support',
         description: 'Supporting services for e-commerce businesses',
         longDescription: 'A suite of auxiliary services that support and enhance the operations of online businesses. This includes digital marketing tools to attract customers, analytics platforms for performance tracking, customer service solutions for engagement, and various business tools to streamline back-office functions.',
         companiesDetailed: [
@@ -288,7 +288,7 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
         subProducts: [
           {
             id: 'marketing-tools',
-            name: 'Marketing Tools',
+            name: 'E-commerce Marketing & Analytics Tools',
             description: 'E-commerce marketing and analytics',
             longDescription: 'Software and services designed to help e-commerce businesses attract, engage, and retain customers. This includes email marketing, social media advertising, search engine optimization (SEO) tools, and data analytics to track campaign performance and customer behavior.',
             companiesDetailed: [
@@ -299,7 +299,7 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
           },
           {
             id: 'customer-service',
-            name: 'Customer Service',
+            name: 'E-commerce Customer Support Platforms',
             description: 'Customer support and service tools',
             longDescription: 'Platforms and solutions that enable e-commerce businesses to manage customer inquiries, provide support, and resolve issues efficiently. This includes helpdesk software, chatbots, and CRM systems designed to enhance customer satisfaction and loyalty.',
             companiesDetailed: [
@@ -308,7 +308,7 @@ export const ecommerceProductStages: ValueChainStageProducts[] = [
             ]
           }
         ],
-        tags: ['Services', 'Marketing', 'Analytics', 'Customer Service']
+        tags: ['Services', 'Marketing', 'Analytics', 'E-commerce Customer Support Platforms']
       }
     ]
   }

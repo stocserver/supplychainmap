@@ -1,0 +1,2575 @@
+{
+  "totalCompanies": 308,
+  "byIndustry": {
+    "chemicals": {
+      "count": 19,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "4188.T",
+          "name": "Mitsubishi Chemical",
+          "tags": [
+            "specialty-chemicals",
+            "industrial-chemicals"
+          ]
+        },
+        {
+          "ticker": "4042.T",
+          "name": "Tosoh Corporation",
+          "tags": [
+            "petrochemicals",
+            "specialty-chemicals"
+          ]
+        },
+        {
+          "ticker": "6367.T",
+          "name": "Daikin Industries,Ltd.",
+          "tags": [
+            "specialty-chemicals",
+            "industrial-chemicals"
+          ]
+        },
+        {
+          "ticker": "3402.T",
+          "name": "Toray Industries",
+          "tags": [
+            "polymers",
+            "specialty-chemicals"
+          ]
+        },
+        {
+          "ticker": "6988.T",
+          "name": "Nitto Denko Corporation",
+          "tags": [
+            "adhesives-sealants",
+            "polymers"
+          ]
+        },
+        {
+          "ticker": "4204.T",
+          "name": "Sekisui Chemical Co., Ltd.",
+          "tags": [
+            "polymers",
+            "specialty-chemicals"
+          ]
+        },
+        {
+          "ticker": "4021.T",
+          "name": "Nissan Chemical Corporation",
+          "tags": [
+            "specialty-chemicals",
+            "agricultural-chemicals"
+          ]
+        },
+        {
+          "ticker": "5201.T",
+          "name": "AGC Inc.",
+          "tags": [
+            "specialty-chemicals",
+            "industrial-chemicals"
+          ]
+        },
+        {
+          "ticker": "7911.T",
+          "name": "Toppan Inc.",
+          "tags": [
+            "specialty-chemicals"
+          ]
+        },
+        {
+          "ticker": "3407.T",
+          "name": "Asahi Kasei",
+          "tags": [
+            "polymers",
+            "specialty-chemicals"
+          ]
+        },
+        {
+          "ticker": "4005.T",
+          "name": "Sumitomo Chemical",
+          "tags": [
+            "petrochemicals",
+            "specialty-chemicals"
+          ]
+        },
+        {
+          "ticker": "7912.T",
+          "name": "Dai Nippon Printing Co., Ltd.",
+          "tags": [
+            "specialty-chemicals",
+            "coatings"
+          ]
+        },
+        {
+          "ticker": "4004.T",
+          "name": "Resonac Holdings Corporation",
+          "tags": [
+            "petrochemicals",
+            "specialty-chemicals"
+          ]
+        },
+        {
+          "ticker": "4183.T",
+          "name": "Mitsui Chemicals, Inc.",
+          "tags": [
+            "polymers",
+            "specialty-chemicals"
+          ]
+        },
+        {
+          "ticker": "4403.T",
+          "name": "NOF Corporation",
+          "tags": [
+            "specialty-chemicals"
+          ]
+        },
+        {
+          "ticker": "4063.T",
+          "name": "Shin-Etsu Chemical",
+          "tags": [
+            "specialty-chemicals",
+            "polymers"
+          ]
+        },
+        {
+          "ticker": "6370.T",
+          "name": "Kurita Water Industries Ltd.",
+          "tags": [
+            "specialty-chemicals",
+            "industrial-chemicals"
+          ]
+        },
+        {
+          "ticker": "4612.T",
+          "name": "Nippon Paint Holdings Co., Ltd.",
+          "tags": [
+            "coatings",
+            "specialty-chemicals"
+          ]
+        },
+        {
+          "ticker": "4091.T",
+          "name": "Nippon Sanso Holdings Corporation",
+          "tags": [
+            "raw-materials-chem"
+          ]
+        }
+      ]
+    },
+    "construction-engineering": {
+      "count": 12,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "1812.T",
+          "name": "Kajima",
+          "tags": [
+            "construction-services",
+            "construction-equipment"
+          ]
+        },
+        {
+          "ticker": "5332.T",
+          "name": "Toto Ltd.",
+          "tags": [
+            "building-products"
+          ]
+        },
+        {
+          "ticker": "1802.T",
+          "name": "Obayashi",
+          "tags": [
+            "construction-services",
+            "construction-equipment"
+          ]
+        },
+        {
+          "ticker": "MHVYF",
+          "name": "Mitsubishi Heavy Industries, Ltd.",
+          "tags": [
+            "construction-equipment"
+          ]
+        },
+        {
+          "ticker": "6586.T",
+          "name": "Makita Corporation",
+          "tags": [
+            "construction-equipment",
+            "building-products"
+          ]
+        },
+        {
+          "ticker": "1803.T",
+          "name": "Shimizu Corporation",
+          "tags": [
+            "construction-services",
+            "construction-equipment"
+          ]
+        },
+        {
+          "ticker": "6305.T",
+          "name": "Hitachi Construction Machinery Co., Ltd.",
+          "tags": [
+            "construction-equipment"
+          ]
+        },
+        {
+          "ticker": "5929.T",
+          "name": "Sanwa Holdings Corporation",
+          "tags": [
+            "building-products"
+          ]
+        },
+        {
+          "ticker": "7013.T",
+          "name": "IHI Corporation",
+          "tags": [
+            "engineering-design",
+            "construction-services"
+          ]
+        },
+        {
+          "ticker": "1942.T",
+          "name": "Kandenko Co.,Ltd.",
+          "tags": [
+            "construction-services"
+          ]
+        },
+        {
+          "ticker": "6301.T",
+          "name": "Komatsu Ltd.",
+          "tags": [
+            "construction-equipment"
+          ]
+        },
+        {
+          "ticker": "1801.T",
+          "name": "Taisei Corporation",
+          "tags": [
+            "construction-services",
+            "engineering-design"
+          ]
+        }
+      ]
+    },
+    "media-entertainment": {
+      "count": 17,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "8136.T",
+          "name": "Sanrio Company, Ltd.",
+          "tags": [
+            "content-production",
+            "film-production"
+          ]
+        },
+        {
+          "ticker": "9684.T",
+          "name": "Square Enix",
+          "tags": [
+            "game-development",
+            "console-games"
+          ]
+        },
+        {
+          "ticker": "3659.T",
+          "name": "NEXON Co., Ltd.",
+          "tags": [
+            "game-development",
+            "mobile-games"
+          ]
+        },
+        {
+          "ticker": "9602.T",
+          "name": "Toho Co., Ltd.",
+          "tags": [
+            "film-production",
+            "content-production"
+          ]
+        },
+        {
+          "ticker": "4324.T",
+          "name": "Dentsu Group Inc.",
+          "tags": [
+            "content-production",
+            "ad-supported-streaming"
+          ]
+        },
+        {
+          "ticker": "6758.T",
+          "name": "Sony Group",
+          "tags": [
+            "content-production",
+            "game-development"
+          ]
+        },
+        {
+          "ticker": "7832.T",
+          "name": "Bandai Namco",
+          "tags": [
+            "game-development",
+            "console-games"
+          ]
+        },
+        {
+          "ticker": "9766.T",
+          "name": "Konami Group Corporation",
+          "tags": [
+            "game-development",
+            "mobile-games"
+          ]
+        },
+        {
+          "ticker": "9401.T",
+          "name": "TBS Holdings,Inc.",
+          "tags": [
+            "tv-production",
+            "streaming-platforms"
+          ]
+        },
+        {
+          "ticker": "4751.T",
+          "name": "CyberAgent, Inc.",
+          "tags": [
+            "game-development",
+            "social-media"
+          ]
+        },
+        {
+          "ticker": "9404.T",
+          "name": "Nippon Television Holdings, Inc.",
+          "tags": [
+            "content-production",
+            "tv-production"
+          ]
+        },
+        {
+          "ticker": "SONYN.MX",
+          "name": "Sony Group Corporation",
+          "tags": [
+            "content-production",
+            "game-development"
+          ]
+        },
+        {
+          "ticker": "0R1E.L",
+          "name": "Nintendo Co., Ltd.",
+          "tags": [
+            "game-development",
+            "console-games"
+          ]
+        },
+        {
+          "ticker": "7974.T",
+          "name": "Nintendo",
+          "tags": [
+            "game-development",
+            "console-games"
+          ]
+        },
+        {
+          "ticker": "KNM.L",
+          "name": "Konami Group Corporation",
+          "tags": [
+            "game-development",
+            "mobile-games"
+          ]
+        },
+        {
+          "ticker": "4676.T",
+          "name": "Fuji Media Holdings, Inc.",
+          "tags": [
+            "content-production",
+            "streaming-platforms"
+          ]
+        },
+        {
+          "ticker": "9697.T",
+          "name": "Capcom",
+          "tags": [
+            "game-development",
+            "console-games"
+          ]
+        }
+      ]
+    },
+    "banking": {
+      "count": 24,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "7167.T",
+          "name": "Mebuki Financial Group, Inc.",
+          "tags": [
+            "commercial-banking",
+            "retail-banking"
+          ]
+        },
+        {
+          "ticker": "8331.T",
+          "name": "The Chiba Bank, Ltd.",
+          "tags": [
+            "commercial-banking",
+            "retail-banking"
+          ]
+        },
+        {
+          "ticker": "8591.T",
+          "name": "ORIX Corporation",
+          "tags": [
+            "corporate-lending",
+            "investment-banking"
+          ]
+        },
+        {
+          "ticker": "8308.T",
+          "name": "Resona Holdings, Inc.",
+          "tags": [
+            "retail-banking",
+            "commercial-banking"
+          ]
+        },
+        {
+          "ticker": "8306.T",
+          "name": "MUFG",
+          "tags": [
+            "commercial-banking",
+            "investment-banking"
+          ]
+        },
+        {
+          "ticker": "6532.T",
+          "name": "BayCurrent Consulting, Inc.",
+          "tags": [
+            "corporate-lending",
+            "digital-banking"
+          ]
+        },
+        {
+          "ticker": "5844.T",
+          "name": "Kyoto Financial Group,Inc.",
+          "tags": [
+            "retail-banking",
+            "commercial-banking"
+          ]
+        },
+        {
+          "ticker": "8354.T",
+          "name": "Fukuoka Financial Group, Inc.",
+          "tags": [
+            "commercial-banking",
+            "retail-banking"
+          ]
+        },
+        {
+          "ticker": "8411.T",
+          "name": "Mizuho Financial",
+          "tags": [
+            "investment-banking",
+            "retail-banking"
+          ]
+        },
+        {
+          "ticker": "5838.T",
+          "name": "Rakuten Bank, Ltd.",
+          "tags": [
+            "digital-banking",
+            "retail-banking"
+          ]
+        },
+        {
+          "ticker": "8334.T",
+          "name": "The Gunma Bank, Ltd.",
+          "tags": [
+            "commercial-banking",
+            "retail-banking"
+          ]
+        },
+        {
+          "ticker": "8309.T",
+          "name": "Sumitomo Mitsui Trust Holdings, Inc.",
+          "tags": [
+            "wealth-management",
+            "investment-banking"
+          ]
+        },
+        {
+          "ticker": "5830.T",
+          "name": "Iyogin Holdings,Inc.",
+          "tags": [
+            "commercial-banking",
+            "retail-banking"
+          ]
+        },
+        {
+          "ticker": "7163.T",
+          "name": "SBI Sumishin Net Bank, Ltd.",
+          "tags": [
+            "digital-banking",
+            "retail-banking"
+          ]
+        },
+        {
+          "ticker": "8369.T",
+          "name": "The Bank of Kyoto, Ltd.",
+          "tags": [
+            "commercial-banking",
+            "retail-banking"
+          ]
+        },
+        {
+          "ticker": "8359.T",
+          "name": "The Hachijuni Bank, Ltd.",
+          "tags": [
+            "commercial-banking",
+            "retail-banking"
+          ]
+        },
+        {
+          "ticker": "5831.T",
+          "name": "Shizuoka Financial Group,Inc.",
+          "tags": [
+            "commercial-banking",
+            "retail-banking"
+          ]
+        },
+        {
+          "ticker": "8604.T",
+          "name": "Nomura Holdings",
+          "tags": [
+            "investment-banking",
+            "wealth-management"
+          ]
+        },
+        {
+          "ticker": "8316.T",
+          "name": "Sumitomo Mitsui FG",
+          "tags": [
+            "commercial-banking",
+            "investment-banking"
+          ]
+        },
+        {
+          "ticker": "8421.T",
+          "name": "Shinkin Central Bank",
+          "tags": [
+            "commercial-banking",
+            "investment-banking"
+          ]
+        },
+        {
+          "ticker": "8572.T",
+          "name": "Acom Co., Ltd.",
+          "tags": [
+            "retail-banking",
+            "corporate-lending"
+          ]
+        },
+        {
+          "ticker": "7182.T",
+          "name": "JAPAN POST BANK Co., Ltd.",
+          "tags": [
+            "retail-banking",
+            "mortgage-banking"
+          ]
+        },
+        {
+          "ticker": "7186.T",
+          "name": "Yokohama Financial Group, Inc.",
+          "tags": [
+            "commercial-banking",
+            "investment-banking"
+          ]
+        },
+        {
+          "ticker": "8601.T",
+          "name": "Daiwa Securities Group Inc.",
+          "tags": [
+            "investment-banking",
+            "wealth-management"
+          ]
+        }
+      ]
+    },
+    "food-beverage": {
+      "count": 17,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "2875.T",
+          "name": "Toyo Suisan Kaisha, Ltd.",
+          "tags": [
+            "packaged-meals"
+          ]
+        },
+        {
+          "ticker": "7550.T",
+          "name": "Zensho Holdings Co., Ltd.",
+          "tags": [
+            "food-processing",
+            "beverages"
+          ]
+        },
+        {
+          "ticker": "2503.T",
+          "name": "Kirin Holdings",
+          "tags": [
+            "beverages",
+            "soft-drinks"
+          ]
+        },
+        {
+          "ticker": "2212.T",
+          "name": "Yamazaki Baking Co., Ltd.",
+          "tags": [
+            "snacks-confectionery",
+            "packaged-meals"
+          ]
+        },
+        {
+          "ticker": "2802.T",
+          "name": "Ajinomoto",
+          "tags": [
+            "flavors-seasonings",
+            "packaged-meals"
+          ]
+        },
+        {
+          "ticker": "2801.T",
+          "name": "Kikkoman Corporation",
+          "tags": [
+            "ingredients",
+            "flavors-seasonings"
+          ]
+        },
+        {
+          "ticker": "3563.T",
+          "name": "Food & Life Companies Ltd.",
+          "tags": [
+            "food-processing"
+          ]
+        },
+        {
+          "ticker": "2269.T",
+          "name": "Meiji Holdings Co., Ltd.",
+          "tags": [
+            "snacks-confectionery",
+            "beverages"
+          ]
+        },
+        {
+          "ticker": "2502.T",
+          "name": "Asahi Group",
+          "tags": [
+            "beverages",
+            "soft-drinks"
+          ]
+        },
+        {
+          "ticker": "2702.T",
+          "name": "McDonald's Holdings Company (Japan), Ltd.",
+          "tags": [
+            "food-processing",
+            "snacks-confectionery"
+          ]
+        },
+        {
+          "ticker": "6465.T",
+          "name": "Hoshizaki Corporation",
+          "tags": [
+            "food-processing"
+          ]
+        },
+        {
+          "ticker": "2897.T",
+          "name": "Nissin Foods Holdings Co.,Ltd.",
+          "tags": [
+            "snacks-confectionery",
+            "packaged-meals"
+          ]
+        },
+        {
+          "ticker": "2267.T",
+          "name": "Yakult Honsha Co.,Ltd.",
+          "tags": [
+            "beverages",
+            "soft-drinks"
+          ]
+        },
+        {
+          "ticker": "2501.T",
+          "name": "Sapporo Holdings Limited",
+          "tags": [
+            "beverages",
+            "soft-drinks"
+          ]
+        },
+        {
+          "ticker": "2282.T",
+          "name": "NH Foods Ltd.",
+          "tags": [
+            "meat-processing",
+            "packaged-meals"
+          ]
+        },
+        {
+          "ticker": "3197.T",
+          "name": "Skylark Holdings Co., Ltd.",
+          "tags": [
+            "food-processing"
+          ]
+        },
+        {
+          "ticker": "2587.T",
+          "name": "Suntory Beverage & Food Limited",
+          "tags": [
+            "beverages",
+            "soft-drinks"
+          ]
+        }
+      ]
+    },
+    "automotive": {
+      "count": 22,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "8015.T",
+          "name": "Toyota Tsusho Corporation",
+          "tags": [
+            "auto-parts-suppliers",
+            "auto-manufacturing"
+          ]
+        },
+        {
+          "ticker": "4062.T",
+          "name": "Ibiden Co.,Ltd.",
+          "tags": [
+            "auto-parts-suppliers",
+            "electronics"
+          ]
+        },
+        {
+          "ticker": "5101.T",
+          "name": "The Yokohama Rubber Co., Ltd.",
+          "tags": [
+            "tires",
+            "auto-parts-suppliers"
+          ]
+        },
+        {
+          "ticker": "7201.T",
+          "name": "Nissan Motor",
+          "tags": [
+            "auto-manufacturing",
+            "auto-parts-suppliers"
+          ]
+        },
+        {
+          "ticker": "5105.T",
+          "name": "Toyo Tire Corporation",
+          "tags": [
+            "tires",
+            "auto-parts-suppliers"
+          ]
+        },
+        {
+          "ticker": "7202.T",
+          "name": "Isuzu Motors Limited",
+          "tags": [
+            "auto-parts-suppliers",
+            "commercial-vehicles"
+          ]
+        },
+        {
+          "ticker": "6902.T",
+          "name": "Denso",
+          "tags": [
+            "auto-parts-suppliers",
+            "electronics"
+          ]
+        },
+        {
+          "ticker": "6479.T",
+          "name": "MinebeaMitsumi Inc.",
+          "tags": [
+            "auto-parts-suppliers",
+            "electronics"
+          ]
+        },
+        {
+          "ticker": "7272.T",
+          "name": "Yamaha Motor Co., Ltd.",
+          "tags": [
+            "auto-parts-suppliers",
+            "engine-components"
+          ]
+        },
+        {
+          "ticker": "6201.T",
+          "name": "Toyota Industries",
+          "tags": [
+            "auto-parts-suppliers",
+            "auto-manufacturing"
+          ]
+        },
+        {
+          "ticker": "TYT.L",
+          "name": "Toyota Motor Corporation",
+          "tags": [
+            "auto-manufacturing",
+            "auto-parts-suppliers"
+          ]
+        },
+        {
+          "ticker": "5334.T",
+          "name": "Niterra Co., Ltd.",
+          "tags": [
+            "auto-parts-suppliers",
+            "engine-components"
+          ]
+        },
+        {
+          "ticker": "7259.T",
+          "name": "Aisin",
+          "tags": [
+            "auto-parts-suppliers",
+            "engine-components"
+          ]
+        },
+        {
+          "ticker": "7267.T",
+          "name": "Honda Motor",
+          "tags": [
+            "auto-manufacturing",
+            "auto-parts-suppliers"
+          ]
+        },
+        {
+          "ticker": "4732.T",
+          "name": "USS Co., Ltd.",
+          "tags": [
+            "dealers"
+          ]
+        },
+        {
+          "ticker": "7276.T",
+          "name": "Koito Manufacturing Co., Ltd.",
+          "tags": [
+            "auto-parts-suppliers",
+            "electronics"
+          ]
+        },
+        {
+          "ticker": "7269.T",
+          "name": "Suzuki Motor",
+          "tags": [
+            "auto-manufacturing",
+            "auto-parts-suppliers"
+          ]
+        },
+        {
+          "ticker": "7261.T",
+          "name": "Mazda Motor",
+          "tags": [
+            "auto-manufacturing",
+            "engine-components"
+          ]
+        },
+        {
+          "ticker": "5110.T",
+          "name": "Sumitomo Rubber Industries, Ltd.",
+          "tags": [
+            "tires",
+            "auto-parts-suppliers"
+          ]
+        },
+        {
+          "ticker": "7203.T",
+          "name": "Toyota Motor",
+          "tags": [
+            "auto-manufacturing",
+            "auto-parts-suppliers"
+          ]
+        },
+        {
+          "ticker": "7270.T",
+          "name": "Subaru",
+          "tags": [
+            "auto-manufacturing",
+            "auto-parts-suppliers"
+          ]
+        },
+        {
+          "ticker": "5108.T",
+          "name": "Bridgestone",
+          "tags": [
+            "tires",
+            "auto-parts-suppliers"
+          ]
+        }
+      ]
+    },
+    "robotics-automation": {
+      "count": 10,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "6506.T",
+          "name": "Yaskawa Electric",
+          "tags": [
+            "industrial-robots"
+          ]
+        },
+        {
+          "ticker": "6954.T",
+          "name": "Fanuc",
+          "tags": [
+            "industrial-robots",
+            "sensors-actuators"
+          ]
+        },
+        {
+          "ticker": "6861.T",
+          "name": "Keyence",
+          "tags": [
+            "sensors-actuators",
+            "industrial-robots"
+          ]
+        },
+        {
+          "ticker": "6845.T",
+          "name": "Azbil Corporation",
+          "tags": [
+            "sensors-actuators",
+            "industrial-robots"
+          ]
+        },
+        {
+          "ticker": "6383.T",
+          "name": "Daifuku Co., Ltd.",
+          "tags": [
+            "warehouse-automation"
+          ]
+        },
+        {
+          "ticker": "6645.T",
+          "name": "Omron",
+          "tags": [
+            "sensors-actuators",
+            "industrial-robots"
+          ]
+        },
+        {
+          "ticker": "6841.T",
+          "name": "Yokogawa Electric Corporation",
+          "tags": [
+            "industrial-robots"
+          ]
+        },
+        {
+          "ticker": "6273.T",
+          "name": "SMC Corporation",
+          "tags": [
+            "sensors-actuators",
+            "industrial-robots"
+          ]
+        },
+        {
+          "ticker": "6594.T",
+          "name": "Nidec",
+          "tags": [
+            "sensors-actuators",
+            "industrial-robots"
+          ]
+        },
+        {
+          "ticker": "9962.T",
+          "name": "MISUMI Group Inc.",
+          "tags": [
+            "sensors-actuators",
+            "industrial-robots"
+          ]
+        }
+      ]
+    },
+    "pharmaceuticals": {
+      "count": 12,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "4901.T",
+          "name": "FUJIFILM Holdings Corporation",
+          "tags": [
+            "drug-manufacturing",
+            "drug-discovery"
+          ]
+        },
+        {
+          "ticker": "4528.T",
+          "name": "Ono Pharmaceutical Co., Ltd.",
+          "tags": [
+            "drug-discovery",
+            "clinical-trials"
+          ]
+        },
+        {
+          "ticker": "4503.T",
+          "name": "Astellas Pharma",
+          "tags": [
+            "drug-manufacturing",
+            "specialty-pharma"
+          ]
+        },
+        {
+          "ticker": "4519.T",
+          "name": "Chugai Pharmaceutical Co., Ltd.",
+          "tags": [
+            "drug-discovery",
+            "drug-manufacturing"
+          ]
+        },
+        {
+          "ticker": "4578.T",
+          "name": "Otsuka Holdings",
+          "tags": [
+            "drug-manufacturing",
+            "specialty-pharma"
+          ]
+        },
+        {
+          "ticker": "4523.T",
+          "name": "Eisai",
+          "tags": [
+            "drug-manufacturing",
+            "specialty-pharma"
+          ]
+        },
+        {
+          "ticker": "4502.T",
+          "name": "Takeda Pharmaceutical",
+          "tags": [
+            "drug-discovery",
+            "drug-manufacturing"
+          ]
+        },
+        {
+          "ticker": "4568.T",
+          "name": "Daiichi Sankyo",
+          "tags": [
+            "drug-manufacturing",
+            "specialty-pharma"
+          ]
+        },
+        {
+          "ticker": "4506.T",
+          "name": "Sumitomo Pharma Co., Ltd.",
+          "tags": [
+            "drug-discovery",
+            "drug-manufacturing"
+          ]
+        },
+        {
+          "ticker": "4581.T",
+          "name": "Taisho Pharmaceutical Holdings Co., Ltd.",
+          "tags": [
+            "drug-manufacturing",
+            "specialty-pharma"
+          ]
+        },
+        {
+          "ticker": "4151.T",
+          "name": "Kyowa Kirin Co., Ltd.",
+          "tags": [
+            "drug-discovery",
+            "specialty-pharma"
+          ]
+        },
+        {
+          "ticker": "4507.T",
+          "name": "Shionogi & Co., Ltd.",
+          "tags": [
+            "drug-discovery",
+            "clinical-trials"
+          ]
+        }
+      ]
+    },
+    "utilities": {
+      "count": 11,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "9531.T",
+          "name": "Tokyo Gas Co.,Ltd.",
+          "tags": [
+            "gas-utilities"
+          ]
+        },
+        {
+          "ticker": "1944.T",
+          "name": "Kinden Corporation",
+          "tags": [
+            "renewable-generation",
+            "transmission"
+          ]
+        },
+        {
+          "ticker": "6503.T",
+          "name": "Mitsubishi Electric Corporation",
+          "tags": [
+            "power-generation",
+            "transmission"
+          ]
+        },
+        {
+          "ticker": "9501.T",
+          "name": "Tokyo Electric Power Company Holdings, Incorporated",
+          "tags": [
+            "power-generation",
+            "transmission"
+          ]
+        },
+        {
+          "ticker": "9532.T",
+          "name": "Osaka Gas Co., Ltd.",
+          "tags": [
+            "gas-utilities",
+            "power-generation"
+          ]
+        },
+        {
+          "ticker": "9508.T",
+          "name": "Kyushu Electric Power Company, Incorporated",
+          "tags": [
+            "power-generation",
+            "transmission"
+          ]
+        },
+        {
+          "ticker": "6501.T",
+          "name": "Hitachi, Ltd.",
+          "tags": [
+            "power-generation",
+            "nuclear-generation"
+          ]
+        },
+        {
+          "ticker": "5333.T",
+          "name": "NGK Insulators, Ltd.",
+          "tags": [
+            "transmission",
+            "substations"
+          ]
+        },
+        {
+          "ticker": "6504.T",
+          "name": "Fuji Electric Co., Ltd.",
+          "tags": [
+            "power-generation",
+            "transmission"
+          ]
+        },
+        {
+          "ticker": "9503.T",
+          "name": "The Kansai Electric Power Company, Incorporated",
+          "tags": [
+            "power-generation",
+            "nuclear-generation",
+            "gas-utilities"
+          ]
+        },
+        {
+          "ticker": "9502.T",
+          "name": "Chubu Electric Power Company, Incorporated",
+          "tags": [
+            "power-generation",
+            "transmission"
+          ]
+        }
+      ]
+    },
+    "real-estate": {
+      "count": 22,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "8801.T",
+          "name": "Mitsui Fudosan Co., Ltd.",
+          "tags": [
+            "commercial-development",
+            "residential-development"
+          ]
+        },
+        {
+          "ticker": "1878.T",
+          "name": "Daito Trust Construction Co.,Ltd.",
+          "tags": [
+            "residential-development",
+            "commercial-development"
+          ]
+        },
+        {
+          "ticker": "3231.T",
+          "name": "Nomura Real Estate Holdings, Inc.",
+          "tags": [
+            "residential-development",
+            "commercial-development"
+          ]
+        },
+        {
+          "ticker": "1928.T",
+          "name": "Sekisui House",
+          "tags": [
+            "residential-development",
+            "commercial-development"
+          ]
+        },
+        {
+          "ticker": "9005.T",
+          "name": "Tokyu Corporation",
+          "tags": [
+            "commercial-development"
+          ]
+        },
+        {
+          "ticker": "3003.T",
+          "name": "Hulic Co., Ltd.",
+          "tags": [
+            "commercial-development",
+            "commercial-reits"
+          ]
+        },
+        {
+          "ticker": "1925.T",
+          "name": "Daiwa House",
+          "tags": [
+            "residential-development",
+            "commercial-development"
+          ]
+        },
+        {
+          "ticker": "8951.T",
+          "name": "Nippon Building Fund Incorporation",
+          "tags": [
+            "commercial-reits",
+            "office-reits"
+          ]
+        },
+        {
+          "ticker": "8953.T",
+          "name": "Japan Metropolitan Fund Investment Corporation",
+          "tags": [
+            "retail-reits"
+          ]
+        },
+        {
+          "ticker": "3289.T",
+          "name": "Tokyu Fudosan Holdings Corporation",
+          "tags": [
+            "residential-development",
+            "commercial-development"
+          ]
+        },
+        {
+          "ticker": "3283.T",
+          "name": "Nippon Prologis REIT, Inc.",
+          "tags": [
+            "commercial-reits"
+          ]
+        },
+        {
+          "ticker": "1808.T",
+          "name": "HASEKO Corporation",
+          "tags": [
+            "residential-development",
+            "commercial-development"
+          ]
+        },
+        {
+          "ticker": "3281.T",
+          "name": "GLP J-REIT",
+          "tags": [
+            "commercial-reits",
+            "specialized-reits"
+          ]
+        },
+        {
+          "ticker": "8830.T",
+          "name": "Sumitomo Realty & Development Co., Ltd.",
+          "tags": [
+            "residential-development",
+            "commercial-development"
+          ]
+        },
+        {
+          "ticker": "1911.T",
+          "name": "Sumitomo Forestry Co., Ltd.",
+          "tags": [
+            "residential-development",
+            "commercial-development"
+          ]
+        },
+        {
+          "ticker": "3291.T",
+          "name": "Iida Group Holdings Co., Ltd.",
+          "tags": [
+            "residential-development"
+          ]
+        },
+        {
+          "ticker": "8804.T",
+          "name": "Tokyo Tatemono Co., Ltd.",
+          "tags": [
+            "commercial-development",
+            "residential-development"
+          ]
+        },
+        {
+          "ticker": "3462.T",
+          "name": "Nomura Real Estate Master Fund, Inc.",
+          "tags": [
+            "commercial-reits",
+            "office-reits"
+          ]
+        },
+        {
+          "ticker": "3288.T",
+          "name": "Open House Group Co., Ltd.",
+          "tags": [
+            "residential-development",
+            "commercial-development"
+          ]
+        },
+        {
+          "ticker": "8952.T",
+          "name": "Japan Real Estate Investment Corporation",
+          "tags": [
+            "commercial-reits",
+            "office-reits"
+          ]
+        },
+        {
+          "ticker": "8972.T",
+          "name": "KDX Realty Investment Corporation",
+          "tags": [
+            "commercial-reits",
+            "office-reits"
+          ]
+        },
+        {
+          "ticker": "8802.T",
+          "name": "Mitsubishi Estate Co., Ltd.",
+          "tags": [
+            "commercial-development",
+            "office-reits"
+          ]
+        }
+      ]
+    },
+    "agtech": {
+      "count": 1,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "6326.T",
+          "name": "Kubota Corporation",
+          "tags": [
+            "ag-equipment",
+            "tractors-harvesters"
+          ]
+        }
+      ]
+    },
+    "insurance": {
+      "count": 8,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "8795.T",
+          "name": "T&D Holdings, Inc.",
+          "tags": [
+            "life-insurance",
+            "term-life"
+          ]
+        },
+        {
+          "ticker": "7181.T",
+          "name": "Japan Post Insurance Co., Ltd.",
+          "tags": [
+            "life-insurance",
+            "annuities"
+          ]
+        },
+        {
+          "ticker": "8766.T",
+          "name": "Tokio Marine Holdings, Inc.",
+          "tags": [
+            "reinsurance",
+            "pc-insurance"
+          ]
+        },
+        {
+          "ticker": "8725.T",
+          "name": "MS&AD Insurance Group Holdings, Inc.",
+          "tags": [
+            "reinsurance",
+            "pc-insurance"
+          ]
+        },
+        {
+          "ticker": "8630.T",
+          "name": "Sompo Holdings, Inc.",
+          "tags": [
+            "property-casualty-re",
+            "life-insurance"
+          ]
+        },
+        {
+          "ticker": "8750.T",
+          "name": "Dai-ichi Life Holdings, Inc.",
+          "tags": [
+            "life-insurance",
+            "annuities"
+          ]
+        },
+        {
+          "ticker": "9735.T",
+          "name": "SECOM Co., Ltd.",
+          "tags": [
+            "property-casualty-re",
+            "life-insurance"
+          ]
+        },
+        {
+          "ticker": "8729.T",
+          "name": "Sony Financial Group Inc.",
+          "tags": [
+            "life-insurance",
+            "reinsurance"
+          ]
+        }
+      ]
+    },
+    "semiconductors": {
+      "count": 19,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "6920.T",
+          "name": "Lasertec Corporation",
+          "tags": [
+            "wafer-fab",
+            "foundries-idms"
+          ]
+        },
+        {
+          "ticker": "6723.T",
+          "name": "Renesas Electronics",
+          "tags": [
+            "ic-design",
+            "analog"
+          ]
+        },
+        {
+          "ticker": "7751.T",
+          "name": "Canon Inc.",
+          "tags": [
+            "ip-design"
+          ]
+        },
+        {
+          "ticker": "6981.T",
+          "name": "Murata Manufacturing Co., Ltd.",
+          "tags": [
+            "rf",
+            "analog"
+          ]
+        },
+        {
+          "ticker": "6525.T",
+          "name": "Kokusai Electric Corporation",
+          "tags": [
+            "wafer-fab"
+          ]
+        },
+        {
+          "ticker": "6971.T",
+          "name": "Kyocera Corporation",
+          "tags": [
+            "rf"
+          ]
+        },
+        {
+          "ticker": "6146.T",
+          "name": "Disco Corporation",
+          "tags": [
+            "wafer-fab"
+          ]
+        },
+        {
+          "ticker": "285A.T",
+          "name": "Kioxia Holdings Corp.",
+          "tags": [
+            "wafer-fab",
+            "foundries-idms"
+          ]
+        },
+        {
+          "ticker": "0Q0C.L",
+          "name": "Toshiba Corporation",
+          "tags": [
+            "analog"
+          ]
+        },
+        {
+          "ticker": "6361.T",
+          "name": "Ebara Corporation",
+          "tags": [
+            "semiconductor-manufacturing"
+          ]
+        },
+        {
+          "ticker": "6857.T",
+          "name": "Advantest",
+          "tags": [
+            "wafer-fab",
+            "foundries-idms"
+          ]
+        },
+        {
+          "ticker": "7735.T",
+          "name": "Screen Holdings",
+          "tags": [
+            "wafer-fab",
+            "foundries-idms"
+          ]
+        },
+        {
+          "ticker": "6963.T",
+          "name": "ROHM",
+          "tags": [
+            "analog",
+            "foundries-idms"
+          ]
+        },
+        {
+          "ticker": "6967.T",
+          "name": "Shinko Electric Industries Co., Ltd.",
+          "tags": [
+            "ic-design",
+            "wafer-fab"
+          ]
+        },
+        {
+          "ticker": "6762.T",
+          "name": "TDK Corporation",
+          "tags": [
+            "analog",
+            "rf"
+          ]
+        },
+        {
+          "ticker": "6724.T",
+          "name": "Seiko Epson Corporation",
+          "tags": [
+            "ic-design",
+            "analog"
+          ]
+        },
+        {
+          "ticker": "4186.T",
+          "name": "Tokyo Ohka Kogyo Co., Ltd.",
+          "tags": [
+            "wafer-fab",
+            "foundries-idms"
+          ]
+        },
+        {
+          "ticker": "3436.T",
+          "name": "SUMCO",
+          "tags": [
+            "wafer-fab",
+            "foundries-idms"
+          ]
+        },
+        {
+          "ticker": "8035.T",
+          "name": "Tokyo Electron",
+          "tags": [
+            "wafer-fab",
+            "foundries-idms"
+          ]
+        }
+      ]
+    },
+    "retail": {
+      "count": 20,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "8267.T",
+          "name": "Aeon Co., Ltd.",
+          "tags": [
+            "discount-retail",
+            "supercenters"
+          ]
+        },
+        {
+          "ticker": "3064.T",
+          "name": "MonotaRO Co., Ltd.",
+          "tags": [
+            "consumer-goods",
+            "home-improvement"
+          ]
+        },
+        {
+          "ticker": "2651.T",
+          "name": "Lawson, Inc.",
+          "tags": [
+            "food-beverage",
+            "consumer-goods"
+          ]
+        },
+        {
+          "ticker": "7532.T",
+          "name": "Pan Pacific International Holdings Corporation",
+          "tags": [
+            "discount-retail",
+            "supercenters"
+          ]
+        },
+        {
+          "ticker": "2670.T",
+          "name": "ABC-Mart,Inc.",
+          "tags": [
+            "specialty-retail",
+            "apparel-retail"
+          ]
+        },
+        {
+          "ticker": "3382.T",
+          "name": "Seven & i Holdings Co., Ltd.",
+          "tags": [
+            "food-beverage",
+            "consumer-goods"
+          ]
+        },
+        {
+          "ticker": "6288.HK",
+          "name": "Fast Retailing Co., Ltd.",
+          "tags": [
+            "apparel-retail"
+          ]
+        },
+        {
+          "ticker": "8060.T",
+          "name": "Canon Marketing Japan Inc.",
+          "tags": [
+            "electronics"
+          ]
+        },
+        {
+          "ticker": "7453.T",
+          "name": "Ryohin Keikaku Co., Ltd.",
+          "tags": [
+            "consumer-goods",
+            "food-beverage",
+            "apparel-retail"
+          ]
+        },
+        {
+          "ticker": "7752.T",
+          "name": "Ricoh Company, Ltd.",
+          "tags": [
+            "electronics"
+          ]
+        },
+        {
+          "ticker": "3099.T",
+          "name": "Isetan Mitsukoshi Holdings Ltd.",
+          "tags": [
+            "consumer-goods",
+            "food-beverage"
+          ]
+        },
+        {
+          "ticker": "9843.T",
+          "name": "Nitori Holdings Co., Ltd.",
+          "tags": [
+            "consumer-goods",
+            "home-improvement"
+          ]
+        },
+        {
+          "ticker": "3038.T",
+          "name": "Kobe Bussan Co., Ltd.",
+          "tags": [
+            "food-beverage"
+          ]
+        },
+        {
+          "ticker": "3088.T",
+          "name": "MatsukiyoCocokara & Co.",
+          "tags": [
+            "consumer-goods",
+            "food-beverage"
+          ]
+        },
+        {
+          "ticker": "8227.T",
+          "name": "SHIMAMURA Co., Ltd.",
+          "tags": [
+            "apparel-retail"
+          ]
+        },
+        {
+          "ticker": "3141.T",
+          "name": "Welcia Holdings Co., Ltd.",
+          "tags": [
+            "food-beverage",
+            "consumer-goods"
+          ]
+        },
+        {
+          "ticker": "7649.T",
+          "name": "Sugi Holdings Co.,Ltd.",
+          "tags": [
+            "consumer-goods",
+            "food-beverage"
+          ]
+        },
+        {
+          "ticker": "9983.T",
+          "name": "Fast Retailing Co., Ltd.",
+          "tags": [
+            "apparel-retail"
+          ]
+        },
+        {
+          "ticker": "RICO.L",
+          "name": "Ricoh Company, Ltd.",
+          "tags": [
+            "electronics"
+          ]
+        },
+        {
+          "ticker": "7936.T",
+          "name": "ASICS Corporation",
+          "tags": [
+            "apparel-retail",
+            "consumer-goods"
+          ]
+        }
+      ]
+    },
+    "telecommunications": {
+      "count": 12,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "6701.T",
+          "name": "NEC Corporation",
+          "tags": [
+            "network-equipment",
+            "wireless-infrastructure"
+          ]
+        },
+        {
+          "ticker": "9432.T",
+          "name": "NTT",
+          "tags": [
+            "carriers",
+            "fiber-networks"
+          ]
+        },
+        {
+          "ticker": "6702.T",
+          "name": "Fujitsu Limited",
+          "tags": [
+            "network-equipment",
+            "business-services"
+          ]
+        },
+        {
+          "ticker": "5802.T",
+          "name": "Sumitomo Electric Industries, Ltd.",
+          "tags": [
+            "network-equipment",
+            "fiber-networks"
+          ]
+        },
+        {
+          "ticker": "9433.T",
+          "name": "KDDI",
+          "tags": [
+            "carriers",
+            "fiber-networks"
+          ]
+        },
+        {
+          "ticker": "0R15.L",
+          "name": "SoftBank Group Corp.",
+          "tags": [
+            "carriers",
+            "fiber-networks"
+          ]
+        },
+        {
+          "ticker": "9984.T",
+          "name": "SoftBank Group Corp.",
+          "tags": [
+            "carriers",
+            "residential-broadband"
+          ]
+        },
+        {
+          "ticker": "9435.T",
+          "name": "Hikari Tsushin, Inc.",
+          "tags": [
+            "business-services"
+          ]
+        },
+        {
+          "ticker": "9434.T",
+          "name": "SoftBank Corp",
+          "tags": [
+            "carriers"
+          ]
+        },
+        {
+          "ticker": "5803.T",
+          "name": "Fujikura Ltd.",
+          "tags": [
+            "fiber-networks",
+            "network-equipment"
+          ]
+        },
+        {
+          "ticker": "9613.T",
+          "name": "NTT DATA Corporation",
+          "tags": [
+            "business-services",
+            "fiber-networks"
+          ]
+        },
+        {
+          "ticker": "5801.T",
+          "name": "Furukawa Electric Co., Ltd.",
+          "tags": [
+            "network-equipment",
+            "fiber-networks"
+          ]
+        }
+      ]
+    },
+    "software-saas": {
+      "count": 9,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "4768.T",
+          "name": "Otsuka Corporation",
+          "tags": [
+            "enterprise-apps",
+            "collab"
+          ]
+        },
+        {
+          "ticker": "3626.T",
+          "name": "TIS Inc.",
+          "tags": [
+            "enterprise-apps",
+            "analytics"
+          ]
+        },
+        {
+          "ticker": "4716.T",
+          "name": "Oracle Corporation Japan",
+          "tags": [
+            "enterprise-apps",
+            "integration"
+          ]
+        },
+        {
+          "ticker": "2181.T",
+          "name": "Persol Holdings Co., Ltd.",
+          "tags": [
+            "enterprise-apps"
+          ]
+        },
+        {
+          "ticker": "2327.T",
+          "name": "NS Solutions Corporation",
+          "tags": [
+            "enterprise-apps",
+            "analytics"
+          ]
+        },
+        {
+          "ticker": "4733.T",
+          "name": "OBIC Business Consultants Co., Ltd.",
+          "tags": [
+            "enterprise-apps"
+          ]
+        },
+        {
+          "ticker": "9719.T",
+          "name": "SCSK Corporation",
+          "tags": [
+            "enterprise-apps",
+            "analytics"
+          ]
+        },
+        {
+          "ticker": "6098.T",
+          "name": "Recruit Holdings Co., Ltd.",
+          "tags": [
+            "enterprise-apps",
+            "vertical-saas"
+          ]
+        },
+        {
+          "ticker": "4684.T",
+          "name": "OBIC Co.,Ltd.",
+          "tags": [
+            "enterprise-apps",
+            "integration"
+          ]
+        }
+      ]
+    },
+    "consumer-products": {
+      "count": 9,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "6752.T",
+          "name": "Panasonic Holdings Corporation",
+          "tags": [
+            "raw-materials-consumer"
+          ]
+        },
+        {
+          "ticker": "4452.T",
+          "name": "Kao Corporation",
+          "tags": [
+            "personal-care",
+            "household-products"
+          ]
+        },
+        {
+          "ticker": "8113.T",
+          "name": "Unicharm Corporation",
+          "tags": [
+            "personal-care",
+            "household-products"
+          ]
+        },
+        {
+          "ticker": "6448.T",
+          "name": "Brother Industries, Ltd.",
+          "tags": [
+            "household-products"
+          ]
+        },
+        {
+          "ticker": "3861.T",
+          "name": "Oji Holdings Corporation",
+          "tags": [
+            "paper-goods",
+            "household-products"
+          ]
+        },
+        {
+          "ticker": "2914.T",
+          "name": "Japan Tobacco",
+          "tags": [
+            "tobacco",
+            "combustibles"
+          ]
+        },
+        {
+          "ticker": "0QYR.L",
+          "name": "Panasonic Holdings Corporation",
+          "tags": [
+            "raw-materials-consumer"
+          ]
+        },
+        {
+          "ticker": "7309.T",
+          "name": "Shimano Inc.",
+          "tags": [
+            "raw-materials-consumer"
+          ]
+        },
+        {
+          "ticker": "4911.T",
+          "name": "Shiseido Company, Limited",
+          "tags": [
+            "skincare",
+            "hair-care"
+          ]
+        }
+      ]
+    },
+    "aerospace": {
+      "count": 6,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "7409.T",
+          "name": "AeroEdge Co., Ltd.",
+          "tags": [
+            "components-parts",
+            "engines"
+          ]
+        },
+        {
+          "ticker": "7011.T",
+          "name": "Mitsubishi Heavy Industries",
+          "tags": [
+            "engines",
+            "defense-systems"
+          ]
+        },
+        {
+          "ticker": "7224.T",
+          "name": "ShinMaywa Industries",
+          "tags": [
+            "aircraft-manufacturing",
+            "components-parts"
+          ]
+        },
+        {
+          "ticker": "SHMWF",
+          "name": "ShinMaywa Industries, Ltd.",
+          "tags": [
+            "aircraft-manufacturing",
+            "components-parts"
+          ]
+        },
+        {
+          "ticker": "6946.T",
+          "name": "Nippon Avionics Co., Ltd.",
+          "tags": [
+            "avionics",
+            "components-parts"
+          ]
+        },
+        {
+          "ticker": "7408.T",
+          "name": "JAMCO Corporation",
+          "tags": [
+            "aircraft-manufacturing",
+            "components-parts"
+          ]
+        }
+      ]
+    },
+    "ecommerce": {
+      "count": 3,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "3092.T",
+          "name": "ZOZO, Inc.",
+          "tags": [
+            "marketplace-platforms",
+            "marketplaces"
+          ]
+        },
+        {
+          "ticker": "4755.T",
+          "name": "Rakuten Group, Inc.",
+          "tags": [
+            "marketplace-platforms",
+            "payment-gateway"
+          ]
+        },
+        {
+          "ticker": "4689.T",
+          "name": "LY Corporation",
+          "tags": [
+            "marketplace-platforms",
+            "payment-gateway"
+          ]
+        }
+      ]
+    },
+    "transportation-logistics": {
+      "count": 21,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "KWHIY",
+          "name": "Kawasaki Heavy Industries, Ltd.",
+          "tags": [
+            "transportation-equipment",
+            "railroads"
+          ]
+        },
+        {
+          "ticker": "9024.T",
+          "name": "Seibu Holdings Inc.",
+          "tags": [
+            "railroads"
+          ]
+        },
+        {
+          "ticker": "9086.T",
+          "name": "Hitachi Transport System, Ltd.",
+          "tags": [
+            "3pl-logistics"
+          ]
+        },
+        {
+          "ticker": "9020.T",
+          "name": "East Japan Railway Company",
+          "tags": [
+            "railroads"
+          ]
+        },
+        {
+          "ticker": "9147.T",
+          "name": "Nippon Express Holdings,Inc.",
+          "tags": [
+            "3pl-logistics"
+          ]
+        },
+        {
+          "ticker": "6178.T",
+          "name": "Japan Post Holdings Co., Ltd.",
+          "tags": [
+            "3pl-logistics",
+            "freight-trucking"
+          ]
+        },
+        {
+          "ticker": "2768.T",
+          "name": "Sojitz Corporation",
+          "tags": [
+            "transportation-equipment"
+          ]
+        },
+        {
+          "ticker": "8053.T",
+          "name": "Sumitomo Corporation",
+          "tags": [
+            "transportation-equipment"
+          ]
+        },
+        {
+          "ticker": "8001.T",
+          "name": "ITOCHU Corporation",
+          "tags": [
+            "transportation-equipment"
+          ]
+        },
+        {
+          "ticker": "9202.T",
+          "name": "ANA Holdings Inc.",
+          "tags": [
+            "transportation-equipment"
+          ]
+        },
+        {
+          "ticker": "9101.T",
+          "name": "Nippon Yusen Kabushiki Kaisha",
+          "tags": [
+            "3pl-logistics"
+          ]
+        },
+        {
+          "ticker": "9021.T",
+          "name": "West Japan Railway Company",
+          "tags": [
+            "railroads"
+          ]
+        },
+        {
+          "ticker": "9201.T",
+          "name": "Japan Airlines Co., Ltd.",
+          "tags": [
+            "transportation-equipment"
+          ]
+        },
+        {
+          "ticker": "9107.T",
+          "name": "Kawasaki Kisen Kaisha, Ltd.",
+          "tags": [
+            "transportation-equipment",
+            "3pl-logistics"
+          ]
+        },
+        {
+          "ticker": "9064.T",
+          "name": "Yamato Holdings Co., Ltd.",
+          "tags": [
+            "last-mile",
+            "3pl-logistics"
+          ]
+        },
+        {
+          "ticker": "7012.T",
+          "name": "Kawasaki Heavy Industries",
+          "tags": [
+            "transportation-equipment",
+            "railroads"
+          ]
+        },
+        {
+          "ticker": "8031.T",
+          "name": "Mitsui & Co., Ltd.",
+          "tags": [
+            "transportation-equipment",
+            "railroads"
+          ]
+        },
+        {
+          "ticker": "9042.T",
+          "name": "Hankyu Hanshin Holdings, Inc.",
+          "tags": [
+            "railroads"
+          ]
+        },
+        {
+          "ticker": "9022.T",
+          "name": "Central Japan Railway Company",
+          "tags": [
+            "railroads"
+          ]
+        },
+        {
+          "ticker": "9143.T",
+          "name": "SG Holdings Co.,Ltd.",
+          "tags": [
+            "freight-trucking",
+            "last-mile"
+          ]
+        },
+        {
+          "ticker": "9104.T",
+          "name": "Mitsui O.S.K. Lines, Ltd.",
+          "tags": [
+            "transportation-equipment",
+            "3pl-logistics"
+          ]
+        }
+      ]
+    },
+    "fintech": {
+      "count": 5,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "8473.T",
+          "name": "SBI Holdings, Inc.",
+          "tags": [
+            "digital-banking",
+            "cryptocurrency-exchanges"
+          ]
+        },
+        {
+          "ticker": "8593.T",
+          "name": "Mitsubishi HC Capital Inc.",
+          "tags": [
+            "online-payments",
+            "digital-banking"
+          ]
+        },
+        {
+          "ticker": "4307.T",
+          "name": "Nomura Research Institute, Ltd.",
+          "tags": [
+            "digital-banking"
+          ]
+        },
+        {
+          "ticker": "8439.T",
+          "name": "Tokyo Century Corporation",
+          "tags": [
+            "online-payments",
+            "digital-banking"
+          ]
+        },
+        {
+          "ticker": "3769.T",
+          "name": "GMO Payment Gateway, Inc.",
+          "tags": [
+            "payment-processors",
+            "online-payments"
+          ]
+        }
+      ]
+    },
+    "mining-materials": {
+      "count": 9,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "5406.T",
+          "name": "Kobe Steel, Ltd.",
+          "tags": [
+            "metals-production"
+          ]
+        },
+        {
+          "ticker": "5016.T",
+          "name": "JX Advanced Metals Corporation",
+          "tags": [
+            "metals-production"
+          ]
+        },
+        {
+          "ticker": "5706.T",
+          "name": "Mitsui Kinzoku Co., Ltd.",
+          "tags": [
+            "metals-production",
+            "industrial-gases"
+          ]
+        },
+        {
+          "ticker": "5411.T",
+          "name": "JFE Holdings, Inc.",
+          "tags": [
+            "metals-production"
+          ]
+        },
+        {
+          "ticker": "5713.T",
+          "name": "Sumitomo Metal Mining Co., Ltd.",
+          "tags": [
+            "mining-extraction",
+            "metals-production"
+          ]
+        },
+        {
+          "ticker": "8058.T",
+          "name": "Mitsubishi Corporation",
+          "tags": [
+            "mining-extraction",
+            "metals-production"
+          ]
+        },
+        {
+          "ticker": "5401.T",
+          "name": "Nippon Steel Corporation",
+          "tags": [
+            "metals-production"
+          ]
+        },
+        {
+          "ticker": "5444.T",
+          "name": "Yamato Kogyo Co., Ltd.",
+          "tags": [
+            "metals-production",
+            "industrial-distribution"
+          ]
+        },
+        {
+          "ticker": "8002.T",
+          "name": "Marubeni Corporation",
+          "tags": [
+            "metals-production",
+            "industrial-distribution"
+          ]
+        }
+      ]
+    },
+    "digital-health": {
+      "count": 1,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "2413.T",
+          "name": "M3, Inc.",
+          "tags": [
+            "health-data",
+            "telehealth-platforms"
+          ]
+        }
+      ]
+    },
+    "medical-devices": {
+      "count": 7,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "7701.T",
+          "name": "Shimadzu Corporation",
+          "tags": [
+            "diagnostic-equipment",
+            "imaging-systems"
+          ]
+        },
+        {
+          "ticker": "6869.T",
+          "name": "Sysmex Corporation",
+          "tags": [
+            "diagnostic-equipment",
+            "laboratory-analyzers"
+          ]
+        },
+        {
+          "ticker": "4543.T",
+          "name": "Terumo Corporation",
+          "tags": [
+            "surgical-devices",
+            "diagnostic-equipment"
+          ]
+        },
+        {
+          "ticker": "7733.T",
+          "name": "Olympus Corporation",
+          "tags": [
+            "surgical-devices",
+            "diagnostic-equipment"
+          ]
+        },
+        {
+          "ticker": "7747.T",
+          "name": "Asahi Intecc Co., Ltd.",
+          "tags": [
+            "device-manufacturing",
+            "surgical-devices"
+          ]
+        },
+        {
+          "ticker": "7741.T",
+          "name": "HOYA Corporation",
+          "tags": [
+            "implants",
+            "surgical-devices"
+          ]
+        },
+        {
+          "ticker": "6856.T",
+          "name": "HORIBA, Ltd.",
+          "tags": [
+            "diagnostic-equipment",
+            "laboratory-analyzers"
+          ]
+        }
+      ]
+    },
+    "oil-gas": {
+      "count": 5,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "1605.T",
+          "name": "Inpex Corporation",
+          "tags": [
+            "exploration",
+            "natural-gas-pipelines"
+          ]
+        },
+        {
+          "ticker": "5021.T",
+          "name": "Cosmo Energy Holdings Co., Ltd.",
+          "tags": [
+            "refining",
+            "petrochemicals"
+          ]
+        },
+        {
+          "ticker": "5019.T",
+          "name": "Idemitsu Kosan Co.,Ltd.",
+          "tags": [
+            "refining",
+            "petroleum-refining"
+          ]
+        },
+        {
+          "ticker": "6269.T",
+          "name": "MODEC, Inc.",
+          "tags": [
+            "offshore-drilling",
+            "oilfield-services"
+          ]
+        },
+        {
+          "ticker": "5020.T",
+          "name": "ENEOS Holdings, Inc.",
+          "tags": [
+            "petrochemicals",
+            "refining"
+          ]
+        }
+      ]
+    },
+    "asset-management": {
+      "count": 5,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "1591.T",
+          "name": "NEXT FUNDS JPX-Nikkei Index 400 Exchange Traded Fund",
+          "tags": [
+            "market-infrastructure"
+          ]
+        },
+        {
+          "ticker": "8697.T",
+          "name": "Japan Exchange Group, Inc.",
+          "tags": [
+            "market-infrastructure"
+          ]
+        },
+        {
+          "ticker": "1306.T",
+          "name": "NEXT FUNDS TOPIX Exchange Traded Fund",
+          "tags": [
+            "market-infrastructure"
+          ]
+        },
+        {
+          "ticker": "1330.T",
+          "name": "Nikko Exchange Traded Index Fund 225",
+          "tags": [
+            "market-infrastructure"
+          ]
+        },
+        {
+          "ticker": "1475.T",
+          "name": "iShares Core TOPIX ETF",
+          "tags": [
+            "market-infrastructure"
+          ]
+        }
+      ]
+    },
+    "cybersecurity": {
+      "count": 1,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "4704.T",
+          "name": "Trend Micro Incorporated",
+          "tags": [
+            "endpoint",
+            "network-security"
+          ]
+        }
+      ]
+    },
+    "hospitality": {
+      "count": 1,
+      "hasValidStructure": true,
+      "companies": [
+        {
+          "ticker": "4661.T",
+          "name": "Oriental Land Co., Ltd.",
+          "tags": [
+            "hotels-resorts"
+          ]
+        }
+      ]
+    }
+  },
+  "issues": [
+    "Industry \"semiconductors\" has invalid tags: semiconductor-manufacturing"
+  ]
+}

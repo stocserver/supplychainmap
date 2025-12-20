@@ -239,7 +239,7 @@ export const aerospaceProductStages: ValueChainStageProducts[] = [
             ]
           }
         ],
-        tags: ['Maintenance', 'Repair', 'Overhaul', 'Services']
+        tags: ['Maintenance', 'Repair', 'Overhaul', 'MRO']
       }
     ]
   }

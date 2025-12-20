@@ -1,12 +1,22 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Search } from "lucide-react"
+import { Search, Loader2 } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { CompanyCard } from "@/components/companies/company-card"
+import { CompaniesViewToggle } from "@/components/companies/CompaniesViewToggle"
+import { VisualMap } from "@/components/industries/VisualMap"
 import { supabase } from "@/lib/supabase/client"
 import { industries as localIndustries, type Industry } from "@/lib/data/industries"
+
+// Map country codes to country names used in the database
+const COUNTRY_MAP: Record<string, string[]> = {
+    'US': ['US', 'USA', 'United States'],
+    'CN': ['CN', 'China'],
+    'JP': ['JP', 'Japan'],
+    'EU': ['DE', 'FR', 'GB', 'IT', 'ES', 'NL', 'BE', 'AT', 'CH', 'SE', 'NO', 'DK', 'FI', 'IE', 'PL', 'CZ', 'PT', 'GR', 'HU', 'RO'],
+}
 
 interface DbIndustry {
     id: string
@@ -28,20 +38,24 @@ interface Company {
     name: string
     market_cap: number
     industry?: string
+    logo_url?: string
+    data?: any
 }
 
 interface CompaniesClientProps {
     initialCompanies: Company[]
     initialIndustries: DbIndustry[]
     initialMapping: MappingRow[]
+    country?: string
 }
 
-export function CompaniesClient({ initialCompanies, initialIndustries, initialMapping }: CompaniesClientProps) {
+export function CompaniesClient({ initialCompanies, initialIndustries, initialMapping, country = 'US' }: CompaniesClientProps) {
     const [searchTerm, setSearchTerm] = useState("")
     const [category, setCategory] = useState("all")
     const [companiesFromDb, setCompaniesFromDb] = useState<Company[]>(initialCompanies)
     const [page, setPage] = useState(1)
-    const [hasMore, setHasMore] = useState(true) // Assuming initial fetch might not be everything
+    const [hasMore, setHasMore] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const loadingRef = useRef(false)
     const [searchResults, setSearchResults] = useState<Company[] | null>(null)
     const searchTimer = useRef<number | null>(null)
@@ -72,21 +86,22 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
         return local
     }, [initialIndustries, initialMapping])
 
-    // High-level category filters
+    // High-level category filters - mapped to industry slugs in the database
     const categoryOptions = useMemo(() => [
         { label: "All", value: "all", ids: null as string[] | null },
-        { label: "Technology & Innovation", value: "tech", ids: ['semiconductors', 'ai-ml', 'cloud-computing', 'cybersecurity', 'software-saas', 'data-centers', 'telecommunications', 'robotics'] },
+        { label: "Technology & Innovation", value: "tech", ids: ['semiconductors', 'artificial-intelligence', 'cloud-computing', 'cybersecurity', 'software-saas', 'data-centers', 'telecommunications', 'robotics-automation', 'consumer-electronics'] },
         { label: "Financials", value: "financials", ids: ['banking', 'insurance', 'asset-management', 'fintech'] },
         { label: "Energy & Materials", value: "energy-materials", ids: ['oil-gas', 'mining-materials', 'chemicals', 'solar-energy', 'energy-storage', 'utilities'] },
-        { label: "Transportation & Mobility", value: "transport", ids: ['electric-vehicles', 'automotive', 'transportation-logistics', 'aerospace', 'space'] },
+        { label: "Transportation & Mobility", value: "transport", ids: ['electric-vehicles', 'automotive', 'transportation-logistics', 'aerospace-defense', 'space-technology'] },
         { label: "Healthcare & Life Sciences", value: "healthcare", ids: ['pharmaceuticals', 'biotechnology', 'medical-devices', 'digital-health'] },
         { label: "Consumer & Retail", value: "consumer", ids: ['food-beverage', 'consumer-products', 'retail', 'ecommerce'] },
         { label: "Real Estate & Construction", value: "real-estate", ids: ['real-estate', 'construction-engineering'] },
         { label: "Hospitality & Entertainment", value: "hospitality", ids: ['hospitality', 'media-entertainment'] },
-        { label: "Agriculture & Industrial", value: "agriculture", ids: ['agtech'] },
+        { label: "Industrial & Manufacturing", value: "industrial", ids: ['agtech', 'heavy-industry', 'wholesale-trading'] },
     ], [])
 
-    // Infinite scroll loader
+    // Infinite scroll loader - batch size of 20
+    const BATCH_SIZE = 20
     useEffect(() => {
         function onScroll() {
             if (!hasMore || loadingRef.current) return
@@ -94,34 +109,49 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
             if (!nearBottom) return
 
             loadingRef.current = true
-            const from = page * 50
-            const to = from + 49
+            setIsLoading(true)
+            const from = page * BATCH_SIZE
+            const to = from + BATCH_SIZE - 1
 
                 ; (async () => {
                     try {
-                        const { data, error } = await supabase
+                        let query = supabase
                             .from('companies')
-                            .select('ticker, name, market_cap, industry')
+                            .select('ticker, name, market_cap, industry, country, logo_url, data')
                             .gt('market_cap', 0)
+
+                        // Apply country filter for non-US regions
+                        if (country !== 'US') {
+                            const countryFilter = COUNTRY_MAP[country] || COUNTRY_MAP['US']
+                            query = query.in('country', countryFilter)
+                        }
+
+                        const { data, error } = await query
                             .order('market_cap', { ascending: false, nullsFirst: false })
                             .range(from, to)
 
                         if (!error && data && data.length > 0) {
-                            setCompaniesFromDb(prev => [...prev, ...data as Company[]])
+                            // Filter out duplicates by checking existing tickers
+                            setCompaniesFromDb(prev => {
+                                const existingTickers = new Set(prev.map(c => c.ticker))
+                                const newCompanies = (data as Company[]).filter(c => !existingTickers.has(c.ticker))
+                                return [...prev, ...newCompanies]
+                            })
                             setPage(prev => prev + 1)
-                            setHasMore(data.length === 50)
+                            setHasMore(data.length === BATCH_SIZE)
                         } else {
                             setHasMore(false)
                         }
                     } finally {
                         loadingRef.current = false
+                        setIsLoading(false)
                     }
                 })()
         }
 
         window.addEventListener('scroll', onScroll)
         return () => window.removeEventListener('scroll', onScroll)
-    }, [page, hasMore])
+    }, [page, hasMore, country])
 
     // Debounced server-side search
     useEffect(() => {
@@ -135,17 +165,25 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
 
         searchTimer.current = window.setTimeout(async () => {
             const term = `%${searchTerm.trim()}%`
-            const { data } = await supabase
+            let query = supabase
                 .from('companies')
-                .select('ticker, name, market_cap, industry')
+                .select('ticker, name, market_cap, industry, country, logo_url, data')
                 .or(`ticker.ilike.${term},name.ilike.${term}`)
+
+            // Apply country filter for non-US regions
+            if (country !== 'US') {
+                const countryFilter = COUNTRY_MAP[country] || COUNTRY_MAP['US']
+                query = query.in('country', countryFilter)
+            }
+
+            const { data } = await query
                 .order('market_cap', { ascending: false, nullsFirst: false })
                 .limit(200)
             setSearchResults((data || []) as Company[])
         }, 300)
 
         return () => { if (searchTimer.current) window.clearTimeout(searchTimer.current) }
-    }, [searchTerm])
+    }, [searchTerm, country])
 
     // All available companies for filtering
     const allCompanies = useMemo(() => {
@@ -173,6 +211,16 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
         return allCompanies.filter(t => matchesCategory(t) && matchesSearch(t))
     }, [allCompanies, category, searchTerm, searchResults, tickerToIndustry, companiesFromDb, categoryOptions])
 
+    // Get companies for VisualMap display
+    // VisualMap handles its own data transformation, so we just pass the raw company objects
+    const visualMapCompanies = useMemo(() => {
+        const source = searchResults ?? companiesFromDb
+        return filteredCompanies.map(ticker => {
+            const company = source.find(c => c.ticker === ticker)
+            return company || null
+        }).filter(Boolean)
+    }, [filteredCompanies, companiesFromDb, searchResults])
+
     return (
         <div className="container py-8">
             <div className="mb-8">
@@ -194,8 +242,8 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
                                 aria-pressed={selected}
                                 onClick={() => setCategory(opt.value)}
                                 className={`rounded-full border px-3 py-1.5 transition-colors ${selected
-                                        ? 'border-primary bg-primary text-primary-foreground'
-                                        : 'border-input bg-background text-foreground hover:bg-accent'
+                                    ? 'border-primary bg-primary text-primary-foreground'
+                                    : 'border-input bg-background text-foreground hover:bg-accent'
                                     }`}
                             >
                                 {opt.label}
@@ -225,31 +273,54 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
                 Showing {filteredCompanies.length} of {allCompanies.length} companies
             </div>
 
-            {/* Companies Grid */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {filteredCompanies.map((ticker) => {
-                    const source = searchResults ?? companiesFromDb
-                    const company = source.find(c => c.ticker === ticker)
-                    return (
-                        <CompanyCard
-                            key={ticker}
-                            ticker={ticker}
-                            name={company?.name}
-                            marketCap={company?.market_cap}
-                            industry={tickerToIndustry.get(ticker)}
-                            labelTextOverride={tickerToIndustry.get(ticker) ? undefined : (company?.industry || undefined)}
-                        />
-                    )
-                })}
-            </div>
+            {/* View Toggle */}
+            <CompaniesViewToggle
+                gridView={
+                    <>
+                        {/* Companies Grid */}
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            {filteredCompanies.map((ticker) => {
+                                const source = searchResults ?? companiesFromDb
+                                const company = source.find(c => c.ticker === ticker)
+                                return (
+                                    <CompanyCard
+                                        key={ticker}
+                                        ticker={ticker}
+                                        name={company?.name}
+                                        marketCap={company?.market_cap}
+                                        industry={tickerToIndustry.get(ticker)}
+                                        labelTextOverride={tickerToIndustry.get(ticker) ? undefined : (company?.industry || undefined)}
+                                        country={country}
+                                    />
+                                )
+                            })}
+                        </div>
 
-            {filteredCompanies.length === 0 && (
-                <div className="flex h-48 items-center justify-center rounded-lg border-2 border-dashed">
-                    <p className="text-muted-foreground">No companies found matching &quot;{searchTerm}&quot;</p>
+                        {filteredCompanies.length === 0 && (
+                            <div className="flex h-48 items-center justify-center rounded-lg border-2 border-dashed">
+                                <p className="text-muted-foreground">No companies found matching &quot;{searchTerm}&quot;</p>
+                            </div>
+                        )}
+
+                        {(!searchResults && !hasMore && companiesFromDb.length > 0) && null}
+                    </>
+                }
+                leaderboardView={
+                    <VisualMap
+                        companies={visualMapCompanies}
+                    />
+                }
+            />
+
+            {/* Loading Indicator */}
+            {isLoading && (
+                <div className="flex justify-center py-8">
+                    <Loader2 className="h-8 w-8 animate-spin text-slate-400" />
                 </div>
             )}
 
-            {(!searchResults && !hasMore && companiesFromDb.length > 0) && (
+            {/* End of results message */}
+            {(!searchResults && !hasMore && companiesFromDb.length > 0 && !isLoading) && (
                 <div className="py-6 text-center text-xs text-muted-foreground">No more results</div>
             )}
         </div>

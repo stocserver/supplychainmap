@@ -3,12 +3,12 @@ import { ValueChainStageProducts } from "@/lib/data/industries"
 export const consumerProductsProductStages: ValueChainStageProducts[] = [
   {
     stage: 'upstream',
-    stageLabel: 'Raw Materials & Personal Care',
+    stageLabel: 'Raw Material Sourcing & Processing',
     layout: 'grid',
     products: [
       {
         id: 'raw-materials-consumer',
-        name: 'Raw Materials & Ingredients',
+        name: 'Basic Ingredients & Packaging',
         description: 'Fragrances, flavors and key inputs for consumer goods',
         longDescription:
           'Inputs that feed personal care and household product manufacturing, including fragrances, surfactants and packaging resins.',
@@ -22,7 +22,7 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'personal-care',
-        name: 'Personal Care',
+        name: 'Personal & Household Care Products',
         description: 'Personal and household care products',
         longDescription:
           'Manufacturing and marketing of products for personal hygiene and grooming, including skincare, haircare, oral care, and cosmetics. This segment focuses on brand innovation, consumer preferences, and broad distribution channels.',
@@ -78,12 +78,12 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
   },
   {
     stage: 'midstream',
-    stageLabel: 'Manufacturing & Brands',
+    stageLabel: 'Product Manufacturing & Branding',
     layout: 'hybrid',
     products: [
       {
         id: 'household-products',
-        name: 'Household Products',
+        name: 'Household Goods Manufacturing',
         description: 'Household consumables and appliances',
         longDescription:
           'Production and marketing of cleaning supplies, paper goods, and small household appliances for home use. This segment emphasizes effectiveness, convenience, and value for everyday household tasks.',
@@ -125,7 +125,7 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
       },
       {
         id: 'tobacco',
-        name: 'Tobacco',
+        name: 'Tobacco Products',
         description: 'Tobacco and reduced-risk products',
         longDescription:
           'Manufacturing and marketing of tobacco products, including traditional cigarettes and cigars, as well as developing and distributing reduced-risk alternatives. This segment navigates evolving regulations and public health concerns.',
@@ -162,12 +162,12 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
   },
   {
     stage: 'downstream',
-    stageLabel: 'Retail',
+    stageLabel: 'Distribution & Retail',
     layout: 'grid',
     products: [
       {
         id: 'retail',
-        name: 'Retail Channels',
+        name: 'Retail & E-commerce Channels',
         description: 'Big box and specialty retail',
         longDescription:
           'Distribution channels through which consumer products reach end-users. This includes mass merchandisers, drugstores, and online platforms, each with distinct strategies for product display, pricing, and customer engagement.',
@@ -181,7 +181,7 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
         subProducts: [
           {
             id: 'mass-merch',
-            name: 'Mass Merchandisers',
+            name: 'Mass Market Retailers',
             description: 'Big-box retail chains',
             longDescription:
               'Large retail formats (superstores, hypermarkets) offering a wide variety of consumer goods at competitive prices, including groceries, electronics, apparel, and household items. Focus on high volume and broad appeal.',
@@ -196,7 +196,7 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
           },
           {
             id: 'drugstores',
-            name: 'Drugstores',
+            name: 'Pharmacy & Health Retailers',
             description: 'Drugstore chains and health retail',
             longDescription:
               'Retailers primarily focused on health, beauty, and wellness products, alongside pharmaceuticals, over-the-counter medicines, and some convenience goods. They serve as accessible community health and shopping hubs.',
@@ -208,7 +208,7 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
           },
           {
             id: 'online',
-            name: 'Online Retail',
+            name: 'Online & Direct-to-Consumer Sales',
             description: 'E-commerce channels',
             longDescription:
               'Sales of consumer products through digital platforms and websites. This channel offers convenience, vast product selection, and competitive pricing, driven by rapid fulfillment and personalized shopping experiences.',
@@ -217,7 +217,7 @@ export const consumerProductsProductStages: ValueChainStageProducts[] = [
             ]
           }
         ],
-        tags: ['Mass', 'Drugstores', 'Online']
+        tags: ['Mass', 'Pharmacy & Health Retailers', 'Online']
       }
     ]
   }
