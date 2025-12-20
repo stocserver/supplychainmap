@@ -190,7 +190,13 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
         const source = searchResults ?? companiesFromDb
         const fromDb = source.map(c => c.ticker)
         if (fromDb.length > 0) return fromDb
-        return Array.from(new Set(Array.from(tickerToIndustry.keys()))).sort()
+
+        // Only fall back to local static data if we are in US mode
+        // Otherwise we show empty state to avoid showing US companies for JP/CN/etc
+        if (country === 'US') {
+            return Array.from(new Set(Array.from(tickerToIndustry.keys()))).sort()
+        }
+        return []
     }, [companiesFromDb, searchResults, tickerToIndustry])
 
     const filteredCompanies = useMemo(() => {
