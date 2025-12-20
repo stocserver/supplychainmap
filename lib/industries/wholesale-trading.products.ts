@@ -1,4 +1,4 @@
-import { ValueChainStageProducts } from "../../data/structure"
+import { ValueChainStageProducts } from "../data/structure"
 
 export const wholesaleTradingProducts: ValueChainStageProducts[] = [
     {
