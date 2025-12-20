@@ -25,7 +25,7 @@ export default function TermsPage() {
 
                 <h2 className="mt-8 text-2xl font-semibold text-foreground">2. Disclaimer</h2>
                 <p>
-                    THE SERVICE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. WE DISCLAIM ALL LIABILITIES.
+                    THE SERVICE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND. WE DISCLAIM ALL LIABILITIES.
                 </p>
 
                 <h2 className="mt-8 text-2xl font-semibold text-foreground">3. Changes</h2>
