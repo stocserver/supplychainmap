@@ -59,6 +59,8 @@ export interface Industry {
     valueChain?: ValueChain
     // Optional product-centric chain (pilot for selected industries)
     productValueChain?: ValueChainStageProducts[]
+    // Featured companies for this industry (tickers)
+    featured_companies?: string[]
 }
 
 export const industriesStructure: Industry[] = [
