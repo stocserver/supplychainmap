@@ -19,12 +19,15 @@ export const metadata: Metadata = {
   },
 }
 
+import { COUNTRY_MAP, DEFAULT_COUNTRY } from "@/lib/data/constants"
+
 export default async function IndustriesPage({
   searchParams,
 }: {
   searchParams: { country?: string }
 }) {
-  const country = searchParams.country || 'US'
+  const country = searchParams.country || DEFAULT_COUNTRY
+  const countryFilter = COUNTRY_MAP[country] || COUNTRY_MAP['US']
 
   // Fetch industries data on the server
   let industriesList: DbIndustry[] = []
@@ -56,7 +59,7 @@ export default async function IndustriesPage({
     const { data, error } = await supabaseServer
       .from('companies')
       .select('ticker, name, industry, value_chain_tags, market_cap, logo_url')
-      .eq('country', country)
+      .in('country', countryFilter) // Match companies page logic
       .range(from, from + batchSize - 1)
 
     if (error) {

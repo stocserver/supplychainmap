@@ -56,6 +56,7 @@ export function CountrySwitcher() {
         const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`
 
         // Use window.location for hard reload to ensure server-side data is refetched
+        // router.refresh() sometimes isn't enough for searchParams changes in complex layouts
         window.location.href = newUrl
     }
 

@@ -20,24 +20,18 @@ export const metadata: Metadata = {
   },
 }
 
-// Map country codes to country names used in the database
-const COUNTRY_MAP: Record<string, string[]> = {
-  'US': ['US', 'USA', 'United States'],
-  'CN': ['CN', 'China'],
-  'JP': ['JP', 'Japan'],
-  'EU': ['DE', 'FR', 'GB', 'IT', 'ES', 'NL', 'BE', 'AT', 'CH', 'SE', 'NO', 'DK', 'FI', 'IE', 'PL', 'CZ', 'PT', 'GR', 'HU', 'RO'],
-}
+import { COUNTRY_MAP, DEFAULT_COUNTRY } from "@/lib/data/constants"
 
 export default async function CompaniesPage({
   searchParams,
 }: {
   searchParams: { country?: string }
 }) {
-  const countryCode = searchParams.country || 'US'
+  const countryCode = searchParams.country || DEFAULT_COUNTRY
   const countryFilter = COUNTRY_MAP[countryCode] || COUNTRY_MAP['US']
 
-  // Redis Cache Keys
-  const COMPANIES_CACHE_KEY = `companies_list_${countryCode}`
+  // Redis Cache Keys (Bump version to v2 to clear stale "global US" cache)
+  const COMPANIES_CACHE_KEY = `companies_list_v2_${countryCode}`
   const INDUSTRIES_CACHE_KEY = `industries_list`
   const MAPPING_CACHE_KEY = `industry_mappings`
 
@@ -76,7 +70,13 @@ export default async function CompaniesPage({
       .gt('market_cap', 0)
 
     // Apply country filter for non-US regions
-    if (countryCode !== 'US') {
+    // Apply country filter
+    if (countryCode === 'US') {
+      // For US, we default to filtering, assuming data has 'US', 'USA', or 'United States'
+      // If we confirm database has NULL for US, we might need `.or('country.eq.US,country.is.null')`
+      // But for now, strict filtering is safer for "Country Switcher" logic.
+      query = query.in('country', countryFilter)
+    } else {
       query = query.in('country', countryFilter)
     }
 

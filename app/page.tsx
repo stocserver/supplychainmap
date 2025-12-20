@@ -100,10 +100,7 @@ export default function Home({
         <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
           {countryName} Supply Chain & Value Chain Platform
         </h1>
-        <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
-          Explore public companies through their industry value chains.
-          Understand supply chain relationships and investment opportunities.
-        </p>
+
       </div>
 
       {/* Call to Action */}
