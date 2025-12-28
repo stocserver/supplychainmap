@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
-import { DollarSign, TrendingUp, Wallet, Check } from 'lucide-react'
+import { DollarSign, TrendingUp, Wallet, Check, Info, X } from 'lucide-react'
 import Link from 'next/link'
 
 // --- MOCK DATA ---
@@ -22,12 +22,13 @@ const MOCK_DATA = [
     { name: 'JPMorgan Chase', ticker: 'JPM', marketCap: 570000000000, revenue: 158000000000, netIncome: 49000000000, logo_url: 'https://img.logo.dev/ticker/JPM?token=pk_mcaTzX9MTM6eM9rN-sV5cQ' },
 ]
 
-type MetricType = 'marketCap' | 'revenue' | 'netIncome'
+type MetricType = 'marketCap' | 'revenue' | 'netIncome' | 'netMargin'
 
-const METRIC_CONFIG: Record<MetricType, { label: string, color: string, buttonColor: string, icon: any }> = {
+const METRIC_CONFIG: Record<MetricType, { label: string, color: string, buttonColor: string, icon: any, isPercentage?: boolean }> = {
     marketCap: { label: 'Market Cap', color: 'bg-blue-500', buttonColor: 'bg-blue-600 border-blue-600', icon: DollarSign },
     revenue: { label: 'Revenue', color: 'bg-emerald-500', buttonColor: 'bg-emerald-600 border-emerald-600', icon: TrendingUp },
     netIncome: { label: 'Net Profit', color: 'bg-violet-500', buttonColor: 'bg-violet-600 border-violet-600', icon: Wallet },
+    netMargin: { label: 'Net Margin %', color: 'bg-amber-500', buttonColor: 'bg-amber-600 border-amber-600', icon: TrendingUp, isPercentage: true },
 }
 
 export interface VisualMapProps {
@@ -37,39 +38,60 @@ export interface VisualMapProps {
 export function VisualMap({ companies }: VisualMapProps) {
     // Allow multiple selected metrics. Default to just Market Cap.
     const [selectedMetrics, setSelectedMetrics] = useState<MetricType[]>(['marketCap'])
+    const [dismissedTickers, setDismissedTickers] = useState<Set<string>>(new Set())
+    const [openTagsTicker, setOpenTagsTicker] = useState<string | null>(null)
 
     // Helper to toggle metrics
+    // Net Margin is exclusive - selecting it deselects all others, and selecting others deselects it
     const toggleMetric = (m: MetricType) => {
         setSelectedMetrics(prev => {
-            if (prev.includes(m)) {
+            // If selecting Net Margin, make it the only selection
+            if (m === 'netMargin') {
+                return prev.includes('netMargin') ? ['marketCap'] : ['netMargin']
+            }
+
+            // If selecting a non-netMargin metric, remove netMargin if present
+            const withoutNetMargin = prev.filter(item => item !== 'netMargin')
+
+            if (withoutNetMargin.includes(m)) {
                 // Don't allow unselecting the last one (avoid empty state)
-                if (prev.length === 1) return prev
-                return prev.filter(item => item !== m)
+                if (withoutNetMargin.length === 1) return withoutNetMargin
+                return withoutNetMargin.filter(item => item !== m)
             } else {
-                return [...prev, m]
+                return [...withoutNetMargin, m]
             }
         })
     }
 
     // Use mock data if no companies provided
     const data = useMemo(() => {
-        const source = (companies && companies.length > 0) ? companies.map(c => {
-            return {
-                name: c.name,
-                ticker: c.ticker,
-                marketCap: Number(c.market_cap || c.marketCap || 0),
-                revenue: Number(c.data?.incomeStatement?.revenue || c.revenue || 0),
-                netIncome: Number(c.data?.incomeStatement?.netIncome || c.netIncome || 0),
-                logo_url: c.logo_url || c.logo || `https://ui-avatars.com/api/?name=${c.name}&background=random`
-            }
-        }) : MOCK_DATA
+        const source = (companies && companies.length > 0) ? companies
+            .filter(c => !dismissedTickers.has(c.ticker))
+            .map(c => {
+                const revenue = Number(c.data?.incomeStatement?.revenue || c.revenue || 0)
+                const netIncome = Number(c.data?.incomeStatement?.netIncome || c.netIncome || 0)
+                // Calculate net margin as percentage
+                const netMargin = revenue > 0 ? (netIncome / revenue) * 100 : 0
+
+                return {
+                    name: c.name,
+                    ticker: c.ticker,
+                    country: c.country,
+                    tags: c.value_chain_tags || [],
+                    marketCap: Number(c.market_cap || c.marketCap || 0),
+                    revenue,
+                    netIncome,
+                    netMargin,
+                    logo_url: c.logo_url || c.logo || `https://ui-avatars.com/api/?name=${c.name}&background=random`
+                }
+            }) : []
 
         // Sort High to Low based on the FIRST selected metric
         const primaryMetric = selectedMetrics[0] || 'marketCap'
 
         return [...source]
             .sort((a, b) => (b[primaryMetric] as number) - (a[primaryMetric] as number))
-    }, [companies, selectedMetrics])
+    }, [companies, selectedMetrics, dismissedTickers])
 
     // Calculate max value across ALL selected metrics globally (for single metric comparison)
     const globalMax = useMemo(() => {
@@ -103,8 +125,8 @@ export function VisualMap({ companies }: VisualMapProps) {
                         Leaderboard
                     </CardTitle>
                     <div className="h-4 w-px bg-slate-200 hidden sm:block" />
-                    <div className="flex gap-1">
-                        {(['marketCap', 'revenue', 'netIncome'] as MetricType[]).map((m) => {
+                    <div className="flex gap-1 flex-wrap">
+                        {(['marketCap', 'revenue', 'netIncome', 'netMargin'] as MetricType[]).map((m) => {
                             const isSelected = selectedMetrics.includes(m)
                             const config = METRIC_CONFIG[m]
                             const Icon = config.icon
@@ -182,29 +204,41 @@ export function VisualMap({ companies }: VisualMapProps) {
 
                                 {/* RIGHT: Bars (Flex) */}
                                 <div className="flex-1 min-w-0 flex flex-col justify-center gap-3 sm:gap-1.5 w-full">
-                                    {/* Sort metrics: Market Cap -> Revenue -> Net Income */}
-                                    {(['marketCap', 'revenue', 'netIncome'] as MetricType[])
+                                    {/* Sort metrics: Market Cap -> Revenue -> Net Income -> Net Margin */}
+                                    {(['marketCap', 'revenue', 'netIncome', 'netMargin'] as MetricType[])
                                         .filter(m => selectedMetrics.includes(m))
                                         .map((metric) => {
                                             const value = company[metric] as number
-                                            const safeValue = Math.max(0, value)
-
-                                            // Scaling logic:
-                                            // - 1 metric: compare across all companies (global max)
-                                            // - 2+ metrics: compare within the same company (company's own max)
-                                            let percentage: number
-                                            if (usePerCompanyScaling) {
-                                                // Per-company scaling: find max among selected metrics for THIS company
-                                                const companyMax = Math.max(
-                                                    ...selectedMetrics.map(m => Math.max(0, company[m] as number)),
-                                                    1
-                                                )
-                                                percentage = companyMax > 0 ? (safeValue / companyMax) * 100 : 0
-                                            } else {
-                                                // Global scaling: compare across all companies
-                                                percentage = globalMax > 0 ? (safeValue / globalMax) * 100 : 0
-                                            }
                                             const config = METRIC_CONFIG[metric]
+                                            const isPercentage = config.isPercentage
+
+                                            // For percentage metrics like Net Margin, use the value directly as percentage (0-100 scale)
+                                            // For currency metrics, scale relative to max
+                                            let percentage: number
+                                            if (isPercentage) {
+                                                // Net Margin is already a percentage, cap at 100%
+                                                percentage = Math.min(Math.max(0, value), 100)
+                                            } else {
+                                                const safeValue = Math.max(0, value)
+                                                if (usePerCompanyScaling) {
+                                                    // Per-company scaling: find max among selected non-percentage metrics for THIS company
+                                                    const companyMax = Math.max(
+                                                        ...selectedMetrics
+                                                            .filter(m => !METRIC_CONFIG[m].isPercentage)
+                                                            .map(m => Math.max(0, company[m] as number)),
+                                                        1
+                                                    )
+                                                    percentage = companyMax > 0 ? (safeValue / companyMax) * 100 : 0
+                                                } else {
+                                                    // Global scaling: compare across all companies
+                                                    percentage = globalMax > 0 ? (safeValue / globalMax) * 100 : 0
+                                                }
+                                            }
+
+                                            // Format display value
+                                            const displayValue = isPercentage
+                                                ? `${value.toFixed(1)}%`
+                                                : formatCurrency(value)
 
                                             return (
                                                 <div key={metric} className="flex items-center gap-2 sm:gap-3 h-4 sm:h-5">
@@ -221,7 +255,7 @@ export function VisualMap({ companies }: VisualMapProps) {
                                                     </div>
                                                     <div className="w-32 sm:w-40 text-right shrink-0 leading-none flex items-center justify-between sm:justify-end gap-2">
                                                         <span className="font-mono text-xs sm:text-sm font-bold text-slate-700 w-auto sm:w-16 text-right order-2 sm:order-1">
-                                                            {formatCurrency(value)}
+                                                            {displayValue}
                                                         </span>
                                                         <div className="w-auto sm:w-20 text-left order-1 sm:order-2">
                                                             <span className="text-[10px] sm:text-[10px] text-slate-500 font-medium inline-block truncate w-full">
@@ -232,6 +266,66 @@ export function VisualMap({ companies }: VisualMapProps) {
                                                 </div>
                                             )
                                         })}
+                                </div>
+
+                                {/* TAGS & COUNTRY & DISMISS */}
+                                <div className="flex items-center gap-2 shrink-0 ml-auto mr-2">
+                                    {/* Info Button for Tags - Always show to prevent UI shift */}
+                                    <div className="relative">
+                                        <button
+                                            onClick={() => setOpenTagsTicker(openTagsTicker === company.ticker ? null : company.ticker)}
+                                            className={cn(
+                                                "h-6 w-6 flex items-center justify-center rounded-full transition-colors",
+                                                company.tags && company.tags.length > 0
+                                                    ? "hover:bg-blue-50 hover:text-blue-500 text-slate-400"
+                                                    : "text-slate-200 hover:text-slate-300"
+                                            )}
+                                            title="View product tags"
+                                        >
+                                            <Info className="h-3.5 w-3.5" />
+                                        </button>
+                                        {/* Tags Popover */}
+                                        {openTagsTicker === company.ticker && (
+                                            <div className="absolute right-0 top-8 z-50 bg-white border border-slate-200 rounded-lg shadow-lg p-3 min-w-[180px] max-w-[280px]">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <span className="text-xs font-semibold text-slate-600">Product Tags</span>
+                                                    <button
+                                                        onClick={() => setOpenTagsTicker(null)}
+                                                        className="h-5 w-5 flex items-center justify-center rounded hover:bg-slate-100 text-slate-400 hover:text-slate-600"
+                                                    >
+                                                        <X className="h-3 w-3" />
+                                                    </button>
+                                                </div>
+                                                <div className="flex flex-wrap gap-1.5">
+                                                    {company.tags && company.tags.length > 0 ? (
+                                                        company.tags.map((tag: string) => (
+                                                            <span key={tag} className="px-2 py-1 rounded-full bg-blue-50 text-blue-600 text-[10px] font-medium border border-blue-100">
+                                                                {tag}
+                                                            </span>
+                                                        ))
+                                                    ) : (
+                                                        <span className="text-xs text-slate-400 italic">No tags available</span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Country Code */}
+                                    {company.country && (
+                                        <div className="hidden md:flex items-center px-2 py-0.5 rounded bg-slate-100 text-[10px] font-bold text-slate-500 uppercase">
+                                            {company.country}
+                                        </div>
+                                    )}
+
+                                    {/* Dismiss Button */}
+                                    <button
+                                        onClick={() => setDismissedTickers(prev => new Set([...prev, company.ticker]))}
+                                        className="h-6 w-6 flex items-center justify-center rounded-full hover:bg-red-50 hover:text-red-500 text-slate-300 transition-colors"
+                                        title="Dismiss company"
+                                    >
+                                        <span className="text-sm">×</span>
+                                    </button>
                                 </div>
                             </motion.div>
                         )

@@ -19,11 +19,11 @@ export default async function CompanyPage({
   searchParams
 }: {
   params: { ticker: string }
-  searchParams: { country?: string }
+  searchParams: { region?: string }
 }) {
   const ticker = params.ticker.toUpperCase()
-  const country = searchParams.country || 'US'
-  const backHref = country !== 'US' ? `/companies?country=${country}` : '/companies'
+  const country = searchParams.region || 'US'
+  const backHref = country !== 'US' ? `/companies?region=${country}` : '/companies'
 
   // Try to fetch from Supabase; if missing, render page with placeholders
   const { data: fetched, error } = await supabaseServer

@@ -17,12 +17,12 @@ import { CountrySwitcher } from "@/components/layout/country-switcher"
 export function Header() {
   const [open, setOpen] = useState(false)
   const searchParams = useSearchParams()
-  const country = searchParams.get("country")
+  const country = searchParams.get("region")
 
   // Helper to build country-aware URLs
   const getHref = (path: string) => {
     if (country && country !== 'US') {
-      return `${path}?country=${country}`
+      return `${path}?region=${country}`
     }
     return path
   }

@@ -22,7 +22,7 @@ type Props = { ticker: string; name?: string; marketCap?: number; industry?: Ind
 export function CompanyCard({ ticker, name, marketCap, industry, labelTextOverride, country = 'US' }: Props) {
   const router = useRouter()
   // Helper to build country-aware URLs
-  const getHref = (path: string) => country !== 'US' ? `${path}?country=${country}` : path
+  const getHref = (path: string) => country !== 'US' ? `${path}?region=${country}` : path
   const [data, setData] = useState<CompanyData | null>(null)
   const [loading, setLoading] = useState(true)
 

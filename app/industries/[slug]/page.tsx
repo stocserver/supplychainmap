@@ -55,9 +55,9 @@ export default async function IndustryPage({
   searchParams,
 }: {
   params: { slug: string }
-  searchParams: { country?: string; view?: string }
+  searchParams: { region?: string; view?: string }
 }) {
-  const country = searchParams.country || 'US'
+  const country = searchParams.region || 'US'
   const industry = getIndustryBySlug(params.slug, country)
   const view = searchParams.view === 'value-chain' ? 'value-chain' : 'visual'
 
@@ -82,10 +82,13 @@ export default async function IndustryPage({
   }
 
   if (!dbCompanies) {
+    // For CN, also include HK since Chinese companies list on both exchanges
+    const countriesToQuery = country === 'CN' ? ['CN', 'HK'] : [country]
+
     const { data } = await supabaseServer
       .from('companies')
       .select('ticker, name, value_chain_tags, country, industry, market_cap, data, logo_url')
-      .eq('country', country)
+      .in('country', countriesToQuery)
       .eq('industry', params.slug)
       .limit(1000)
 
@@ -130,7 +133,7 @@ export default async function IndustryPage({
   return (
     <div className="w-full max-w-[1400px] mx-auto px-3 sm:px-6 md:px-8 py-4 md:py-8">
       {/* Back button */}
-      <Link href={`/industries${searchParams.country ? `?country=${searchParams.country}` : ''}`}>
+      <Link href={`/industries${searchParams.region ? `?region=${searchParams.region}` : ''}`}>
         <Button variant="ghost" className="mb-6">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Industries

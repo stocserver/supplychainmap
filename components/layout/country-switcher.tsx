@@ -14,16 +14,18 @@ import {
 
 const countries = [
     { code: "US", name: "United States", flag: "🇺🇸", color: "bg-background" },
-    // { code: "CN", name: "China", flag: "🇨🇳", color: "bg-red-50" }, // Coming soon
+    { code: "CN", name: "China", flag: "🇨🇳", color: "bg-red-50" },
     { code: "JP", name: "Japan", flag: "🇯🇵", color: "bg-yellow-50" },
-    // { code: "EU", name: "Europe", flag: "🇪🇺", color: "bg-green-50" }, // Coming soon
+    { code: "TW", name: "Taiwan", flag: "🇹🇼", color: "bg-blue-50" },
+    { code: "KR", name: "South Korea", flag: "🇰🇷", color: "bg-indigo-50" },
+    { code: "EU", name: "Europe", flag: "🇪🇺", color: "bg-green-50" },
 ]
 
 export function CountrySwitcher() {
     const router = useRouter()
     const searchParams = useSearchParams()
     // Default to US if no param
-    const currentCode = searchParams.get("country") || "US"
+    const currentCode = searchParams.get("region") || "US"
     const currentCountry = countries.find(c => c.code === currentCode) || countries[0]
 
     // Effect to apply theme
@@ -36,6 +38,10 @@ export function CountrySwitcher() {
             document.body.classList.add("bg-red-50")
         } else if (currentCountry.code === "JP") {
             document.body.classList.add("bg-yellow-50")
+        } else if (currentCountry.code === "TW") {
+            document.body.classList.add("bg-blue-50")
+        } else if (currentCountry.code === "KR") {
+            document.body.classList.add("bg-indigo-50")
         } else if (currentCountry.code === "EU") {
             document.body.classList.add("bg-green-50")
         } else {
@@ -45,18 +51,16 @@ export function CountrySwitcher() {
 
     const handleSelect = (code: string) => {
         // Update URL param with full page reload to get fresh server data
-        const params = new URLSearchParams(searchParams.toString())
-        if (code === "US") {
-            params.delete("country")
-        } else {
-            params.set("country", code)
+        // Always redirect to home page to avoid data leakage on specific pages
+        // The user requested to "move to the country main page" to ensure clean state
+        const params = new URLSearchParams()
+        if (code !== "US") {
+            params.set("region", code)
         }
 
-        // Get current pathname and build new URL
-        const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`
+        const newUrl = `/${params.toString() ? '?' + params.toString() : ''}`
 
         // Use window.location for hard reload to ensure server-side data is refetched
-        // router.refresh() sometimes isn't enough for searchParams changes in complex layouts
         window.location.href = newUrl
     }
 

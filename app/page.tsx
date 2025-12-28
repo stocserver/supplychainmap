@@ -29,13 +29,13 @@ export const metadata: Metadata = {
 export default function Home({
   searchParams,
 }: {
-  searchParams: { country?: string }
+  searchParams: { region?: string }
 }) {
-  const country = searchParams.country || 'US'
+  const country = searchParams.region || 'US'
   const countryName = COUNTRY_NAMES[country] || 'US'
 
   // Helper to build country-aware URLs
-  const getHref = (path: string) => country !== 'US' ? `${path}?country=${country}` : path
+  const getHref = (path: string) => country !== 'US' ? `${path}?region=${country}` : path
 
   // FAQ data for both display and JSON-LD
   const faqs = [

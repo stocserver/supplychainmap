@@ -1,39 +1,38 @@
-import { Suspense } from "react"
-import { Metadata } from "next"
-import { supabaseServer } from "@/lib/supabase/server"
-import dataRedis from "@/lib/redis"
-import { CompaniesClient } from "@/components/companies/companies-client"
 
-export const dynamic = 'force-dynamic' // Required for searchParams to work
+import { Suspense } from 'react'
+import { Metadata } from 'next'
+import { supabaseServer } from '@/lib/supabase/server'
+import { CompaniesClient } from '@/components/companies/companies-client'
+import dataRedis from '@/lib/redis'
+import { COUNTRY_MAP, DEFAULT_COUNTRY } from '@/lib/data/constants'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+export const revalidate = 0 // Disable cache for debugging
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
 export const metadata: Metadata = {
-  title: "Public Companies & Supply Chains | SupplyChainMap",
-  description: "Browse and analyze public companies across major industries like AI, Semiconductors, Banking, and Energy. View market cap, ticker symbols, and value chain data.",
+  title: 'Top Public Companies | SupplyChainMap',
+  description: 'Explore the largest public companies in supply chain and manufacturing globally.',
   alternates: { canonical: `${siteUrl}/companies` },
   openGraph: {
-    title: "Public Companies Database | SupplyChainMap",
-    description: "Comprehensive database of public companies and their industry supply chain positions.",
+    title: 'Top Public Companies | SupplyChainMap',
+    description: 'Explore the largest public companies in supply chain and manufacturing globally.',
     url: `${siteUrl}/companies`,
-    type: "website",
+    type: 'website',
   },
 }
-
-import { COUNTRY_MAP, DEFAULT_COUNTRY } from "@/lib/data/constants"
 
 export default async function CompaniesPage({
   searchParams,
 }: {
-  searchParams: { country?: string }
+  searchParams: { region?: string }
 }) {
-  const countryCode = searchParams.country || DEFAULT_COUNTRY
+  const countryCode = searchParams.region || DEFAULT_COUNTRY
   const countryFilter = COUNTRY_MAP[countryCode] || COUNTRY_MAP['US']
 
-  // Redis Cache Keys (Bump version to v2 to clear stale "global US" cache)
   const COMPANIES_CACHE_KEY = `companies_list_v2_${countryCode}`
-  const INDUSTRIES_CACHE_KEY = `industries_list`
-  const MAPPING_CACHE_KEY = `industry_mappings`
+  const INDUSTRIES_CACHE_KEY = 'industries_list'
+  const MAPPING_CACHE_KEY = 'industry_mappings'
 
   // Helper function to get cached data or fetch from DB
   async function getCachedOrFetch<T>(
@@ -53,7 +52,7 @@ export default async function CompaniesPage({
 
     if (data) {
       try {
-        await dataRedis.set(cacheKey, JSON.stringify(data), 'EX', 30) // 30 seconds TTL
+        await dataRedis.set(cacheKey, JSON.stringify(data), 'EX', 300) // 5 minutes TTL
       } catch (err) {
         console.error(`Redis SET error for ${cacheKey}:`, err)
       }
@@ -62,30 +61,72 @@ export default async function CompaniesPage({
     return data
   }
 
-  // Build the companies query with country filter applied directly
+  // Build the companies query - fetch ALL companies for the country (cached)
   const fetchCompanies = async () => {
-    let query = supabaseServer
-      .from('companies')
-      .select('ticker, name, market_cap, industry, country, logo_url, data')
-      .gt('market_cap', 0)
+    // Primary attempt: Smart Financials (Fetch specific fields to avoid timeout)
+    try {
+      const { data, error } = await supabaseServer
+        .from('companies')
+        // Fetch just the incomeStatement part of the JSON (much smaller than full data)
+        .select('ticker, name, market_cap, industry, country, logo_url, value_chain_tags, incomeStatement:data->incomeStatement')
+        .gt('market_cap', 0)
+        .in('country', countryFilter)
+        .order('market_cap', { ascending: false, nullsFirst: false })
+        .limit(2000)
 
-    // Apply country filter for non-US regions
-    // Apply country filter
-    if (countryCode === 'US') {
-      // For US, we default to filtering, assuming data has 'US', 'USA', or 'United States'
-      // If we confirm database has NULL for US, we might need `.or('country.eq.US,country.is.null')`
-      // But for now, strict filtering is safer for "Country Switcher" logic.
-      query = query.in('country', countryFilter)
-    } else {
-      query = query.in('country', countryFilter)
+      if (error) throw error
+
+      // Map to flattened structure (matching cache warmer)
+      const mappedData = (data || []).map((c: any) => ({
+        ...c,
+        revenue: c.incomeStatement?.revenue || 0,
+        netIncome: c.incomeStatement?.netIncome || 0,
+        // VisualMap checks data.incomeStatement too, so we can reconstruction it if needed,
+        // but since it checks c.revenue/c.netIncome, this is sufficient.
+        // But let's be safe and provide data structure too if VisualMap depends on deep checking
+        data: { incomeStatement: c.incomeStatement }
+      }))
+
+      return { data: mappedData }
+
+    } catch (err) {
+      console.error('Primary fetch (Smart Financials) failed. Retrying with Survival Mode (No Financials)...', err)
+
+      // Fallback: Survival Mode - Fetch 2000 items WITHOUT any JSONB data access
+      // This is guaranteed to be fast and should never timeout for 2000 rows
+      try {
+        const { data, error } = await supabaseServer
+          .from('companies')
+          .select('ticker, name, market_cap, industry, country, logo_url, value_chain_tags')
+          .gt('market_cap', 0)
+          .in('country', countryFilter)
+          .order('market_cap', { ascending: false, nullsFirst: false })
+          .limit(2000)
+
+        if (error) {
+          console.error('Survival Mode failed:', error)
+          return { data: [] }
+        }
+        return { data: data || [] }
+      } catch (errSurvival) {
+        console.error('Survival Mode critical error:', errSurvival)
+        return { data: [] }
+      }
     }
-
-    return query
-      .order('market_cap', { ascending: false, nullsFirst: false })
-      .range(0, 19)
   }
 
-  const [companies, industries, mapping] = await Promise.all([
+  const fetchAvailableIndustries = async () => {
+    const { data } = await supabaseServer
+      .from('companies')
+      .select('industry')
+      .in('country', countryFilter)
+      .not('industry', 'is', null)
+
+    if (!data) return []
+    return [...new Set(data.map(d => d.industry))] as string[]
+  }
+
+  const [companies, industries, mapping, availableIndustries] = await Promise.all([
     getCachedOrFetch<any[]>(COMPANIES_CACHE_KEY, fetchCompanies),
     getCachedOrFetch<any[]>(INDUSTRIES_CACHE_KEY, async () =>
       supabaseServer
@@ -96,16 +137,19 @@ export default async function CompaniesPage({
       supabaseServer
         .from('industry_featured_companies')
         .select('industry_id, ticker, position_order')
-    )
+    ),
+    // Cache specific to country list of industries
+    getCachedOrFetch<string[]>(`${COMPANIES_CACHE_KEY}_industries`, async () => ({ data: await fetchAvailableIndustries() }))
   ])
 
   // Fallback to empty arrays
   const safeCompanies = companies || []
   const safeIndustries = industries || []
   const safeMapping = mapping || []
+  const safeAvailableIndustries = availableIndustries || []
 
   // Debug log
-  console.log(`[Companies] Country: ${countryCode}, Filter: ${countryFilter.join(',')}, Results: ${safeCompanies.length}`)
+  console.log(`[Companies] Country: ${countryCode}, Filter: ${countryFilter.join(',')}, Results: ${safeCompanies.length}, Industries: ${safeAvailableIndustries.length}`)
 
   // Structured Data for SEO
   const jsonLd = {
@@ -117,8 +161,8 @@ export default async function CompaniesPage({
     hasPart: safeCompanies.slice(0, 20).map(c => ({
       "@type": "Organization",
       name: c.name,
-      tickerSymbol: c.ticker,
-      url: `${siteUrl}/companies/${c.ticker}`
+      url: `${siteUrl}/companies/${c.ticker}`,
+      image: c.logo_url
     }))
   }
 
@@ -128,12 +172,12 @@ export default async function CompaniesPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-
-      <Suspense fallback={<div className="container py-8 text-center text-muted-foreground">Loading companies...</div>}>
+      <Suspense fallback={<div className="p-8 text-center">Loading companies...</div>}>
         <CompaniesClient
           initialCompanies={safeCompanies}
           initialIndustries={safeIndustries}
           initialMapping={safeMapping}
+          availableIndustries={safeAvailableIndustries}
           country={countryCode}
         />
       </Suspense>

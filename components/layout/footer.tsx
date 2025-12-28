@@ -5,10 +5,10 @@ import { useSearchParams } from "next/navigation"
 
 export function Footer() {
   const searchParams = useSearchParams()
-  const country = searchParams.get("country") || "US"
+  const country = searchParams.get("region") || "US"
 
   // Helper to build country-aware URLs
-  const getHref = (path: string) => country !== "US" ? `${path}?country=${country}` : path
+  const getHref = (path: string) => country !== "US" ? `${path}?region=${country}` : path
 
   return (
     <footer className="border-t">

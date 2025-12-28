@@ -15,6 +15,9 @@ const COUNTRY_MAP: Record<string, string[]> = {
     'US': ['US', 'USA', 'United States'],
     'CN': ['CN', 'China'],
     'JP': ['JP', 'Japan'],
+    'TW': ['TW', 'Taiwan'],
+    'KR': ['KR', 'South Korea'],
+    'IN': ['IN', 'India'],
     'EU': ['DE', 'FR', 'GB', 'IT', 'ES', 'NL', 'BE', 'AT', 'CH', 'SE', 'NO', 'DK', 'FI', 'IE', 'PL', 'CZ', 'PT', 'GR', 'HU', 'RO'],
 }
 
@@ -46,112 +49,99 @@ interface CompaniesClientProps {
     initialCompanies: Company[]
     initialIndustries: DbIndustry[]
     initialMapping: MappingRow[]
+    availableIndustries: string[]
     country?: string
 }
 
-export function CompaniesClient({ initialCompanies, initialIndustries, initialMapping, country = 'US' }: CompaniesClientProps) {
+export function CompaniesClient({ initialCompanies, initialIndustries, initialMapping, availableIndustries, country = 'US' }: CompaniesClientProps) {
     const [searchTerm, setSearchTerm] = useState("")
-    const [category, setCategory] = useState("all")
-    const [companiesFromDb, setCompaniesFromDb] = useState<Company[]>(initialCompanies)
-    const [page, setPage] = useState(1)
-    const [hasMore, setHasMore] = useState(true)
+    const [selectedIndustry, setSelectedIndustry] = useState("all")
+    const companiesFromDb = initialCompanies // All data pre-loaded from server
     const [isLoading, setIsLoading] = useState(false)
     const loadingRef = useRef(false)
     const [searchResults, setSearchResults] = useState<Company[] | null>(null)
     const searchTimer = useRef<number | null>(null)
 
-    // Map each ticker to its first associated industry
+    // Map each ticker to its industry info
     const tickerToIndustry = useMemo(() => {
-        // 1. Try DB mapping first
+        const local = new Map<string, Industry>()
+
+        // 1. Create a lookup for all known industry metadata (DB + Local)
+        const industryMetadata = new Map<string, Industry>()
+
+        // Add DB industries
+        for (const i of initialIndustries) {
+            industryMetadata.set(i.slug, { id: i.slug, name: i.name, slug: i.slug, description: i.description, color: i.color, icon: i.icon })
+        }
+        // Add Local industries (fallback for metadata)
+        for (const i of localIndustries as any[]) {
+            if (!industryMetadata.has(i.slug)) {
+                industryMetadata.set(i.slug, i)
+            }
+        }
+
+        // 2. Map companies to industries
+        // Prioritize: 1. DB Mapping (Featured), 2. Company `industry` column, 3. Local Featured
+        const sourceCompanies = searchResults ?? companiesFromDb
+        for (const c of sourceCompanies) {
+            if (c.industry) {
+                const meta = industryMetadata.get(c.industry)
+                // If we have metadata, use it. If not, create a shell.
+                if (meta) {
+                    local.set(c.ticker, meta)
+                } else {
+                    // Create provisional metadata for industries without a definition in 'industries' table yet
+                    local.set(c.ticker, {
+                        id: c.industry,
+                        slug: c.industry,
+                        name: c.industry.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' '),
+                        description: '',
+                        color: '#cbd5e1',
+                        icon: 'PieChart'
+                    })
+                }
+            }
+        }
+
+        // Apply manual mappings from DB if not already set (though company.industry should be source of truth now)
         if (initialIndustries.length > 0 && initialMapping.length > 0) {
             const idToInd = new Map<string, Industry>()
             for (const i of initialIndustries) {
                 idToInd.set(i.id, { id: i.slug, name: i.name, slug: i.slug, description: i.description, color: i.color, icon: i.icon })
             }
-            const map = new Map<string, Industry>()
             for (const row of initialMapping) {
                 const ind = idToInd.get(row.industry_id)
-                if (ind && !map.has(row.ticker)) map.set(row.ticker, ind)
+                if (ind && !local.has(row.ticker)) local.set(row.ticker, ind)
             }
-            return map
         }
 
-        // 2. Fallback to local static mapping
-        const local = new Map<string, Industry>()
-        for (const industry of localIndustries as any[]) {
-            for (const t of industry.featured_companies || []) {
-                if (!local.has(t)) local.set(t, industry)
-            }
-        }
         return local
-    }, [initialIndustries, initialMapping])
+    }, [initialIndustries, initialMapping, companiesFromDb, searchResults])
 
-    // High-level category filters - mapped to industry slugs in the database
-    const categoryOptions = useMemo(() => [
-        { label: "All", value: "all", ids: null as string[] | null },
-        { label: "Technology & Innovation", value: "tech", ids: ['semiconductors', 'artificial-intelligence', 'cloud-computing', 'cybersecurity', 'software-saas', 'data-centers', 'telecommunications', 'robotics-automation', 'consumer-electronics'] },
-        { label: "Financials", value: "financials", ids: ['banking', 'insurance', 'asset-management', 'fintech'] },
-        { label: "Energy & Materials", value: "energy-materials", ids: ['oil-gas', 'mining-materials', 'chemicals', 'solar-energy', 'energy-storage', 'utilities'] },
-        { label: "Transportation & Mobility", value: "transport", ids: ['electric-vehicles', 'automotive', 'transportation-logistics', 'aerospace-defense', 'space-technology'] },
-        { label: "Healthcare & Life Sciences", value: "healthcare", ids: ['pharmaceuticals', 'biotechnology', 'medical-devices', 'digital-health'] },
-        { label: "Consumer & Retail", value: "consumer", ids: ['food-beverage', 'consumer-products', 'retail', 'ecommerce'] },
-        { label: "Real Estate & Construction", value: "real-estate", ids: ['real-estate', 'construction-engineering'] },
-        { label: "Hospitality & Entertainment", value: "hospitality", ids: ['hospitality', 'media-entertainment'] },
-        { label: "Industrial & Manufacturing", value: "industrial", ids: ['agtech', 'heavy-industry', 'wholesale-trading'] },
-    ], [])
+    // Client-side pagination - all data is pre-loaded from server
+    const BATCH_SIZE = 40
+    const [displayCount, setDisplayCount] = useState(BATCH_SIZE)
 
-    // Infinite scroll loader - batch size of 20
-    const BATCH_SIZE = 20
     useEffect(() => {
         function onScroll() {
-            if (!hasMore || loadingRef.current) return
+            if (loadingRef.current) return
             const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200
             if (!nearBottom) return
 
             loadingRef.current = true
             setIsLoading(true)
-            const from = page * BATCH_SIZE
-            const to = from + BATCH_SIZE - 1
 
-                ; (async () => {
-                    try {
-                        let query = supabase
-                            .from('companies')
-                            .select('ticker, name, market_cap, industry, country, logo_url, data')
-                            .gt('market_cap', 0)
-
-                        // Apply country filter for non-US regions
-                        if (country !== 'US') {
-                            const countryFilter = COUNTRY_MAP[country] || COUNTRY_MAP['US']
-                            query = query.in('country', countryFilter)
-                        }
-
-                        const { data, error } = await query
-                            .order('market_cap', { ascending: false, nullsFirst: false })
-                            .range(from, to)
-
-                        if (!error && data && data.length > 0) {
-                            // Filter out duplicates by checking existing tickers
-                            setCompaniesFromDb(prev => {
-                                const existingTickers = new Set(prev.map(c => c.ticker))
-                                const newCompanies = (data as Company[]).filter(c => !existingTickers.has(c.ticker))
-                                return [...prev, ...newCompanies]
-                            })
-                            setPage(prev => prev + 1)
-                            setHasMore(data.length === BATCH_SIZE)
-                        } else {
-                            setHasMore(false)
-                        }
-                    } finally {
-                        loadingRef.current = false
-                        setIsLoading(false)
-                    }
-                })()
+            // Simply increase display count - data is already loaded
+            setTimeout(() => {
+                setDisplayCount(prev => prev + BATCH_SIZE)
+                loadingRef.current = false
+                setIsLoading(false)
+            }, 100) // Small delay for UX
         }
 
         window.addEventListener('scroll', onScroll)
         return () => window.removeEventListener('scroll', onScroll)
-    }, [page, hasMore, country])
+    }, [])
 
     // Debounced server-side search
     useEffect(() => {
@@ -200,12 +190,10 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
     }, [companiesFromDb, searchResults, tickerToIndustry])
 
     const filteredCompanies = useMemo(() => {
-        const selected = categoryOptions.find(c => c.value === category)
-
-        const matchesCategory = (ticker: string) => {
-            if (!selected || !selected.ids) return true
+        const matchesIndustry = (ticker: string) => {
+            if (selectedIndustry === 'all') return true
             const ind = tickerToIndustry.get(ticker)
-            return ind ? selected.ids.includes(ind.id) : false
+            return ind ? ind.slug === selectedIndustry : false
         }
 
         const matchesSearch = (ticker: string) => {
@@ -214,8 +202,8 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
             return ticker.toLowerCase().includes(searchTerm.toLowerCase()) || name.toLowerCase().includes(searchTerm.toLowerCase())
         }
 
-        return allCompanies.filter(t => matchesCategory(t) && matchesSearch(t))
-    }, [allCompanies, category, searchTerm, searchResults, tickerToIndustry, companiesFromDb, categoryOptions])
+        return allCompanies.filter(t => matchesIndustry(t) && matchesSearch(t))
+    }, [allCompanies, selectedIndustry, searchTerm, searchResults, tickerToIndustry, companiesFromDb])
 
     // Get companies for VisualMap display
     // VisualMap handles its own data transformation, so we just pass the raw company objects
@@ -236,47 +224,45 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
                 </p>
             </div>
 
-            {/* Category Filters */}
-            <div className="mb-4">
-                <div className="flex w-full flex-wrap items-center gap-2 text-sm">
-                    {categoryOptions.map(opt => {
-                        const selected = category === opt.value
-                        return (
-                            <button
-                                key={opt.value}
-                                type="button"
-                                aria-pressed={selected}
-                                onClick={() => setCategory(opt.value)}
-                                className={`rounded-full border px-3 py-1.5 transition-colors ${selected
-                                    ? 'border-primary bg-primary text-primary-foreground'
-                                    : 'border-input bg-background text-foreground hover:bg-accent'
-                                    }`}
-                            >
-                                {opt.label}
-                            </button>
-                        )
-                    })}
+            {/* Industry Filter Dropdown */}
+            <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <div className="relative min-w-[280px]">
+                    <select
+                        className="w-full appearance-none rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                        value={selectedIndustry}
+                        onChange={(e) => setSelectedIndustry(e.target.value)}
+                    >
+                        <option value="all">All Industries ({allCompanies.length})</option>
+                        {availableIndustries.map(ind => {
+                            const label = ind.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ')
+                            const count = allCompanies.filter(ticker => tickerToIndustry.get(ticker)?.slug === ind).length
+                            return (
+                                <option key={ind} value={ind}>
+                                    {label} ({count})
+                                </option>
+                            )
+                        })}
+                    </select>
+                    <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 opacity-50">
+                        ▼
+                    </div>
                 </div>
             </div>
 
             {/* Search */}
-            <Card className="mb-8">
-                <CardContent className="pt-6">
-                    <div className="relative">
-                        <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <Input
-                            placeholder="Search by ticker symbol..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="pl-10"
-                        />
-                    </div>
-                </CardContent>
-            </Card>
+            <div className="relative mb-6">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                    placeholder="Search by ticker or name..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10"
+                />
+            </div>
 
             {/* Stats */}
             <div className="mb-6 text-sm text-muted-foreground">
-                Showing {filteredCompanies.length} of {allCompanies.length} companies
+                Showing {Math.min(displayCount, filteredCompanies.length)} of {filteredCompanies.length} companies
             </div>
 
             {/* View Toggle */}
@@ -285,7 +271,7 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
                     <>
                         {/* Companies Grid */}
                         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                            {filteredCompanies.map((ticker) => {
+                            {filteredCompanies.slice(0, displayCount).map((ticker) => {
                                 const source = searchResults ?? companiesFromDb
                                 const company = source.find(c => c.ticker === ticker)
                                 return (
@@ -308,7 +294,7 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
                             </div>
                         )}
 
-                        {(!searchResults && !hasMore && companiesFromDb.length > 0) && null}
+                        {displayCount >= filteredCompanies.length && filteredCompanies.length > 0 && null}
                     </>
                 }
                 leaderboardView={
@@ -325,9 +311,8 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
                 </div>
             )}
 
-            {/* End of results message */}
-            {(!searchResults && !hasMore && companiesFromDb.length > 0 && !isLoading) && (
-                <div className="py-6 text-center text-xs text-muted-foreground">No more results</div>
+            {displayCount >= filteredCompanies.length && filteredCompanies.length > 0 && !isLoading && (
+                <div className="py-6 text-center text-xs text-muted-foreground">All {filteredCompanies.length} companies loaded</div>
             )}
         </div>
     )

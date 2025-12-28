@@ -24,9 +24,9 @@ import { COUNTRY_MAP, DEFAULT_COUNTRY } from "@/lib/data/constants"
 export default async function IndustriesPage({
   searchParams,
 }: {
-  searchParams: { country?: string }
+  searchParams: { region?: string }
 }) {
-  const country = searchParams.country || DEFAULT_COUNTRY
+  const country = searchParams.region || DEFAULT_COUNTRY
   const countryFilter = COUNTRY_MAP[country] || COUNTRY_MAP['US']
 
   // Fetch industries data on the server
