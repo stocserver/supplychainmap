@@ -44,8 +44,8 @@ export default async function CompaniesPage({
       if (cached) {
         return JSON.parse(cached) as T
       }
-    } catch (err) {
-      console.error(`Redis GET error for ${cacheKey}:`, err)
+    } catch (err: any) {
+      console.warn(`[Redis] Cache miss/skip for ${cacheKey}: ${err.message || 'Connection failed'}`)
     }
 
     const { data } = await fetchFn()
@@ -53,8 +53,8 @@ export default async function CompaniesPage({
     if (data) {
       try {
         await dataRedis.set(cacheKey, JSON.stringify(data), 'EX', 300) // 5 minutes TTL
-      } catch (err) {
-        console.error(`Redis SET error for ${cacheKey}:`, err)
+      } catch (err: any) {
+        console.warn(`[Redis] Cache set skipped for ${cacheKey}`)
       }
     }
 

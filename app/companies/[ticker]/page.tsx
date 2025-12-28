@@ -229,12 +229,14 @@ export default async function CompanyPage({
             {/* Key Metrics */}
             {(() => {
               // Check if we have any key metrics data to display
-              // Note: FMP key-metrics-ttm uses different field names
-              const hasEvToSales = keyMetrics?.evToSalesTTM
-              const hasEvToEbitda = keyMetrics?.evToEBITDATTM
-              const hasRoe = keyMetrics?.returnOnEquityTTM
-              const hasRoa = keyMetrics?.returnOnAssetsTTM
+              // Note: FMP key-metrics-ttm uses different field names, so we check both
+              const km = keyMetrics || {}
+              const hasEvToSales = km.evToSalesTTM || km.evToSales
+              const hasEvToEbitda = km.evToEBITDATTM || km.evToEbitda
+              const hasRoe = km.returnOnEquityTTM || km.returnOnEquity
+              const hasRoa = km.returnOnAssetsTTM || km.returnOnAssets
 
+              // Only render if we have at least one valid metric
               const hasAnyMetrics = peRatio || hasEvToSales || hasEvToEbitda || hasRoe || hasRoa || eps
 
               if (!hasAnyMetrics) return null
@@ -262,25 +264,25 @@ export default async function CompanyPage({
                       {hasEvToSales && (
                         <div>
                           <p className="text-sm text-muted-foreground">EV/Sales</p>
-                          <p className="text-lg font-semibold">{keyMetrics.evToSalesTTM.toFixed(2)}</p>
+                          <p className="text-lg font-semibold">{hasEvToSales.toFixed(2)}</p>
                         </div>
                       )}
                       {hasEvToEbitda && (
                         <div>
                           <p className="text-sm text-muted-foreground">EV/EBITDA</p>
-                          <p className="text-lg font-semibold">{keyMetrics.evToEBITDATTM.toFixed(2)}</p>
+                          <p className="text-lg font-semibold">{hasEvToEbitda.toFixed(2)}</p>
                         </div>
                       )}
                       {hasRoe && (
                         <div>
                           <p className="text-sm text-muted-foreground">ROE</p>
-                          <p className="text-lg font-semibold">{(keyMetrics.returnOnEquityTTM * 100).toFixed(2)}%</p>
+                          <p className="text-lg font-semibold">{(hasRoe * 100).toFixed(2)}%</p>
                         </div>
                       )}
                       {hasRoa && (
                         <div>
                           <p className="text-sm text-muted-foreground">ROA</p>
-                          <p className="text-lg font-semibold">{(keyMetrics.returnOnAssetsTTM * 100).toFixed(2)}%</p>
+                          <p className="text-lg font-semibold">{(hasRoa * 100).toFixed(2)}%</p>
                         </div>
                       )}
                     </div>
@@ -290,63 +292,77 @@ export default async function CompanyPage({
             })()}
 
             {/* Financial Ratios */}
-            {ratios && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Financial Ratios (TTM)</CardTitle>
-                  <CardDescription>Trailing Twelve Months</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {(ratios.currentRatioTTM || ratios.quickRatioTTM) && (
-                      <div>
-                        <h4 className="font-semibold mb-2 text-sm">Liquidity Ratios</h4>
-                        <div className="grid gap-4 md:grid-cols-2">
-                          {ratios.currentRatioTTM && (
-                            <div>
-                              <p className="text-sm text-muted-foreground">Current Ratio</p>
-                              <p className="text-lg font-semibold">{ratios.currentRatioTTM.toFixed(2)}</p>
-                            </div>
-                          )}
-                          {ratios.quickRatioTTM && (
-                            <div>
-                              <p className="text-sm text-muted-foreground">Quick Ratio</p>
-                              <p className="text-lg font-semibold">{ratios.quickRatioTTM.toFixed(2)}</p>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )}
+            {ratios && (() => {
+              const r = ratios || {}
+              const currentRatio = r.currentRatioTTM || r.currentRatio
+              const quickRatio = r.quickRatioTTM || r.quickRatio
+              const grossMargin = r.grossProfitMarginTTM || r.grossProfitMargin
+              const opMargin = r.operatingProfitMarginTTM || r.operatingProfitMargin
+              const netMargin = r.netProfitMarginTTM || r.netProfitMargin
 
-                    {(ratios.grossProfitMarginTTM || ratios.operatingProfitMarginTTM || ratios.netProfitMarginTTM) && (
-                      <div className="pt-2 border-t">
-                        <h4 className="font-semibold mb-2 text-sm">Profitability Ratios</h4>
-                        <div className="grid gap-4 md:grid-cols-3">
-                          {ratios.grossProfitMarginTTM && (
-                            <div>
-                              <p className="text-sm text-muted-foreground">Gross Profit Margin</p>
-                              <p className="text-lg font-semibold">{(ratios.grossProfitMarginTTM * 100).toFixed(2)}%</p>
-                            </div>
-                          )}
-                          {ratios.operatingProfitMarginTTM && (
-                            <div>
-                              <p className="text-sm text-muted-foreground">Operating Margin</p>
-                              <p className="text-lg font-semibold">{(ratios.operatingProfitMarginTTM * 100).toFixed(2)}%</p>
-                            </div>
-                          )}
-                          {ratios.netProfitMarginTTM && (
-                            <div>
-                              <p className="text-sm text-muted-foreground">Net Profit Margin</p>
-                              <p className="text-lg font-semibold">{(ratios.netProfitMarginTTM * 100).toFixed(2)}%</p>
-                            </div>
-                          )}
+              const hasLiquidity = currentRatio || quickRatio
+              const hasProfitability = grossMargin || opMargin || netMargin
+
+              if (!hasLiquidity && !hasProfitability) return null
+
+              return (
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Financial Ratios (TTM)</CardTitle>
+                    <CardDescription>Trailing Twelve Months</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {hasLiquidity && (
+                        <div>
+                          <h4 className="font-semibold mb-2 text-sm">Liquidity Ratios</h4>
+                          <div className="grid gap-4 md:grid-cols-2">
+                            {currentRatio && (
+                              <div>
+                                <p className="text-sm text-muted-foreground">Current Ratio</p>
+                                <p className="text-lg font-semibold">{currentRatio.toFixed(2)}</p>
+                              </div>
+                            )}
+                            {quickRatio && (
+                              <div>
+                                <p className="text-sm text-muted-foreground">Quick Ratio</p>
+                                <p className="text-lg font-semibold">{quickRatio.toFixed(2)}</p>
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+                      )}
+
+                      {hasProfitability && (
+                        <div className="pt-2 border-t">
+                          <h4 className="font-semibold mb-2 text-sm">Profitability Ratios</h4>
+                          <div className="grid gap-4 md:grid-cols-3">
+                            {grossMargin && (
+                              <div>
+                                <p className="text-sm text-muted-foreground">Gross Profit Margin</p>
+                                <p className="text-lg font-semibold">{(grossMargin * 100).toFixed(2)}%</p>
+                              </div>
+                            )}
+                            {opMargin && (
+                              <div>
+                                <p className="text-sm text-muted-foreground">Operating Margin</p>
+                                <p className="text-lg font-semibold">{(opMargin * 100).toFixed(2)}%</p>
+                              </div>
+                            )}
+                            {netMargin && (
+                              <div>
+                                <p className="text-sm text-muted-foreground">Net Profit Margin</p>
+                                <p className="text-lg font-semibold">{(netMargin * 100).toFixed(2)}%</p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })()}
           </div>
         </TabsContent>
 

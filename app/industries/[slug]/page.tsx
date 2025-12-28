@@ -49,6 +49,7 @@ import { hospitalityProductStages } from "@/lib/industries/hospitality.products"
 import { constructionEngineeringProductStages } from "@/lib/industries/construction-engineering.products"
 import { agtechProductStages } from "@/lib/industries/agtech.products"
 import { getValueChainFromDB, DB_DRIVEN_INDUSTRIES } from "@/lib/data/value-chain-db"
+import { COUNTRY_MAP } from "@/lib/data/constants"
 
 export default async function IndustryPage({
   params,
@@ -77,13 +78,13 @@ export default async function IndustryPage({
       // console.log('Serving from Redis cache:', CACHE_KEY)
       dbCompanies = JSON.parse(cachedData)
     }
-  } catch (err) {
-    console.error('Redis Error:', err)
+  } catch (err: any) {
+    console.warn('[Redis] Cache miss/skip:', err.message || 'Connection failed')
   }
 
   if (!dbCompanies) {
-    // For CN, also include HK since Chinese companies list on both exchanges
-    const countriesToQuery = country === 'CN' ? ['CN', 'HK'] : [country]
+    // Use the robust country map (e.g. US -> [US, USA, United States])
+    const countriesToQuery = COUNTRY_MAP[country] || [country]
 
     const { data } = await supabaseServer
       .from('companies')
