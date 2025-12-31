@@ -217,7 +217,7 @@ export default function AnalysisPage() {
         setLoading(true)
         setError(null)
         setResult(null)
-        setLogs([]) // Clear previous logs
+        setLogs(['🔄 Initializing system processes...']) // Set initial log to ensure console visibility
 
         try {
             const endpoint = useRag ? '/api/analysis-rag' : '/api/analysis'
