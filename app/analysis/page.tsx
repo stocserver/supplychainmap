@@ -377,7 +377,7 @@ export default function AnalysisPage() {
             </Card>
 
             {/* Thinking Console - Visible only when processing */}
-            {loading && (
+            {(loading || (!result && logs.length > 0)) && (
                 <ThinkingConsole logs={logs} />
             )}
 
