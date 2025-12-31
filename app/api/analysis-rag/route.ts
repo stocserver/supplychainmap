@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import { Groq } from 'groq-sdk'
 
 // Init Supabase
 const supabase = createClient(
@@ -9,9 +10,11 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-// Init Gemini
+// Init Groq (fast LLM for analysis)
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY })
+
+// Init Gemini (for embeddings only)
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
-const chatModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" })
 
 // Embedding models - V1 (768 dims) and V2 (3072 dims)
 const embeddingModelV1 = genAI.getGenerativeModel({ model: "text-embedding-004" })
@@ -52,45 +55,18 @@ async function processAnalysis(query: string, embeddingVersion: string, log: (ms
     let structuredExtraction: any = null
 
     try {
-        await log('📡 Analyzing scenario context...')
-
-        const liveSearchPrompt = `
-Based on this scenario, identify BOTH winners and losers:
-
-SCENARIO: "${query}"
-
-Identify:
-1. **BENEFICIARIES (WINNERS)**: Which public companies will GAIN from this scenario?
-   - Competitors who gain market share
-   - Alternative suppliers who become more valuable
-   - Companies that benefit from substitution or increased demand
-
-2. **NEGATIVELY AFFECTED (LOSERS)**: Which public companies will be HARMED?
-   - Companies directly impacted by supply disruption
-   - Companies with revenue exposure to affected regions
-   - Companies dependent on affected resources
-
-3. **INVESTORS/STAKEHOLDERS**: Who has ownership stakes or partnerships?
-
-Return a balanced summary that includes SPECIFIC company names for BOTH sides (winners AND losers).
-Focus on PUBLICLY TRADED companies only.
-`
-        const searchResult = await executeGeminiCall(() => chatModel.generateContent(liveSearchPrompt))
-        liveSearchContext = searchResult.response.text() || ''
-        await log(`📶 Context analysis complete...`)
+        await log('📡 Establishing secure data uplink...')
 
         // ==========================================
-        // STRUCTURED EXTRACTION
+        // STEP 1: STRUCTURED EXTRACTION (Groq - Fast)
         // ==========================================
+        // Note: Skipping slow Gemini Google Search. Using Groq for direct extraction.
         await log('💾 Parsing external signals & entities...')
 
         const structuredExtractionPrompt = `
 Analyze this scenario and extract STRUCTURED relationships with publicly traded companies.
 
 SCENARIO: "${query}"
-
-LIVE WEB INTELLIGENCE:
-${liveSearchContext}
 
 STEP 1: Classify the scenario type:
 - IPO: Company going public
@@ -103,74 +79,50 @@ STEP 1: Classify the scenario type:
 - REGULATORY: New regulations, policy changes
 - CORPORATE: Earnings, mergers, acquisitions, bankruptcies
 
-STEP 2: Extract ALL company relationships mentioned with their IMPACT:
+STEP 2: Extract ALL company relationships with their IMPACT:
 - POSITIVE: Company will BENEFIT (higher revenue, market share, stock price)
 - NEGATIVE: Company will be HARMED (higher costs, lost revenue, disruption)
 
 Return JSON:
 {
     "scenario_type": "IPO | TARIFF | SANCTIONS | WAR | COMMODITY_PRICE | SUPPLY_SHORTAGE | DEMAND_CHANGE | REGULATORY | CORPORATE",
-    "affected_subject": "What is affected (e.g., 'SpaceX', 'Chinese semiconductors', 'uranium')",
-    "affected_region": "Geographic area if relevant (e.g., 'China', 'Taiwan', 'Middle East')",
-    
+    "affected_subject": "What is affected",
+    "affected_region": "Geographic area if relevant",
     "companies": [
         {
-            "name": "Alphabet",
-            "ticker_if_known": "GOOGL",
-            "relationship": "investor",
-            "impact": "positive",
-            "reason": "Owns 7.5% stake, IPO increases NAV"
-        },
-        {
-            "name": "Rocket Lab",
-            "ticker_if_known": "RKLB",
-            "relationship": "competitor",
-            "impact": "negative",
-            "reason": "Competes for launch contracts, SpaceX IPO draws investor attention away"
+            "name": "Company Name",
+            "ticker_if_known": "TICKER",
+            "relationship": "investor|competitor|supplier|customer|etc",
+            "impact": "positive|negative",
+            "reason": "Brief explanation"
         }
     ]
 }
 
-RELATIONSHIPS can be: investor, shareholder, competitor, supplier, customer, manufacturer, operator, alternative_supplier, dependent, partner
-
-**CRITICAL BALANCE REQUIREMENT**:
-- You MUST include BOTH positive AND negative impacts.
-- **SUBSTITUTION LOGIC**: If a major supplier is disrupted (earthquake, war, strikes), their COMPETITORS in unaffected regions are **WINNERS**.
-  - Example: "Tokyo earthquake" -> Tokyo suppliers = NEGATIVE, Korean/Taiwanese competitors = POSITIVE
-  - Example: "China tariffs" -> China manufacturers = NEGATIVE, Vietnam/India/US alternatives = POSITIVE
-- For price surges: Producers BENEFIT, Consumers HARMED.
-- For price drops: Consumers BENEFIT, Producers HARMED.
-
+**CRITICAL**: Include BOTH positive AND negative impacts. At least 5 winners and 5 losers.
 Return RAW JSON ONLY.`
 
-        const structuredResult = await executeGeminiCall(() => chatModel.generateContent(structuredExtractionPrompt))
-        const structuredText = cleanJson(structuredResult.response.text())
-
+        let structuredResult: any
         try {
+            structuredResult = await groq.chat.completions.create({
+                messages: [{ role: 'user', content: structuredExtractionPrompt }],
+                model: 'llama-3.3-70b-versatile',
+                temperature: 0.3,
+                max_tokens: 4000,
+            })
+            const structuredText = cleanJson(structuredResult.choices[0]?.message?.content || '')
             structuredExtraction = JSON.parse(structuredText)
-            // await log(`📊 Scenario Type: ${structuredExtraction.scenario_type}`)
             await log(`📊 Identified ${structuredExtraction.companies?.length || 0} entities of interest`)
 
             if (structuredExtraction.companies) {
                 const positive = structuredExtraction.companies.filter((c: any) => c.impact === 'positive').length
                 const negative = structuredExtraction.companies.filter((c: any) => c.impact === 'negative').length
                 await log(`⚖️ Computing market sentiment...`)
-                // await log(`📊 Impact breakdown: 🟢 ${positive} positive, 🔴 ${negative} negative`)
-
-                // Extract company names for later matching
                 liveCompanyNames = structuredExtraction.companies.map((c: any) => c.name)
             }
-        } catch (e) {
-            await log('⚠️ Resynchronizing data stream...')
-            // Fallback: simple company name extraction
-            const fallbackResult = await executeGeminiCall(() => chatModel.generateContent(`Extract company names from: "${liveSearchContext}". Return JSON array: ["Company1", "Company2"]`))
-            try {
-                liveCompanyNames = JSON.parse(cleanJson(fallbackResult.response.text()))
-            } catch (e2) {
-                console.log('⚠️ Fallback extraction also failed')
-            }
+        } catch (groqError: any) {
+            await log(`⚠️ Extraction error: ${groqError.message}`)
         }
-
     } catch (e: any) {
         await log(`⚠️ Connection interruption: ${e.message}`)
     }
@@ -254,8 +206,13 @@ Return RAW JSON only.`
     let extractionResult: any = null
 
     try {
-        const extractResult = await executeGeminiCall(() => chatModel.generateContent(extractionPrompt))
-        const extractText = cleanJson(extractResult.response.text())
+        const extractResult = await groq.chat.completions.create({
+            messages: [{ role: 'user', content: extractionPrompt }],
+            model: 'llama-3.3-70b-versatile',
+            temperature: 0.3,
+            max_tokens: 4000,
+        })
+        const extractText = cleanJson(extractResult.choices[0]?.message?.content || '')
         extractionResult = JSON.parse(extractText)
 
         // ==========================================
@@ -585,8 +542,13 @@ ${companyContext}
 Return RAW JSON ONLY.No markdown.
 `
     await log('🖥️ Computing impact probabilities...')
-    const analysisResult = await executeGeminiCall(() => chatModel.generateContent(analysisPrompt))
-    const analysisText = cleanJson(analysisResult.response.text())
+    const analysisResult = await groq.chat.completions.create({
+        messages: [{ role: 'user', content: analysisPrompt }],
+        model: 'llama-3.3-70b-versatile',
+        temperature: 0.4,
+        max_tokens: 4000,
+    })
+    const analysisText = cleanJson(analysisResult.choices[0]?.message?.content || '')
 
     let analysis
     try {
