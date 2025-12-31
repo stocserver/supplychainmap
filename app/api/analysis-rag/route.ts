@@ -2,8 +2,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { GoogleGenerativeAI } from '@google/generative-ai'
-import { GoogleGenAI } from '@google/genai'
-import { Groq } from 'groq-sdk'
 
 // Init Supabase
 const supabase = createClient(
@@ -11,15 +9,9 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-// Init Groq (fast LLM for analysis)
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY! })
-
-// Init Gemini (old SDK for chat and embeddings)
+// Init Gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
 const chatModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" })
-
-// Init Gemini (new SDK for Google Search grounding - kept as fallback)
-const genAINew = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! })
 
 // Embedding models - V1 (768 dims) and V2 (3072 dims)
 const embeddingModelV1 = genAI.getGenerativeModel({ model: "text-embedding-004" })
@@ -60,14 +52,14 @@ async function processAnalysis(query: string, embeddingVersion: string, log: (ms
     let structuredExtraction: any = null
 
     try {
-        await log('📡 Establishing secure data uplink...')
+        await log('📡 Analyzing scenario context...')
 
         const liveSearchPrompt = `
-Based on this scenario, search the web to find BOTH winners and losers:
+Based on this scenario, identify BOTH winners and losers:
 
 SCENARIO: "${query}"
 
-Search for and identify:
+Identify:
 1. **BENEFICIARIES (WINNERS)**: Which public companies will GAIN from this scenario?
    - Competitors who gain market share
    - Alternative suppliers who become more valuable
@@ -83,22 +75,9 @@ Search for and identify:
 Return a balanced summary that includes SPECIFIC company names for BOTH sides (winners AND losers).
 Focus on PUBLICLY TRADED companies only.
 `
-        let searchResult: any
-        try {
-            // Use Groq Llama 3 for fast analysis (typically 2-5 seconds)
-            const chatCompletion = await groq.chat.completions.create({
-                messages: [{ role: 'user', content: liveSearchPrompt }],
-                model: 'llama-3.3-70b-versatile',
-                temperature: 0.5,
-                max_tokens: 4000,
-            })
-            liveSearchContext = chatCompletion.choices[0]?.message?.content || ''
-            await log(`📶 Incoming data stream active...`)
-        } catch (groqError: any) {
-            await log(`❌ Analysis model failed: ${groqError.message || 'Unknown error'}`)
-            // Continue without context if it fails
-            liveSearchContext = ''
-        }
+        const searchResult = await executeGeminiCall(() => chatModel.generateContent(liveSearchPrompt))
+        liveSearchContext = searchResult.response.text() || ''
+        await log(`📶 Context analysis complete...`)
 
         // ==========================================
         // STRUCTURED EXTRACTION
