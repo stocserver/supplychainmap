@@ -81,12 +81,19 @@ Focus on PUBLICLY TRADED companies only.
 `
         let searchResult: any
         try {
-            searchResult = await executeGeminiCall(() => genAINew.models.generateContent({
-                model: "gemini-2.5-flash",
-                contents: [{ text: liveSearchPrompt }], // Ensure contents is an array of parts
-                tools: [{ googleSearch: {} }]
-            } as any))
-            liveSearchContext = searchResult.text || ''
+            // Add timeout to prevent indefinite hanging (30s max for Gemini call)
+            const timeoutPromise = new Promise((_, reject) =>
+                setTimeout(() => reject(new Error('Gemini API timeout after 30s')), 30000)
+            )
+            searchResult = await Promise.race([
+                executeGeminiCall(() => genAINew.models.generateContent({
+                    model: "gemini-2.5-flash",
+                    contents: [{ text: liveSearchPrompt }],
+                    tools: [{ googleSearch: {} }]
+                } as any)),
+                timeoutPromise
+            ])
+            liveSearchContext = (searchResult as any).text || ''
             await log(`📶 Incoming data stream active...`)
         } catch (geminiError: any) {
             await log(`❌ Live search failed: ${geminiError.message || 'Unknown error'}`)
