@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
             orConditions.push(`value_chain_tags.cs.{${productTags.join(',')}}`);
         }
         if (industryTags.length > 0) {
-            orConditions.push(`industry.in.(${industryTags.map(t => `"${t}"`).join(',')})`);
+            orConditions.push(`industry.in.(${industryTags.map((t: string) => `"${t}"`).join(',')})`);
         }
         if (countryTags.length > 0) {
             orConditions.push(`country.in.(${countryTags.join(',')})`);
