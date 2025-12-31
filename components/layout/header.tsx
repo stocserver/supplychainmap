@@ -57,14 +57,12 @@ export function Header() {
             >
               Industries
             </Link>
-            {/* Analysis link hidden until backend timeout is resolved
             <Link
               href={getHref("/analysis")}
               className="text-sm font-medium transition-colors hover:text-foreground text-foreground/60"
             >
               Analysis
             </Link>
-            */}
             <Link
               href={getHref("/companies")}
               className="transition-colors hover:text-foreground/80 text-foreground/60 text-sm font-medium"
@@ -108,7 +106,6 @@ export function Header() {
                 >
                   Industries
                 </Link>
-                {/* Analysis link hidden until backend timeout is resolved
                 <Link
                   href={getHref("/analysis")}
                   className="text-base font-medium px-2 py-2"
@@ -116,7 +113,6 @@ export function Header() {
                 >
                   Analysis
                 </Link>
-                */}
                 <Link
                   href={getHref("/companies")}
                   className="transition-colors hover:text-foreground/80 text-foreground/60 text-base font-medium px-2 py-2"
