@@ -4,7 +4,7 @@
 import { useState, useRef, useEffect } from "react"
 import { Send, AlertTriangle, TrendingUp, TrendingDown, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
+import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
@@ -49,13 +49,10 @@ const LoadingDots = () => {
 }
 
 const ThinkingConsole = ({ logs }: { logs: string[] }) => {
-    const scrollContainerRef = useRef<HTMLDivElement>(null)
+    const bottomRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        // Scroll to bottom within the container only (not the whole page)
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight
-        }
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" })
     }, [logs])
 
     if (logs.length === 0) return null
@@ -81,10 +78,7 @@ const ThinkingConsole = ({ logs }: { logs: string[] }) => {
                 </span>
             </div>
 
-            <div
-                ref={scrollContainerRef}
-                className="p-4 h-32 overflow-y-auto space-y-2 bg-black/90 text-slate-300 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent relative z-10"
-            >
+            <div className="p-4 h-32 overflow-y-auto space-y-2 bg-black/90 text-slate-300 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent relative z-10">
                 {logs.map((log, i) => (
                     <div key={i} className="flex gap-2">
                         <span className="text-slate-600 select-none shrink-0">{`>`}</span>
@@ -94,6 +88,7 @@ const ThinkingConsole = ({ logs }: { logs: string[] }) => {
                         </span>
                     </div>
                 ))}
+                <div ref={bottomRef} />
             </div>
         </div>
     )
@@ -300,25 +295,19 @@ export default function AnalysisPage() {
             {/* Input Section */}
             <Card className="max-w-3xl mx-auto border-blue-100 shadow-sm">
                 <CardContent className="p-4 space-y-3">
-                    <div className="flex flex-col gap-2">
-                        <Textarea
+                    <div className="flex gap-2 flex-col sm:flex-row">
+                        <Input
                             placeholder="e.g. What if the US imposes comprehensive trade tariffs?"
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter' && !e.shiftKey) {
-                                    e.preventDefault()
-                                    handleAnalyze()
-                                }
-                            }}
+                            onKeyDown={(e) => e.key === 'Enter' && handleAnalyze()}
                             disabled={loading}
-                            className="min-h-[60px] resize-none"
-                            rows={2}
+                            className="flex-1"
                         />
                         <Button
                             onClick={handleAnalyze}
                             disabled={loading || !query.trim()}
-                            className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto sm:self-end"
+                            className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto"
                         >
                             {loading ? "Analyzing..." : (
                                 <>

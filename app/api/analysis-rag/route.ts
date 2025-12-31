@@ -138,7 +138,7 @@ Return RAW JSON ONLY.`
         try {
             structuredResult = await groq.chat.completions.create({
                 messages: [{ role: 'user', content: structuredExtractionPrompt }],
-                model: 'llama-3.3-70b-versatile',
+                model: 'llama-3.1-8b-instant',
                 temperature: 0.3,
                 max_tokens: 4000,
             })
@@ -248,7 +248,7 @@ Return RAW JSON only.`
     try {
         const extractResult = await groq.chat.completions.create({
             messages: [{ role: 'user', content: extractionPrompt }],
-            model: 'llama-3.3-70b-versatile',
+            model: 'llama-3.1-8b-instant',
             temperature: 0.3,
             max_tokens: 4000,
         })
@@ -586,7 +586,7 @@ Return RAW JSON ONLY.No markdown.
     await log('🖥️ Computing impact probabilities...')
     const analysisResult = await groq.chat.completions.create({
         messages: [{ role: 'user', content: analysisPrompt }],
-        model: 'llama-3.3-70b-versatile',
+        model: 'llama-3.1-8b-instant',
         temperature: 0.4,
         max_tokens: 4000,
     })
