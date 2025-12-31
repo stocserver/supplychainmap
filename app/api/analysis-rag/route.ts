@@ -83,7 +83,7 @@ Focus on PUBLICLY TRADED companies only.
             model: "gemini-2.5-flash",
             contents: [{ text: liveSearchPrompt }], // Ensure contents is an array of parts
             tools: [{ googleSearch: {} }]
-        }))
+        } as any))
         liveSearchContext = searchResult.text || ''
         await log(`📶 Incoming data stream active...`)
 
