@@ -64,42 +64,74 @@ async function processAnalysis(query: string, embeddingVersion: string, log: (ms
         await log('💾 Parsing external signals & entities...')
 
         const structuredExtractionPrompt = `
-Analyze this scenario and extract STRUCTURED relationships with publicly traded companies.
+You are an elite supply chain intelligence analyst. Your task is to uncover HIDDEN connections and provide LOGICALLY CONSISTENT analysis.
 
 SCENARIO: "${query}"
 
-STEP 1: Classify the scenario type:
-- IPO: Company going public
-- TARIFF: Trade barriers, import taxes
-- SANCTIONS: Government restrictions on trade/business
-- WAR: Military conflict affecting regions/supply chains
-- COMMODITY_PRICE: Price surge or drop in commodities (oil, uranium, lithium, etc.)
-- SUPPLY_SHORTAGE: Factory shutdowns, disasters, capacity constraints
-- DEMAND_CHANGE: Consumer demand shift up or down
-- REGULATORY: New regulations, policy changes
-- CORPORATE: Earnings, mergers, acquisitions, bankruptcies
+=== STEP 1: CLASSIFY THE SCENARIO ===
+Determine the PRIMARY shock type:
+- IPO: Company going public (investors, competitors, suppliers affected)
+- TARIFF: Trade barriers (import/export costs change, alternatives benefit)
+- WAR/GEOPOLITICAL: Military conflict (defense up, regional commerce down)
+- COMMODITY_PRICE: Price surge/drop (producers vs consumers)
+- SUPPLY_SHORTAGE: Capacity disruption (competitors and alternatives benefit)
+- NATURAL_DISASTER: Physical destruction (reconstruction up, affected down)
+- REGULATORY: New laws (compliance costs, beneficiaries)
+- TECH_SHIFT: Technology change (disruptors vs incumbents)
 
-STEP 2: Extract ALL company relationships with their IMPACT:
-- POSITIVE: Company will BENEFIT (higher revenue, market share, stock price)
-- NEGATIVE: Company will be HARMED (higher costs, lost revenue, disruption)
+=== STEP 2: THINK STEP BY STEP - FIND HIDDEN CONNECTIONS ===
+
+**HIDDEN EQUITY RELATIONSHIPS to discover:**
+1. WHO OWNS STAKES in the primary subject? (VCs, conglomerates, sovereign wealth funds)
+2. WHO ARE MAJOR SHAREHOLDERS of affected companies? (institutional investors like Berkshire, BlackRock)
+3. JOINT VENTURES or SUBSIDIARIES that people overlook?
+4. PARENT COMPANIES that benefit/suffer indirectly?
+
+**SUPPLY CHAIN LOGIC - Apply this matrix:**
+| Scenario          | PRODUCER    | CONSUMER    | COMPETITOR  | INVESTOR    |
+|-------------------|-------------|-------------|-------------|-------------|
+| Price SURGE       | ✅ POSITIVE | ❌ NEGATIVE | ⚪ NEUTRAL  | ✅ POSITIVE |
+| Price DROP        | ❌ NEGATIVE | ✅ POSITIVE | ⚪ NEUTRAL  | ❌ NEGATIVE |
+| Supply SHORTAGE   | ⚪ NEUTRAL  | ❌ NEGATIVE | ✅ POSITIVE | ❌ NEGATIVE |
+| War/Disaster      | ❌ NEGATIVE | ⚪ NEUTRAL  | ✅ POSITIVE | ❌ NEGATIVE |
+| IPO               | N/A         | N/A         | ❌ NEGATIVE | ✅ POSITIVE |
+
+**SUBSTITUTION LOGIC - Who fills the gap?**
+- If China is blocked → Vietnam, India, Mexico manufacturers BENEFIT
+- If TSMC is disrupted → Samsung, Intel BENEFIT
+- If oil spikes → renewables, EVs, nuclear BENEFIT
+- If a major player IPOs → competitors SUFFER (capital flows away)
+
+=== STEP 3: GENERATE COMPREHENSIVE LIST ===
+You MUST identify:
+- At least 5 WINNERS (positive) with clear reasoning
+- At least 5 LOSERS (negative) with clear reasoning
+- Include at least 2 "HIDDEN" relationships that casual observers miss
 
 Return JSON:
 {
-    "scenario_type": "IPO | TARIFF | SANCTIONS | WAR | COMMODITY_PRICE | SUPPLY_SHORTAGE | DEMAND_CHANGE | REGULATORY | CORPORATE",
-    "affected_subject": "What is affected",
+    "scenario_type": "IPO|TARIFF|WAR|COMMODITY_PRICE|SUPPLY_SHORTAGE|NATURAL_DISASTER|REGULATORY|TECH_SHIFT",
+    "affected_subject": "What is primarily affected",
     "affected_region": "Geographic area if relevant",
+    "reasoning_chain": "2-3 sentences explaining your logical chain of thought",
     "companies": [
         {
             "name": "Company Name",
             "ticker_if_known": "TICKER",
-            "relationship": "investor|competitor|supplier|customer|etc",
+            "relationship": "producer|consumer|competitor|investor|supplier|subsidiary|alternative",
             "impact": "positive|negative",
-            "reason": "Brief explanation"
+            "reason": "Specific, logical explanation of WHY",
+            "hidden": false
         }
     ]
 }
 
-**CRITICAL**: Include BOTH positive AND negative impacts. At least 5 winners and 5 losers.
+**QUALITY RULES:**
+1. NO DOUBLE STANDARDS: If you mark producers as winners, ALL producers should be winners (unless specific exception)
+2. BE SPECIFIC: "Higher revenue due to X" not just "will benefit"
+3. INCLUDE HIDDEN: Mark companies with hidden=true if the relationship is non-obvious
+4. NO CONTRADICTIONS: Your reasoning_chain must be consistent with all company impacts
+
 Return RAW JSON ONLY.`
 
         let structuredResult: any
