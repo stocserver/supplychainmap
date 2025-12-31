@@ -53,9 +53,15 @@ export function Header() {
           <nav className="flex items-center space-x-8">
             <Link
               href={getHref("/industries")}
-              className="text-base font-semibold transition-colors hover:text-foreground"
+              className="text-sm font-medium transition-colors hover:text-foreground text-foreground/60"
             >
               Industries
+            </Link>
+            <Link
+              href={getHref("/analysis")}
+              className="text-sm font-medium transition-colors hover:text-foreground text-foreground/60"
+            >
+              Analysis
             </Link>
             <Link
               href={getHref("/companies")}
@@ -95,10 +101,17 @@ export function Header() {
               <nav className="flex flex-col space-y-4 pt-4">
                 <Link
                   href={getHref("/industries")}
-                  className="text-lg font-semibold px-2 py-2"
+                  className="text-base font-medium px-2 py-2"
                   onClick={() => setOpen(false)}
                 >
                   Industries
+                </Link>
+                <Link
+                  href={getHref("/analysis")}
+                  className="text-base font-medium px-2 py-2"
+                  onClick={() => setOpen(false)}
+                >
+                  Analysis
                 </Link>
                 <Link
                   href={getHref("/companies")}
