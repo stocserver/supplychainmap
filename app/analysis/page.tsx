@@ -288,7 +288,7 @@ export default function AnalysisPage() {
                     </div>
                 </h1>
                 <p className="text-muted-foreground max-w-2xl text-sm">
-                    Ask "What if" questions to map ripple effects. AI identifies winners and losers based on live supply chain data.
+                    Ask &quot;What if&quot; questions to map ripple effects. AI identifies winners and losers based on live supply chain data.
                 </p>
             </div>
 
