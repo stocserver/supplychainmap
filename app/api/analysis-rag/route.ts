@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { GoogleGenAI } from '@google/genai'
+import { Groq } from 'groq-sdk'
 
 // Init Supabase
 const supabase = createClient(
@@ -10,11 +11,14 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
+// Init Groq (fast LLM for analysis)
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY! })
+
 // Init Gemini (old SDK for chat and embeddings)
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
 const chatModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" })
 
-// Init Gemini (new SDK for Google Search grounding)
+// Init Gemini (new SDK for Google Search grounding - kept as fallback)
 const genAINew = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! })
 
 // Embedding models - V1 (768 dims) and V2 (3072 dims)
@@ -81,23 +85,18 @@ Focus on PUBLICLY TRADED companies only.
 `
         let searchResult: any
         try {
-            // Add timeout to prevent indefinite hanging (30s max for Gemini call)
-            const timeoutPromise = new Promise((_, reject) =>
-                setTimeout(() => reject(new Error('Gemini API timeout after 30s')), 30000)
-            )
-            searchResult = await Promise.race([
-                executeGeminiCall(() => genAINew.models.generateContent({
-                    model: "gemini-2.5-flash",
-                    contents: [{ text: liveSearchPrompt }],
-                    tools: [{ googleSearch: {} }]
-                } as any)),
-                timeoutPromise
-            ])
-            liveSearchContext = (searchResult as any).text || ''
+            // Use Groq Llama 3 for fast analysis (typically 2-5 seconds)
+            const chatCompletion = await groq.chat.completions.create({
+                messages: [{ role: 'user', content: liveSearchPrompt }],
+                model: 'llama-3.3-70b-versatile',
+                temperature: 0.5,
+                max_tokens: 4000,
+            })
+            liveSearchContext = chatCompletion.choices[0]?.message?.content || ''
             await log(`📶 Incoming data stream active...`)
-        } catch (geminiError: any) {
-            await log(`❌ Live search failed: ${geminiError.message || 'Unknown error'}`)
-            // Continue without live search context if it fails
+        } catch (groqError: any) {
+            await log(`❌ Analysis model failed: ${groqError.message || 'Unknown error'}`)
+            // Continue without context if it fails
             liveSearchContext = ''
         }
 
