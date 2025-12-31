@@ -6,7 +6,3 @@
 # Scheduled function for cache warming
 [functions]
   directory = "netlify/functions"
-
-# Schedule the cache-warmer function to run every 5 minutes
-[functions."warm-cache"]
-  schedule = "*/5 * * * *"
