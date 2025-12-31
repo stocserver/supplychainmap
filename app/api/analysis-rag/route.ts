@@ -79,13 +79,20 @@ Search for and identify:
 Return a balanced summary that includes SPECIFIC company names for BOTH sides (winners AND losers).
 Focus on PUBLICLY TRADED companies only.
 `
-        const searchResult = await executeGeminiCall(() => genAINew.models.generateContent({
-            model: "gemini-2.5-flash",
-            contents: [{ text: liveSearchPrompt }], // Ensure contents is an array of parts
-            tools: [{ googleSearch: {} }]
-        } as any))
-        liveSearchContext = searchResult.text || ''
-        await log(`📶 Incoming data stream active...`)
+        let searchResult: any
+        try {
+            searchResult = await executeGeminiCall(() => genAINew.models.generateContent({
+                model: "gemini-2.5-flash",
+                contents: [{ text: liveSearchPrompt }], // Ensure contents is an array of parts
+                tools: [{ googleSearch: {} }]
+            } as any))
+            liveSearchContext = searchResult.text || ''
+            await log(`📶 Incoming data stream active...`)
+        } catch (geminiError: any) {
+            await log(`❌ Live search failed: ${geminiError.message || 'Unknown error'}`)
+            // Continue without live search context if it fails
+            liveSearchContext = ''
+        }
 
         // ==========================================
         // STRUCTURED EXTRACTION
