@@ -158,29 +158,37 @@ Return RAW JSON ONLY.`
     } catch (e: any) {
         await log(`⚠️ Connection interruption: ${e.message}`)
     }
+    // ==========================================
+    // STEP 2: Embed the Query (with fallback if Gemini fails)
+    // ==========================================
+    let queryEmbedding: number[] | null = null
+    let ragCompanies: any[] = []
 
-    // ==========================================
-    // STEP 2: Embed the Query
-    // ==========================================
-    const embeddingModel = isV2 ? embeddingModelV2 : embeddingModelV1
-    const embeddingResult = await executeGeminiCall(() => embeddingModel.embedContent(query))
-    const queryEmbedding = embeddingResult.embedding.values
+    try {
+        const embeddingModel = isV2 ? embeddingModelV2 : embeddingModelV1
+        const embeddingResult = await executeGeminiCall(() => embeddingModel.embedContent(query))
+        queryEmbedding = embeddingResult.embedding.values
 
-    // ==========================================
-    // STEP 2: Vector Search - Find Similar Companies
-    // ==========================================
-    await log('🔍 Querying internal node database...')
-    const rpcFunction = isV2 ? 'match_companies_by_embedding_v2' : 'match_companies_by_embedding'
-    const { data: ragCompanies, error: searchError } = await supabase.rpc(
-        rpcFunction,
-        {
-            query_embedding: queryEmbedding,
-            match_count: 15 // Reduced to make room for tag-matched
-        }
-    )
+        // ==========================================
+        // STEP 2b: Vector Search - Find Similar Companies
+        // ==========================================
+        await log('🔍 Querying internal node database...')
+        const rpcFunction = isV2 ? 'match_companies_by_embedding_v2' : 'match_companies_by_embedding'
+        const { data: searchResults, error: searchError } = await supabase.rpc(
+            rpcFunction,
+            {
+                query_embedding: queryEmbedding,
+                match_count: 15
+            }
+        )
+        if (searchResults) ragCompanies = searchResults
+        if (searchError) await log(`⚠️ Vector search error: ${searchError.message}`)
+    } catch (embeddingError: any) {
+        await log(`⚠️ Embedding API unavailable, using extraction-only mode...`)
+        // Continue without embeddings - will rely on structured extraction and name matching
+    }
 
-    if (searchError) throw searchError
-    // await log(`📊 RAG found ${ragCompanies?.length || 0} companies`)
+    // Note: searchError is now handled inside the try block above
 
     // ==========================================
     // STEP 2.5: REASONING AGENT - Multi-Hop Discovery
@@ -281,9 +289,11 @@ Return RAW JSON only.`
 
             for (const searchTerm of extractionResult.equity_search_terms.slice(0, 3)) { // Max 3 searches
                 try {
-                    const equityEmbedding = await executeGeminiCall(() => embeddingModel.embedContent(searchTerm))
+                    const equityEmbeddingModel = isV2 ? embeddingModelV2 : embeddingModelV1
+                    const equityEmbedding = await executeGeminiCall(() => equityEmbeddingModel.embedContent(searchTerm))
+                    const equityRpcFunction = isV2 ? 'match_companies_by_embedding_v2' : 'match_companies_by_embedding'
                     const { data: equityCompanies } = await supabase.rpc(
-                        rpcFunction,
+                        equityRpcFunction,
                         {
                             query_embedding: equityEmbedding.embedding.values,
                             match_count: 5
