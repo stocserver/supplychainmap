@@ -12,44 +12,10 @@ import { IndustryValueChain } from "@/components/industries/IndustryValueChain"
 import { IndustryProductValueChain } from "@/components/industries/IndustryProductValueChain"
 import { VisualMap } from "@/components/industries/VisualMap"
 import { IndustryViewToggle } from "@/components/industries/IndustryViewToggle"
-import { semiconductorProductStages } from "@/lib/industries/semiconductors.products"
-import { cloudProductStages } from "@/lib/industries/cloud-computing.products"
-import { dataCenterProductStages } from "@/lib/industries/data-centers.products"
-import { cyberProductStages } from "@/lib/industries/cybersecurity.products"
-import { softwareSaaSProductStages } from "@/lib/industries/software-saas.products"
-import { evProductStages } from "@/lib/industries/electric-vehicles.products"
-import { solarProductStages } from "@/lib/industries/solar-energy.products"
-import { energyStorageProductStages } from "@/lib/industries/energy-storage.products"
-import { pharmaceuticalProductStages } from "@/lib/industries/pharmaceuticals.products"
-import { bankingProductStages } from "@/lib/industries/banking.products"
-import { oilGasProductStages } from "@/lib/industries/oil-gas.products"
-import { automotiveProductStages } from "@/lib/industries/automotive.products"
-import { retailProductStages } from "@/lib/industries/retail.products"
-import { telecommunicationsProductStages } from "@/lib/industries/telecommunications.products"
-import { aerospaceProductStages } from "@/lib/industries/aerospace-defense.products"
-import { biotechnologyProductStages } from "@/lib/industries/biotechnology.products"
-import { insuranceProductStages } from "@/lib/industries/insurance.products"
-import { mediaEntertainmentProductStages } from "@/lib/industries/media-entertainment.products"
-import { utilitiesProductStages } from "@/lib/industries/utilities.products"
-import { fintechProductStages } from "@/lib/industries/fintech.products"
-import { medicalDevicesProductStages } from "@/lib/industries/medical-devices.products"
-import { ecommerceProductStages } from "@/lib/industries/ecommerce.products"
-import { realEstateProductStages } from "@/lib/industries/real-estate.products"
-import { assetManagementProductStages } from "@/lib/industries/asset-management.products"
-import { chemicalsProductStages } from "@/lib/industries/chemicals.products"
-import { foodBeverageProductStages } from "@/lib/industries/food-beverage.products"
-import { artificialIntelligenceProductStages } from "@/lib/industries/artificial-intelligence.products"
-import { roboticsAutomationProductStages } from "@/lib/industries/robotics-automation.products"
-import { transportationLogisticsProductStages } from "@/lib/industries/transportation-logistics.products"
-import { spaceTechnologyProductStages } from "@/lib/industries/space-technology.products"
-import { digitalHealthProductStages } from "@/lib/industries/digital-health.products"
-import { miningMaterialsProductStages } from "@/lib/industries/mining-materials.products"
-import { consumerProductsProductStages } from "@/lib/industries/consumer-products.products"
-import { hospitalityProductStages } from "@/lib/industries/hospitality.products"
-import { constructionEngineeringProductStages } from "@/lib/industries/construction-engineering.products"
-import { agtechProductStages } from "@/lib/industries/agtech.products"
 import { getValueChainFromDB, DB_DRIVEN_INDUSTRIES } from "@/lib/data/value-chain-db"
 import { COUNTRY_MAP } from "@/lib/data/constants"
+import { normalizeCompanyClassification } from "@/lib/data/company-format"
+import { productStagesByIndustry } from "@/lib/data/product-stages"
 
 export default async function IndustryPage({
   params,
@@ -88,12 +54,12 @@ export default async function IndustryPage({
 
     const { data } = await supabaseServer
       .from('companies')
-      .select('ticker, name, value_chain_tags, country, industry, market_cap, data, logo_url')
+      .select('ticker, name, value_chain_tags, product_tags, country, industry, industry_slug, market_cap, data, logo_url')
       .in('country', countriesToQuery)
-      .eq('industry', params.slug)
+      .eq('industry_slug', params.slug)
       .limit(1000)
 
-    dbCompanies = data
+    dbCompanies = (data || []).map((row: any) => normalizeCompanyClassification(row))
 
     if (dbCompanies && dbCompanies.length > 0) {
       try {
@@ -164,46 +130,7 @@ export default async function IndustryPage({
         }
         valueChain={
           (() => {
-            const productStagesMap: Record<string, any> = {
-              'semiconductors': semiconductorProductStages,
-              'cloud-computing': cloudProductStages,
-              'data-centers': dataCenterProductStages,
-              'cybersecurity': cyberProductStages,
-              'software-saas': softwareSaaSProductStages,
-              'electric-vehicles': evProductStages,
-              'solar-energy': solarProductStages,
-              'energy-storage': energyStorageProductStages,
-              'pharmaceuticals': pharmaceuticalProductStages,
-              'banking': bankingProductStages,
-              'oil-gas': oilGasProductStages,
-              'automotive': automotiveProductStages,
-              'retail': retailProductStages,
-              'telecommunications': telecommunicationsProductStages,
-              'aerospace-defense': aerospaceProductStages,
-              'biotechnology': biotechnologyProductStages,
-              'insurance': insuranceProductStages,
-              'media-entertainment': mediaEntertainmentProductStages,
-              'utilities': utilitiesProductStages,
-              'fintech': fintechProductStages,
-              'medical-devices': medicalDevicesProductStages,
-              'ecommerce': ecommerceProductStages,
-              'real-estate': realEstateProductStages,
-              'asset-management': assetManagementProductStages,
-              'chemicals': chemicalsProductStages,
-              'food-beverage': foodBeverageProductStages,
-              'artificial-intelligence': artificialIntelligenceProductStages,
-              'robotics-automation': roboticsAutomationProductStages,
-              'transportation-logistics': transportationLogisticsProductStages,
-              'space-technology': spaceTechnologyProductStages,
-              'digital-health': digitalHealthProductStages,
-              'mining-materials': miningMaterialsProductStages,
-              'consumer-products': consumerProductsProductStages,
-              'hospitality': hospitalityProductStages,
-              'construction-engineering': constructionEngineeringProductStages,
-              'agtech': agtechProductStages,
-            }
-
-            const rawStages = productStagesMap[industry.slug]
+            const rawStages = productStagesByIndustry[industry.slug]
 
             // Use database-driven value chain if available, otherwise use hardcoded
             const contextualizedStages = dbValueChain
@@ -357,4 +284,3 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     },
   }
 }
-

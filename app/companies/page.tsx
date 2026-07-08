@@ -5,6 +5,7 @@ import { supabaseServer } from '@/lib/supabase/server'
 import { CompaniesClient } from '@/components/companies/companies-client'
 import dataRedis from '@/lib/redis'
 import { COUNTRY_MAP, DEFAULT_COUNTRY } from '@/lib/data/constants'
+import { normalizeCompanyClassification, normalizeIndustrySlug } from '@/lib/data/company-format'
 
 export const revalidate = 0 // Disable cache for debugging
 
@@ -68,7 +69,7 @@ export default async function CompaniesPage({
       const { data, error } = await supabaseServer
         .from('companies')
         // Fetch just the incomeStatement part of the JSON (much smaller than full data)
-        .select('ticker, name, market_cap, industry, country, logo_url, value_chain_tags, incomeStatement:data->incomeStatement')
+        .select('ticker, name, market_cap, industry, industry_slug, country, logo_url, value_chain_tags, product_tags, incomeStatement:data->incomeStatement')
         .gt('market_cap', 0)
         .in('country', countryFilter)
         .order('market_cap', { ascending: false, nullsFirst: false })
@@ -78,7 +79,7 @@ export default async function CompaniesPage({
 
       // Map to flattened structure (matching cache warmer)
       const mappedData = (data || []).map((c: any) => ({
-        ...c,
+        ...normalizeCompanyClassification(c),
         revenue: c.incomeStatement?.revenue || 0,
         netIncome: c.incomeStatement?.netIncome || 0,
         // VisualMap checks data.incomeStatement too, so we can reconstruction it if needed,
@@ -97,7 +98,7 @@ export default async function CompaniesPage({
       try {
         const { data, error } = await supabaseServer
           .from('companies')
-          .select('ticker, name, market_cap, industry, country, logo_url, value_chain_tags')
+          .select('ticker, name, market_cap, industry, industry_slug, country, logo_url, value_chain_tags, product_tags')
           .gt('market_cap', 0)
           .in('country', countryFilter)
           .order('market_cap', { ascending: false, nullsFirst: false })
@@ -107,7 +108,7 @@ export default async function CompaniesPage({
           console.error('Survival Mode failed:', error)
           return { data: [] }
         }
-        return { data: data || [] }
+        return { data: (data || []).map((c: any) => normalizeCompanyClassification(c)) }
       } catch (errSurvival) {
         console.error('Survival Mode critical error:', errSurvival)
         return { data: [] }
@@ -118,12 +119,12 @@ export default async function CompaniesPage({
   const fetchAvailableIndustries = async () => {
     const { data } = await supabaseServer
       .from('companies')
-      .select('industry')
+      .select('industry, industry_slug')
       .in('country', countryFilter)
-      .not('industry', 'is', null)
+      .not('industry_slug', 'is', null)
 
     if (!data) return []
-    return [...new Set(data.map(d => d.industry))] as string[]
+    return [...new Set(data.map(d => normalizeIndustrySlug(d)).filter(Boolean))] as string[]
   }
 
   const [companies, industries, mapping, availableIndustries] = await Promise.all([

@@ -9,6 +9,7 @@ import { CompaniesViewToggle } from "@/components/companies/CompaniesViewToggle"
 import { VisualMap } from "@/components/industries/VisualMap"
 import { supabase } from "@/lib/supabase/client"
 import { industries as localIndustries, type Industry } from "@/lib/data/industries"
+import { normalizeCompanyClassification } from "@/lib/data/company-format"
 
 // Map country codes to country names used in the database
 const COUNTRY_MAP: Record<string, string[]> = {
@@ -41,7 +42,10 @@ interface Company {
     name: string
     market_cap: number
     industry?: string
+    industry_slug?: string
     logo_url?: string
+    value_chain_tags?: string[]
+    product_tags?: string[]
     data?: any
 }
 
@@ -157,7 +161,7 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
             const term = `%${searchTerm.trim()}%`
             let query = supabase
                 .from('companies')
-                .select('ticker, name, market_cap, industry, country, logo_url, data')
+                .select('ticker, name, market_cap, industry, industry_slug, country, logo_url, value_chain_tags, product_tags, data')
                 .or(`ticker.ilike.${term},name.ilike.${term}`)
 
             // Apply country filter for non-US regions
@@ -169,7 +173,7 @@ export function CompaniesClient({ initialCompanies, initialIndustries, initialMa
             const { data } = await query
                 .order('market_cap', { ascending: false, nullsFirst: false })
                 .limit(200)
-            setSearchResults((data || []) as Company[])
+            setSearchResults((data || []).map((c: any) => normalizeCompanyClassification(c)) as Company[])
         }, 300)
 
         return () => { if (searchTimer.current) window.clearTimeout(searchTimer.current) }

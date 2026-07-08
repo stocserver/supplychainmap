@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { Groq } from 'groq-sdk'
+import { normalizeCompanyClassification } from '@/lib/data/company-format'
 
 // Init Supabase
 const supabase = createClient(
@@ -267,14 +268,14 @@ Return RAW JSON only.`
             await log(`📂 Indexing sector relationships: ${allIndustries.join(', ')}`)
             const { data: industryCompanies } = await supabase
                 .from('companies')
-                .select('ticker, name, industry, country, description, value_chain_tags, market_cap, deep_research')
-                .in('industry', allIndustries)
+                .select('ticker, name, industry, industry_slug, country, description, value_chain_tags, product_tags, market_cap, deep_research')
+                .in('industry_slug', allIndustries)
                 .order('market_cap', { ascending: false })
                 .limit(10)
 
             if (industryCompanies) {
-                tagMatchedCompanies = industryCompanies.map(c => ({
-                    ...c,
+                tagMatchedCompanies = industryCompanies.map((c: any) => ({
+                    ...normalizeCompanyClassification(c),
                     similarity: 0.5,
                     source: 'industry_tag'
                 }))
@@ -376,7 +377,7 @@ Return RAW JSON only.`
                         // Try exact/prefix match first
                         let { data: matchedCompanies } = await supabase
                             .from('companies')
-                            .select('ticker, name, description, country, industry, logo_url, market_cap, value_chain_tags')
+                            .select('ticker, name, description, country, industry, industry_slug, logo_url, market_cap, value_chain_tags, product_tags')
                             .ilike('name', variant)
                             .limit(1)
 
@@ -384,7 +385,7 @@ Return RAW JSON only.`
                         if (!matchedCompanies || matchedCompanies.length === 0) {
                             const { data: broadMatch } = await supabase
                                 .from('companies')
-                                .select('ticker, name, description, country, industry, logo_url, market_cap, value_chain_tags')
+                                .select('ticker, name, description, country, industry, industry_slug, logo_url, market_cap, value_chain_tags, product_tags')
                                 .ilike('name', `%${variant}%`)
                                 .limit(1)
                             matchedCompanies = broadMatch
@@ -399,7 +400,7 @@ Return RAW JSON only.`
                             if (!exists) {
                                 const structuredData = getStructuredData(companyName)
                                 liveMatchedCompanies.push({
-                                    ...matchedCompanies[0],
+                                    ...normalizeCompanyClassification(matchedCompanies[0]),
                                     source: 'live_search',
                                     live_context: liveSearchContext.slice(0, 500) + '...',
                                     extracted_relationship: structuredData?.relationship || null,
@@ -423,7 +424,7 @@ Return RAW JSON only.`
     // ==========================================
     // STEP 3: Merge & Deduplicate
     // ==========================================
-    const ragWithSource = (ragCompanies || []).map((c: any) => ({ ...c, source: 'rag' }))
+    const ragWithSource = (ragCompanies || []).map((c: any) => ({ ...normalizeCompanyClassification(c), source: 'rag' }))
     const allCompanies = [...ragWithSource]
     const existingTickers = new Set(allCompanies.map((c: any) => c.ticker))
 

@@ -8,6 +8,7 @@ import { ArrowLeft, Building2, TrendingUp, Users, Globe } from "lucide-react"
 import { formatCurrency, formatNumber } from "@/lib/utils"
 import { supabaseServer } from "@/lib/supabase/server"
 import { FinancialStatements } from "@/components/company/FinancialStatements"
+import { normalizeCompanyClassification } from "@/lib/data/company-format"
 // Using chip-style TabsList; mobile-specific toggle not needed
 
 // Force dynamic rendering to always fetch fresh data
@@ -32,7 +33,7 @@ export default async function CompanyPage({
     .eq('ticker', ticker)
     .maybeSingle()
 
-  const companyData = fetched || null
+  const companyData = fetched ? normalizeCompanyClassification(fetched) : null
 
 
   // Extract data

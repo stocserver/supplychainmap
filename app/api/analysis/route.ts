@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import fs from 'fs'
 import path from 'path'
+import { normalizeCompanyClassification } from '@/lib/data/company-format'
 
 // Init Supabase
 const supabase = createClient(
@@ -112,7 +113,7 @@ export async function POST(req: NextRequest) {
             orConditions.push(`value_chain_tags.cs.{${productTags.join(',')}}`);
         }
         if (industryTags.length > 0) {
-            orConditions.push(`industry.in.(${industryTags.map((t: string) => `"${t}"`).join(',')})`);
+            orConditions.push(`industry_slug.in.(${industryTags.map((t: string) => `"${t}"`).join(',')})`);
         }
         if (countryTags.length > 0) {
             orConditions.push(`country.in.(${countryTags.join(',')})`);
@@ -122,20 +123,21 @@ export async function POST(req: NextRequest) {
 
         const { data: companies, error } = await supabase
             .from('companies')
-            .select('ticker, name, description, country, market_cap, logo_url, value_chain_tags, industry')
+            .select('ticker, name, description, country, market_cap, logo_url, value_chain_tags, product_tags, industry, industry_slug')
             .or(orQuery)
             .order('market_cap', { ascending: false })
             .limit(3000)
 
         if (error) throw error
-        if (!companies || companies.length === 0) {
+        const normalizedCompanies = (companies || []).map((row: any) => normalizeCompanyClassification(row))
+        if (normalizedCompanies.length === 0) {
             return NextResponse.json({ analysis: macroAnalysis, companies: [] })
         }
 
         // ==========================================
         // FILTER & SORT BY RELEVANCE
         // ==========================================
-        const scoredCompanies = companies.map(c => {
+        const scoredCompanies = normalizedCompanies.map(c => {
             let score = 0;
             const matchedTags: string[] = [];
 

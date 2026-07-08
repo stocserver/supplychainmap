@@ -1,5 +1,6 @@
 import { supabaseServer } from '@/lib/supabase/server'
 import type { ValueChainStageProducts, ProductCategory } from './industries'
+import { normalizeCompanyClassification } from './company-format'
 
 /**
  * Fetch value chain structure dynamically from company data.
@@ -30,15 +31,15 @@ export async function getValueChainFromDB(
 ): Promise<ValueChainStageProducts[]> {
     const { data: companies, error: companiesError } = await supabaseServer
         .from('companies')
-        .select('ticker, name, stream_slug, category_slug, value_chain_tags, country, industry')
-        .eq('industry', industrySlug)
+        .select('ticker, name, stream_slug, category_slug, value_chain_tags, product_tags, country, industry, industry_slug')
+        .eq('industry_slug', industrySlug)
 
     if (companiesError) {
         console.error('Error fetching companies:', companiesError)
         return []
     }
 
-    const allCompanies = companies || []
+    const allCompanies = (companies || []).map((row: any) => normalizeCompanyClassification(row))
 
     // 1. Try to fetch Full Structure from DB (Streams -> Categories -> Products)
     // ---------------------------------------------------------
@@ -51,7 +52,7 @@ export async function getValueChainFromDB(
                 products:value_chain_products(*)
             )
         `)
-        .eq('industry', industrySlug)
+        .eq('industry_slug', industrySlug)
         .order('sort_order')
 
     if (streamsError) {
@@ -67,20 +68,33 @@ export async function getValueChainFromDB(
         // FULL DB MODE: Use DB Structure (The "Gold Standard" in SQL)
         // ---------------------------------------------------------
         return streams.map(stream => {
-            const streamCompanies = allCompanies.filter(c => c.stream_slug === stream.slug)
-
             // Sort categories by sort_order
             const sortedCategories = (stream.categories || []).sort((a: any, b: any) => (a.sort_order || 0) - (b.sort_order || 0))
+            const streamTagIds = new Set<string>()
+            sortedCategories.forEach((cat: any) => {
+                streamTagIds.add(cat.slug)
+                ;(cat.products || []).forEach((product: any) => streamTagIds.add(product.slug))
+            })
+
+            const streamCompanies = allCompanies.filter(c =>
+                c.stream_slug === stream.slug ||
+                (!c.stream_slug && (c.value_chain_tags || []).some((tag: string) => streamTagIds.has(tag)))
+            )
 
             const products: ProductCategory[] = sortedCategories.map((cat: any) => {
+                const sortedSubProducts = (cat.products || []).sort((a: any, b: any) => (a.sort_order || 0) - (b.sort_order || 0))
+                const categoryTagIds = new Set<string>([
+                    cat.slug,
+                    ...sortedSubProducts.map((sub: any) => sub.slug),
+                ])
+
                 // 1. Find companies for this MAIN CATEGORY
                 const categoryCompanies = streamCompanies.filter(c =>
-                    c.category_slug === cat.slug
+                    c.category_slug === cat.slug ||
+                    (!c.category_slug && (c.value_chain_tags || []).some((tag: string) => categoryTagIds.has(tag)))
                 )
 
                 // 2. Hydrate Sub-Products (from value_chain_products table)
-                const sortedSubProducts = (cat.products || []).sort((a: any, b: any) => (a.sort_order || 0) - (b.sort_order || 0))
-
                 const subProducts: ProductCategory[] = sortedSubProducts.map((sub: any) => {
                     // Find companies that match this tag
                     const tagCompanies = categoryCompanies.filter(c =>

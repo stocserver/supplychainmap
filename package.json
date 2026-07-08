@@ -13,6 +13,10 @@
     "test:fmp": "tsx scripts/test-fmp.ts",
     "test:endpoints": "tsx scripts/test-fmp-endpoints.ts",
     "test:income": "tsx scripts/test-income-statement.ts",
+    "test:free-data": "tsx scripts/test-free-data-sources.ts",
+    "audit:free-data": "tsx scripts/audit-free-data-db-format.ts",
+    "audit:ticker-hygiene": "tsx scripts/audit-ticker-hygiene.ts",
+    "update:free-data": "tsx scripts/update-companies-free-data.ts",
     "step1:seed-industries": "tsx scripts/step1-seed-industries.ts",
     "step1:seed-companies": "tsx scripts/step1-seed-companies.ts",
     "step2:validate": "tsx scripts/step2-validate-hardcoded-vs-db.ts",
@@ -22,6 +26,7 @@
     "step3:import-fundamentals": "tsx scripts/step3-import-fundamentals-to-supabase.ts",
     "step3:import-fundamentals-only": "tsx scripts/step3-import-fundamentals-only.ts",
     "step3:import-batch": "tsx scripts/step3-import-batch-fundamentals.ts --limit=10 --concurrency=10",
+    "seed:value-chains": "tsx scripts/seed-value-chain-structure.ts",
     "verify:data": "tsx scripts/verify-supabase-data.ts",
     "inspect:db": "tsx scripts/inspect-db.ts"
   },

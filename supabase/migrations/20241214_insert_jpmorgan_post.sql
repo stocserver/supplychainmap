@@ -46,4 +46,5 @@ VALUES (
   'JPMorgan Chase 2024 financial analysis: Record $58.5B net income, $180.6B revenue. Investment banking up 49%. Buy rating from analysts.',
   true,
   NOW()
-);
+)
+ON CONFLICT (slug) DO NOTHING;

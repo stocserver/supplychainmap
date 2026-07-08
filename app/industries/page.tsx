@@ -2,6 +2,7 @@ import { Suspense } from "react"
 import { Metadata } from "next"
 import { supabaseServer } from "@/lib/supabase/server"
 import { IndustriesClient, DbIndustry } from "@/components/industries/industries-client"
+import { normalizeCompanyClassification, normalizeIndustrySlug } from "@/lib/data/company-format"
 
 export const revalidate = 0 // Disable cache for debugging
 
@@ -58,7 +59,7 @@ export default async function IndustriesPage({
   while (true) {
     const { data, error } = await supabaseServer
       .from('companies')
-      .select('ticker, name, industry, value_chain_tags, market_cap, logo_url')
+      .select('ticker, name, industry, industry_slug, value_chain_tags, product_tags, market_cap, logo_url')
       .in('country', countryFilter) // Match companies page logic
       .range(from, from + batchSize - 1)
 
@@ -67,7 +68,7 @@ export default async function IndustriesPage({
       break
     }
     if (data && data.length > 0) {
-      dbRows = [...dbRows, ...data]
+      dbRows = [...dbRows, ...data.map((row: any) => normalizeCompanyClassification(row))]
       if (data.length < batchSize) break
     } else {
       break
@@ -79,8 +80,9 @@ export default async function IndustriesPage({
   const counts: Record<string, number> = {}
   if (dbRows) {
     dbRows.forEach((r: any) => {
-      if (r.industry) {
-        counts[r.industry] = (counts[r.industry] || 0) + 1
+      const industrySlug = normalizeIndustrySlug(r)
+      if (industrySlug) {
+        counts[industrySlug] = (counts[industrySlug] || 0) + 1
       }
     })
   }

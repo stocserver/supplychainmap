@@ -36,5 +36,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local scripts (keep out of CI builds if desired)
-/scripts/
+# generated local artifacts
+/reports/
+/supabase/.temp/
