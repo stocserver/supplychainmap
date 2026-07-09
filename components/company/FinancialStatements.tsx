@@ -10,6 +10,58 @@ interface FinancialStatementsProps {
   data: any // Full company data from Supabase
 }
 
+function mergeQuarterlyFactHistory(financials: any) {
+  const history = financials?.quarterlyHistory || {}
+  const byPeriod = new Map<string, any>()
+
+  const applyFacts = (items: any[] = [], mapper: (fact: any) => Record<string, any>) => {
+    items.forEach((fact) => {
+      if (!fact?.end) return
+      const existing = byPeriod.get(fact.end) || {
+        date: fact.end,
+        period: fact.fiscalPeriod || 'Q',
+        fiscalYear: fact.fiscalYear,
+      }
+      byPeriod.set(fact.end, { ...existing, ...mapper(fact) })
+    })
+  }
+
+  applyFacts(history.revenue, (fact) => ({ revenue: fact.value }))
+  applyFacts(history.netIncome, (fact) => ({ netIncome: fact.value }))
+  applyFacts(history.assets, (fact) => ({ totalAssets: fact.value }))
+
+  return Array.from(byPeriod.values())
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+}
+
+function secAnnualFallback(financials: any) {
+  const latest = financials?.latestAnnual
+  if (!latest) return { incomeStatements: [], balanceSheets: [] }
+
+  const date = latest.revenue?.end || latest.netIncome?.end || latest.assets?.end
+  const fiscalYear = latest.revenue?.fiscalYear || latest.netIncome?.fiscalYear || latest.assets?.fiscalYear
+
+  return {
+    incomeStatements: date
+      ? [{
+        date,
+        period: 'FY',
+        fiscalYear,
+        revenue: latest.revenue?.value,
+        netIncome: latest.netIncome?.value,
+      }]
+      : [],
+    balanceSheets: latest.assets?.end
+      ? [{
+        date: latest.assets.end,
+        period: 'FY',
+        fiscalYear: latest.assets.fiscalYear,
+        totalAssets: latest.assets.value,
+      }]
+      : [],
+  }
+}
+
 export function FinancialStatements({ data }: FinancialStatementsProps) {
   const [period, setPeriod] = useState<'annual' | 'quarterly'>('annual')
   const [activeTab, setActiveTab] = useState<'income' | 'balance' | 'cashflow' | 'metrics' | 'ratios'>('income')
@@ -26,15 +78,22 @@ export function FinancialStatements({ data }: FinancialStatementsProps) {
   }
 
   const historicalFinancials = data.data.historicalFinancials || {}
+  const secFinancials = data.data.financials || {}
+  const quarterlySecFacts = mergeQuarterlyFactHistory(secFinancials)
+  const annualSecFallback = secAnnualFallback(secFinancials)
 
   // Get data based on selected period
   const incomeStatements = period === 'annual'
-    ? (historicalFinancials.incomeStatements || [])
-    : (historicalFinancials.incomeStatementsQuarterly || [])
+    ? ((historicalFinancials.incomeStatements || []).length > 0 ? historicalFinancials.incomeStatements : annualSecFallback.incomeStatements)
+    : ((historicalFinancials.incomeStatementsQuarterly || []).length > 0
+      ? historicalFinancials.incomeStatementsQuarterly
+      : quarterlySecFacts.filter((stmt) => stmt.revenue !== undefined || stmt.netIncome !== undefined))
 
   const balanceSheets = period === 'annual'
-    ? (historicalFinancials.balanceSheets || [])
-    : (historicalFinancials.balanceSheetsQuarterly || [])
+    ? ((historicalFinancials.balanceSheets || []).length > 0 ? historicalFinancials.balanceSheets : annualSecFallback.balanceSheets)
+    : ((historicalFinancials.balanceSheetsQuarterly || []).length > 0
+      ? historicalFinancials.balanceSheetsQuarterly
+      : quarterlySecFacts.filter((stmt) => stmt.totalAssets !== undefined))
 
   const cashFlowStatements = period === 'annual'
     ? (historicalFinancials.cashFlowStatements || [])
